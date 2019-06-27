@@ -6,6 +6,6 @@ public class Weapon {
 	private String[]	weapons = {"Sword", "Axe", "Great Sword", "Crossbow", "Javelin"};
 
 	public void			generateWeapon(int level) {
-		
+
 	}
 }
