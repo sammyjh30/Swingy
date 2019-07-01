@@ -1,4 +1,4 @@
-package za.co.swingy.model;
+package za.co.swingy.model.items;
 
 public class Weapon {
 	private int			attackIncrease;
