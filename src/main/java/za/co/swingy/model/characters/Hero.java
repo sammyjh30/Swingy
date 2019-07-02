@@ -11,9 +11,9 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class Hero extends Character {
 	@NotNull
-	private Weapon		weapon;
+	private Weapon		equippedWeapon;
 	@NotNull
-	private Armor		armor;
+	private Armor		equippedArmor;
 	@NotNull
 	private  int		experience;
 }

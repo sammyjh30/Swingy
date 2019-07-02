@@ -1,8 +1,13 @@
 package za.co.swingy.model.items;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.NotNull;
 import java.util.Random;
 
+@Getter
+@Setter
 public class Weapon {
 	@NotNull
 	private int		level;
