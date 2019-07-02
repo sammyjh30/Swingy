@@ -1,4 +1,4 @@
-package za.co.swingy.view;
+package za.co.swingy;
 
 public class Main {
 }

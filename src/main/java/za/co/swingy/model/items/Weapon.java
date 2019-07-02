@@ -1,11 +1,58 @@
 package za.co.swingy.model.items;
 
-public class Weapon {
-	private int			attackIncrease;
-	private String		weaponName;
-	private String[]	weapons = {"Sword", "Axe", "Great Sword", "Crossbow", "Javelin"};
+import javax.validation.constraints.NotNull;
+import java.util.Random;
 
-	public void			generateWeapon(int level) {
+public class Weapon {
+	@NotNull
+	private int		level;
+	@NotNull
+	private int		attackIncrease;
+	@NotNull
+	private String	name;
+
+	public				Weapon(Builder builder) {
+		this.level = builder.level;
+		this.attackIncrease = builder.attackIncrease;
+		this.name = builder.name;
+	}
+
+	// Builder
+	public static class Builder {
+		private int		level;
+		private int		attackIncrease;
+		private String	name;
+
+		public static Builder newInstance() {
+			return new Builder();
+		}
+
+		private Builder() {}
+
+		public Builder setLevel(int level) {
+			this.level = level;
+			Random rand = new Random();
+			this.attackIncrease =  rand.nextInt(level) + 2;
+			return this;
+		}
+
+		public Builder			setName() {
+			Random rand = new Random();
+			String weaponType[] = {"Sword","Axe","Crossbow","Lance","Dagger"};
+			String weaponStyle[] = {"Blood","Silver","Wooden","Platinum","Shadow","Gold"};
+			String weaponDescription[] = {"Darkness","Skull Crushing","Tree Cutting","Bone Shattering", "Tooth Brushing"};
+
+			String name = weaponStyle[rand.nextInt(6)] + " " +
+					weaponType[rand.nextInt(7)] + " of " +
+					weaponDescription[rand.nextInt(6)];
+			this.name = name;
+			return this;
+		}
+
+		public Weapon 				build() {
+			return new Weapon(this);
+		}
 
 	}
 }
+//Weapon weapon = Weapon.Builder.newInstance().setLevel(playerLevel).setName().build();
