@@ -54,6 +54,13 @@ public class Weapon {
 			return this;
 		}
 
+		public Builder			setStarterWeapon() {
+			this.name = "Wooden Sword of Beginners";
+			this.level = 1;
+			this.attackIncrease = 1;
+			return this;
+		}
+
 		public Weapon 				build() {
 			return new Weapon(this);
 		}

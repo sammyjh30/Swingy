@@ -50,6 +50,13 @@ public class Helm {
 			return this;
 		}
 
+		public Builder			setStarterHelm() {
+			this.name = "Straw Helmet";
+			this.level = 1;
+			this.hitPointIncrease = 1;
+			return this;
+		}
+
 		public Helm 				build() {
 			return new Helm(this);
 		}

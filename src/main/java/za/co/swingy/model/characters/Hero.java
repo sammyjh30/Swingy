@@ -23,7 +23,7 @@ public class Hero extends Character {
 	public				Hero(Builder builder) {
 		this.equippedWeapon = builder.equippedWeapon;
 		this.equippedArmor = builder.equippedArmor;
-		this.name = builder.name;
+		this.experience = builder.experience;
 	}
 	// Builder
 	public static class Builder {

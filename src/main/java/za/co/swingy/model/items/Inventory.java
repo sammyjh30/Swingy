@@ -1,13 +1,25 @@
 package za.co.swingy.model.items;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
+@Getter
+@Setter
 public class Inventory {
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	private ArrayList<Armor> armors = new ArrayList<Armor>();
 	private ArrayList<Helm> helms = new ArrayList<Helm>();
 	private int				usedSlots = 0;
 	private int				maxSlots = 9;
+	@NotNull
+	private int				equippedWeaponIndex = 0;
+	@NotNull
+	private int				equippedArmorIndex = 0;
+	@NotNull
+	private int				equippedHelmIndex = 0;
 
 	void 		addWeapon(Weapon newWeapon) {
 		if (usedSlots < maxSlots) {

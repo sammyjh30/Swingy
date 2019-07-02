@@ -51,7 +51,12 @@ public class Armor {
 			this.name = name;
 			return this;
 		}
-
+		public Builder			setStarterArmor() {
+			this.name = "Casual Clothes";
+			this.level = 1;
+			this.defenceIncrease = 1;
+			return this;
+		}
 		public Armor 				build() {
 			return new Armor(this);
 		}
