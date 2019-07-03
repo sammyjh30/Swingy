@@ -27,7 +27,8 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.12.6</version>
+<!--      <version>1.12.6</version>-->
+      <version>1.18.2</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -45,12 +46,12 @@
       <version>1.7.15</version>
     </dependency>
 
-<!--    <dependency>-->
-<!--      <groupId>junit</groupId>-->
-<!--      <artifactId>junit</artifactId>-->
-<!--      <version>4.11</version>-->
-<!--      <scope>test</scope>-->
-<!--    </dependency>-->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -77,15 +78,15 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
-          <configuration>
-            <archive>
-              <manifest>
-                <addClasspath>true</addClasspath>
-                <classpathPrefix>lib/></classpathPrefix>
-                <mainClass>za.co.swingy.Main</mainClass>
-              </manifest>
-            </archive>
-          </configuration>
+<!--          <configuration>-->
+<!--            <archive>-->
+<!--              <manifest>-->
+<!--                <addClasspath>true</addClasspath>-->
+<!--                <classpathPrefix>lib/></classpathPrefix>-->
+<!--                <mainClass>za.co.swingy.Main</mainClass>-->
+<!--              </manifest>-->
+<!--            </archive>-->
+<!--          </configuration>-->
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
