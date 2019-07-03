@@ -8,6 +8,8 @@ import lombok.Builder;
 import javax.validation.constraints.NotNull;
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
 @Getter
 @Setter
 @Builder
@@ -20,29 +22,16 @@ public class Armor {
 	@NotNull
 	private String	name;
 
-//	public				Armor(Builder builder) {
-//		this.level = builder.level;
-//		this.defenceIncrease = builder.defenceIncrease;
-//		this.name = builder.name;
-//	}
-
-
 	// Builder
 	public static class ArmorBuilder {
 		private int		level;
 		private int		defenceIncrease;
 		private String	name;
-//
-//		public static Builder newInstance() {
-//			return new Builder();
-//		}
-//
-//		private Builder() {}
-//
-		public ArmorBuilder level(int level) {
-			this.level = level;
+
+		public ArmorBuilder level(int playerLevel) {
+			this.level = playerLevel;
 			Random rand = new Random();
-			this.defenceIncrease =  rand.nextInt(level) + 2;
+			this.defenceIncrease =  rand.nextInt(abs(playerLevel)) + 2;
 			return this;
 		}
 
@@ -65,4 +54,3 @@ public class Armor {
 		this.defenceIncrease = 1;
 	}
 }
-//Armor armor = Armor.Builder.newInstance().setLevel(playerLevel).setName().build();

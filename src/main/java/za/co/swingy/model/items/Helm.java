@@ -1,13 +1,19 @@
 package za.co.swingy.model.items;
 
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
 @Getter
 @Setter
+@Builder
+@Data
 public class Helm {
 	@NotNull
 	private int		level;
@@ -16,32 +22,20 @@ public class Helm {
 	@NotNull
 	private String	name;
 
-	public				Helm(Builder builder) {
-		this.level = builder.level;
-		this.hitPointIncrease = builder.hitPointIncrease;
-		this.name = builder.name;
-	}
-
 	// Builder
-	public static class Builder {
+	public static class HelmBuilder {
 		private int		level;
 		private int		hitPointIncrease;
 		private String	name;
 
-		public static Builder 		newInstance() {
-			return new Builder();
-		}
-
-		private Builder() {}
-
-		public Builder				setLevel(int level) {
-			this.level = level;
+		public HelmBuilder			level(int playerLevel) {
+			this.level = playerLevel;
 			Random rand = new Random();
-			this.hitPointIncrease =  rand.nextInt(level) + 2;
+			this.hitPointIncrease =  rand.nextInt(abs(playerLevel)) + 2;
 			return this;
 		}
 
-		public Builder			setName() {
+		public HelmBuilder			name() {
 			Random rand = new Random();
 			String helmetStyle[] = {"Leather","Chain","Wooden","Bone","Shadow","Gold"};
 
@@ -49,17 +43,12 @@ public class Helm {
 			this.name = name;
 			return this;
 		}
+	}
 
-		public Builder			setStarterHelm() {
-			this.name = "Straw Helmet";
-			this.level = 1;
-			this.hitPointIncrease = 1;
-			return this;
-		}
-
-		public Helm 				build() {
-			return new Helm(this);
-		}
+	public void			setStarterHelm() {
+		this.name = "Straw Helmet";
+		this.level = 1;
+		this.hitPointIncrease = 1;
 	}
 }
 
