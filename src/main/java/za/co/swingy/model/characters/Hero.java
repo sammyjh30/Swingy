@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class Hero extends Character {
 	@NotNull
+	private String		name;
+	@NotNull
 	private Weapon		equippedWeapon;
 	@NotNull
 	private Armor		equippedArmor;
@@ -20,13 +22,14 @@ public class Hero extends Character {
 	@NotNull
 	private Inventory	inventory;
 
-	public				Hero(Builder builder) {
+	public				Hero(HeroBuilder builder) {
+		super(builder);
 		this.equippedWeapon = builder.equippedWeapon;
 		this.equippedArmor = builder.equippedArmor;
 		this.experience = builder.experience;
 	}
 	// Builder
-	public static class Builder {
+	public static class HeroBuilder extends Character.Builder {
 		private Weapon		equippedWeapon;
 		private Armor		equippedArmor;
 		private  int		experience;
@@ -38,14 +41,14 @@ public class Hero extends Character {
 
 		private Builder() {}
 
-		public Builder setLevel(int level) {
-			this.level = level;
+//		public Builder setLevel(int level) {
+////			this.level = level;
+////
+////			return this;
+////		}
 
-			return this;
-		}
 
-
-		public Weapon 				build() {
+		public Hero 				build() {
 			return new Hero(this);
 		}
 
