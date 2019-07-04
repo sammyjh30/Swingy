@@ -39,7 +39,7 @@ public class Helm {
 			Random rand = new Random();
 			String helmetStyle[] = {"Leather","Chain","Wooden","Bone","Shadow","Gold"};
 
-			String name = helmetStyle[rand.nextInt(6)] + " Helmet";
+			String name = helmetStyle[rand.nextInt(5)] + " Helmet";
 			this.name = name;
 			return this;
 		}

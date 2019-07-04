@@ -1,5 +1,7 @@
 package za.co.swingy.model.items;
 
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +10,8 @@ import java.util.Random;
 
 @Getter
 @Setter
+@Builder
+@Data
 public class Weapon {
 	@NotNull
 	private int		level;
@@ -16,55 +20,38 @@ public class Weapon {
 	@NotNull
 	private String	name;
 
-	public				Weapon(Builder builder) {
-		this.level = builder.level;
-		this.attackIncrease = builder.attackIncrease;
-		this.name = builder.name;
-	}
-
 	// Builder
-	public static class Builder {
+	public static class WeaponBuilder {
 		private int		level;
 		private int		attackIncrease;
 		private String	name;
 
-		public static Builder newInstance() {
-			return new Builder();
-		}
-
-		private Builder() {}
-
-		public Builder setLevel(int level) {
+		public WeaponBuilder level(int level) {
 			this.level = level;
 			Random rand = new Random();
 			this.attackIncrease =  rand.nextInt(level) + 2;
 			return this;
 		}
 
-		public Builder			setName() {
+		public WeaponBuilder			name() {
 			Random rand = new Random();
 			String weaponType[] = {"Sword","Axe","Crossbow","Lance","Dagger"};
 			String weaponStyle[] = {"Blood","Silver","Wooden","Platinum","Shadow","Gold"};
 			String weaponDescription[] = {"Darkness","Skull Crushing","Tree Cutting","Bone Shattering", "Tooth Brushing"};
 
-			String name = weaponStyle[rand.nextInt(6)] + " " +
-					weaponType[rand.nextInt(7)] + " of " +
-					weaponDescription[rand.nextInt(6)];
+			String name = weaponStyle[rand.nextInt(5)] + " " +
+					weaponType[rand.nextInt(4)] + " of " +
+					weaponDescription[rand.nextInt(4)];
 			this.name = name;
 			return this;
 		}
-
-		public Builder			setStarterWeapon() {
-			this.name = "Wooden Sword of Beginners";
-			this.level = 1;
-			this.attackIncrease = 1;
-			return this;
-		}
-
-		public Weapon 				build() {
-			return new Weapon(this);
-		}
-
 	}
+
+	public void			setStarterWeapon() {
+		this.name = "Wooden Sword of Beginners";
+		this.level = 1;
+		this.attackIncrease = 1;
+	}
+
 }
 //Weapon weapon = Weapon.Builder.newInstance().setLevel(playerLevel).setName().build();

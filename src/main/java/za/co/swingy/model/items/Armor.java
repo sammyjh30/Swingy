@@ -40,8 +40,8 @@ public class Armor {
 			String armorType[] = {"Chest Plate","Mail","Shield","Gauntlet","Knee Piece"};
 			String armorStyle[] = {"Leather","Chain","Wooden","Bone","Shadow","Gold"};
 
-			String name = armorStyle[rand.nextInt(6)] + " " +
-					armorType[rand.nextInt(7)];
+			String name = armorStyle[rand.nextInt(5)] + " " +
+					armorType[rand.nextInt(4)];
 			this.name = name;
 			return this;
 		}
