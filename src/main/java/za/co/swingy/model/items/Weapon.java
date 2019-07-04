@@ -48,7 +48,7 @@ public class Weapon {
 	}
 
 	public void			setStarterWeapon() {
-		this.name = "Wooden Sword of Beginners";
+		this.name = "Wooden Sword of Noobs";
 		this.level = 1;
 		this.attackIncrease = 1;
 	}

@@ -1,5 +1,7 @@
 package za.co.swingy.model.items;
 
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,35 +10,84 @@ import java.util.ArrayList;
 
 @Getter
 @Setter
+@Builder
+@Data
 public class Inventory {
-	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
-	private ArrayList<Armor> armors = new ArrayList<Armor>();
-	private ArrayList<Helm> helms = new ArrayList<Helm>();
-	private int				usedSlots = 0;
-	private int				maxSlots = 9;
 	@NotNull
-	private int				equippedWeaponIndex = 0;
+	private ArrayList<Weapon> 	weapons;
 	@NotNull
-	private int				equippedArmorIndex = 0;
+	private ArrayList<Armor> 	armors;
 	@NotNull
-	private int				equippedHelmIndex = 0;
+	private ArrayList<Helm> 	helms;
+	@NotNull
+	private int					usedSlots;
+	@NotNull
+	private int					maxSlots;
+	@NotNull
+	private int					equippedWeaponIndex;
+	@NotNull
+	private int					equippedArmorIndex;
+	@NotNull
+	private int					equippedHelmIndex;
 
-	void 		addWeapon(Weapon newWeapon) {
+	public static class InventoryBuilder {
+		private ArrayList<Weapon> 	weapons;
+		private ArrayList<Armor> 	armors;
+		private ArrayList<Helm> 	helms;
+		private int					usedSlots;
+		private int					maxSlots;
+		private int					equippedWeaponIndex;
+		private int					equippedArmorIndex;
+		private int					equippedHelmIndex;
+
+		public InventoryBuilder		weapons(){
+			this.weapons = new ArrayList<Weapon>();
+			return this;
+		}
+
+		public InventoryBuilder		armors(){
+			this.armors = new ArrayList<Armor>();
+			return this;
+		}
+
+		public InventoryBuilder		helms(){
+			this.helms = new ArrayList<Helm>();
+			return this;
+		}
+	}
+
+		public void 		increaseMaxSlots(int n) {
+		this.maxSlots += n;
+	}
+
+	public void 		decreaseMaxSlots(int n) {
+		this.maxSlots -= n;
+	}
+
+	public void 		addWeapon(Weapon newWeapon) {
+		if (newWeapon == null) {
+			System.out.println("newWeapon is invalid");
+			return;
+		}
+		if (this.weapons == null) {
+			System.out.println("weapons is invalid");
+			return;
+		}
 		if (usedSlots < maxSlots) {
-			weapons.add(newWeapon);
+			this.weapons.add(newWeapon);
 		} else {
 			System.out.println("It seems your inventory is full! Remove some items to add this Weapon!");
 		}
 	}
 
-	void 		removeWeapon(Weapon weapon) {
+	public void 		removeWeapon(Weapon weapon) {
 		if (weapons.contains(weapon)) {
 			weapons.remove(weapon);
 			System.out.println("Successfully removed the " + weapon.getName());
 		}
 	}
 
-	void 		addArmor(Armor newArmor) {
+	public void 		addArmor(Armor newArmor) {
 		if (usedSlots < maxSlots) {
 			armors.add(newArmor);
 		} else {
@@ -44,14 +95,14 @@ public class Inventory {
 		}
 	}
 
-	void 		removeArmor(Armor armor) {
+	public void 		removeArmor(Armor armor) {
 		if (armors.contains(armor)) {
 			armors.remove(armor);
 			System.out.println("Successfully removed the " + armor.getName());
 		}
 	}
 
-	void 		addHelm(Helm newHelm) {
+	public void 		addHelm(Helm newHelm) {
 		if (usedSlots < maxSlots) {
 			helms.add(newHelm);
 		} else {
@@ -59,11 +110,33 @@ public class Inventory {
 		}
 	}
 
-	void 		removeHelm(Helm helm) {
+	public void 		removeHelm(Helm helm) {
 		if (helms.contains(helm)) {
 			helms.remove(helm);
 			System.out.println("Successfully removed the " + helm.getName());
 		}
+	}
+
+	public void						starter() {
+		//Set basic stats
+		this.usedSlots = 0;
+		this.maxSlots = 9;
+		this.equippedWeaponIndex = 0;
+		this.equippedArmorIndex = 0;
+		this.equippedHelmIndex = 0;
+		//Starter Weapon
+		Weapon starterWeapon = Weapon.builder().build();
+		starterWeapon.setStarterWeapon();
+		this.addWeapon(starterWeapon);
+
+		//Starter Armor
+		Armor starterArmor = Armor.builder().build();
+		starterArmor.setStarterArmor();
+		this.addArmor(starterArmor);
+		//Starter Helm
+		Helm starterHelm = Helm.builder().build();
+		starterHelm.setStarterHelm();
+		this.addHelm(starterHelm);
 	}
 
 }
