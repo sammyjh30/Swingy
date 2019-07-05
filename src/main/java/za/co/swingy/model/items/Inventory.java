@@ -56,7 +56,7 @@ public class Inventory {
 		}
 	}
 
-		public void 		increaseMaxSlots(int n) {
+	public void 		increaseMaxSlots(int n) {
 		this.maxSlots += n;
 	}
 
@@ -75,6 +75,7 @@ public class Inventory {
 		}
 		if (usedSlots < maxSlots) {
 			this.weapons.add(newWeapon);
+			this.usedSlots++;
 		} else {
 			System.out.println("It seems your inventory is full! Remove some items to add this Weapon!");
 		}
@@ -88,8 +89,17 @@ public class Inventory {
 	}
 
 	public void 		addArmor(Armor newArmor) {
+		if (newArmor == null) {
+			System.out.println("New Armor is invalid");
+			return;
+		}
+		if (this.armors == null) {
+			System.out.println("Armors is invalid");
+			return;
+		}
 		if (usedSlots < maxSlots) {
 			armors.add(newArmor);
+			this.usedSlots++;
 		} else {
 			System.out.println("It seems your inventory is full! Remove some items to add this Armor!");
 		}
@@ -103,8 +113,17 @@ public class Inventory {
 	}
 
 	public void 		addHelm(Helm newHelm) {
+		if (newHelm == null) {
+			System.out.println("New Helm is invalid");
+			return;
+		}
+		if (this.helms == null) {
+			System.out.println("Helms is invalid");
+			return;
+		}
 		if (usedSlots < maxSlots) {
 			helms.add(newHelm);
+			this.usedSlots++;
 		} else {
 			System.out.println("It seems your inventory is full! Remove some items to add this Helm!");
 		}

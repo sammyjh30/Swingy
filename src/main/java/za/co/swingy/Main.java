@@ -41,6 +41,8 @@ public class Main {
 			Helm h = inventory.getHelms().get(i);
 			System.out.println(h.getName() + " level: " + h.getLevel() + " hitPoint increase: " + h.getHitPointIncrease());
 		}
+		System.out.println("Max slots: " + inventory.getMaxSlots());
+		System.out.println("Used slots: " + inventory.getUsedSlots());
 		return;
 	}
 
