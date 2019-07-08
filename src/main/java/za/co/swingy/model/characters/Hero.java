@@ -101,15 +101,23 @@ public class Hero extends Character {
 		if (this.classType == "Explorer") {
 			this.setAttack(1);
 			this.setDefence(1);
+			this.setMaxHitPoints(50);
+			this.setHitPoints(50);
 		} else if (this.classType == "Warrior") {
 			this.setAttack(2);
 			this.setDefence(2);
+			this.setMaxHitPoints(50);
+			this.setHitPoints(50);
 		} else if (this.classType == "Knight") {
 			this.setAttack(3);
 			this.setDefence(3);
+			this.setMaxHitPoints(50);
+			this.setHitPoints(50);
 		} else if (this.classType == "Barbarian") {
 			this.setAttack(4);
 			this.setDefence(4);
+			this.setMaxHitPoints(50);
+			this.setHitPoints(50);
 		}
 	}
 
@@ -161,6 +169,8 @@ public class Hero extends Character {
 				this.setAttack(this.getAttack() + 1);
 				this.setDefence(this.getDefence() + 1);
 			}
+			this.setMaxHitPoints(this.getMaxHitPoints() + this.getLevel() * 50);
+			this.setHitPoints(this.getMaxHitPoints());
 			System.out.println("CONGRATULATIONS! You are now level " + this.getLevel() + "!");
 		}
 	}

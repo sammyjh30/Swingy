@@ -19,6 +19,8 @@ public class Character {
 	private int			defence;
 	@NotNull
 	private int			hitPoints;
+	@NotNull
+	private int			maxHitPoints;
 
 
 
