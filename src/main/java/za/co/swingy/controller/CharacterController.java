@@ -42,11 +42,30 @@ public class CharacterController {
 		//Assign Hero
 	}
 
-	public int				readFile(String input) {
-		int numberOfRuns = 0;
+	public void				readSaves() {
+//		int numberOfRuns = 0;
+		String st;
 		try {
-			File file = new File(input);
-			BufferedReader br = new BufferedReader(new FileReader(file));
+			File file = new File("resources/saves.txt");
+			if (file.canRead()) {
+				//To save
+//				BufferedWriter writer = new BufferedWriter(new FileWriter("./simulation.txt", true));
+//				writer.write(message + '\n');
+//				writer.close();
+				//To load
+				BufferedReader br = new BufferedReader(new FileReader(file));
+				try {
+					while ((st = br.readLine()) != null) {
+						//1|Name|Type|Level|
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} catch ( FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
 			String st;
 
 			int     line = 0;
@@ -76,8 +95,6 @@ public class CharacterController {
 				e.printStackTrace();
 			}
 
-		}  catch ( FileNotFoundException e) {
-			e.printStackTrace();
 		}
 		return numberOfRuns;
 	}
