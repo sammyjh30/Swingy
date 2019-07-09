@@ -65,7 +65,7 @@ public class Hero extends Character {
 		}
 
 		public HeroBuilder			inventory() {
-			this.inventory = Inventory.builder().build();
+			this.inventory = Inventory.builder().weapons().armors().helms().build();
 			return  this;
 		}
 
