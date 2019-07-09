@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-@Builder
+//@Builder
 public class Character {
 //	private String		name;
 	@NotNull

@@ -22,11 +22,8 @@ public class Hero extends Character {
 	private String		name;
 	@NotNull
 	private String		classType;
-	@NotNull
 	private Weapon		equippedWeapon;
-	@NotNull
 	private Armor		equippedArmor;
-	@NotNull
 	private Helm		equippedHelm;
 	@NotNull
 	private  int		experience;
@@ -35,6 +32,7 @@ public class Hero extends Character {
 
 	// Builder
 	public static class HeroBuilder {
+
 		private String		name;
 		private Weapon		equippedWeapon;
 		private Armor		equippedArmor;
@@ -63,6 +61,11 @@ public class Hero extends Character {
 
 		public HeroBuilder			inventory(Inventory invent) {
 			this.inventory = invent;
+			return  this;
+		}
+
+		public HeroBuilder			inventory() {
+			this.inventory = Inventory.builder().build();
 			return  this;
 		}
 
