@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba86a429-a9a6-4607-a511-192b7bebb95c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/model/characters/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/model/characters/Character.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/model/characters/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/model/characters/Hero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/CreateHero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/CreateHero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/CharacterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/CharacterController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -20,7 +16,7 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.53861654">
+    <splitter split-orientation="horizontal" split-proportion="0.66084623">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
@@ -75,8 +71,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/CharacterController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="450">
-                  <caret line="30" column="68" selection-start-line="30" selection-start-column="68" selection-end-line="30" selection-end-column="68" />
+                <state relative-caret-position="249">
+                  <caret line="55" column="25" lean-forward="true" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
                 </state>
               </provider>
             </entry>
@@ -120,12 +116,12 @@
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/model/items/Weapon.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/model/characters/Enemy.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/GameController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/CharacterController.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/model/characters/Hero.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/model/characters/Character.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/model/items/Inventory.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/CreateHero.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/CharacterController.java" />
       </list>
     </option>
   </component>
@@ -305,6 +301,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="413" y="23" width="2147" height="1333" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989059" visible="true" weight="0.13111639" />
       <window_info id="Structure" order="1" sideWeight="0.5010941" side_tool="true" weight="0.21824382" />
@@ -425,17 +422,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/CharacterController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="68" selection-start-line="30" selection-start-column="68" selection-end-line="30" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/CharacterController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="55" column="25" lean-forward="true" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
         </state>
       </provider>
     </entry>
