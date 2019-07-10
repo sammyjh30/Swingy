@@ -47,17 +47,22 @@ public class CharacterController {
 		this.createHeroView.printHeroStatus(this.hero);
 	}
 
-	public void			loadHero() {
+	public Hero			loadHero() {
+		Hero loadedHero = null;
 		//Get File
 		ArrayList<Hero> saves = readSaves();
 		if (saves == null || saves.size() == 0) {
 			this.loadFileView.noSaves();
-			return;
+			return loadedHero;
 		}
 		//List available heroes
 		int i = this.loadFileView.saveList(saves);
 		//Take input
 		//Assign Hero
+		if (i >= 0) {
+			loadedHero = saves.get(i);
+		}
+		return  loadedHero;
 	}
 
 	public static boolean 	isNumeric(String str) {
@@ -96,14 +101,8 @@ public class CharacterController {
 						//1|Armors|Index|Name|Level|DefenceIncrease
 						//1|Helms|Index|Name|Level|hitpointIncrease
 						line = st.split("\\|");
-//						for (int n = 0; n < line.length; n++) {
-//							System.out.println(line[n]);
-//						}
 						if (isNumeric(line[0])){
 							if (Integer.parseInt(line[0]) > save) {
-//								if (heroToAdd != null) {
-//									heroSaves.add(heroToAdd);
-//								}
 								save = Integer.parseInt(line[0]);
 								//Create new character
 								heroToAdd = Hero.builder().name(line[1]).classType(line[2]).inventory().build();
@@ -116,7 +115,6 @@ public class CharacterController {
 								heroSaves.add(heroToAdd);
 							} else if (Integer.parseInt(line[0]) == save && line[1] == "Inventory") {
 								//add the inventory to the hero
-//								heroSaves.get(save - 1)
 								heroSaves.get(save - 1).getInventory().setUsedSlots(Integer.parseInt(line[2]));
 								heroSaves.get(save - 1).getInventory().setMaxSlots(Integer.parseInt(line[3]));
 								heroSaves.get(save - 1).getInventory().setEquippedWeaponIndex(Integer.parseInt(line[4]));
@@ -152,7 +150,6 @@ public class CharacterController {
 									heroSaves.get(save - 1).getInventory().getHelms().add(helm);
 								}
 								heroSaves.get(save - 1).setEquippedHelm(heroToAdd.getInventory().getHelms().get(heroToAdd.getInventory().getEquippedHelmIndex()));
-//								heroSaves.add(heroToAdd);
 							}
 						}
 					}

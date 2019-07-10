@@ -58,11 +58,6 @@ public class LoadFile {
 			InputStreamReader streamReader = new InputStreamReader(System.in);
 			BufferedReader bufferedReader = new BufferedReader(streamReader);
 			String input = bufferedReader.readLine();
-//			while (input == null || input.isEmpty()) {
-//				System.out.println("Oops, that's not a valid command! Please try again!");
-//				System.out.print(": ");
-//				input = bufferedReader.readLine();
-//			}
 			while (!input.equalsIgnoreCase("BACK") && !(isNumeric(input) && Integer.parseInt(input) <= lineCount && Integer.parseInt(input) >= 0)) {
 				System.out.println("Oops, that's not a valid command! Please try again!");
 				System.out.print(": ");
