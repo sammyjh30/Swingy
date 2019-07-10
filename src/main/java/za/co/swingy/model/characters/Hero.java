@@ -70,8 +70,8 @@ public class Hero extends Character {
 		}
 
 		public HeroBuilder			classType(String type) {
-			if (type == "Warrior" || type == "Knight" ||
-					type == "Explorer" || type == "Barbarian") {
+			if (type.equalsIgnoreCase("Warrior") || type.equalsIgnoreCase("Knight") ||
+					type.equalsIgnoreCase("Explorer") || type.equalsIgnoreCase("Barbarian")) {
 				this.classType = type;
 			} else {
 				System.out.println("'" + type + "' is not a valid type. Setting as Warrior by default.");
