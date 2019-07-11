@@ -1,11 +1,16 @@
 package za.co.swingy.view;
 
 import za.co.swingy.model.characters.Hero;
+import za.co.swingy.model.items.Armor;
+import za.co.swingy.model.items.Helm;
+import za.co.swingy.model.items.Inventory;
+import za.co.swingy.model.items.Weapon;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class LoadFile {
 	//Need to still save/load character position
@@ -78,4 +83,46 @@ public class LoadFile {
 		System.out.println("You don't have any saves yet! Create a new character to start the adventure!");
 	}
 
+	public void 			printLoadedHero(Hero hero) {
+		System.out.println("_______________________");
+		System.out.println("| Name:     " + hero.getName());
+		System.out.println("| Type:     " + hero.getClassType());
+		System.out.println("| HP:       " + hero.getHitPoints() + "/" + hero.getMaxHitPoints());
+		System.out.println("| Attack:   " + hero.getAttack());
+		System.out.println("| Defence:  " + hero.getDefence());
+		System.out.println("|_______Inventory______");
+		Inventory inventory = hero.getInventory();
+		System.out.println("| Slots: " + inventory.getUsedSlots() +"/" + inventory.getMaxSlots());
+		System.out.println("| Armor: ");
+		for (int i = 0; i < inventory.getArmors().size(); i++) {
+			Armor a = inventory.getArmors().get(i);
+			System.out.println("| 	" + a.getName() + " level: " + a.getLevel() + " defence increase: " + a.getDefenceIncrease());
+		}
+		System.out.println("| Weapon: ");
+		for (int i = 0; i < inventory.getWeapons().size(); i++) {
+			Weapon w = inventory.getWeapons().get(i);
+			System.out.println("| 	" + w.getName() + " level: " + w.getLevel() + " Attack increase: " + w.getAttackIncrease());
+		}
+		System.out.println("| Helms: ");
+		for (int i = 0; i < inventory.getHelms().size(); i++) {
+			Helm h = inventory.getHelms().get(i);
+			System.out.println("| 	" + h.getName() + " level: " + h.getLevel() + " hitPoint increase: " + h.getHitPointIncrease());
+		}
+		System.out.println("|______________________");
+		try {
+			System.out.print("Alright, hero! We're ready to go! Let your adventure begin");
+			TimeUnit.SECONDS.sleep(1);
+			System.out.print(".");
+			TimeUnit.SECONDS.sleep(1);
+			System.out.print(".");
+			TimeUnit.SECONDS.sleep(1);
+			System.out.print(".");
+			TimeUnit.SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//Try clear screen
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
 }

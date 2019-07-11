@@ -1,18 +1,22 @@
-package za.co.swingy.view;
+package za.co.swingy.view.console;
 
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.model.items.Armor;
 import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Inventory;
 import za.co.swingy.model.items.Weapon;
+import za.co.swingy.view.CreateHeroView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
 
-public class CreateHero {
-//	https://www.tutorialspoint.com/design_pattern/mvc_pattern
+public class CreateHeroConsoleView implements CreateHeroView {
+
+	public 					CreateHeroConsoleView() {
+		controller = new Create
+	}
 
 	public void 			printHeroStatus(Hero hero) {
 		System.out.println("_______________________");

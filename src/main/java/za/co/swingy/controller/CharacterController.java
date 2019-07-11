@@ -7,7 +7,7 @@ import za.co.swingy.model.characters.Hero;
 import za.co.swingy.model.items.Armor;
 import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Weapon;
-import za.co.swingy.view.CreateHero;
+import za.co.swingy.view.CreateHeroView;
 import za.co.swingy.view.LoadFile;
 
 import javax.validation.constraints.NotNull;
@@ -19,17 +19,17 @@ import java.util.ArrayList;
 @Builder
 public class CharacterController {
 	@NotNull
-	private CreateHero		createHeroView;
+	private CreateHeroView createHeroView;
 	private LoadFile		loadFileView;
 	private Hero			hero;
 
 	// Builder
 	public static class CharacterControllerBuilder {
-		private CreateHero		createHeroView;
+		private CreateHeroView createHeroView;
 		private LoadFile		loadFileView;
 
 		public CharacterControllerBuilder		createHeroView() {
-			this.createHeroView = new CreateHero();
+			this.createHeroView = new CreateHeroView();
 			return this;
 		}
 
@@ -62,6 +62,7 @@ public class CharacterController {
 		if (i >= 0) {
 			loadedHero = saves.get(i);
 		}
+		this.loadFileView.printLoadedHero(loadedHero);
 		return  loadedHero;
 	}
 
@@ -75,7 +76,6 @@ public class CharacterController {
 	}
 
 	public ArrayList<Hero>				readSaves() {
-//		int numberOfRuns = 0;
 		String st;
 		try {
 			File file = new File("resources/saves.txt");
@@ -113,14 +113,14 @@ public class CharacterController {
 								heroToAdd.setMaxHitPoints(Integer.parseInt(line[7]));
 								heroToAdd.setExperience(Integer.parseInt(line[8]));
 								heroSaves.add(heroToAdd);
-							} else if (Integer.parseInt(line[0]) == save && line[1] == "Inventory") {
+							} else if (Integer.parseInt(line[0]) == save && line[1].equalsIgnoreCase("Inventory")) {
 								//add the inventory to the hero
 								heroSaves.get(save - 1).getInventory().setUsedSlots(Integer.parseInt(line[2]));
 								heroSaves.get(save - 1).getInventory().setMaxSlots(Integer.parseInt(line[3]));
 								heroSaves.get(save - 1).getInventory().setEquippedWeaponIndex(Integer.parseInt(line[4]));
 								heroSaves.get(save - 1).getInventory().setEquippedArmorIndex(Integer.parseInt(line[5]));
 								heroSaves.get(save - 1).getInventory().setEquippedHelmIndex(Integer.parseInt(line[6]));
-							} else if (Integer.parseInt(line[0]) == save && line[1] == "Weapons") {
+							} else if (Integer.parseInt(line[0]) == save && line[1].equalsIgnoreCase("Weapons")) {
 								//Loop through and assign all weapons
 								for (int i = 2; i < line.length; i++) {
 									weapon = Weapon.builder().build();
@@ -130,7 +130,7 @@ public class CharacterController {
 									heroSaves.get(save - 1).getInventory().getWeapons().add(weapon);
 								}
 								heroSaves.get(save - 1).setEquippedWeapon(heroToAdd.getInventory().getWeapons().get(heroToAdd.getInventory().getEquippedWeaponIndex()));
-							} else if (Integer.parseInt(line[0]) == save && line[1] == "Armors") {
+							} else if (Integer.parseInt(line[0]) == save && line[1].equalsIgnoreCase("Armors")) {
 								//Loop through and assign all armors
 								for (int i = 2; i < line.length; i++) {
 									armor = Armor.builder().build();
@@ -140,7 +140,8 @@ public class CharacterController {
 									heroSaves.get(save - 1).getInventory().getArmors().add(armor);
 								}
 								heroSaves.get(save - 1).setEquippedArmor(heroToAdd.getInventory().getArmors().get(heroToAdd.getInventory().getEquippedArmorIndex()));
-							} else if (Integer.parseInt(line[0]) == save && line[1] == "Helms") {
+							} else if (Integer.parseInt(line[0]) == save && line[1].equalsIgnoreCase("Helms")) {
+								System.out.println("Helms found! Saves = " + save);
 								//Loop through and assign all helms
 								for (int i = 2; i < line.length; i++) {
 									helm = Helm.builder().build();
