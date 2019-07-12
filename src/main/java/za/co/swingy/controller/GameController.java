@@ -1,19 +1,30 @@
 package za.co.swingy.controller;
 
 
+import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.view.MenuView;
 
+import java.util.ArrayList;
+
 public class GameController {
-	private MenuView		menuView;
-	private Hero hero;
+//	private MenuView			menuView;
+	private Hero				hero;
+	private char[]				map;
+	private int					mapSize;
+	private ArrayList<Enemy>	enemies;
 
 	// Builder
-	public static class GameControllerBuilder {
-		private MenuView		menuView;
+	public static class 		GameControllerBuilder {
+		private Hero				hero;
+		private char[]				map;
+		private int					mapSize;
+		private ArrayList<Enemy>	enemies;
 
-		public GameControllerBuilder		menuView() {
-//			this.menuView = new MenuView();
+		public GameControllerBuilder		hero(Hero newHero) {
+			this.hero = newHero;
+			this.mapSize = (newHero.getLevel() - 1) * 5 + 10 - (newHero.getLevel() % 2);
+			this.map = new char[this.mapSize];
 			return this;
 		}
 	}
