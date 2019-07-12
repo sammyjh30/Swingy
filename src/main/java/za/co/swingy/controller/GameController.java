@@ -13,7 +13,7 @@ public class GameController {
 		private MenuView		menuView;
 
 		public GameControllerBuilder		menuView() {
-			this.menuView = new MenuView();
+//			this.menuView = new MenuView();
 			return this;
 		}
 	}
@@ -24,10 +24,10 @@ public class GameController {
 
 	//Menu() CREATE, LOAD or EXIT
 	public void			menu() {
-		int ret = this.menuView.menu();
-		if (ret == 0) {
-			return;
-		} else if (ret ==)
+//		int ret = this.menuView.menu();
+//		if (ret == 0) {
+//			return;
+//		} else if (ret ==)
 	}
 
 	// Place map (enemies, hero, holes)

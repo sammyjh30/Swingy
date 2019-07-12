@@ -8,7 +8,9 @@ import za.co.swingy.model.items.Armor;
 import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.CreateHeroView;
-import za.co.swingy.view.LoadFile;
+import za.co.swingy.view.LoadFileView;
+import za.co.swingy.view.MenuView;
+import za.co.swingy.view.console.CreateHeroConsoleView;
 
 import javax.validation.constraints.NotNull;
 import java.io.*;
@@ -19,22 +21,30 @@ import java.util.ArrayList;
 @Builder
 public class CharacterController {
 	@NotNull
-	private CreateHeroView createHeroView;
-	private LoadFile		loadFileView;
-	private Hero			hero;
+	private CreateHeroView		createHeroView;
+	private LoadFileView loadFileView;
+	private Hero						hero;
+	@NotNull(message = "Menu View cannot be NULL")
+	private MenuView					menuView;
 
 	// Builder
 	public static class CharacterControllerBuilder {
-		private CreateHeroView createHeroView;
-		private LoadFile		loadFileView;
+		private CreateHeroView				createHeroView;
+		private LoadFileView loadFileView;
+		private MenuView					menuView;
 
-		public CharacterControllerBuilder		createHeroView() {
-			this.createHeroView = new CreateHeroView();
+		public CharacterControllerBuilder				menuView(MenuView menuView) {
+			this.menuView = menuView;
 			return this;
 		}
 
-		public CharacterControllerBuilder		loadFileView() {
-			this.loadFileView = new LoadFile();
+		public CharacterControllerBuilder		createHeroView(CreateHeroView createHeroView) {
+			this.createHeroView = createHeroView;
+			return this;
+		}
+
+		public CharacterControllerBuilder		loadFileView(LoadFileView loadFileView) {
+			this.loadFileView = loadFileView;
 			return this;
 		}
 	}
@@ -47,13 +57,13 @@ public class CharacterController {
 		this.createHeroView.printHeroStatus(this.hero);
 	}
 
-	public Hero			loadHero() {
+	public void			loadHero() {
 		Hero loadedHero = null;
 		//Get File
 		ArrayList<Hero> saves = readSaves();
 		if (saves == null || saves.size() == 0) {
 			this.loadFileView.noSaves();
-			return loadedHero;
+			this.menuView.menu();
 		}
 		//List available heroes
 		int i = this.loadFileView.saveList(saves);
@@ -63,7 +73,6 @@ public class CharacterController {
 			loadedHero = saves.get(i);
 		}
 		this.loadFileView.printLoadedHero(loadedHero);
-		return  loadedHero;
 	}
 
 	public static boolean 	isNumeric(String str) {

@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class CreateHeroConsoleView implements CreateHeroView {
 
 	public 					CreateHeroConsoleView() {
-		controller = new Create
+//		controller = new Create
 	}
 
 	public void 			printHeroStatus(Hero hero) {

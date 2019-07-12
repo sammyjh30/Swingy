@@ -1,10 +1,12 @@
-package za.co.swingy.view;
+package za.co.swingy.view.console;
 
+import com.sun.org.apache.bcel.internal.generic.LoadClass;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.model.items.Armor;
 import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Inventory;
 import za.co.swingy.model.items.Weapon;
+import za.co.swingy.view.LoadFileView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +14,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class LoadFile {
+public class LoadFileConsoleView implements LoadFileView {
 	//Need to still save/load character position
 	public static boolean 	isNumeric(String str) {
 		try {
@@ -124,5 +126,6 @@ public class LoadFile {
 		//Try clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
+		//Go to GameController
 	}
 }
