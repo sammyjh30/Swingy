@@ -83,7 +83,8 @@ public class CharacterController {
 			loadedHero = saves.get(i);
 		}
 		this.loadFileView.printLoadedHero(loadedHero);
-		
+		this.mapView.display();
+
 	}
 
 	public static boolean 	isNumeric(String str) {
