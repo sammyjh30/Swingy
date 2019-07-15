@@ -14,8 +14,13 @@ public class MapConsoleView implements MapView {
 //		System.out.println((char)27 + "[35mPURPLE");
 //		System.out.println((char)27 + "[36mLIGHTBLUE");
 //		System.out.println((char)27 + "[37mWHITE");
+		for (int l = 0; l < mapSize * 2 + 2; l++) {
+			System.out.print("_");
+		}
+		System.out.print("\n");
 		for (int i = 0; i < mapSize; i++) {
-			System.out.format("%1$"+ (mapSize * 2) + "s", "_");
+//			System.out.format("%1$"+ (mapSize * 2) + "s", "\n");
+
 			System.out.print("| ");
 			for (int j = 0; j < mapSize; j++) {
 				if (map[i][j] == '.') {
@@ -29,11 +34,36 @@ public class MapConsoleView implements MapView {
 			}
 			System.out.print("|\n");
 		}
-		System.out.format("%1$"+ (mapSize * 2) + "s", "_");
-		System.out.print("| ");
+		System.out.print("|");
+		for (int l = 0; l < mapSize * 2 + 1; l++) {
+			System.out.print("_");
+		}
+		System.out.print("|\n");
+	}
+
+	public void					drawCompass() {
+		System.out.println("    ______________   ");
+		System.out.println("   /              \\  ");
+		System.out.println("  /     NORTH      \\  ");
+		System.out.println(" /        Λ         \\ ");
+		System.out.println("|         |          |");
+		System.out.println("| WEST<---O---> EAST |");
+		System.out.println("|         |          |");
+		System.out.println(" \\        V         / ");
+		System.out.println("  \\     SOUTH      /  ");
+		System.out.println("   \\______________/  ");
 	}
 
 	public void					display(GameController controller) {
-		displayMap(controller.getMap(), controller.getMapSize());
+		int stage = 0;
+		while  (stage >= 0) {
+			displayMap(controller.getMap(), controller.getMapSize());
+			drawCompass();
+		}
+		if (stage == -1) {
+			//Close game
+		} else if (stage == -2) {
+			//Hero died
+		}
 	}
 }

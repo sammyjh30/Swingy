@@ -13,7 +13,7 @@ public class MenuConsoleView implements MenuView {
 	private CharacterController		characterController;
 
 	public MenuConsoleView() {
-		this.characterController = CharacterController.builder().menuView(this).createHeroView(new CreateHeroConsoleView()).loadFileView(new LoadFileConsoleView()).mapView(new MapConsoleView()).build();
+		this.characterController = CharacterController.builder().menuView(this).createHeroView(new CreateHeroConsoleView()).loadFileView(new LoadFileConsoleView()).build();
 	}
 
 	public void			menu() {

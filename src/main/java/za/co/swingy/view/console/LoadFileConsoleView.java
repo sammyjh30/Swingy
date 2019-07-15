@@ -1,6 +1,7 @@
 package za.co.swingy.view.console;
 
 import com.sun.org.apache.bcel.internal.generic.LoadClass;
+import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.model.items.Armor;
 import za.co.swingy.model.items.Helm;
@@ -128,5 +129,7 @@ public class LoadFileConsoleView implements LoadFileView {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 		//Go to GameController
+		GameController controller = GameController.builder().hero(hero).mapView(new MapConsoleView()).build();
+		controller.showMapView();
 	}
 }

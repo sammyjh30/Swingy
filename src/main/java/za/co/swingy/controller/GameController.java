@@ -41,7 +41,9 @@ public class GameController {
 			this.hero = hero;
 			this.mapSize = (hero.getLevel() - 1) * 5 + 10 - (hero.getLevel() % 2);
 			this.map = new char[this.mapSize][this.mapSize];
-			Arrays.fill(this.map, '.');
+			for (int i = 0; i < this.mapSize; i++) {
+				Arrays.fill(this.map[i], '.');
+			}
 			//Place player
 			this.map[hero.getYPos()][hero.getXPos()] = 'X';
 			//Get enemies

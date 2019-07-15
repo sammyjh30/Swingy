@@ -27,8 +27,6 @@ public class CharacterController {
 	private Hero						hero;
 	@NotNull(message = "Menu View cannot be NULL")
 	private MenuView					menuView;
-	@NotNull
-	private MapView						mapView;
 
 	// Builder
 	public static class CharacterControllerBuilder {
@@ -51,12 +49,6 @@ public class CharacterController {
 			this.loadFileView = loadFileView;
 			return this;
 		}
-
-		public CharacterControllerBuilder				mapView(MapView mapView) {
-			this.mapView = mapView;
-			return this;
-		}
-
 	}
 
 	public void			createNewHero() {
@@ -83,8 +75,6 @@ public class CharacterController {
 			loadedHero = saves.get(i);
 		}
 		this.loadFileView.printLoadedHero(loadedHero);
-		this.mapView.display();
-
 	}
 
 	public static boolean 	isNumeric(String str) {

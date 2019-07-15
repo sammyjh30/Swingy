@@ -1,5 +1,6 @@
 package za.co.swingy.view.console;
 
+import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.model.items.Armor;
 import za.co.swingy.model.items.Helm;
@@ -60,6 +61,8 @@ public class CreateHeroConsoleView implements CreateHeroView {
 		//Try clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
+		GameController controller = GameController.builder().hero(hero).mapView(new MapConsoleView()).build();
+		controller.showMapView();
 	}
 
 	public String			 promptName() {
