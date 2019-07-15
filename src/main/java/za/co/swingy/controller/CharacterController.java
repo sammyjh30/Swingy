@@ -9,6 +9,7 @@ import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.CreateHeroView;
 import za.co.swingy.view.LoadFileView;
+import za.co.swingy.view.MapView;
 import za.co.swingy.view.MenuView;
 import za.co.swingy.view.console.CreateHeroConsoleView;
 
@@ -26,27 +27,36 @@ public class CharacterController {
 	private Hero						hero;
 	@NotNull(message = "Menu View cannot be NULL")
 	private MenuView					menuView;
+	@NotNull
+	private MapView						mapView;
 
 	// Builder
 	public static class CharacterControllerBuilder {
 		private CreateHeroView				createHeroView;
-		private LoadFileView loadFileView;
+		private LoadFileView				loadFileView;
 		private MenuView					menuView;
+		private MapView						mapView;
 
 		public CharacterControllerBuilder				menuView(MenuView menuView) {
 			this.menuView = menuView;
 			return this;
 		}
 
-		public CharacterControllerBuilder		createHeroView(CreateHeroView createHeroView) {
+		public CharacterControllerBuilder				createHeroView(CreateHeroView createHeroView) {
 			this.createHeroView = createHeroView;
 			return this;
 		}
 
-		public CharacterControllerBuilder		loadFileView(LoadFileView loadFileView) {
+		public CharacterControllerBuilder				loadFileView(LoadFileView loadFileView) {
 			this.loadFileView = loadFileView;
 			return this;
 		}
+
+		public CharacterControllerBuilder				mapView(MapView mapView) {
+			this.mapView = mapView;
+			return this;
+		}
+
 	}
 
 	public void			createNewHero() {
@@ -73,6 +83,7 @@ public class CharacterController {
 			loadedHero = saves.get(i);
 		}
 		this.loadFileView.printLoadedHero(loadedHero);
+		
 	}
 
 	public static boolean 	isNumeric(String str) {
