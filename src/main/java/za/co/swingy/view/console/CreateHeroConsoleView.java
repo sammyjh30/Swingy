@@ -25,6 +25,7 @@ public class CreateHeroConsoleView implements CreateHeroView {
 		System.out.println("| HP:       " + hero.getHitPoints() + "/" + hero.getMaxHitPoints());
 		System.out.println("| Attack:   " + hero.getAttack());
 		System.out.println("| Defence:  " + hero.getDefence());
+		System.out.println("| Position:  [" + hero.getXPos() + ";" + hero.getYPos() + "]");
 		System.out.println("|_______Inventory______");
 		Inventory inventory = hero.getInventory();
 		System.out.println("| Slots: " + inventory.getUsedSlots() +"/" + inventory.getMaxSlots());
@@ -91,18 +92,18 @@ public class CreateHeroConsoleView implements CreateHeroView {
 			InputStreamReader streamReader = new InputStreamReader(System.in);
 			BufferedReader bufferedReader = new BufferedReader(streamReader);
 			String type = bufferedReader.readLine();
-			while (type.isEmpty() || !type.equals("A") && !type.equals("B") && !type.equals("C") && !type.equals("D")) {
+			while (type.isEmpty() || !type.equalsIgnoreCase("A") && !type.equalsIgnoreCase("B") && !type.equalsIgnoreCase("C") && !type.equalsIgnoreCase("D")) {
 				System.out.println("Oops, that's not a valid class! Please try again!");
 				System.out.print("Please enter either A, B, C, or D for your class: ");
 				type = bufferedReader.readLine();
 			}
-			if (type.equals("A")) {
+			if (type.equalsIgnoreCase("A")) {
 				type = "Explorer";
-			} else if (type.equals("B")) {
+			} else if (type.equalsIgnoreCase("B")) {
 				type = "Warrior";
-			} else if (type.equals("C")) {
+			} else if (type.equalsIgnoreCase("C")) {
 				type = "Knight";
-			} else if (type.equals("D")) {
+			} else if (type.equalsIgnoreCase("D")) {
 				type = "Barbarian";
 			}
 			return type;

@@ -104,7 +104,7 @@ public class CharacterController {
 					int save = 0;
 					String line[];
 					while ((st = br.readLine()) != null) {
-						//1|Name|Type|Level|Attack|Defence|HitPoints|MaxHitPoints|Experience|
+						//1|Name|Type|Level|Attack|Defence|HitPoints|MaxHitPoints|Experience|xPos|yPos
 						//1|Inventory|usedSlots|MaxSlots|equippedWeaponIndex|equippedArmorIndex|equippedHelmIndex
 						//1|Weapons|Index|Name|Level|AttackIncrease
 						//1|Armors|Index|Name|Level|DefenceIncrease
@@ -121,6 +121,8 @@ public class CharacterController {
 								heroToAdd.setHitPoints(Integer.parseInt(line[6]));
 								heroToAdd.setMaxHitPoints(Integer.parseInt(line[7]));
 								heroToAdd.setExperience(Integer.parseInt(line[8]));
+								heroToAdd.setXPos(Integer.parseInt(line[9]));
+								heroToAdd.setYPos(Integer.parseInt(line[10]));
 								heroSaves.add(heroToAdd);
 							} else if (Integer.parseInt(line[0]) == save && line[1].equalsIgnoreCase("Inventory")) {
 								//add the inventory to the hero

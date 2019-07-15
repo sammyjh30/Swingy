@@ -20,4 +20,8 @@ public class Character {
 	private int			hitPoints;
 	@NotNull
 	private int			maxHitPoints;
+	@NotNull
+	private int			xPos;
+	@NotNull
+	private int			yPos;
 }

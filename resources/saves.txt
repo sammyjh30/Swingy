@@ -1,4 +1,4 @@
-1|Bob|Explorer|1|2|3|25|50|100
+1|Bob|Explorer|1|2|3|25|50|100|3|2
 1|Inventory|3|9|0|0|0
 1|Weapons|0|Test Sword|1|2
 1|Armors|0|Test Armor|3|4

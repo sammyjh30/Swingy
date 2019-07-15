@@ -92,6 +92,7 @@ public class LoadFileConsoleView implements LoadFileView {
 		System.out.println("| HP:       " + hero.getHitPoints() + "/" + hero.getMaxHitPoints());
 		System.out.println("| Attack:   " + hero.getAttack());
 		System.out.println("| Defence:  " + hero.getDefence());
+		System.out.println("| Position:  [" + hero.getXPos() + ";" + hero.getYPos() + "]");
 		System.out.println("|_______Inventory______");
 		Inventory inventory = hero.getInventory();
 		System.out.println("| Slots: " + inventory.getUsedSlots() +"/" + inventory.getMaxSlots());

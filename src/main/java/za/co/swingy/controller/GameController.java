@@ -1,9 +1,15 @@
 package za.co.swingy.controller;
 
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.view.MenuView;
 
+@Getter
+@Setter
+@Builder
 public class GameController {
 	private MenuView		menuView;
 	private Hero hero;
@@ -12,7 +18,12 @@ public class GameController {
 	public static class GameControllerBuilder {
 		private MenuView		menuView;
 
-		public GameControllerBuilder		menuView() {
+//		public GameControllerBuilder		menuView() {
+////			this.menuView = new MenuView();
+//			return this;
+//		}
+
+		public GameControllerBuilder		map(Hero hero) {
 //			this.menuView = new MenuView();
 			return this;
 		}

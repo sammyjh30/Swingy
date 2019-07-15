@@ -1,9 +1,6 @@
 package za.co.swingy.model.characters;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import za.co.swingy.model.items.Armor;
 import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Inventory;
@@ -29,6 +26,7 @@ public class Hero extends Character {
 	private  int		experience;
 	@NotNull
 	private Inventory	inventory;
+
 
 	// Builder
 	public static class HeroBuilder {
@@ -100,23 +98,26 @@ public class Hero extends Character {
 			this.equippedHelm = this.inventory.getHelms().get(0);
 			this.inventory.setEquippedHelmIndex(0);
 		}
+		//Set position based on level
+		this.setXPos(((0-1)*5+10-(0%2)) / 2);
+		this.setYPos(((0-1)*5+10-(0%2)) / 2);
 		//Set attack and defence
-		if (this.classType == "Explorer") {
+		if (this.classType.equals("Explorer")) {
 			this.setAttack(1);
 			this.setDefence(1);
 			this.setMaxHitPoints(50);
 			this.setHitPoints(50);
-		} else if (this.classType == "Warrior") {
+		} else if (this.classType.equals("Warrior")) {
 			this.setAttack(2);
 			this.setDefence(2);
 			this.setMaxHitPoints(50);
 			this.setHitPoints(50);
-		} else if (this.classType == "Knight") {
+		} else if (this.classType.equals("Knight")) {
 			this.setAttack(3);
 			this.setDefence(3);
 			this.setMaxHitPoints(50);
 			this.setHitPoints(50);
-		} else if (this.classType == "Barbarian") {
+		} else if (this.classType.equals("Barbarian")) {
 			this.setAttack(4);
 			this.setDefence(4);
 			this.setMaxHitPoints(50);
@@ -159,16 +160,16 @@ public class Hero extends Character {
 		if (this.experience >= xpRequired) {
 			this.setLevel(this.getLevel() + 1);
 			this.experience -= xpRequired;
-			if (this.classType == "Explorer") {
+			if (this.classType.equals("Explorer")) {
 				this.setAttack(this.getAttack() + 4);
 				this.setDefence(this.getDefence() + 4);
-			} else if (this.classType == "Warrior") {
+			} else if (this.classType.equals("Warrior")) {
 				this.setAttack(this.getAttack() + 3);
 				this.setDefence(this.getDefence() + 3);
-			} else if (this.classType == "Knight") {
+			} else if (this.classType.equals("Knight")) {
 				this.setAttack(this.getAttack() + 2);
 				this.setDefence(this.getDefence() + 2);
-			} else if (this.classType == "Barbarian") {
+			} else if (this.classType.equals("Barbarian")) {
 				this.setAttack(this.getAttack() + 1);
 				this.setDefence(this.getDefence() + 1);
 			}
