@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import static za.co.swingy.controller.CharacterController.isNumeric;
 
@@ -54,7 +55,21 @@ public class GameController {
 			this.map[hero.getYPos()][hero.getXPos()] = 'X';
 			//Get enemies
 			int maxEnemies = (hero.getLevel() + 1) * 5 - (hero.getLevel() %2);
+			Enemy enemy;
 			System.out.println("Max Enemies = " + maxEnemies);
+			for (int i = 0; i < maxEnemies; i++) {
+				enemy = Enemy.builder().enemyName().enemyName().build();
+				enemy.generateEnemy(hero);
+				Random rand = new Random();
+				int positionX = rand.nextInt(this.mapSize);
+				int positionY = rand.nextInt(this.mapSize);
+				while (positionX == hero.getXPos() && positionY == hero.getYPos()) {
+					positionX = rand.nextInt(this.mapSize);
+					positionY = rand.nextInt(this.mapSize);
+				}
+				enemy.setXPos(positionX);
+				enemy.setYPos(positionY);
+			}
 			return this;
 		}
 
