@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MapConsoleView implements MapView {
-
 	public void					displayMap(char[][] map, int mapSize) {
 		System.out.print("\n");
 		for (int l = 0; l < mapSize * 2 + 2; l++) {
@@ -73,16 +72,22 @@ public class MapConsoleView implements MapView {
 				}
 				if (input.equalsIgnoreCase("NORTH")) {
 					System.out.println("Move the hero north");
+					controller.moveHero(0, -1);
 				} else if (input.equalsIgnoreCase("SOUTH")) {
 					System.out.println("Move the hero south");
+					controller.moveHero(0, 1);
 				} else if (input.equalsIgnoreCase("EAST")) {
 					System.out.println("Move the hero east");
+					controller.moveHero(1, 0);
 				} else if (input.equalsIgnoreCase("WEST")) {
 					System.out.println("Move the hero west");
+					controller.moveHero(-1, 0);
 				} else if (input.equalsIgnoreCase("INVENTORY")) {
 					System.out.println("Open inventory");
 				} else if (input.equalsIgnoreCase("SAVE")) {
 					System.out.println("Save the game");
+					controller.saveGame();
+					return;
 				}
 				//Clean screen
 			} catch (IOException e) {
