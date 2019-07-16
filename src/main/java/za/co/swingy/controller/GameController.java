@@ -164,6 +164,10 @@ public class GameController {
 		if (newX < 0 || newY < 0 || newX > this.mapSize || newY > this.mapSize) {
 			System.out.println("Change the map!");
 		} else {
+			if (this.map[newY][newX] == 'O') {
+				System.out.println("COMBAT!");
+				//Create an encounter view
+			}
 			this.map[this.hero.getYPos()][this.hero.getXPos()] = '.';
 			this.map[newY][newX] = 'X';
 			this.hero.setXPos(newX);

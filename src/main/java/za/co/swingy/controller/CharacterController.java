@@ -11,7 +11,6 @@ import za.co.swingy.view.CreateHeroView;
 import za.co.swingy.view.LoadFileView;
 import za.co.swingy.view.MapView;
 import za.co.swingy.view.MenuView;
-import za.co.swingy.view.console.CreateHeroConsoleView;
 
 import javax.validation.constraints.NotNull;
 import java.io.*;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 public class CharacterController {
 	@NotNull
 	private CreateHeroView		createHeroView;
-	private LoadFileView loadFileView;
+	private LoadFileView		loadFileView;
 	private Hero						hero;
 	@NotNull(message = "Menu View cannot be NULL")
 	private MenuView					menuView;
@@ -51,7 +50,7 @@ public class CharacterController {
 		}
 	}
 
-	public void			createNewHero() {
+	public void				createNewHero() {
 		String name = this.createHeroView.promptName();
 		String type = this.createHeroView.promptType();
 		this.hero = Hero.builder().classType(type).name(name).inventory().build();
@@ -59,7 +58,7 @@ public class CharacterController {
 		this.createHeroView.printHeroStatus(this.hero);
 	}
 
-	public void			loadHero() {
+	public void				loadHero() {
 		Hero loadedHero = null;
 		//Get File
 		ArrayList<Hero> saves = readSaves();
@@ -86,15 +85,11 @@ public class CharacterController {
 		return true;
 	}
 
-	public ArrayList<Hero>				readSaves() {
+	public ArrayList<Hero>	readSaves() {
 		String st;
 		try {
 			File file = new File("resources/saves.txt");
 			if (file.canRead()) {
-				//To save
-//				BufferedWriter writer = new BufferedWriter(new FileWriter("./simulation.txt", true));
-//				writer.write(message + '\n');
-//				writer.close();
 				//To load
 				BufferedReader br = new BufferedReader(new FileReader(file));
 				ArrayList<Hero> heroSaves = new ArrayList<Hero>();
@@ -154,7 +149,6 @@ public class CharacterController {
 								}
 								heroSaves.get(save - 1).setEquippedArmor(heroToAdd.getInventory().getArmors().get(heroToAdd.getInventory().getEquippedArmorIndex()));
 							} else if (Integer.parseInt(line[0]) == save && line[1].equalsIgnoreCase("Helms")) {
-								System.out.println("Helms found! Saves = " + save);
 								//Loop through and assign all helms
 								for (int i = 2; i < line.length; i++) {
 									helm = Helm.builder().build();

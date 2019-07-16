@@ -3,3 +3,8 @@
 1|Weapons|0|Test Sword|1|2
 1|Armors|0|Test Armor|3|4
 1|Helms|0|Test Helm|5|6
+2|bob|Warrior|0|2|2|50|50|0|2|0
+2|Inventory|3|9|0|0|0
+2|Weapons|0|Wooden Sword of Noobs|1|1
+2|Armors|0|Casual Clothes|1|1
+2|Helms|0|Straw Helmet|1|1
