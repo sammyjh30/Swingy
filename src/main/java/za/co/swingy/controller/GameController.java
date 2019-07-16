@@ -45,6 +45,7 @@ public class GameController {
 		private MapView				mapView;
 
 		public GameControllerBuilder		hero(Hero hero) {
+			System.out.println("GameController HERO!");
 			this.hero = hero;
 			this.mapSize = (hero.getLevel() - 1) * 5 + 10 - (hero.getLevel() % 2);
 			this.map = new char[this.mapSize][this.mapSize];
@@ -57,18 +58,26 @@ public class GameController {
 			int maxEnemies = (hero.getLevel() + 1) * 5 - (hero.getLevel() %2);
 			Enemy enemy;
 			System.out.println("Max Enemies = " + maxEnemies);
+			int linePlaces[] = new int[maxEnemies];
+			Arrays.fill(linePlaces, maxEnemies+1);
+			Random rand = new Random();
+			int linePos = 0;
 			for (int i = 0; i < maxEnemies; i++) {
 				enemy = Enemy.builder().enemyName().enemyName().build();
 				enemy.generateEnemy(hero);
-				Random rand = new Random();
-				int positionX = rand.nextInt(this.mapSize);
-				int positionY = rand.nextInt(this.mapSize);
-				while (positionX == hero.getXPos() && positionY == hero.getYPos()) {
-					positionX = rand.nextInt(this.mapSize);
-					positionY = rand.nextInt(this.mapSize);
+				linePos = rand.nextInt(this.mapSize* this.mapSize);
+				int positionX = linePos % this.mapSize;
+				int positionY = linePos / this.mapSize;
+				System.out.println("Enemy position: [" + positionX + ";" + positionY + "]");
+				while (Arrays.asList(linePlaces).contains(linePos) || (positionX == hero.getXPos() && positionY == hero.getYPos())) {
+					linePos = rand.nextInt(maxEnemies);
+					positionX = linePos % this.mapSize;
+					positionY = linePos / this.mapSize;
+					System.out.println("Enemy position: [" + positionX + ";" + positionY + "]");
 				}
 				enemy.setXPos(positionX);
 				enemy.setYPos(positionY);
+				this.map[positionY][positionX] = 'O';
 			}
 			return this;
 		}
