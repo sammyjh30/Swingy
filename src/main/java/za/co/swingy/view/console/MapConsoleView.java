@@ -1,6 +1,7 @@
 package za.co.swingy.view.console;
 
 import za.co.swingy.controller.GameController;
+import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.view.MapView;
 
 import java.io.BufferedReader;
@@ -53,7 +54,7 @@ public class MapConsoleView implements MapView {
 		System.out.println("Or you can go to your " + (char)27 + "[32mINVENTORY" + (char)27 + "[37m or " + (char)27 + "[32mSAVE" + (char)27 + "[37m to save and exit this game.");
 	}
 
-	public void					checkForCombat(GameController controller, int x, int y) {
+	public int					checkForCombat(GameController controller, int x, int y) {
 		int newX = controller.getHero().getXPos() + x;
 		int newY = controller.getHero().getYPos() + y;
 		if (newX < 0 || newY < 0 || newX > controller.getMapSize() || newY > controller.getMapSize()) {
@@ -63,11 +64,16 @@ public class MapConsoleView implements MapView {
 		if (controller.getMap()[newY][newX] == 'O') {
 			System.out.println("COMBAT!");
 			//Create an encounter view
-			for (int i = 0; i < controller.getEnemies().size(); i++) {
-				if (controller.getEnemies().get(i).getXPos() == newX && controller.getEnemies().get(i).getYPos() == newY) {
+			Enemy enemy = controller.getCombatEnemy(x,y);
+			if (enemy == null) {
+				System.out.println("False alarm! It was just a cardboard cutout!");
+				return 1;
+			} else {
 
-				}
+				if ()
 			}
+			//Use controller to get enemy and index
+			//Pass to Encounter mode
 		}
 	}
 

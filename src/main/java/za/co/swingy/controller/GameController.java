@@ -181,6 +181,15 @@ public class GameController {
 		}
 	}
 
+	public Enemy			getCombatEnemy(int x, int y) {
+		for (int i = 0; i < this.enemies.size(); i++) {
+			if (this.enemies.get(i).getXPos() == x && this.enemies.get(i).getYPos() == y) {
+				return this.enemies.get(i);
+			}
+		}
+		return null;
+	}
+
 	public void			moveHero(int x, int y) {
 		int newX = this.hero.getXPos() + x;
 		int newY = this.hero.getYPos() + y;
