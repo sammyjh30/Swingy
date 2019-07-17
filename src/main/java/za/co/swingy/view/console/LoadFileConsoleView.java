@@ -89,6 +89,7 @@ public class LoadFileConsoleView implements LoadFileView {
 	public void 			printLoadedHero(Hero hero) {
 		System.out.println("_______________________");
 		System.out.println("| Name:     " + hero.getName());
+		System.out.println("| Level:    " + hero.getLevel());
 		System.out.println("| Type:     " + hero.getClassType());
 		System.out.println("| HP:       " + hero.getHitPoints() + "/" + hero.getMaxHitPoints());
 		System.out.println("| Attack:   " + hero.getAttack());

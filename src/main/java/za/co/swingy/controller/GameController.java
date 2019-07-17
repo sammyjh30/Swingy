@@ -28,7 +28,7 @@ import static za.co.swingy.controller.CharacterController.isNumeric;
 @Setter
 @Builder
 public class GameController {
-//	private MenuView			menuView;
+	//	private MenuView			menuView;
 	private Hero				hero;
 	private char[][]			map;
 	private int					mapSize;
@@ -57,24 +57,23 @@ public class GameController {
 			//Get enemies
 			int maxEnemies = (hero.getLevel() + 1) * 5 - (hero.getLevel() %2);
 			Enemy enemy;
-			System.out.println("Max Enemies = " + maxEnemies);
-			int linePlaces[] = new int[maxEnemies];
-			Arrays.fill(linePlaces, maxEnemies+1);
+			Integer linePlaces[] = new Integer[maxEnemies];
+			Arrays.fill(linePlaces, -1);
 			Random rand = new Random();
-			int linePos = 0;
+			Integer linePos = 0;
 			for (int i = 0; i < maxEnemies; i++) {
+				System.out.println("I = " + i);
 				enemy = Enemy.builder().enemyName().enemyName().build();
 				enemy.generateEnemy(hero);
 				linePos = rand.nextInt(this.mapSize* this.mapSize);
-				int positionX = linePos % this.mapSize;
-				int positionY = linePos / this.mapSize;
-				System.out.println("Enemy position: [" + positionX + ";" + positionY + "]");
+				int positionX = linePos % (this.mapSize);
+				int positionY = linePos / (this.mapSize);
 				while (Arrays.asList(linePlaces).contains(linePos) || (positionX == hero.getXPos() && positionY == hero.getYPos())) {
-					linePos = rand.nextInt(maxEnemies);
-					positionX = linePos % this.mapSize;
-					positionY = linePos / this.mapSize;
-					System.out.println("Enemy position: [" + positionX + ";" + positionY + "]");
+					linePos = rand.nextInt(this.mapSize* this.mapSize);
+					positionX = linePos % (this.mapSize);
+					positionY = linePos / (this.mapSize);
 				}
+				linePlaces[i] = linePos;
 				enemy.setXPos(positionX);
 				enemy.setYPos(positionY);
 				this.map[positionY][positionX] = 'O';
