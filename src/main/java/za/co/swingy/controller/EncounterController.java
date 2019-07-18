@@ -39,10 +39,19 @@ public class EncounterController {
 	}
 
 	public int				fight() {
+		int heroAttack;
+		int heroDefence;
+		int enemyAttack;
+		int enemyDefence;
 		Random rand = new Random();
 		//Hero attacks
-		int heroAttack = this.hero.getEquippedWeapon().getAttackIncrease() + rand.nextInt(5);
+		if (this.hero.getEquippedWeapon() != null) {
+			heroAttack = this.hero.getAttack() + this.hero.getEquippedWeapon().getAttackIncrease() + rand.nextInt(5);
+		} else {
+			heroAttack = this.hero.getAttack() + this.hero.getEquippedWeapon().getAttackIncrease() + rand.nextInt(5);
 
+		}
+		return 1;
 	}
 
 	public int				startNewEncounter(Enemy enemy) {
