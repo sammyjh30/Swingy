@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MapConsoleView implements MapView {
+
+	// "\033[0m" RESET
 	public void					displayMap(char[][] map, int mapSize) {
 		System.out.print("\n");
 		for (int l = 0; l < mapSize * 2 + 2; l++) {
@@ -22,9 +24,9 @@ public class MapConsoleView implements MapView {
 				if (map[i][j] == '.') {
 					System.out.print('.');
 				} else if (map[i][j] == 'X') {
-					System.out.print((char)27 + "[32mX" + (char)27 + "[37m");
+					System.out.print((char)27 + "[32mX" +  "\033[0m");
 				} else if (map[i][j] == 'O') {
-					System.out.print((char)27 + "[35mO" + (char)27 + "[37m");
+					System.out.print((char)27 + "[35mO" +  "\033[0m");
 				}
 				System.out.print(" ");
 			}
@@ -49,9 +51,9 @@ public class MapConsoleView implements MapView {
 
 	public void					showOptions() {
 		System.out.println("Your goal is to leave all the maps, or level up lo level 6.");
-		System.out.println("You can move: " + (char)27 + "[32mNORTH" + (char)27 + "[37m, " + (char)27 + "[32mSOUTH" + (char)27 + "[37m, "
-				+ (char)27 + "[32mEAST" + (char)27 + "[37m or " + (char)27 + "[32mWEST" + (char)27 + "[37m");
-		System.out.println("Or you can go to your " + (char)27 + "[32mINVENTORY" + (char)27 + "[37m or " + (char)27 + "[32mSAVE" + (char)27 + "[37m to save and exit this game.");
+		System.out.println("You can move: " + (char)27 + "[32mNORTH" +  "\033[0m, " + (char)27 + "[32mSOUTH" + (char)27 + "[37m, "
+				+ (char)27 + "[32mEAST" +  "\033[0m or " + (char)27 + "[32mWEST" +  "\033[0m");
+		System.out.println("Or you can go to your " + (char)27 + "[32mINVENTORY" +  "\033[0m or " + (char)27 + "[32mSAVE" +  "\033[0m to save and exit this game.");
 	}
 
 	public int					checkForCombat(GameController controller, int x, int y) {

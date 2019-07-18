@@ -8,6 +8,7 @@ import za.co.swingy.model.characters.Hero;
 import za.co.swingy.view.EncounterView;
 
 import javax.validation.constraints.NotNull;
+import java.util.Random;
 
 @Builder
 @Getter
@@ -34,6 +35,13 @@ public class EncounterController {
 			this.encounterView = view;
 			return this;
 		}
+
+	}
+
+	public int				fight() {
+		Random rand = new Random();
+		//Hero attacks
+		int heroAttack = this.hero.getEquippedWeapon().getAttackIncrease() + rand.nextInt(5);
 
 	}
 
