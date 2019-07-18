@@ -24,14 +24,18 @@ public class EncounterConsoleView implements EncounterView {
 	}
 
 	private void					showHero(Hero hero) {
-		System.out.println("| Name: " + hero.getName().substring(0, 10));
+		if (hero.getName().length() > 10) {
+			System.out.println("| Name: " + hero.getName().substring(0, 10));
+		} else {
+			System.out.println("| Name: " + hero.getName());
+		}
 		System.out.println("| Class: " + hero.getClassType());
 		System.out.println("| Level: " + hero.getLevel());
 		if (this.controller.getHero().getEquippedHelm() == null) {
 			System.out.println("| HP:    " + hero.getHitPoints() + "/" + hero.getMaxHitPoints());
 		} else {
 			System.out.println("| HP:    " + (hero.getHitPoints() + hero.getEquippedHelm().getHitPointIncrease()) +
-					"/" + hero.getMaxHitPoints() + hero.getEquippedHelm().getHitPointIncrease());
+					"/" + (hero.getMaxHitPoints() + hero.getEquippedHelm().getHitPointIncrease()));
 		}
 		if (this.controller.getHero().getEquippedWeapon() == null) {
 			System.out.println("| ATT " + hero.getAttack());
@@ -46,8 +50,11 @@ public class EncounterConsoleView implements EncounterView {
 	}
 
 	private void					showEnemy(Enemy enemy) {
-		System.out.println("| Name: " + enemy.getEnemyName().substring(0, 10));
-		System.out.println("| Class: " + enemy.getEnemyType());
+		if (enemy.getEnemyName().length() > 10) {
+			System.out.println("| Name: " + enemy.getEnemyName().substring(0, 10) + "the" + enemy.getEnemyType());
+		} else {
+			System.out.println("| Name: " + enemy.getEnemyName() + " the " + enemy.getEnemyType());
+		}
 		System.out.println("| Level: " + enemy.getLevel());
 		System.out.println("| HP:    " + enemy.getHitPoints() + "/" + enemy.getMaxHitPoints());
 		System.out.println("| ATT " + enemy.getAttack());

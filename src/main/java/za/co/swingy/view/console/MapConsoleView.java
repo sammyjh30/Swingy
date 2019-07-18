@@ -60,11 +60,10 @@ public class MapConsoleView implements MapView {
 		if (newX < 0 || newY < 0 || newX > controller.getMapSize() || newY > controller.getMapSize()) {
 			System.out.println("Change the map!");
 //			return;
-		}
-		if (controller.getMap()[newY][newX] == 'O') {
+		} else if (controller.getMap()[newY][newX] == 'O') {
 			System.out.println("COMBAT!");
 			//Create an encounter view
-			Enemy enemy = controller.getCombatEnemy(x,y);
+			Enemy enemy = controller.getCombatEnemy(newX,newY);
 			if (enemy == null) {
 				System.out.println("False alarm! It was just a cardboard cutout!");
 				return 1;
@@ -82,6 +81,8 @@ public class MapConsoleView implements MapView {
 			}
 			//Use controller to get enemy and index
 			//Pass to Encounter mode
+		} else {
+			controller.moveHero(x, y);
 		}
 		return 1;
 	}
@@ -105,16 +106,16 @@ public class MapConsoleView implements MapView {
 				}
 				if (input.equalsIgnoreCase("NORTH")) {
 					System.out.println("Move the hero north");
-					controller.moveHero(0, -1);
+					this.checkForCombat(controller,0, -1);
 				} else if (input.equalsIgnoreCase("SOUTH")) {
 					System.out.println("Move the hero south");
-					controller.moveHero(0, 1);
+					this.checkForCombat(controller,0, 1);
 				} else if (input.equalsIgnoreCase("EAST")) {
 					System.out.println("Move the hero east");
-					controller.moveHero(1, 0);
+					this.checkForCombat(controller,1, 0);
 				} else if (input.equalsIgnoreCase("WEST")) {
 					System.out.println("Move the hero west");
-					controller.moveHero(-1, 0);
+					this.checkForCombat(controller,-1, 0);
 				} else if (input.equalsIgnoreCase("INVENTORY")) {
 					System.out.println("Open inventory");
 				} else if (input.equalsIgnoreCase("SAVE")) {

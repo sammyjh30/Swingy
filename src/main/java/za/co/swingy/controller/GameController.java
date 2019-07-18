@@ -57,13 +57,14 @@ public class GameController {
 			//Get enemies
 			int maxEnemies = (hero.getLevel() + 1) * 5 - (hero.getLevel() %2);
 			Enemy enemy;
+			this.enemies = new ArrayList<Enemy>();
 			Integer linePlaces[] = new Integer[maxEnemies];
 			Arrays.fill(linePlaces, -1);
 			Random rand = new Random();
 			Integer linePos = 0;
 			for (int i = 0; i < maxEnemies; i++) {
 				System.out.println("I = " + i);
-				enemy = Enemy.builder().enemyName().enemyName().build();
+				enemy = Enemy.builder().enemyName().enemyType().build();
 				enemy.generateEnemy(hero);
 				linePos = rand.nextInt(this.mapSize* this.mapSize);
 				int positionX = linePos % (this.mapSize);
@@ -77,6 +78,8 @@ public class GameController {
 				enemy.setXPos(positionX);
 				enemy.setYPos(positionY);
 				this.map[positionY][positionX] = 'O';
+				enemies.add(enemy);
+				System.out.println("Added enemy " + this.enemies.get(i).getEnemyName());
 			}
 			return this;
 		}
