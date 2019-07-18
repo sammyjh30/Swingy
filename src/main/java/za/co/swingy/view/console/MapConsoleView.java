@@ -59,7 +59,7 @@ public class MapConsoleView implements MapView {
 		int newY = controller.getHero().getYPos() + y;
 		if (newX < 0 || newY < 0 || newX > controller.getMapSize() || newY > controller.getMapSize()) {
 			System.out.println("Change the map!");
-			return;
+//			return;
 		}
 		if (controller.getMap()[newY][newX] == 'O') {
 			System.out.println("COMBAT!");
@@ -69,12 +69,21 @@ public class MapConsoleView implements MapView {
 				System.out.println("False alarm! It was just a cardboard cutout!");
 				return 1;
 			} else {
-
-				if ()
+//Create view and encounter
+				EncounterConsoleView encounterConsoleView = new EncounterConsoleView(controller.getHero());
+				int ret = encounterConsoleView.getController().startNewEncounter(enemy);
+				if (ret == -1) {
+					System.out.println("THE HERO IS DEAD?!");
+				} else if ( ret == 0) {
+					System.out.println("THE HERO RAN AWAY!");
+				} else if (ret == 1) {
+					System.out.println("THE HERO DEFEATED THEIR OPPONENT!");
+				}
 			}
 			//Use controller to get enemy and index
 			//Pass to Encounter mode
 		}
+		return 1;
 	}
 
 	public void					display(GameController controller) {

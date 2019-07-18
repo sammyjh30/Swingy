@@ -40,7 +40,22 @@ public class EncounterController {
 	public int				startNewEncounter(Enemy enemy) {
 		this.setEnemy(enemy);
 		//Show encounter and get input
-		String input;
-		if (input)
+		int ret = this.encounterView.display();
+		if (ret == 0) {
+			System.out.println("Call run function");
+		} else if (ret == 1) {
+			System.out.println("Call fight function");
+		} else if (ret == 2) {
+			System.out.println("Call simulate function");
+		}
+			//To return
+//			if (ret == -1) {
+//				System.out.println("THE HERO IS DEAD?!");
+//			} else if ( ret == 0) {
+//				System.out.println("THE HERO RAN AWAY!");
+//			} else if (ret == 1) {
+//				System.out.println("THE HERO DEFEATED THEIR OPPONENT!");
+//			}
+		return 1;
 	}
 }

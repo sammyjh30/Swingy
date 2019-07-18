@@ -1,5 +1,8 @@
 package za.co.swingy.view.console;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import za.co.swingy.controller.EncounterController;
 import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
@@ -10,18 +13,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+@Getter
+@Setter
 public class EncounterConsoleView implements EncounterView {
 	@NotNull
 	private EncounterController controller;
 
-	// Builder
-	public static class 		EncounterConsoleViewBuilder {
-		private EncounterController controller;
-
-		public EncounterConsoleViewBuilder controller(EncounterController controller) {
-			this.controller = controller;
-			return this;
-		}
+	public EncounterConsoleView(Hero hero) {
+		this.controller = EncounterController.builder().encounterView(this).hero(hero).build();
 	}
 
 	private void					showHero(Hero hero) {
@@ -76,8 +75,28 @@ public class EncounterConsoleView implements EncounterView {
 				System.out.print("Please enter in a command: ");
 				input = bufferedReader.readLine();
 			}
+			if (input.equalsIgnoreCase("RUN")) {
+				return 0;
+			} else if (input.equalsIgnoreCase("FIGHT")) {
+				return 1;
+			} else if (input.equalsIgnoreCase("SIMULATE")) {
+				return 2;
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return -1;
+	}
+
+	public void					fight() {
+
+	}
+
+	public void					run() {
+
+	}
+
+	public void					simulate() {
+
 	}
 }
