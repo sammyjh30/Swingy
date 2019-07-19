@@ -96,8 +96,12 @@ public class EncounterConsoleView implements EncounterView {
 		return -1;
 	}
 
-	public void					fight() {
-
+	public void					fight(String attacker, String defender, int success, int damage) {
+		if (success == 1) {
+			System.out.println(attacker + " attacked " + defender + " with " + damage + " points of damage!");
+		} else if (success == 0) {
+			System.out.println(attacker + " tried to attack " + defender + " but missed!");
+		}
 	}
 
 	public void					run() {

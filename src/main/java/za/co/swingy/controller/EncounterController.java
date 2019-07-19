@@ -39,40 +39,70 @@ public class EncounterController {
 	}
 
 	public int				fight() {
+		//The outputs need to be a view thing. Need to set up the appropriate functions
 		int heroAttack;
 		int heroDefence;
-		int enemyAttack;
-		int enemyDefence;
+		int damage;
+		String enemyName = this.enemy.getEnemyName() + " the " + this.enemy.getEnemyType();
 		Random rand = new Random();
-		//Hero attacks
+		int enemyAttack = this.enemy.getAttack() + rand.nextInt(10);
 		if (this.hero.getEquippedWeapon() != null) {
-			heroAttack = this.hero.getAttack() + this.hero.getEquippedWeapon().getAttackIncrease() + rand.nextInt(5);
+			heroAttack = this.hero.getAttack() + this.hero.getEquippedWeapon().getAttackIncrease() + rand.nextInt(10);
 		} else {
-			heroAttack = this.hero.getAttack() + this.hero.getEquippedWeapon().getAttackIncrease() + rand.nextInt(5);
-
+			heroAttack = this.hero.getAttack() + this.hero.getEquippedWeapon().getAttackIncrease() + rand.nextInt(10);
 		}
-		return 1;
+		if (this.hero.getEquippedArmor() != null) {
+			heroDefence = this.hero.getDefence() + this.hero.getEquippedArmor().getDefenceIncrease();
+		} else {
+			heroDefence = this.hero.getDefence() + this.hero.getEquippedArmor().getDefenceIncrease();
+		}
+		//Hero attacks
+		if (heroAttack > this.enemy.getDefence()) {
+			damage = heroAttack - this.enemy.getDefence();
+			this.encounterView.fight(this.hero.getName(), enemyName, 1, damage);
+			this.enemy.setHitPoints(this.enemy.getHitPoints() - damage);
+		} else {
+			this.encounterView.fight(this.hero.getName(), enemyName, 0, 0);
+		}
+		if (this.enemy.getHitPoints() <= 0) {
+			return 1;
+		}
+		//Enemy attacks
+		if (enemyAttack > heroDefence) {
+			damage = enemyAttack - heroDefence;
+			this.encounterView.fight(enemyName, this.hero.getName(), 1, damage);
+			this.hero.setHitPoints((this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) - damage);
+		} else {
+			this.encounterView.fight(enemyName, this.hero.getName(), 0, 0);
+		}
+		if ((this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) {
+			return -1;
+		}
+		return 0;
 	}
 
 	public int				startNewEncounter(Enemy enemy) {
 		this.setEnemy(enemy);
 		//Show encounter and get input
-		int ret = this.encounterView.display();
-		if (ret == 0) {
-			System.out.println("Call run function");
-		} else if (ret == 1) {
-			System.out.println("Call fight function");
-		} else if (ret == 2) {
-			System.out.println("Call simulate function");
+		while (this.enemy.getHitPoints() > 0 && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) > 0) {
+			int ret = this.encounterView.display();
+			if (ret == 0) {
+				System.out.println("Call run function");
+			} else if (ret == 1) {
+				System.out.println("Call fight function");
+				this.fight();
+			} else if (ret == 2) {
+				System.out.println("Call simulate function");
+			}
 		}
-			//To return
-//			if (ret == -1) {
-//				System.out.println("THE HERO IS DEAD?!");
-//			} else if ( ret == 0) {
-//				System.out.println("THE HERO RAN AWAY!");
-//			} else if (ret == 1) {
-//				System.out.println("THE HERO DEFEATED THEIR OPPONENT!");
-//			}
+				//To return
+	//			if (ret == -1) {
+	//				System.out.println("THE HERO IS DEAD?!");
+	//			} else if ( ret == 0) {
+	//				System.out.println("THE HERO RAN AWAY!");
+	//			} else if (ret == 1) {
+	//				System.out.println("THE HERO DEFEATED THEIR OPPONENT!");
+	//			}
 		return 1;
 	}
 }
