@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba86a429-a9a6-4607-a511-192b7bebb95c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/EncounterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/EncounterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/EncounterView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/EncounterView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -24,8 +21,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/EncounterController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="71" column="32" selection-start-line="71" selection-start-column="32" selection-end-line="71" selection-end-column="32" />
+            <state relative-caret-position="170">
+              <caret line="85" column="29" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
+              <folding>
+                <element signature="method#fight#0;class#EncounterController#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -42,12 +42,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
+            <state relative-caret-position="663">
               <caret line="100" column="90" selection-start-line="100" selection-start-column="90" selection-end-line="100" selection-end-column="90" />
               <folding>
                 <element signature="method#showHero#0;class#EncounterConsoleView#0" />
                 <element signature="method#showEnemy#0;class#EncounterConsoleView#0" />
-                <element signature="method#display#0;class#EncounterConsoleView#0" />
               </folding>
             </state>
           </provider>
@@ -102,7 +101,6 @@
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/MapView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/MenuConsoleView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/CharacterController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/LoadFileConsoleView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/CreateHeroConsoleView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/model/characters/Enemy.java" />
@@ -111,6 +109,7 @@
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/EncounterView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/EncounterController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java" />
       </list>
     </option>
   </component>
@@ -314,7 +313,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4991708" visible="true" weight="0.3916849" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4991708" weight="0.5207878" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -332,6 +331,18 @@
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java</url>
+          <line>65</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/test/java/za/co/swingy/AppTest.java" />
@@ -497,20 +508,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
+        <state relative-caret-position="663">
           <caret line="100" column="90" selection-start-line="100" selection-start-column="90" selection-end-line="100" selection-end-column="90" />
           <folding>
             <element signature="method#showHero#0;class#EncounterConsoleView#0" />
             <element signature="method#showEnemy#0;class#EncounterConsoleView#0" />
-            <element signature="method#display#0;class#EncounterConsoleView#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/EncounterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="71" column="32" selection-start-line="71" selection-start-column="32" selection-end-line="71" selection-end-column="32" />
+        <state relative-caret-position="170">
+          <caret line="85" column="29" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
+          <folding>
+            <element signature="method#fight#0;class#EncounterController#0" />
+          </folding>
         </state>
       </provider>
     </entry>

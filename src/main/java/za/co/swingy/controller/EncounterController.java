@@ -38,7 +38,7 @@ public class EncounterController {
 
 	}
 
-	public int				fight() {
+	public void				fight() {
 		//The outputs need to be a view thing. Need to set up the appropriate functions
 		int heroAttack;
 		int heroDefence;
@@ -65,7 +65,7 @@ public class EncounterController {
 			this.encounterView.fight(this.hero.getName(), enemyName, 0, 0);
 		}
 		if (this.enemy.getHitPoints() <= 0) {
-			return 1;
+			return;
 		}
 		//Enemy attacks
 		if (enemyAttack > heroDefence) {
@@ -76,9 +76,14 @@ public class EncounterController {
 			this.encounterView.fight(enemyName, this.hero.getName(), 0, 0);
 		}
 		if ((this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) {
-			return -1;
+			return;
 		}
-		return 0;
+		return;
+	}
+
+	public int				run() {
+		Random rand = new Random();
+		return rand.nextInt(2);
 	}
 
 	public int				startNewEncounter(Enemy enemy) {
@@ -88,12 +93,20 @@ public class EncounterController {
 			int ret = this.encounterView.display();
 			if (ret == 0) {
 				System.out.println("Call run function");
+				if (this.run() == 1) {
+					return 0;
+				}
 			} else if (ret == 1) {
 				System.out.println("Call fight function");
 				this.fight();
 			} else if (ret == 2) {
 				System.out.println("Call simulate function");
 			}
+		}
+		if (this.enemy.getHitPoints() <= 0) {
+			return 1;
+		} else if ((this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) {
+			return -1;
 		}
 				//To return
 	//			if (ret == -1) {
