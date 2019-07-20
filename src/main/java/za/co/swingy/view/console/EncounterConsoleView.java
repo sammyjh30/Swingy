@@ -104,11 +104,19 @@ public class EncounterConsoleView implements EncounterView {
 		}
 	}
 
-	public void					run() {
+	public void					run(int success) {
+		if (success == 1) {
+			System.out.println(this.controller.getHero().getName() + " managed to run away!");
+		} else {
+			System.out.println(this.controller.getHero().getName() + " tried to run away but failed!");
+		}
 
 	}
 
-	public void					simulate() {
-
+	public void					simulate(int turn) {
+		if (turn == 0) {
+			System.out.println("			SIMULATION START!");
+		}
+		System.out.println("Round " + turn + ":");
 	}
 }

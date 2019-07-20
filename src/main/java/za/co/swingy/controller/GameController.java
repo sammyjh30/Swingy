@@ -193,19 +193,19 @@ public class GameController {
 		return null;
 	}
 
+	public void				removeEnemy(Enemy enemy) {
+		if (this.enemies.contains(enemy)) {
+			this.map[enemy.getYPos()][enemy.getXPos()] = '.';
+			this.enemies.remove(enemy);
+		}
+	}
+
 	public void			moveHero(int x, int y) {
 		int newX = this.hero.getXPos() + x;
 		int newY = this.hero.getYPos() + y;
 		if (newX < 0 || newY < 0 || newX > this.mapSize || newY > this.mapSize) {
 			System.out.println("Change the map!");
 		} else {
-//			if (this.map[newY][newX] == 'O') {
-//				System.out.println("COMBAT!");
-//				//Create an encounter view
-//				for (int i = 0; i < this.enemies.size(); i++) {
-//					if
-//				}
-//			}
 			this.map[this.hero.getYPos()][this.hero.getXPos()] = '.';
 			this.map[newY][newX] = 'X';
 			this.hero.setXPos(newX);

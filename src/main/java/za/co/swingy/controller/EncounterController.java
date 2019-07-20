@@ -86,6 +86,15 @@ public class EncounterController {
 		return rand.nextInt(2);
 	}
 
+	public void				simulate() {
+		int i = 0;
+		while (this.enemy.getHitPoints() > 0 && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) > 0) {
+			this.encounterView.simulate(i);
+			this.fight();
+			i++;
+		}
+	}
+
 	public int				startNewEncounter(Enemy enemy) {
 		this.setEnemy(enemy);
 		//Show encounter and get input
@@ -94,28 +103,25 @@ public class EncounterController {
 			if (ret == 0) {
 				System.out.println("Call run function");
 				if (this.run() == 1) {
+					this.encounterView.run(1);
 					return 0;
+				} else {
+					this.encounterView.run(0);
 				}
 			} else if (ret == 1) {
 				System.out.println("Call fight function");
 				this.fight();
 			} else if (ret == 2) {
 				System.out.println("Call simulate function");
+				this.simulate();
 			}
 		}
 		if (this.enemy.getHitPoints() <= 0) {
+			//Call the item drop!
 			return 1;
 		} else if ((this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) {
 			return -1;
 		}
-				//To return
-	//			if (ret == -1) {
-	//				System.out.println("THE HERO IS DEAD?!");
-	//			} else if ( ret == 0) {
-	//				System.out.println("THE HERO RAN AWAY!");
-	//			} else if (ret == 1) {
-	//				System.out.println("THE HERO DEFEATED THEIR OPPONENT!");
-	//			}
 		return 1;
 	}
 }

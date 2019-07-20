@@ -5,7 +5,7 @@ public interface EncounterView {
 
 	void					fight(String attacker, String defender, int success, int damage);
 
-	void					run();
+	void					run(int success);
 
-	void					simulate();
-	}
+	void					simulate(int turn);
+}

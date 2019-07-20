@@ -75,10 +75,13 @@ public class MapConsoleView implements MapView {
 				int ret = encounterConsoleView.getController().startNewEncounter(enemy);
 				if (ret == -1) {
 					System.out.println("THE HERO IS DEAD?!");
+					//Go back to the main menu
 				} else if ( ret == 0) {
 					System.out.println("THE HERO RAN AWAY!");
 				} else if (ret == 1) {
 					System.out.println("THE HERO DEFEATED THEIR OPPONENT!");
+					controller.removeEnemy(enemy);
+					controller.moveHero(x,y);
 				}
 			}
 			//Use controller to get enemy and index
