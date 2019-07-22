@@ -50,15 +50,15 @@ public class CharacterController {
 		}
 	}
 
-	public void				createNewHero() {
+	public int				createNewHero() {
 		String name = this.createHeroView.promptName();
 		String type = this.createHeroView.promptType();
 		this.hero = Hero.builder().classType(type).name(name).inventory().build();
 		this.hero.starterHero();
-		this.createHeroView.printHeroStatus(this.hero);
+		return this.createHeroView.printHeroStatus(this.hero);
 	}
 
-	public void				loadHero() {
+	public int				loadHero() {
 		Hero loadedHero = null;
 		//Get File
 		ArrayList<Hero> saves = readSaves();
@@ -73,7 +73,7 @@ public class CharacterController {
 		if (i >= 0) {
 			loadedHero = saves.get(i);
 		}
-		this.loadFileView.printLoadedHero(loadedHero);
+		return this.loadFileView.printLoadedHero(loadedHero);
 	}
 
 	public static boolean 	isNumeric(String str) {

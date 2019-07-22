@@ -86,7 +86,7 @@ public class LoadFileConsoleView implements LoadFileView {
 		System.out.println("You don't have any saves yet! Create a new character to start the adventure!");
 	}
 
-	public void 			printLoadedHero(Hero hero) {
+	public int 			printLoadedHero(Hero hero) {
 		System.out.println("_______________________");
 		System.out.println("| Name:     " + hero.getName());
 		System.out.println("| Level:    " + hero.getLevel());
@@ -131,6 +131,6 @@ public class LoadFileConsoleView implements LoadFileView {
 		System.out.flush();
 		//Go to GameController
 		GameController controller = GameController.builder().hero(hero).mapView(new MapConsoleView()).build();
-		controller.showMapView();
+		return controller.showMapView();
 	}
 }

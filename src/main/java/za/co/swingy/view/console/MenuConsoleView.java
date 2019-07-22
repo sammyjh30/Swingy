@@ -17,41 +17,44 @@ public class MenuConsoleView implements MenuView {
 	}
 
 	public void			menu() {
-		try {
-			System.out.println("_________________________________________________");
-			System.out.println("|				Welcome to Swingy!				|");
-			System.out.println("|			What would you like to do?			|");
-			System.out.println("|												|");
-			System.out.println("|			NEW   -  Create a new hero			|");
-			System.out.println("|			LOAD  -  Load a previous hero		|");
-			System.out.println("|			EXIT  -  Leave the game, duh!		|");
-			System.out.println("|_______________________________________________|");
-			System.out.print("  Please enter one of the above commands:");
-			InputStreamReader streamReader = new InputStreamReader(System.in);
-			BufferedReader bufferedReader = new BufferedReader(streamReader);
-			String input = bufferedReader.readLine();
-			while (!input.equalsIgnoreCase("NEW") && !input.equalsIgnoreCase("LOAD") && !input.equalsIgnoreCase("EXIT")) {
-				System.out.println("Oops, that's not a valid command! Please try again!");
+		int ret = 0;
+		while (ret <= 0) {
+			try {
+				System.out.println("_________________________________________________");
+				System.out.println("|				Welcome to Swingy!				|");
+				System.out.println("|			What would you like to do?			|");
+				System.out.println("|												|");
+				System.out.println("|			NEW   -  Create a new hero			|");
+				System.out.println("|			LOAD  -  Load a previous hero		|");
+				System.out.println("|			EXIT  -  Leave the game, duh!		|");
+				System.out.println("|_______________________________________________|");
 				System.out.print("  Please enter one of the above commands:");
-				input = bufferedReader.readLine();
+				InputStreamReader streamReader = new InputStreamReader(System.in);
+				BufferedReader bufferedReader = new BufferedReader(streamReader);
+				String input = bufferedReader.readLine();
+				while (!input.equalsIgnoreCase("NEW") && !input.equalsIgnoreCase("LOAD") && !input.equalsIgnoreCase("EXIT")) {
+					System.out.println("Oops, that's not a valid command! Please try again!");
+					System.out.print("  Please enter one of the above commands:");
+					input = bufferedReader.readLine();
+				}
+				if (input.equalsIgnoreCase("NEW")) {
+					//				return 1;
+					//Create Character view
+					System.out.println("Call character create function.");
+					ret = this.characterController.createNewHero();
+				} else if (input.equalsIgnoreCase("LOAD")) {
+					//				return 2;
+					//Load character view
+					System.out.println("Call character load function.");
+					ret = this.characterController.loadHero();
+				} else if (input.equalsIgnoreCase("EXIT")) {
+					//				return 0;
+					System.out.println("Exiting...");
+					ret = 1;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			if (input.equalsIgnoreCase("NEW")) {
-//				return 1;
-				//Create Character view
-				System.out.println("Call character create function.");
-				this.characterController.createNewHero();
-			} else if (input.equalsIgnoreCase("LOAD")) {
-//				return 2;
-				//Load character view
-				System.out.println("Call character load function.");
-				this.characterController.loadHero();
-			} else if (input.equalsIgnoreCase("EXIT")) {
-//				return 0;
-				System.out.println("Exiting...");
-				return;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 }

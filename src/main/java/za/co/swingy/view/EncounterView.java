@@ -8,4 +8,8 @@ public interface EncounterView {
 	void					run(int success);
 
 	void					simulate(int turn);
-}
+
+	void						title();
+
+	int						itemDrop(String item, int index);
+	}

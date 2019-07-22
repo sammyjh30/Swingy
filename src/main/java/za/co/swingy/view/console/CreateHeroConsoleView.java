@@ -19,13 +19,27 @@ public class CreateHeroConsoleView implements CreateHeroView {
 //		controller = new Create
 	}
 
-	public void 			printHeroStatus(Hero hero) {
+	public int 			printHeroStatus(Hero hero) {
 		System.out.println("_______________________");
 		System.out.println("| Name:     " + hero.getName());
 		System.out.println("| Level:    " + hero.getLevel());
 		System.out.println("| Type:     " + hero.getClassType());
-		System.out.println("| HP:       " + hero.getHitPoints() + "/" + hero.getMaxHitPoints());
-		System.out.println("| Attack:   " + hero.getAttack());
+		if (hero.getEquippedHelm() == null) {
+			System.out.println("| HP:       "  + hero.getHitPoints() + "/" + hero.getMaxHitPoints());
+		} else {
+			System.out.println("| HP:       "  + (hero.getHitPoints() + hero.getEquippedHelm().getHitPointIncrease()) +
+					"/" + (hero.getMaxHitPoints() + hero.getEquippedHelm().getHitPointIncrease()));
+		}
+		if (hero.getEquippedWeapon() == null) {
+			System.out.println("| Attack:   " + hero.getAttack());
+		} else {
+			System.out.println("| Attack:   " + (hero.getAttack() + hero.getEquippedWeapon().getAttackIncrease()));
+		}
+		if (hero.getEquippedArmor() == null) {
+			System.out.println("| Defence:  " + hero.getDefence());
+		} else {
+			System.out.println("| Defence:  " + (hero.getDefence() + hero.getEquippedArmor().getDefenceIncrease()));
+		}
 		System.out.println("| Defence:  " + hero.getDefence());
 		System.out.println("| Position:  [" + hero.getXPos() + ";" + hero.getYPos() + "]");
 		System.out.println("|_______Inventory______");
@@ -63,7 +77,7 @@ public class CreateHeroConsoleView implements CreateHeroView {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 		GameController controller = GameController.builder().hero(hero).mapView(new MapConsoleView()).build();
-		controller.showMapView();
+		return controller.showMapView();
 	}
 
 	public String			 promptName() {

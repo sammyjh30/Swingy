@@ -4,5 +4,5 @@ import za.co.swingy.controller.GameController;
 
 public interface MapView {
 	void					displayMap(char[][] map, int mapSize);
-	void					display(GameController controller);
+	int					display(GameController controller);
 }

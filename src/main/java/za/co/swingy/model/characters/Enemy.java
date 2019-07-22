@@ -48,8 +48,8 @@ public class Enemy extends Character{
 		} else {
 			this.setLevel(level);
 		}
-		this.setAttack(this.getLevel() + 3);
-		this.setDefence(this.getLevel() + 3);
+		this.setAttack(this.getLevel() + 1);
+		this.setDefence(this.getLevel() + 1);
 		this.setMaxHitPoints((this.getLevel() + 1) + (this.getLevel() + 1) * 20 + 1);
 		this.setHitPoints((this.getLevel() + 1) + (this.getLevel() + 1) * 20 + 1);
 		this.setXPos(0);

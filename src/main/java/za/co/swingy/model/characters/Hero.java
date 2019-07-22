@@ -80,7 +80,7 @@ public class Hero extends Character {
 	}
 
 	public void 			starterHero(){
-		this.setLevel(0);
+		this.setLevel(1);
 		this.experience = 0;
 		this.inventory.starter();
 		//Set Starter Weapon as equipped

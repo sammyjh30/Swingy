@@ -62,12 +62,59 @@ public class EncounterConsoleView implements EncounterView {
 		System.out.println("| DEF:   " + (char)27 + "[35m" + (enemy.getDefence()) + "\033[0m");
 	}
 
+	public void						title() {
+		System.out.println("								COMBAT!");
+		System.out.println("						An enemy has appeared!");
+	}
+
+	public void					success() {
+		System.out.println("\n\n_________________________________________");
+		System.out.println("|										|");
+		System.out.println("|										|");
+		System.out.println("|	" + (char)27 + "[32m" + "Congratulations! You leveled up!" + "\033[0m" + "	|");
+		System.out.println("|										|");
+		System.out.println("|_______________________________________|\n\n");
+	}
+
+	public int						itemDrop(String item, int index) {
+		String drops[] = {"Weapon", "Armor", "Helm", "Inventory", "Health"};
+		System.out.println("			ITEM DROP!");
+		if (drops[index].equalsIgnoreCase("Weapon")) {
+			System.out.println("	The enemy dropped a Weapon: " + item);
+		} else if (drops[index].equalsIgnoreCase("Armor")) {
+			System.out.println("	The enemy dropped an Armor: " + item);
+		} else if (drops[index].equalsIgnoreCase("Helm")) {
+			System.out.println("	The enemy dropped a Helm: " + item);
+		} else if (drops[index].equalsIgnoreCase("Inventory")) {
+			System.out.println("	The enemy dropped an Inventory attachment with a +" + item + " boost.");
+		} else if (drops[index].equalsIgnoreCase("Health")) {
+			System.out.println("	The enemy dropped a small health remedy of +" + item + "HP.");
+		}
+		System.out.println("	Would you like to take it?");
+		try {
+			System.out.print("Please enter either YES or NO: ");
+			InputStreamReader streamReader = new InputStreamReader(System.in);
+			BufferedReader bufferedReader = new BufferedReader(streamReader);
+			String input = bufferedReader.readLine();
+			while (!input.equalsIgnoreCase("YES") && !input.equalsIgnoreCase("NO")) {
+				System.out.println("Oops, that's not a valid command! Please try again!");
+				System.out.print("Please enter either YES or NO: ");
+				input = bufferedReader.readLine();
+			}
+			if (input.equalsIgnoreCase("YES")) {
+				return 1;
+			} else if (input.equalsIgnoreCase("NO")) {
+				return 0;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 	public int						display() {
 		//How Helmet and hitpoints will work: hitpoints can go into negative
 		//Check if hitpoint + helmet <= 0 (e.g. if -3 + 5 <= 0 die, else continue
-
-		System.out.println("								COMBAT!");
-		System.out.println("						An enemy has appeared!");
 		System.out.println("Your Hero Stats:");
 		this.showHero(this.controller.getHero());
 		System.out.println("Your Opponent's Stats:");

@@ -5,7 +5,7 @@ import za.co.swingy.model.characters.Hero;
 public interface CreateHeroView {
 //	https://www.tutorialspoint.com/design_pattern/mvc_pattern
 
-	void 			printHeroStatus(Hero hero);
+	int 			printHeroStatus(Hero hero);
 
 	String			 promptName();
 

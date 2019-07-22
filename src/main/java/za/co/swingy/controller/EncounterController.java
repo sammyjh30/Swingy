@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
+import za.co.swingy.model.items.Armor;
+import za.co.swingy.model.items.Helm;
+import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.EncounterView;
 
 import javax.validation.constraints.NotNull;
@@ -45,7 +48,7 @@ public class EncounterController {
 		int damage;
 		String enemyName = this.enemy.getEnemyName() + " the " + this.enemy.getEnemyType();
 		Random rand = new Random();
-		int enemyAttack = this.enemy.getAttack() + rand.nextInt(10);
+		int enemyAttack = this.enemy.getAttack() + rand.nextInt(7);
 		if (this.hero.getEquippedWeapon() != null) {
 			heroAttack = this.hero.getAttack() + this.hero.getEquippedWeapon().getAttackIncrease() + rand.nextInt(10);
 		} else {
@@ -71,7 +74,7 @@ public class EncounterController {
 		if (enemyAttack > heroDefence) {
 			damage = enemyAttack - heroDefence;
 			this.encounterView.fight(enemyName, this.hero.getName(), 1, damage);
-			this.hero.setHitPoints((this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) - damage);
+			this.hero.setHitPoints((this.hero.getHitPoints()) - damage);
 		} else {
 			this.encounterView.fight(enemyName, this.hero.getName(), 0, 0);
 		}
@@ -95,13 +98,52 @@ public class EncounterController {
 		}
 	}
 
+	private void			randomDrop() {
+		Random rand = new Random();
+		int ret;
+		if (rand.nextInt(2) == 1) {
+			String drops[] = {"Weapon", "Armor", "Helm", "Inventory", "Health"};
+			int i = rand.nextInt(5);
+			if (drops[i].equalsIgnoreCase("Weapon")) {
+				Weapon weaponDrop = Weapon.builder().name().level(this.hero.getLevel()).build();
+				if (this.encounterView.itemDrop(weaponDrop.getName(), i) == 1) {
+					this.hero.getInventory().addWeapon(weaponDrop);
+				}
+			} else if (drops[i].equalsIgnoreCase("Armor")) {
+				Armor armorDrop = Armor.builder().name().level(this.hero.getLevel()).build();
+				if (this.encounterView.itemDrop(armorDrop.getName(), i) == 1) {
+					this.hero.getInventory().addArmor(armorDrop);
+				}
+			} else if (drops[i].equalsIgnoreCase("Helm")) {
+				Helm helmDrop = Helm.builder().name().level(this.hero.getLevel()).build();
+				if (this.encounterView.itemDrop(helmDrop.getName(), i) == 1) {
+					this.hero.getInventory().addHelm(helmDrop);
+				}
+			} else if (drops[i].equalsIgnoreCase("Inventory")) {
+				int boost = rand.nextInt(5) + 1;
+				if (this.encounterView.itemDrop(Integer.toString(boost), i) == 1) {
+					this.hero.getInventory().setMaxSlots(this.hero.getInventory().getMaxSlots() + boost);
+				}
+			} else if (drops[i].equalsIgnoreCase("Health")) {
+				int boost = rand.nextInt(5) + 1;
+				if (this.encounterView.itemDrop(Integer.toString(boost), i) == 1) {
+					if (this.hero.getHitPoints() + boost >= this.hero.getMaxHitPoints()) {
+						this.hero.setHitPoints(this.hero.getMaxHitPoints());
+					} else {
+						this.hero.setHitPoints(this.hero.getHitPoints() + boost);
+					}
+				}
+			}
+		}
+	}
+
 	public int				startNewEncounter(Enemy enemy) {
 		this.setEnemy(enemy);
 		//Show encounter and get input
 		while (this.enemy.getHitPoints() > 0 && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) > 0) {
+			this.encounterView.title();
 			int ret = this.encounterView.display();
 			if (ret == 0) {
-				System.out.println("Call run function");
 				if (this.run() == 1) {
 					this.encounterView.run(1);
 					return 0;
@@ -109,15 +151,20 @@ public class EncounterController {
 					this.encounterView.run(0);
 				}
 			} else if (ret == 1) {
-				System.out.println("Call fight function");
 				this.fight();
 			} else if (ret == 2) {
-				System.out.println("Call simulate function");
 				this.simulate();
 			}
 		}
 		if (this.enemy.getHitPoints() <= 0) {
 			//Call the item drop!
+			this.randomDrop();
+			int currentLevel = this.hero.getLevel();
+			this.hero.setExperience(this.hero.getExperience() + ((this.enemy.getLevel() - this.hero.getLevel()) * 10 + 50));
+			this.hero.levelUp();
+			if (this.hero.getLevel() > currentLevel) {
+				//Level up screen
+			}
 			return 1;
 		} else if ((this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) {
 			return -1;

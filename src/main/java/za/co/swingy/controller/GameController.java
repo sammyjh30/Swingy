@@ -63,7 +63,6 @@ public class GameController {
 			Random rand = new Random();
 			Integer linePos = 0;
 			for (int i = 0; i < maxEnemies; i++) {
-				System.out.println("I = " + i);
 				enemy = Enemy.builder().enemyName().enemyType().build();
 				enemy.generateEnemy(hero);
 				linePos = rand.nextInt(this.mapSize* this.mapSize);
@@ -79,7 +78,6 @@ public class GameController {
 				enemy.setYPos(positionY);
 				this.map[positionY][positionX] = 'O';
 				enemies.add(enemy);
-				System.out.println("Added enemy " + this.enemies.get(i).getEnemyName());
 			}
 			return this;
 		}
@@ -90,23 +88,10 @@ public class GameController {
 		}
 	}
 
-	public void				showMapView() {
-		this.mapView.display(this);
+	public int				showMapView() {
+		return this.mapView.display(this);
 	}
 
-	// Map
-	// Array Enemies
-	// Hero
-
-	//Menu() CREATE, LOAD or EXIT
-//	public void			menu() {
-//		int ret = this.menuView.menu();
-//		if (ret == 0) {
-//			return;
-//		} else if (ret ==)
-//	}
-
-	// Place map (enemies, hero, holes)
 	// Set up starter commands (Move, inventory, save and quit)
 	// Set up interaction commands (Fight, Run)
 	// Set up victory commands
@@ -131,7 +116,6 @@ public class GameController {
 								save = Integer.parseInt(line[0]);
 							}
 						}
-						System.out.println("save = " + save);
 					}
 
 					//Getting information to add to the save file
@@ -160,12 +144,6 @@ public class GameController {
 						Helm helm = this.hero.getInventory().getHelms().get(i);
 						helmDetails = helmDetails + "|" + i + "|" + helm.getName() + "|" + helm.getLevel() + "|" + helm.getHitPointIncrease();
 					}
-					System.out.println("Got character info");
-					System.out.println(characterDetails);
-					System.out.println(inventoryDetails);
-					System.out.println(weaponDetails);
-					System.out.println(armorDetails);
-					System.out.println(helmDetails);
 					//Add to file
 					BufferedWriter writer = new BufferedWriter(new FileWriter("resources/saves.txt", true));
 					writer.write(characterDetails + '\n');
@@ -174,7 +152,6 @@ public class GameController {
 					writer.write(armorDetails + '\n');
 					writer.write(helmDetails + '\n');
 					writer.close();
-					System.out.println("Written character");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
