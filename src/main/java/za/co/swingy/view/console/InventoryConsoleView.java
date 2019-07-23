@@ -21,92 +21,83 @@ public class InventoryConsoleView implements InventoryView {
 	}
 
 	public void				display() {
-		int list = 1;
-		System.out.println("______________INVENTORY______________");
-		System.out.println("| Capacity: " + this.controller.getHero().getInventory().getUsedSlots() + "/" + this.controller.getHero().getInventory().getMaxSlots());
+		int list;
+		while (true) {
+			System.out.println("______________INVENTORY______________");
+			System.out.println("| Capacity: " + this.controller.getHero().getInventory().getUsedSlots() + "/" + this.controller.getHero().getInventory().getMaxSlots());
 
-		//Armor
-		System.out.println("| Armor:");
-		for (int i = 0; i < this.controller.getHero().getInventory().getArmors().size(); i++) {
-			Armor a = this.controller.getHero().getInventory().getArmors().get(i);
-			if (i == this.controller.getHero().getInventory().getEquippedArmorIndex()) {
-				System.out.println("|	[" + (i + 1) + "] " + a.getName() + " level: " + a.getLevel() + " defence increase: " + a.getDefenceIncrease() + "     [EQUIPPED]");
-			} else {
-				System.out.println("|	[" + (i + 1) + "] " + a.getName() + " level: " + a.getLevel() + " defence increase: " + a.getDefenceIncrease());
+			//Armor
+			System.out.println("| Armor:");
+			for (int i = 0; i < this.controller.getHero().getInventory().getArmors().size(); i++) {
+				Armor a = this.controller.getHero().getInventory().getArmors().get(i);
+				if (i == this.controller.getHero().getInventory().getEquippedArmorIndex()) {
+					System.out.println("|	[" + (i + 1) + "] " + a.getName() + " level: " + a.getLevel() + " defence increase: " + a.getDefenceIncrease() + "     [EQUIPPED]");
+				} else {
+					System.out.println("|	[" + (i + 1) + "] " + a.getName() + " level: " + a.getLevel() + " defence increase: " + a.getDefenceIncrease());
+				}
 			}
-		}
-		list =  this.controller.getHero().getInventory().getArmors().size();
+			list = this.controller.getHero().getInventory().getArmors().size();
 
-		//Weapon
-		System.out.println("| Weapon: ");
-		for (int i = 0; i < this.controller.getHero().getInventory().getWeapons().size(); i++) {
-			Weapon w = this.controller.getHero().getInventory().getWeapons().get(i);
-			if (i == this.controller.getHero().getInventory().getEquippedWeaponIndex()) {
-				System.out.println("|	[" + (i + 1 + list) + "] " + w.getName() + " level: " + w.getLevel() + " Attack increase: " + w.getAttackIncrease() + "     [EQUIPPED]");
-			} else {
-				System.out.println("|	[" + (i + 1 + list) + "] " + w.getName() + " level: " + w.getLevel() + " Attack increase: " + w.getAttackIncrease());
+			//Weapon
+			System.out.println("| Weapon: ");
+			for (int i = 0; i < this.controller.getHero().getInventory().getWeapons().size(); i++) {
+				Weapon w = this.controller.getHero().getInventory().getWeapons().get(i);
+				if (i == this.controller.getHero().getInventory().getEquippedWeaponIndex()) {
+					System.out.println("|	[" + (i + 1 + list) + "] " + w.getName() + " level: " + w.getLevel() + " Attack increase: " + w.getAttackIncrease() + "     [EQUIPPED]");
+				} else {
+					System.out.println("|	[" + (i + 1 + list) + "] " + w.getName() + " level: " + w.getLevel() + " Attack increase: " + w.getAttackIncrease());
+				}
 			}
-		}
-		list +=  this.controller.getHero().getInventory().getWeapons().size();
+			list += this.controller.getHero().getInventory().getWeapons().size();
 
-		// Helm
-		System.out.println("| Helms: ");
-		for (int i = 0; i < this.controller.getHero().getInventory().getHelms().size(); i++) {
-			Helm h = this.controller.getHero().getInventory().getHelms().get(i);
-			if (i == this.controller.getHero().getInventory().getEquippedHelmIndex()) {
-				System.out.println("|	[" + (i + 1 + list) + "] " + h.getName() + " level: " + h.getLevel() + " hitPoint increase: " + h.getHitPointIncrease() + "     [EQUIPPED]");
-			} else {
-				System.out.println("|	[" + (i + 1 + list) + "] " + h.getName() + " level: " + h.getLevel() + " hitPoint increase: " + h.getHitPointIncrease());
+			// Helm
+			System.out.println("| Helms: ");
+			for (int i = 0; i < this.controller.getHero().getInventory().getHelms().size(); i++) {
+				Helm h = this.controller.getHero().getInventory().getHelms().get(i);
+				if (i == this.controller.getHero().getInventory().getEquippedHelmIndex()) {
+					System.out.println("|	[" + (i + 1 + list) + "] " + h.getName() + " level: " + h.getLevel() + " hitPoint increase: " + h.getHitPointIncrease() + "     [EQUIPPED]");
+				} else {
+					System.out.println("|	[" + (i + 1 + list) + "] " + h.getName() + " level: " + h.getLevel() + " hitPoint increase: " + h.getHitPointIncrease());
+				}
 			}
-		}
-		System.out.println("_____________________________________");
-		System.out.println("You can use the commands EQUIP to equip an item, DELETE to delete and item, or RETURN to return to the game.");
-		try {
-			System.out.print("Please enter a command: ");
-			InputStreamReader streamReader = new InputStreamReader(System.in);
-			BufferedReader bufferedReader = new BufferedReader(streamReader);
-			String input = bufferedReader.readLine();
-			while (!input.equalsIgnoreCase("EQUIP") && !input.equalsIgnoreCase("DELETE") && !input.equalsIgnoreCase("RETURN")) {
-				System.out.println("Oops, that's not a valid command! Please try again!");
+			System.out.println("_____________________________________");
+			System.out.println("You can use the commands EQUIP to equip an item, DELETE to delete and item, or RETURN to return to the game.");
+			try {
 				System.out.print("Please enter a command: ");
-				input = bufferedReader.readLine();
-			}
-			if (input.equalsIgnoreCase("EQUIP")) {
-				System.out.print("Please select the number of the item you would like to equip: ");
-				input = bufferedReader.readLine();
-				while (!this.isNumeric(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
-					System.out.println("Oops, that's not a valid input! Please try again!");
+				InputStreamReader streamReader = new InputStreamReader(System.in);
+				BufferedReader bufferedReader = new BufferedReader(streamReader);
+				String input = bufferedReader.readLine();
+				while (!input.equalsIgnoreCase("EQUIP") && !input.equalsIgnoreCase("DELETE") && !input.equalsIgnoreCase("RETURN")) {
+					System.out.println("Oops, that's not a valid command! Please try again!");
+					System.out.print("Please enter a command: ");
+					input = bufferedReader.readLine();
+				}
+				if (input.equalsIgnoreCase("EQUIP")) {
 					System.out.print("Please select the number of the item you would like to equip: ");
 					input = bufferedReader.readLine();
-				}
-//				int section;
-				int index;
-				if (Integer.parseInt(input) <= this.controller.getHero().getInventory().getArmors().size()) {
-//					Armors
-					index = Integer.parseInt(input) - 1;
-				} else if (Integer.parseInt(input) > this.controller.getHero().getInventory().getArmors().size() &&
-						Integer.parseInt(input) <= (this.controller.getHero().getInventory().getArmors().size() + this.controller.getHero().getInventory().getWeapons().size())) {
-					//Weapons
-					index = Integer.parseInt(input) - this.controller.getHero().getInventory().getArmors().size() - 1;
-				} else if (Integer.parseInt(input) > (this.controller.getHero().getInventory().getArmors().size() + + this.controller.getHero().getInventory().getWeapons().size()) &&
-						Integer.parseInt(input) <= (this.controller.getHero().getInventory().getArmors().size() + this.controller.getHero().getInventory().getWeapons().size() + this.controller.getHero().getInventory().getHelms().size())) {
-					//Helms
-					index = Integer.parseInt(input) - (this.controller.getHero().getInventory().getArmors().size() + + this.controller.getHero().getInventory().getWeapons().size()) - 1;
-				}
-			} else if (input.equalsIgnoreCase("DELETE")) {
-				System.out.print("Please select the number of the item you would like to delete: ");
-				input = bufferedReader.readLine();
-				while (!this.isNumeric(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
-					System.out.println("Oops, that's not a valid input! Please try again!");
+					while (!this.isNumeric(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
+						System.out.println("Oops, that's not a valid input! Please try again!");
+						System.out.print("Please select the number of the item you would like to equip: ");
+						input = bufferedReader.readLine();
+					}
+					//				int section;
+					this.controller.equip(input);
+				} else if (input.equalsIgnoreCase("DELETE")) {
 					System.out.print("Please select the number of the item you would like to delete: ");
 					input = bufferedReader.readLine();
+					while (!this.isNumeric(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
+						System.out.println("Oops, that's not a valid input! Please try again!");
+						System.out.print("Please select the number of the item you would like to delete: ");
+						input = bufferedReader.readLine();
+					}
+					this.controller.delete(input);
+				} else if (input.equalsIgnoreCase("RETURN")) {
+					return;
 				}
-			} else if (input.equalsIgnoreCase("RETURN")) {
-				return;
-			}
 
-		} catch (IOException e) {
-			e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

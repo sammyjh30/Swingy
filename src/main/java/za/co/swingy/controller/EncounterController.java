@@ -56,7 +56,7 @@ public class EncounterController {
 		int damage;
 		String enemyName = this.enemy.getEnemyName() + " the " + this.enemy.getEnemyType();
 		Random rand = new Random();
-		int enemyAttack = this.enemy.getAttack() + rand.nextInt(6);
+		int enemyAttack = this.enemy.getAttack() + rand.nextInt(7);
 		if (this.hero.getEquippedWeapon() != null) {
 			heroAttack = this.hero.getAttack() + this.hero.getEquippedWeapon().getAttackIncrease() + rand.nextInt(10);
 		} else {
