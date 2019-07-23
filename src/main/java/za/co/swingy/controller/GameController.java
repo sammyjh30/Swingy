@@ -15,6 +15,7 @@ import za.co.swingy.view.MenuView;
 import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.view.MenuView;
+import za.co.swingy.view.console.EncounterConsoleView;
 
 import javax.validation.constraints.NotNull;
 import java.io.*;
@@ -88,12 +89,47 @@ public class GameController {
 		}
 	}
 
+	public void				updateMap() {
+		this.mapSize = (hero.getLevel() - 1) * 5 + 10 - (hero.getLevel() % 2);
+		this.map = new char[this.mapSize][this.mapSize];
+		for (int i = 0; i < this.mapSize; i++) {
+			Arrays.fill(this.map[i], '.');
+		}
+		//Place player
+		this.hero.setXPos(this.mapSize / 2);
+		this.hero.setYPos(this.mapSize  / 2);
+		this.map[hero.getYPos()][hero.getXPos()] = 'X';
+		//Get enemies
+		int maxEnemies = (hero.getLevel() + 1) * 5 - (hero.getLevel() %2);
+		Enemy enemy;
+		this.enemies = new ArrayList<Enemy>();
+		Integer linePlaces[] = new Integer[maxEnemies];
+		Arrays.fill(linePlaces, -1);
+		Random rand = new Random();
+		Integer linePos = 0;
+		for (int i = 0; i < maxEnemies; i++) {
+			enemy = Enemy.builder().enemyName().enemyType().build();
+			enemy.generateEnemy(hero);
+			linePos = rand.nextInt(this.mapSize* this.mapSize);
+			int positionX = linePos % (this.mapSize);
+			int positionY = linePos / (this.mapSize);
+			while (Arrays.asList(linePlaces).contains(linePos) || (positionX == hero.getXPos() && positionY == hero.getYPos())) {
+				linePos = rand.nextInt(this.mapSize* this.mapSize);
+				positionX = linePos % (this.mapSize);
+				positionY = linePos / (this.mapSize);
+			}
+			linePlaces[i] = linePos;
+			enemy.setXPos(positionX);
+			enemy.setYPos(positionY);
+			this.map[positionY][positionX] = 'O';
+			enemies.add(enemy);
+		}
+	}
+
 	public int				showMapView() {
 		return this.mapView.display(this);
 	}
 
-	// Set up starter commands (Move, inventory, save and quit)
-	// Set up interaction commands (Fight, Run)
 	// Set up victory commands
 	// Set up failure command
 	// Set up level up (Map increase, enemy increase)
@@ -180,14 +216,67 @@ public class GameController {
 	public void			moveHero(int x, int y) {
 		int newX = this.hero.getXPos() + x;
 		int newY = this.hero.getYPos() + y;
-		if (newX < 0 || newY < 0 || newX > this.mapSize || newY > this.mapSize) {
+		if (newX < 0 || newY < 0 || newX >= this.mapSize || newY >= this.mapSize) {
 			System.out.println("Change the map!");
+			int currentLevel = this.hero.getLevel();
+			this.hero.setExperience(this.hero.getExperience() + this.mapSize * 2);
+			this.hero.levelUp();
+			if (this.hero.getLevel() > currentLevel) {
+				//Congrats you levelled up
+			}
+			this.updateMap();
 		} else {
 			this.map[this.hero.getYPos()][this.hero.getXPos()] = '.';
 			this.map[newY][newX] = 'X';
 			this.hero.setXPos(newX);
 			this.hero.setYPos(newY);
 		}
+	}
+
+	public int					checkForCombat(int x, int y) {
+		int newX = this.getHero().getXPos() + x;
+		int newY = this.getHero().getYPos() + y;
+		if (newX < 0 || newY < 0 || newX >= this.getMapSize() || newY >= this.getMapSize()) {
+			int currentLevel = this.hero.getLevel();
+			this.hero.setExperience(this.hero.getExperience() + this.mapSize * 2);
+			this.hero.levelUp();
+			if (this.hero.getLevel() > currentLevel) {
+				//Congrats you levelled up
+			}
+			this.updateMap();
+//			return;
+		} else if (this.getMap()[newY][newX] == 'O') {
+			System.out.println("COMBAT!");
+			//Create an encounter view
+			Enemy enemy = this.getCombatEnemy(newX,newY);
+			if (enemy == null) {
+				System.out.println("False alarm! It was just a cardboard cutout!");
+				return 1;
+			} else {
+//Create view and encounter
+				EncounterConsoleView encounterConsoleView = new EncounterConsoleView(this);
+				int ret = encounterConsoleView.getController().startNewEncounter(enemy);
+				if (ret == -1) {
+//					System.out.println("THE HERO IS DEAD?!");
+					this.mapView.death();
+					//Go back to the main menu
+					return -2;
+				} else if ( ret == 0) {
+//					System.out.println("THE HERO RAN AWAY!");
+					this.mapView.runAway();
+				} else if (ret == 1) {
+//					System.out.println("THE HERO DEFEATED THEIR OPPONENT!");
+					this.mapView.success();
+					this.removeEnemy(enemy);
+					this.moveHero(x,y);
+				}
+			}
+			//Use controller to get enemy and index
+			//Pass to Encounter mode
+		} else {
+			this.moveHero(x, y);
+		}
+		return 1;
 	}
 
 }

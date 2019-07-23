@@ -99,8 +99,8 @@ public class Hero extends Character {
 			this.inventory.setEquippedHelmIndex(0);
 		}
 		//Set position based on level
-		this.setXPos(((0-1)*5+10-(0%2)) / 2);
-		this.setYPos(((0-1)*5+10-(0%2)) / 2);
+		this.setXPos(((1-1)*5+10-(1%2)) / 2);
+		this.setYPos(((1-1)*5+10-(1%2)) / 2);
 		//Set attack and defence
 		if (this.classType.equals("Explorer")) {
 			this.setAttack(1);

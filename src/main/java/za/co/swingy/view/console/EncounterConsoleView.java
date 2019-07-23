@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import za.co.swingy.controller.EncounterController;
+import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.view.EncounterView;
@@ -17,10 +18,13 @@ import java.io.InputStreamReader;
 @Setter
 public class EncounterConsoleView implements EncounterView {
 	@NotNull
-	private EncounterController controller;
+	private EncounterController		controller;
+	@NotNull
+	public GameController			gameController;
 
-	public EncounterConsoleView(Hero hero) {
-		this.controller = EncounterController.builder().encounterView(this).hero(hero).build();
+	public EncounterConsoleView(GameController controller) {
+		this.gameController = controller;
+		this.controller = EncounterController.builder().encounterView(this).hero(controller.getHero()).gameController(controller).build();
 	}
 
 	private void					showHero(Hero hero) {

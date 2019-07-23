@@ -18,3 +18,8 @@
 4|Weapons|0|Wooden Sword of Noobs|1|1
 4|Armors|0|Casual Clothes|1|1|1|Leather Gauntlet|1|2|2|Wooden Mail|1|2
 4|Helms|0|Straw Helmet|1|1
+5|bob|Knight|1|3|3|7|50|966|8|0
+5|Inventory|5|15|0|0|0
+5|Weapons|0|Wooden Sword of Noobs|1|1|1|Platinum Sword of Skull Crushing|1|2
+5|Armors|0|Casual Clothes|1|1|1|Bone Mail|1|2
+5|Helms|0|Straw Helmet|1|1

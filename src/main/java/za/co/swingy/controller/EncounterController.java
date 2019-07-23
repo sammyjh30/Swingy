@@ -23,11 +23,14 @@ public class EncounterController {
 	private Enemy enemy;
 	@NotNull
 	private EncounterView encounterView;
+	@NotNull
+	private GameController	gameController;
 
 	// Builder
 	public static class 		EncounterControllerBuilder {
 		private Hero hero;
-		private EncounterView encounterView;
+		private EncounterView	encounterView;
+		private GameController	gameController;
 
 		public EncounterControllerBuilder		hero(Hero hero) {
 			this.hero = hero;
@@ -36,6 +39,11 @@ public class EncounterController {
 
 		public EncounterControllerBuilder			encounterView(EncounterView view) {
 			this.encounterView = view;
+			return this;
+		}
+
+		public EncounterControllerBuilder			gameController(GameController controller) {
+			this.gameController = controller;
 			return this;
 		}
 
@@ -48,7 +56,7 @@ public class EncounterController {
 		int damage;
 		String enemyName = this.enemy.getEnemyName() + " the " + this.enemy.getEnemyType();
 		Random rand = new Random();
-		int enemyAttack = this.enemy.getAttack() + rand.nextInt(7);
+		int enemyAttack = this.enemy.getAttack() + rand.nextInt(6);
 		if (this.hero.getEquippedWeapon() != null) {
 			heroAttack = this.hero.getAttack() + this.hero.getEquippedWeapon().getAttackIncrease() + rand.nextInt(10);
 		} else {
@@ -160,10 +168,13 @@ public class EncounterController {
 			//Call the item drop!
 			this.randomDrop();
 			int currentLevel = this.hero.getLevel();
-			this.hero.setExperience(this.hero.getExperience() + ((this.enemy.getLevel() - this.hero.getLevel()) * 10 + 50));
+			this.hero.setExperience(this.hero.getExperience() + ((this.enemy.getLevel() + 1) * 10 + 50));
 			this.hero.levelUp();
 			if (this.hero.getLevel() > currentLevel) {
 				//Level up screen
+				this.encounterView.success();
+				//Map update
+				this.gameController.updateMap();
 			}
 			return 1;
 		} else if ((this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) {

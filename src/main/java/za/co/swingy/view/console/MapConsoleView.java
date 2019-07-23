@@ -87,46 +87,6 @@ public class MapConsoleView implements MapView {
 		System.out.println("Or you can go to your " + (char)27 + "[32mINVENTORY" +  "\033[0m or " + (char)27 + "[32mSAVE" +  "\033[0m to save and exit this game.");
 	}
 
-	public int					checkForCombat(GameController controller, int x, int y) {
-		int newX = controller.getHero().getXPos() + x;
-		int newY = controller.getHero().getYPos() + y;
-		if (newX < 0 || newY < 0 || newX > controller.getMapSize() || newY > controller.getMapSize()) {
-			System.out.println("Change the map!");
-//			return;
-		} else if (controller.getMap()[newY][newX] == 'O') {
-			System.out.println("COMBAT!");
-			//Create an encounter view
-			Enemy enemy = controller.getCombatEnemy(newX,newY);
-			if (enemy == null) {
-				System.out.println("False alarm! It was just a cardboard cutout!");
-				return 1;
-			} else {
-//Create view and encounter
-				EncounterConsoleView encounterConsoleView = new EncounterConsoleView(controller.getHero());
-				int ret = encounterConsoleView.getController().startNewEncounter(enemy);
-				if (ret == -1) {
-//					System.out.println("THE HERO IS DEAD?!");
-					this.death();
-					//Go back to the main menu
-					return -2;
-				} else if ( ret == 0) {
-//					System.out.println("THE HERO RAN AWAY!");
-					this.runAway();
-				} else if (ret == 1) {
-//					System.out.println("THE HERO DEFEATED THEIR OPPONENT!");
-					this.success();
-					controller.removeEnemy(enemy);
-					controller.moveHero(x,y);
-				}
-			}
-			//Use controller to get enemy and index
-			//Pass to Encounter mode
-		} else {
-			controller.moveHero(x, y);
-		}
-		return 1;
-	}
-
 	public void					death() {
 		System.out.println("\n\n_________________________________________");
 		System.out.println("|										|");
@@ -174,16 +134,16 @@ public class MapConsoleView implements MapView {
 				}
 				if (input.equalsIgnoreCase("NORTH")) {
 					System.out.println("Move the hero north");
-					stage = this.checkForCombat(controller,0, -1);
+					stage = controller.checkForCombat(0, -1);
 				} else if (input.equalsIgnoreCase("SOUTH")) {
 					System.out.println("Move the hero south");
-					stage = this.checkForCombat(controller,0, 1);
+					stage = controller.checkForCombat(0, 1);
 				} else if (input.equalsIgnoreCase("EAST")) {
 					System.out.println("Move the hero east");
-					stage = this.checkForCombat(controller,1, 0);
+					stage = controller.checkForCombat(1, 0);
 				} else if (input.equalsIgnoreCase("WEST")) {
 					System.out.println("Move the hero west");
-					stage = this.checkForCombat(controller,-1, 0);
+					stage = controller.checkForCombat(-1, 0);
 				} else if (input.equalsIgnoreCase("INVENTORY")) {
 					System.out.println("Open inventory");
 				} else if (input.equalsIgnoreCase("SAVE")) {
