@@ -19,6 +19,7 @@ public class InventoryConsoleView implements InventoryView {
 	public InventoryConsoleView(Hero hero) {
 		this.controller = InventoryController.builder().inventoryView(this).hero(hero).build();
 	}
+
 	public void				display() {
 		int list = 1;
 		System.out.println("______________INVENTORY______________");
@@ -77,6 +78,20 @@ public class InventoryConsoleView implements InventoryView {
 					System.out.println("Oops, that's not a valid input! Please try again!");
 					System.out.print("Please select the number of the item you would like to equip: ");
 					input = bufferedReader.readLine();
+				}
+//				int section;
+				int index;
+				if (Integer.parseInt(input) <= this.controller.getHero().getInventory().getArmors().size()) {
+//					Armors
+					index = Integer.parseInt(input) - 1;
+				} else if (Integer.parseInt(input) > this.controller.getHero().getInventory().getArmors().size() &&
+						Integer.parseInt(input) <= (this.controller.getHero().getInventory().getArmors().size() + this.controller.getHero().getInventory().getWeapons().size())) {
+					//Weapons
+					index = Integer.parseInt(input) - this.controller.getHero().getInventory().getArmors().size() - 1;
+				} else if (Integer.parseInt(input) > (this.controller.getHero().getInventory().getArmors().size() + + this.controller.getHero().getInventory().getWeapons().size()) &&
+						Integer.parseInt(input) <= (this.controller.getHero().getInventory().getArmors().size() + this.controller.getHero().getInventory().getWeapons().size() + this.controller.getHero().getInventory().getHelms().size())) {
+					//Helms
+					index = Integer.parseInt(input) - (this.controller.getHero().getInventory().getArmors().size() + + this.controller.getHero().getInventory().getWeapons().size()) - 1;
 				}
 			} else if (input.equalsIgnoreCase("DELETE")) {
 				System.out.print("Please select the number of the item you would like to delete: ");

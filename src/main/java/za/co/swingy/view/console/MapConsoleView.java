@@ -146,6 +146,8 @@ public class MapConsoleView implements MapView {
 					stage = controller.checkForCombat(-1, 0);
 				} else if (input.equalsIgnoreCase("INVENTORY")) {
 					System.out.println("Open inventory");
+					InventoryConsoleView inventoryConsoleView = new InventoryConsoleView(controller.getHero());
+					inventoryConsoleView.display();
 				} else if (input.equalsIgnoreCase("SAVE")) {
 					System.out.println("Save the game");
 					controller.saveGame();
