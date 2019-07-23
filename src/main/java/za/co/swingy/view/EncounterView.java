@@ -12,4 +12,6 @@ public interface EncounterView {
 	void						title();
 
 	int						itemDrop(String item, int index);
+
+	void					success();
 	}

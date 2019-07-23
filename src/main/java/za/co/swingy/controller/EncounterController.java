@@ -164,6 +164,8 @@ public class EncounterController {
 			this.hero.levelUp();
 			if (this.hero.getLevel() > currentLevel) {
 				//Level up screen
+				this.encounterView.success();
+				//Remake map
 			}
 			return 1;
 		} else if ((this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) {

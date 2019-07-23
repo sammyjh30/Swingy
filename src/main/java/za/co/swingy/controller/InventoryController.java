@@ -1,5 +1,6 @@
 package za.co.swingy.controller;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import za.co.swingy.model.characters.Hero;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
+@Builder
 public class InventoryController {
 	@NotNull
 	private Hero hero;
