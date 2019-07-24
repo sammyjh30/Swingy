@@ -83,6 +83,8 @@ public class InventoryController {
 				if (this.getHero().getInventory().getEquippedArmorIndex() == index) {
 					this.getHero().setEquippedArmor(null);
 					this.getHero().getInventory().setEquippedArmorIndex(-1);
+				} else if (index < this.hero.getInventory().getEquippedArmorIndex()) {
+					this.getHero().getInventory().setEquippedArmorIndex( this.hero.getInventory().getEquippedArmorIndex() - 1);
 				}
 				this.getHero().getInventory().removeArmor(armor);
 				this.getHero().getInventory().setUsedSlots(this.getHero().getInventory().getUsedSlots() - 1);
@@ -98,6 +100,8 @@ public class InventoryController {
 				if (this.getHero().getInventory().getEquippedWeaponIndex() == index) {
 					this.getHero().setEquippedWeapon(null);
 					this.getHero().getInventory().setEquippedArmorIndex(-1);
+				} else if (index < this.getHero().getInventory().getEquippedWeaponIndex()) {
+					this.getHero().getInventory().setEquippedWeaponIndex(this.getHero().getInventory().getEquippedWeaponIndex() - 1);
 				}
 				this.getHero().getInventory().removeWeapon(weapon);
 				this.getHero().getInventory().setUsedSlots(this.getHero().getInventory().getUsedSlots() - 1);
@@ -113,6 +117,8 @@ public class InventoryController {
 				if (this.getHero().getInventory().getEquippedHelmIndex() == index) {
 					this.getHero().setEquippedHelm(null);
 					this.getHero().getInventory().setEquippedHelmIndex(-1);
+				} else if (index < this.getHero().getInventory().getEquippedHelmIndex()) {
+					this.getHero().getInventory().setEquippedHelmIndex(this.getHero().getInventory().getEquippedHelmIndex() - 1);
 				}
 				this.getHero().getInventory().removeHelm(helm);
 				this.getHero().getInventory().setUsedSlots(this.getHero().getInventory().getUsedSlots() - 1);
