@@ -5,4 +5,5 @@ import javax.swing.*;
 public class LoadFileGuiView {
 	private JTable table1;
 	private JPanel panel1;
+	private JTextPane LOADSAVETextPane;
 }
