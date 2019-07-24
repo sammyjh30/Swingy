@@ -112,7 +112,11 @@ public class CharacterController {
 								save = Integer.parseInt(line[0]);
 								//Create new character
 								heroToAdd = Hero.builder().name(line[1]).classType(line[2]).inventory().build();
-								heroToAdd.setLevel(Integer.parseInt(line[3]));
+								if (Integer.parseInt(line[3]) > 0) {
+									heroToAdd.setLevel(Integer.parseInt(line[3]));
+								} else {
+									heroToAdd.setLevel(1);
+								}
 								heroToAdd.setAttack(Integer.parseInt(line[4]));
 								heroToAdd.setDefence(Integer.parseInt(line[5]));
 								heroToAdd.setHitPoints(Integer.parseInt(line[6]));

@@ -1,7 +1,6 @@
-package za.co.swingy.view.console;
+package za.co.swingy.view.gui.old;
 
 import za.co.swingy.controller.GameController;
-import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.view.MapView;
 
@@ -12,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.Math.pow;
 
-public class MapConsoleView implements MapView {
+public class MapGuiView implements MapView {
 
 	//  RESET
 	public void					displayMap(char[][] map, int mapSize) {
@@ -189,7 +188,7 @@ public class MapConsoleView implements MapView {
 					stage = controller.checkForCombat(-1, 0);
 				} else if (input.equalsIgnoreCase("INVENTORY")) {
 					System.out.println("Open inventory");
-					InventoryConsoleView inventoryConsoleView = new InventoryConsoleView(controller.getHero());
+					InventoryGuiView inventoryConsoleView = new InventoryGuiView(controller.getHero());
 					inventoryConsoleView.display();
 				} else if (input.equalsIgnoreCase("SAVE")) {
 					System.out.println("Save the game");

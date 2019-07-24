@@ -85,6 +85,7 @@ public class InventoryController {
 					this.getHero().getInventory().setEquippedArmorIndex(-1);
 				}
 				this.getHero().getInventory().removeArmor(armor);
+				this.getHero().getInventory().setUsedSlots(this.getHero().getInventory().getUsedSlots() - 1);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -99,6 +100,7 @@ public class InventoryController {
 					this.getHero().getInventory().setEquippedArmorIndex(-1);
 				}
 				this.getHero().getInventory().removeWeapon(weapon);
+				this.getHero().getInventory().setUsedSlots(this.getHero().getInventory().getUsedSlots() - 1);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -113,6 +115,7 @@ public class InventoryController {
 					this.getHero().getInventory().setEquippedHelmIndex(-1);
 				}
 				this.getHero().getInventory().removeHelm(helm);
+				this.getHero().getInventory().setUsedSlots(this.getHero().getInventory().getUsedSlots() - 1);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

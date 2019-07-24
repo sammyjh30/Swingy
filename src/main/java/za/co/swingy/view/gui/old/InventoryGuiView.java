@@ -1,4 +1,4 @@
-package za.co.swingy.view.console;
+package za.co.swingy.view.gui.old;
 
 import za.co.swingy.controller.InventoryController;
 import za.co.swingy.model.characters.Hero;
@@ -12,11 +12,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class InventoryConsoleView implements InventoryView {
+public class InventoryGuiView implements InventoryView {
 	@NotNull
 	private InventoryController controller;
 
-	public InventoryConsoleView(Hero hero) {
+	public InventoryGuiView(Hero hero) {
 		this.controller = InventoryController.builder().inventoryView(this).hero(hero).build();
 	}
 

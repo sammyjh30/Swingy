@@ -1,6 +1,5 @@
-package za.co.swingy.view.console;
+package za.co.swingy.view.gui.old;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import za.co.swingy.controller.EncounterController;
@@ -17,13 +16,13 @@ import java.util.concurrent.TimeUnit;
 
 @Getter
 @Setter
-public class EncounterConsoleView implements EncounterView {
+public class EncounterGuiView implements EncounterView {
 	@NotNull
 	private EncounterController		controller;
 	@NotNull
 	public GameController			gameController;
 
-	public EncounterConsoleView(GameController controller) {
+	public EncounterGuiView(GameController controller) {
 		this.gameController = controller;
 		this.controller = EncounterController.builder().encounterView(this).hero(controller.getHero()).gameController(controller).build();
 	}

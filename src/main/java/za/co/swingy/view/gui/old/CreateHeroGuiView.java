@@ -1,4 +1,4 @@
-package za.co.swingy.view.console;
+package za.co.swingy.view.gui.old;
 
 import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Hero;
@@ -13,9 +13,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
 
-public class CreateHeroConsoleView implements CreateHeroView {
+public class CreateHeroGuiView implements CreateHeroView {
 
-	public 					CreateHeroConsoleView() {
+	public CreateHeroGuiView() {
 //		controller = new Create
 	}
 
@@ -80,7 +80,7 @@ public class CreateHeroConsoleView implements CreateHeroView {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
-		GameController controller = GameController.builder().hero(hero).mapView(new MapConsoleView()).build();
+		GameController controller = GameController.builder().hero(hero).mapView(new MapGuiView()).build();
 		return controller.showMapView();
 	}
 

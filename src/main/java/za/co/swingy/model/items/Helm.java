@@ -31,7 +31,11 @@ public class Helm {
 		public HelmBuilder			level(int playerLevel) {
 			this.level = playerLevel;
 			Random rand = new Random();
-			this.hitPointIncrease =  rand.nextInt(abs(playerLevel)) + 2;
+			if (playerLevel > 0) {
+				this.hitPointIncrease =  rand.nextInt(abs(playerLevel)) + 2;
+			} else {
+				this.hitPointIncrease =  rand.nextInt(1) + 2;
+			}
 			return this;
 		}
 

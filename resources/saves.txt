@@ -23,3 +23,8 @@
 5|Weapons|0|Wooden Sword of Noobs|1|1|1|Platinum Sword of Skull Crushing|1|2
 5|Armors|0|Casual Clothes|1|1|1|Bone Mail|1|2
 5|Helms|0|Straw Helmet|1|1
+6|Geaorge|Knight|1|3|3|31|50|382|5|4
+6|Inventory|5|9|1|0|1
+6|Weapons|0|Wooden Sword of Noobs|1|1|1|Wooden Lance of Bone Shattering|1|2|2|Blood Sword of Skull Crushing|1|2
+6|Armors|0|Casual Clothes|1|1
+6|Helms|0|Chain Helmet|1|2

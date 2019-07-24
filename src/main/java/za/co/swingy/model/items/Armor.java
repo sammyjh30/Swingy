@@ -31,7 +31,11 @@ public class Armor {
 		public ArmorBuilder level(int playerLevel) {
 			this.level = playerLevel;
 			Random rand = new Random();
-			this.defenceIncrease =  rand.nextInt(abs(playerLevel)) + 2;
+			if (playerLevel > 0) {
+				this.defenceIncrease = rand.nextInt(abs(playerLevel)) + 2;
+			} else {
+				this.defenceIncrease = rand.nextInt(1) + 2;
+			}
 			return this;
 		}
 

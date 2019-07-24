@@ -8,6 +8,8 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
 @Getter
 @Setter
 @Builder
@@ -29,7 +31,11 @@ public class Weapon {
 		public WeaponBuilder level(int level) {
 			this.level = level;
 			Random rand = new Random();
-			this.attackIncrease =  rand.nextInt(level) + 2;
+			if (level > 0) {
+				this.attackIncrease =  rand.nextInt(abs(level)) + 2;
+			} else {
+				this.attackIncrease =  rand.nextInt(1) + 2;
+			}
 			return this;
 		}
 

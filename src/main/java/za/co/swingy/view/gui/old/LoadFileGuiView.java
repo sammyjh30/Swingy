@@ -1,6 +1,5 @@
-package za.co.swingy.view.console;
+package za.co.swingy.view.gui.old;
 
-import com.sun.org.apache.bcel.internal.generic.LoadClass;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.model.items.Armor;
@@ -15,7 +14,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class LoadFileConsoleView implements LoadFileView {
+public class LoadFileGuiView implements LoadFileView {
 	//Need to still save/load character position
 	public static boolean 	isNumeric(String str) {
 		try {
@@ -134,7 +133,7 @@ public class LoadFileConsoleView implements LoadFileView {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 		//Go to GameController
-		GameController controller = GameController.builder().hero(hero).mapView(new MapConsoleView()).build();
+		GameController controller = GameController.builder().hero(hero).mapView(new MapGuiView()).build();
 		return controller.showMapView();
 	}
 }

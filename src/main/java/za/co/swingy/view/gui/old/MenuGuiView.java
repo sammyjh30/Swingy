@@ -1,4 +1,4 @@
-package za.co.swingy.view.console;
+package za.co.swingy.view.gui.old;
 
 import za.co.swingy.controller.CharacterController;
 import za.co.swingy.view.MenuView;
@@ -9,12 +9,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
 
-public class MenuConsoleView implements MenuView {
+public class MenuGuiView implements MenuView {
 	@NotNull(message = "Character Controller cannot be NULL")
 	private CharacterController		characterController;
 
-	public MenuConsoleView() {
-		this.characterController = CharacterController.builder().menuView(this).createHeroView(new CreateHeroConsoleView()).loadFileView(new LoadFileConsoleView()).build();
+	public MenuGuiView() {
+		this.characterController = CharacterController.builder().menuView(this).createHeroView(new CreateHeroGuiView()).loadFileView(new LoadFileGuiView()).build();
 	}
 
 	public void			menu() {
