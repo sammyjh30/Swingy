@@ -1,97 +1,180 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="za.co.swingy.view.gui.CreateHeroGuiView">
-  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="4" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="11" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="1280" height="720"/>
+      <xy x="20" y="20" width="588" height="560"/>
     </constraints>
     <properties>
-      <maximumSize width="720" height="720"/>
-      <minimumSize width="720" height="720"/>
-      <preferredSize width="720" height="720"/>
+      <background color="-12566464"/>
+      <maximumSize width="560" height="560"/>
+      <minimumSize width="560" height="560"/>
+      <preferredSize width="560" height="560"/>
     </properties>
-    <border type="line">
-      <color color="-4473925"/>
-    </border>
+    <border type="none"/>
     <children>
-      <component id="fe8cc" class="javax.swing.JTextPane" binding="alrightNowItSTextPane" default-binding="true">
+      <component id="bdc95" class="javax.swing.JTextPane" binding="greetingsHeroBeforeYouTextPane" default-binding="true">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="6" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
         <properties>
-          <text value="Alright, now it's time to choose a class! What would you like to be?&#10;&#10;Explorer               (Attack: 1, Defence: 1, MaxHitPoints: 50)&#10;Warrior                (Attack: 2, Defence: 2, MaxHitPoints: 50) &#10;Knight                 (Attack: 3, Defence: 3, MaxHitPoints: 50) &#10;Barbarian             (Attack: 4, Defence: 4, MaxHitPoints: 50)"/>
+          <background color="-12566464"/>
+          <editable value="false"/>
+          <font size="16" style="1"/>
+          <foreground color="-4342339"/>
+          <text value="Greetings hero! Before you begin your journey, &#10;         let's set up your character!"/>
         </properties>
       </component>
-      <component id="782dd" class="javax.swing.JTextPane" binding="pleaseEnterYourNameTextPane" default-binding="true">
+      <vspacer id="8c501">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="4" hsize-policy="4" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
+          <grid row="10" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties>
-          <text value="Please enter your name:"/>
-        </properties>
-      </component>
-      <component id="d922e" class="javax.swing.JButton" binding="button1" default-binding="true">
+      </vspacer>
+      <hspacer id="d8f9c">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties>
-          <text value="Button"/>
-        </properties>
-      </component>
-      <component id="b9a7" class="javax.swing.JButton" binding="button3" default-binding="true">
+      </hspacer>
+      <hspacer id="6a031">
         <constraints>
-          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties>
-          <text value="Button"/>
-        </properties>
-      </component>
-      <component id="c06ec" class="javax.swing.JButton" binding="button5" default-binding="true">
+      </hspacer>
+      <component id="cdf30" class="javax.swing.JTextField" binding="textField1" default-binding="true">
         <constraints>
-          <grid row="3" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Button"/>
-        </properties>
-      </component>
-      <component id="2a9ce" class="javax.swing.JButton" binding="button6" default-binding="true">
-        <constraints>
-          <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Button"/>
-        </properties>
-      </component>
-      <component id="4989b" class="javax.swing.JButton" binding="button2" default-binding="true">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Button"/>
-        </properties>
-      </component>
-      <component id="3341e" class="javax.swing.JTextPane" binding="greetingsHeroBeforeYouTextPane" default-binding="true">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="Greetings hero! Before you begin your journey, let's set up your character!"/>
-        </properties>
-      </component>
-      <component id="e3ae3" class="javax.swing.JTextField" binding="textField1" default-binding="true">
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
         <properties/>
       </component>
+      <component id="ac13d" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-4342339"/>
+          <text value="Please enter in your name:"/>
+        </properties>
+      </component>
+      <component id="b3d6c" class="javax.swing.JTextArea" binding="alrightNowItSTextArea" default-binding="true">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12566464"/>
+          <editable value="false"/>
+          <foreground color="-4342339"/>
+          <text value="Alright, now it's time to choose a class! What would you like to be?"/>
+        </properties>
+      </component>
+      <grid id="4a5b4" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12566464"/>
+          <enabled value="false"/>
+          <focusable value="false"/>
+        </properties>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <scrollpane id="ffdf4">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="4" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="30"/>
+            <preferred-size width="-1" height="30"/>
+            <maximum-size width="-1" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12566464"/>
+          <enabled value="false"/>
+          <focusable value="false"/>
+          <foreground color="-12566464"/>
+        </properties>
+        <border type="none"/>
+        <children/>
+      </scrollpane>
+      <component id="b7780" class="javax.swing.JButton" binding="explorerButton" default-binding="true">
+        <constraints>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Explorer"/>
+        </properties>
+      </component>
+      <component id="35d33" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-4342339"/>
+          <text value="(Attack: 1, Defence: 1, MaxHitPoints: 50)"/>
+        </properties>
+      </component>
+      <component id="94504" class="javax.swing.JButton" binding="warriorButton" default-binding="true">
+        <constraints>
+          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Warrior"/>
+        </properties>
+      </component>
+      <component id="dd7f2" class="javax.swing.JButton" binding="knightButton" default-binding="true">
+        <constraints>
+          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Knight"/>
+        </properties>
+      </component>
+      <component id="e32e" class="javax.swing.JButton" binding="barbarianButton" default-binding="true">
+        <constraints>
+          <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Barbarian"/>
+        </properties>
+      </component>
+      <component id="f514" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-4342339"/>
+          <text value="(Attack: 2, Defence: 2, MaxHitPoints: 50)"/>
+        </properties>
+      </component>
+      <component id="8ab91" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-4342339"/>
+          <text value="(Attack: 3, Defence: 3, MaxHitPoints: 50)"/>
+        </properties>
+      </component>
+      <component id="caef9" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-4342339"/>
+          <text value="(Attack: 4, Defence: 4, MaxHitPoints: 50)"/>
+        </properties>
+      </component>
+      <vspacer id="b5bcc">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
     </children>
   </grid>
 </form>

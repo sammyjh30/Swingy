@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="za.co.swingy.view.gui.MenuGuiView">
+  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="7" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="560" height="560"/>
+    </constraints>
+    <properties>
+      <background color="-12566464"/>
+      <maximumSize width="560" height="560"/>
+      <minimumSize width="560" height="560"/>
+      <preferredSize width="560" height="560"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <hspacer id="c6cdf">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="c4a2a">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <grid id="f8086" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="50"/>
+            <maximum-size width="-1" height="150"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12566464"/>
+          <foreground color="-12566464"/>
+        </properties>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <component id="a8229" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <enabled value="true"/>
+          <foreground color="-4342339"/>
+          <text value="Create a new hero."/>
+        </properties>
+      </component>
+      <component id="4fbfe" class="javax.swing.JTextArea" binding="welcomeToSwingyWhatTextArea" default-binding="true">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="2" use-parent-layout="false">
+            <minimum-size width="-1" height="100"/>
+            <preferred-size width="150" height="100"/>
+            <maximum-size width="-1" height="100"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12566464"/>
+          <disabledTextColor color="-4473925"/>
+          <editable value="false"/>
+          <enabled value="false"/>
+          <font size="16" style="1"/>
+          <text value="     Welcome to Swingy!&#10;What would you like to do?"/>
+        </properties>
+      </component>
+      <component id="8f95e" class="javax.swing.JButton" binding="newButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="148" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="New"/>
+        </properties>
+      </component>
+      <component id="d37d" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-4342339"/>
+          <text value="Load a previous hero."/>
+        </properties>
+      </component>
+      <component id="b6d02" class="javax.swing.JButton" binding="loadButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Load"/>
+        </properties>
+      </component>
+      <component id="87a90" class="javax.swing.JButton" binding="exitButton" default-binding="true">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Exit"/>
+        </properties>
+      </component>
+      <component id="42de0" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-4342339"/>
+          <text value="Leave the game, duh!"/>
+        </properties>
+      </component>
+      <vspacer id="2a44a">
+        <constraints>
+          <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="150"/>
+            <preferred-size width="-1" height="150"/>
+            <maximum-size width="-1" height="150"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <vspacer id="2e506">
+        <constraints>
+          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="150"/>
+            <preferred-size width="-1" height="150"/>
+            <maximum-size width="-1" height="150"/>
+          </grid>
+        </constraints>
+      </vspacer>
+    </children>
+  </grid>
+</form>
