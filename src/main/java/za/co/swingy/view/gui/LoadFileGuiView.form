@@ -24,6 +24,7 @@
         <properties>
           <background color="-12566464"/>
           <cellSelectionEnabled value="false"/>
+          <columnSelectionAllowed value="true"/>
         </properties>
       </component>
       <component id="6b619" class="javax.swing.JTextPane" binding="LOADSAVETextPane" default-binding="true">
