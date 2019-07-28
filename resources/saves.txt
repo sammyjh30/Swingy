@@ -28,3 +28,13 @@
 6|Weapons|0|Wooden Sword of Noobs|1|1|1|Wooden Lance of Bone Shattering|1|2|2|Blood Sword of Skull Crushing|1|2
 6|Armors|0|Casual Clothes|1|1
 6|Helms|0|Chain Helmet|1|2
+7|Bob Dingleeton|Warrior|2|5|5|135|150|410|10|5
+7|Inventory|9|20|3|0|1
+7|Weapons|0|Wooden Sword of Noobs|1|1|1|Silver Sword of Skull Crushing|1|2|2|Silver Crossbow of Bone Shattering|1|2|3|Wooden Lance of Darkness|2|3
+7|Armors|0|Wooden Chest Plate|1|2|1|Wooden Mail|1|2
+7|Helms|0|Straw Helmet|1|1|1|Wooden Helmet|1|2|2|Shadow Helmet|1|2
+8|Bob Dingleeton|Warrior|2|5|5|127|150|590|9|8
+8|Inventory|9|20|3|0|1
+8|Weapons|0|Wooden Sword of Noobs|1|1|1|Silver Sword of Skull Crushing|1|2|2|Silver Crossbow of Bone Shattering|1|2|3|Wooden Lance of Darkness|2|3
+8|Armors|0|Wooden Chest Plate|1|2|1|Wooden Mail|1|2
+8|Helms|0|Straw Helmet|1|1|1|Wooden Helmet|1|2|2|Shadow Helmet|1|2
