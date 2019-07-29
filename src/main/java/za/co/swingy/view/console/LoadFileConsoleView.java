@@ -1,6 +1,5 @@
 package za.co.swingy.view.console;
 
-import com.sun.org.apache.bcel.internal.generic.LoadClass;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.model.items.Armor;

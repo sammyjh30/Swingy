@@ -37,30 +37,31 @@ public class CreateHeroGuiView implements CreateHeroView {
 	private String name = null;
 
 	public CreateHeroGuiView(JFrame frame) {
+		this.frame = frame;
 		this.topPanel.setVisible(false);
 		this.bottomPanel.setVisible(false);
 		this.heroPanel.setVisible(false);
 //
-//		this.OKButton.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				if(nameTextArea.getText() != null && !nameTextArea.getText().isEmpty()) {
-//					name = nameTextArea.getText();
-////					topPanel.setVisible(false);
-//				}
-//			}
-//		});
-//
-//		nameTextField.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				if(nameTextArea.getText() == null && nameTextArea.getText().isEmpty()) {
-//					OKButton.setEnabled(false);
-//				} else {
-//					OKButton.setEnabled(true);
-//				}
-//			}
-//		});
+		this.OKButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(nameTextArea.getText() != null && !nameTextArea.getText().isEmpty()) {
+					name = nameTextArea.getText();
+					topPanel.setVisible(false);
+				}
+			}
+		});
+
+		this.nameTextField.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(nameTextArea.getText() == null && nameTextArea.getText().isEmpty()) {
+					OKButton.setEnabled(false);
+				} else {
+					OKButton.setEnabled(true);
+				}
+			}
+		});
 	}
 
 	public int 			printHeroStatus(Hero hero) {
@@ -69,14 +70,21 @@ public class CreateHeroGuiView implements CreateHeroView {
 		return 0;
 	}
 
-	public String			 promptName() {
-//		this.frame = frame;
-		this.frame.setContentPane(this.mainPanel);
-//		this.frame.setContentPane(topPanel);
-		this.frame.pack();
+	private void 				showTopPanel() {
+		this.frame.add(this.topPanel);
+		this.frame.setContentPane(this.topPanel);
 		this.topPanel.setVisible(true);
-		while (this.name == null) {
-		}
+
+//		this.frame.setContentPane(topPanel);
+//		this.frame.pack();
+//		this.mainPanel.setVisible(true);
+//		this.frame.validate();
+	}
+
+	public String			 promptName() {
+		this.showTopPanel();
+//		while (this.name == null) {
+//		}
 		return this.name;
 	}
 

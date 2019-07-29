@@ -44,6 +44,7 @@ public class MenuGuiView implements MenuView {
 		newButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				mainPanel.setVisible(false);
 				characterController.createNewHero();
 
 			}
@@ -52,7 +53,8 @@ public class MenuGuiView implements MenuView {
 	}
 
 	public void			menu() {
-		this.frame.setContentPane(mainPanel);
+		this.frame.setContentPane(this.mainPanel);
 		this.frame.pack();
+		this.mainPanel.setVisible(true);
 	}
 }
