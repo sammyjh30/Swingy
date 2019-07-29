@@ -27,12 +27,6 @@ public class MenuGuiView implements MenuView {
 	public MenuGuiView(JFrame frame) {
 		this.characterController = CharacterController.builder().menuView(this).createHeroView(new CreateHeroGuiView(frame)).loadFileView(new LoadFileGuiView()).build();
 		this.frame = frame;
-		newButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				characterController.createNewHero();
-			}
-		});
 
 		loadButton.addActionListener(new ActionListener() {
 			@Override
@@ -40,6 +34,21 @@ public class MenuGuiView implements MenuView {
 				characterController.loadHero();
 			}
 		});
+
+		exitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(1);
+			}
+		});
+		newButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				characterController.createNewHero();
+
+			}
+		});
+
 	}
 
 	public void			menu() {
