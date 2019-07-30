@@ -18,8 +18,8 @@ import java.awt.event.ActionListener;
 
 @Getter
 @Setter
-public class MenuGuiView implements MenuView {
-	private JFrame frame;
+public class MenuGuiView extends FrameView implements MenuView {
+//	private JFrame frame;
 	private CharacterController characterController;
 	private JTextArea welcomeToSwingyWhatTextArea;
 	private JButton newButton;
@@ -28,7 +28,9 @@ public class MenuGuiView implements MenuView {
 	@NotNull
 	private JPanel mainPanel;
 
-	public MenuGuiView(JFrame frame) {
+//	private static FrameView frameView;
+
+	public MenuGuiView() {
 //		welcomeToSwingyWhatTextArea = new JTextArea();
 //		newButton = new JButton();
 //		loadButton = new JButton();
@@ -39,9 +41,15 @@ public class MenuGuiView implements MenuView {
 //		mainPanel.add(newButton);
 //		mainPanel.add(loadButton);
 //		mainPanel.add(exitButton);
+//		getFrame() = new FrameView();
 
-		this.characterController = CharacterController.builder().menuView(this).createHeroView(new CreateHeroGuiView(frame)).loadFileView(new LoadFileGuiView()).build();
-		this.frame = frame;
+		this.initFrame();
+		this.getFrame().setContentPane(this.mainPanel);
+		this.getFrame().pack();
+
+		CreateHeroGuiView createHeroGuiView = new CreateHeroGuiView();
+		LoadFileGuiView loadFileGuiView = new LoadFileGuiView();
+		this.characterController = CharacterController.builder().menuView(this).createHeroView(createHeroGuiView).loadFileView(loadFileGuiView).build();
 
 		loadButton.addActionListener(new ActionListener() {
 			@Override
@@ -60,6 +68,8 @@ public class MenuGuiView implements MenuView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mainPanel.setVisible(false);
+				getFrame().remove(mainPanel);
+				System.out.println("Character creation test");
 				characterController.createNewHero();
 
 			}
@@ -68,8 +78,7 @@ public class MenuGuiView implements MenuView {
 	}
 
 	public void menu() {
-		this.frame.setContentPane(this.mainPanel);
-		this.frame.pack();
+		this.getFrame().setVisible(true);
 		this.mainPanel.setVisible(true);
 	}
 

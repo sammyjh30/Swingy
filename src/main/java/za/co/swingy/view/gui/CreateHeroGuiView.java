@@ -5,21 +5,23 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import lombok.Getter;
 import lombok.Setter;
+import za.co.swingy.Main;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.view.CreateHeroView;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.validation.constraints.NotNull;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static com.sun.tools.internal.xjc.reader.Ring.add;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 @Getter
 @Setter
-public class CreateHeroGuiView implements CreateHeroView {
+public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 	private JPanel topPanel;
 	private JPanel mainPanel;
 	private JPanel bottomPanel;
@@ -38,24 +40,27 @@ public class CreateHeroGuiView implements CreateHeroView {
 	private JButton OKButton;
 	private JTextField nameTextField;
 
-	private JFrame frame;
+//	private JFrame frame;
 
 	private String name = null;
 
-	public CreateHeroGuiView(JFrame frame) {
-		this.frame = frame;
-//		this.topPanel.setVisible(false);
-//		this.bottomPanel.setVisible(false);
-//		this.heroPanel.setVisible(false);
+//	private static FrameView frameView;
+
+	public CreateHeroGuiView() {
+//		frameView = new FrameView();
+		this.initFrame();
+
 		System.out.println("Build Test 1");
 
 		OKButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Checking input");
-				if (nameTextArea.getText() != null && !nameTextArea.getText().isEmpty()) {
-					name = nameTextArea.getText();
-					topPanel.setVisible(false);
+				if (nameTextField.getText() != null && !nameTextField.getText().isEmpty()) {
+					name = nameTextField.getText();
+//					topPanel.setVisible(false);
+					System.out.println("Name = " + name);
+
 				}
 			}
 		});
@@ -65,7 +70,7 @@ public class CreateHeroGuiView implements CreateHeroView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Checking");
-				if (nameTextArea.getText() == null && nameTextArea.getText().isEmpty()) {
+				if (nameTextField.getText() == null && nameTextField.getText().isEmpty()) {
 					OKButton.setEnabled(false);
 				} else {
 					OKButton.setEnabled(true);
@@ -76,21 +81,41 @@ public class CreateHeroGuiView implements CreateHeroView {
 	}
 
 	public int printHeroStatus(Hero hero) {
-		this.frame.setContentPane(heroPanel);
-		this.frame.pack();
+		this.getFrame().setContentPane(heroPanel);
+		this.getFrame().pack();
 		return 0;
+	}
+
+	private void		showNamePrompt() {
+		this.getFrame().setVisible(true);
+		this.getFrame().setContentPane(mainPanel);
+		this.mainPanel.setVisible(true);
+		this.topPanel.setVisible(true);
 	}
 
 	public String promptName() {
 		System.out.println("Test1");
-		this.frame.setContentPane(this.topPanel);
-		this.frame.pack();
-		System.out.println("Test2");
-//		while (this.name == null) {
+		this.getFrame().setContentPane(this.mainPanel);
+		this.getFrame().pack();
+
+		this.topPanel.setVisible(false);
+		this.bottomPanel.setVisible(false);
+		this.heroPanel.setVisible(false);
+//		while (this.name == null || this.name.isEmpty()) {
+//			System.out.println("Name is dead");
+//			this.frame.setContentPane(bottomPanel);
+//			this.frame.pack();
+//			this.frame.setVisible(true);
+//			this.mainPanel.setVisible(true);
+//			this.topPanel.setVisible(true);
+			this.showNamePrompt();
 //		}
+		System.out.println("Test2");
+
 //		if (this.name == null) {
 //			try {
 //				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
 //			} catch (InterruptedException e) {
 //				e.printStackTrace();
 //			}
@@ -99,8 +124,8 @@ public class CreateHeroGuiView implements CreateHeroView {
 	}
 
 	public String promptType() {
-		this.frame.setContentPane(bottomPanel);
-		this.frame.pack();
+		this.getFrame().setContentPane(bottomPanel);
+		this.getFrame().pack();
 		return null;
 	}
 
@@ -376,7 +401,7 @@ public class CreateHeroGuiView implements CreateHeroView {
 		topPanel = new JPanel();
 		topPanel.setLayout(new GridLayoutManager(6, 5, new Insets(0, 0, 0, 0), -1, -1));
 		topPanel.setBackground(new Color(-12566464));
-		mainPanel.add(topPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, -1), new Dimension(560, -1), new Dimension(560, -1), 0, false));
+		mainPanel.add(topPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 		final Spacer spacer8 = new Spacer();
 		topPanel.add(spacer8, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
 		final Spacer spacer9 = new Spacer();
@@ -429,4 +454,5 @@ public class CreateHeroGuiView implements CreateHeroView {
 		}
 		return new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
 	}
+
 }

@@ -52,6 +52,11 @@ public class CharacterController {
 
 	public int				createNewHero() {
 		String name = this.createHeroView.promptName();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		String type = this.createHeroView.promptType();
 		this.hero = Hero.builder().classType(type).name(name).inventory().build();
 		this.hero.starterHero();
