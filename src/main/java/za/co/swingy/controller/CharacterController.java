@@ -50,17 +50,32 @@ public class CharacterController {
 		}
 	}
 
-	public int				createNewHero() {
-		String name = this.createHeroView.promptName();
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		String type = this.createHeroView.promptType();
+	public int				generateHero(String name, String type) {
 		this.hero = Hero.builder().classType(type).name(name).inventory().build();
 		this.hero.starterHero();
 		return this.createHeroView.printHeroStatus(this.hero);
+	}
+
+	private int			callNamePrompt(){
+		return this.createHeroView.promptName(this);
+//		System.out.println("The name from the view is: " + name);
+//		return name;
+	}
+	private void			callTypePrompt(){
+		this.createHeroView.promptType();
+//		return null;
+	}
+	public int				createNewHero() {
+		return this.callNamePrompt();
+
+		// Call Name prompt -> name prompt calls type prompt -> type promt calls generate Hero.
+		//Generate Hero returns a int from print hero status -> carries int back to prompt name which we return in the controller
+
+//		this.callTypePrompt();
+//		this.hero = Hero.builder().classType(type).name(name).inventory().build();
+//		this.hero.starterHero();
+//		return this.createHeroView.printHeroStatus(this.hero);
+//		return 0;
 	}
 
 	public int				loadHero() {

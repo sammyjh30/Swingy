@@ -1,5 +1,6 @@
 package za.co.swingy.view;
 
+import za.co.swingy.controller.CharacterController;
 import za.co.swingy.model.characters.Hero;
 
 public interface CreateHeroView {
@@ -7,7 +8,7 @@ public interface CreateHeroView {
 
 	int 			printHeroStatus(Hero hero);
 
-	String			 promptName();
+	int				 promptName(CharacterController controller);
 
-	String			 promptType();
+	void			 promptType();
 }

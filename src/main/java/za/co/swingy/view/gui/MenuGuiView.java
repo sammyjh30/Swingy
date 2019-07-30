@@ -68,7 +68,7 @@ public class MenuGuiView extends FrameView implements MenuView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mainPanel.setVisible(false);
-				getFrame().remove(mainPanel);
+//				getFrame().remove(mainPanel);
 				System.out.println("Character creation test");
 				characterController.createNewHero();
 

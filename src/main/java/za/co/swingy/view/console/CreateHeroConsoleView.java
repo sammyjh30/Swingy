@@ -1,5 +1,6 @@
 package za.co.swingy.view.console;
 
+import za.co.swingy.controller.CharacterController;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.model.items.Armor;
@@ -14,6 +15,9 @@ import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
 
 public class CreateHeroConsoleView implements CreateHeroView {
+	private CharacterController controller;
+	private String				name;
+	private String				type;
 
 	public 					CreateHeroConsoleView() {
 //		controller = new Create
@@ -44,7 +48,6 @@ public class CreateHeroConsoleView implements CreateHeroView {
 		} else {
 			System.out.println("| Defence:  " + (hero.getDefence() + hero.getEquippedArmor().getDefenceIncrease()));
 		}
-		System.out.println("| Defence:  " + hero.getDefence());
 		System.out.println("| Position:  [" + hero.getXPos() + ";" + hero.getYPos() + "]");
 		System.out.println("|_______Inventory______");
 		Inventory inventory = hero.getInventory();
@@ -84,26 +87,31 @@ public class CreateHeroConsoleView implements CreateHeroView {
 		return controller.showMapView();
 	}
 
-	public String			 promptName() {
+	public int			 promptName(CharacterController controller) {
+		this.controller = controller;
 		try {
 			System.out.println("Greetings hero! Before you begin your journey, let's set up your character!");
 			System.out.print("Please enter in your name: ");
 			InputStreamReader streamReader = new InputStreamReader(System.in);
 			BufferedReader bufferedReader = new BufferedReader(streamReader);
-			String name = bufferedReader.readLine();
-			while (name == null || name.isEmpty()) {
+			String nameInput = bufferedReader.readLine();
+			while (nameInput == null || nameInput.isEmpty()) {
 				System.out.println("Oops, that's not a valid name! Please try again!");
 				System.out.print("Please enter in your name: ");
-				name = bufferedReader.readLine();
+				nameInput = bufferedReader.readLine();
 			}
-			return name;
+			this.name = nameInput;
+//			return name;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "Bob";
+		this.name = "Bob";
+		this.promptType();
+		return this.controller.generateHero(this.name, this.type);
+//		return "Bob";
 	}
 
-	public String			 promptType() {
+	public void		 promptType() {
 		try {
 			System.out.println("Alright, now it's time to choose a class! What would you like to be?");
 			System.out.println("A : Explorer		(Attack: 1, Defence: 1, MaxHitPoints: 50)");
@@ -113,25 +121,27 @@ public class CreateHeroConsoleView implements CreateHeroView {
 			System.out.print("Please enter either A, B, C, or D for your class: ");
 			InputStreamReader streamReader = new InputStreamReader(System.in);
 			BufferedReader bufferedReader = new BufferedReader(streamReader);
-			String type = bufferedReader.readLine();
-			while (type.isEmpty() || !type.equalsIgnoreCase("A") && !type.equalsIgnoreCase("B") && !type.equalsIgnoreCase("C") && !type.equalsIgnoreCase("D")) {
+			String typeInput = bufferedReader.readLine();
+			while (typeInput.isEmpty() || !typeInput.equalsIgnoreCase("A") && !typeInput.equalsIgnoreCase("B") && !typeInput.equalsIgnoreCase("C") && !typeInput.equalsIgnoreCase("D")) {
 				System.out.println("Oops, that's not a valid class! Please try again!");
 				System.out.print("Please enter either A, B, C, or D for your class: ");
-				type = bufferedReader.readLine();
+				typeInput = bufferedReader.readLine();
 			}
-			if (type.equalsIgnoreCase("A")) {
-				type = "Explorer";
+			if (typeInput.equalsIgnoreCase("A")) {
+				typeInput = "Explorer";
 			} else if (type.equalsIgnoreCase("B")) {
-				type = "Warrior";
+				typeInput = "Warrior";
 			} else if (type.equalsIgnoreCase("C")) {
-				type = "Knight";
+				typeInput = "Knight";
 			} else if (type.equalsIgnoreCase("D")) {
-				type = "Barbarian";
+				typeInput = "Barbarian";
 			}
-			return type;
+			this.type = typeInput;
+//			return type;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "Explorer";
+		this.type = "Explorer";
+//		return "Explorer";
 	}
 }
