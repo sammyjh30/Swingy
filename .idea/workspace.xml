@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba86a429-a9a6-4607-a511-192b7bebb95c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.java" afterDir="false" />
     </list>
@@ -17,80 +22,85 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.8015424">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="563">
-                  <caret line="147" column="93" lean-forward="true" selection-start-line="122" selection-start-column="8" selection-end-line="147" selection-end-column="93" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="360">
-                  <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="25" selection-end-column="27" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="645">
-                  <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
-                  <folding>
-                    <element signature="method#setHero#0;class#MapGuiView#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/GameController.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1597">
-                  <caret line="129" column="27" selection-start-line="129" selection-start-column="20" selection-end-line="129" selection-end-column="27" />
-                  <folding>
-                    <element signature="method#saveGame#0;class#GameController#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.form">
-              <provider selected="true" editor-type-id="ui-designer" />
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/MapConsoleView.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="164">
-                  <caret line="55" column="56" selection-start-line="55" selection-start-column="56" selection-end-line="55" selection-end-column="56" />
-                  <folding>
-                    <element signature="method#displayMap#0;class#MapConsoleView#0" />
-                    <element signature="method#showHero#0;class#MapConsoleView#0" />
-                    <element signature="method#showOptions#0;class#MapConsoleView#0" />
-                    <element signature="method#death#0;class#MapConsoleView#0" />
-                    <element signature="method#runAway#0;class#MapConsoleView#0" />
-                    <element signature="method#success#0;class#MapConsoleView#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="117" column="42" selection-start-line="117" selection-start-column="42" selection-end-line="117" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.form">
+          <provider selected="true" editor-type-id="ui-designer" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="22" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/CreateHeroConsoleView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="196">
+              <caret line="78" column="38" selection-start-line="78" selection-start-column="12" selection-end-line="78" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1489">
+              <caret line="117" column="39" selection-start-line="117" selection-start-column="39" selection-end-line="117" selection-end-column="39" />
+              <folding>
+                <element signature="initializer##0;class#MapGuiView#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.form">
+          <provider selected="true" editor-type-id="ui-designer" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/MapConsoleView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="31" column="42" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="42" />
+              <folding>
+                <element signature="method#showHero#0;class#MapConsoleView#0" />
+                <element signature="method#showOptions#0;class#MapConsoleView#0" />
+                <element signature="method#death#0;class#MapConsoleView#0" />
+                <element signature="method#runAway#0;class#MapConsoleView#0" />
+                <element signature="method#success#0;class#MapConsoleView#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/GameController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1597">
+              <caret line="129" column="27" selection-start-line="129" selection-start-column="20" selection-end-line="129" selection-end-column="27" />
+              <folding>
+                <element signature="method#saveGame#0;class#GameController#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -147,18 +157,18 @@
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/LoadFileGuiView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/LoadFileConsoleView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MenuGuiView.form" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/FrameView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MenuGuiView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/MapView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/CreateHeroView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/CharacterController.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/CreateHeroConsoleView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.form" />
-        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.form" />
+        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.form" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.java" />
       </list>
     </option>
   </component>
@@ -174,11 +184,11 @@
       <expand>
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="swingy" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Swingy" type="9519ce18:MavenProjectsStructure$ProjectNode" />
         </path>
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="swingy" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Swingy" type="9519ce18:MavenProjectsStructure$ProjectNode" />
           <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
         </path>
       </expand>
@@ -186,9 +196,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="29" />
+    <option name="x" value="651" />
     <option name="y" value="23" />
-    <option name="width" value="2531" />
+    <option name="width" value="1909" />
     <option name="height" value="1333" />
   </component>
   <component name="ProjectView">
@@ -262,28 +272,7 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="swingy" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="console" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="swingy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swingy" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="swingy" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="gui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="swingy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swingy" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="swingy" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="gui" type="462c0819:PsiDirectoryNode" />
-              <item name="CreateHeroGuiView" type="e9f4de52:FormNode" />
             </path>
           </expand>
           <select />
@@ -367,10 +356,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="29" y="23" width="2531" height="1333" extended-state="0" />
+    <frame x="651" y="23" width="1909" height="1333" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989059" visible="true" weight="0.10445962" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989059" visible="true" weight="0.13926084" />
       <window_info id="Structure" order="1" sideWeight="0.5010941" side_tool="true" weight="0.21824382" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -379,7 +368,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4991708" visible="true" weight="0.116035454" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4991708" visible="true" weight="0.3126511" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -392,7 +381,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven" order="4" visible="true" weight="0.11410205" />
+      <window_info anchor="right" id="Maven" order="4" visible="true" weight="0.15211569" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
@@ -542,13 +531,6 @@
     <entry file="file://$PROJECT_DIR$/.classpath">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="137" column="36" selection-start-line="137" selection-start-column="36" selection-end-line="137" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/model/characters/Hero.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -601,45 +583,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/CreateHeroConsoleView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="114" column="13" selection-start-line="114" selection-start-column="13" selection-end-line="114" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.form">
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="25" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="147" column="93" lean-forward="true" selection-start-line="122" selection-start-column="8" selection-end-line="147" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/MapConsoleView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="55" column="56" selection-start-line="55" selection-start-column="56" selection-end-line="55" selection-end-column="56" />
-          <folding>
-            <element signature="method#displayMap#0;class#MapConsoleView#0" />
-            <element signature="method#showHero#0;class#MapConsoleView#0" />
-            <element signature="method#showOptions#0;class#MapConsoleView#0" />
-            <element signature="method#death#0;class#MapConsoleView#0" />
-            <element signature="method#runAway#0;class#MapConsoleView#0" />
-            <element signature="method#success#0;class#MapConsoleView#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/GameController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1597">
@@ -650,18 +593,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
-          <folding>
-            <element signature="method#setHero#0;class#MapGuiView#0" />
-          </folding>
+        <state relative-caret-position="315">
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="22" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.form">
       <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/MapConsoleView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="31" column="42" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="42" />
+          <folding>
+            <element signature="method#showHero#0;class#MapConsoleView#0" />
+            <element signature="method#showOptions#0;class#MapConsoleView#0" />
+            <element signature="method#death#0;class#MapConsoleView#0" />
+            <element signature="method#runAway#0;class#MapConsoleView#0" />
+            <element signature="method#success#0;class#MapConsoleView#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/CreateHeroConsoleView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="78" column="38" selection-start-line="78" selection-start-column="12" selection-end-line="78" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1489">
+          <caret line="117" column="39" selection-start-line="117" selection-start-column="39" selection-end-line="117" selection-end-column="39" />
+          <folding>
+            <element signature="initializer##0;class#MapGuiView#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/CreateHeroGuiView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="117" column="42" selection-start-line="117" selection-start-column="42" selection-end-line="117" selection-end-column="42" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">
@@ -720,6 +708,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

@@ -19,11 +19,11 @@ public class Main {
 //	private static FrameView frameView;
 
 	public static void 			main(String[] args) {
-		MenuConsoleView menuConsoleView = new MenuConsoleView();
-		menuConsoleView.menu();
+//		MenuConsoleView menuConsoleView = new MenuConsoleView();
+//		menuConsoleView.menu();
 
-//		MenuGuiView menuGuiView = new MenuGuiView();
-//		menuGuiView.menu();
+		MenuGuiView menuGuiView = new MenuGuiView();
+		menuGuiView.menu();
 		return;
 	}
 
