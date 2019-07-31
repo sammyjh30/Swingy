@@ -19,27 +19,11 @@ public class Main {
 //	private static FrameView frameView;
 
 	public static void 			main(String[] args) {
-//		MenuConsoleView menuConsoleView = new MenuConsoleView();
-//		menuConsoleView.menu();
+		MenuConsoleView menuConsoleView = new MenuConsoleView();
+		menuConsoleView.menu();
 
-//		frame = new JFrame("Swingy");
-//		frame.addWindowListener(new WindowAdapter() {
-//			public void windowClosing(WindowEvent e) {
-//				System.exit(0);
-//			}
-//		});
-//		frame.setVisible(true);
-//		frame.setPreferredSize(new Dimension(560,560));
-
-//		frameView = new FrameView();
-//		frameView.getFrame().setVisible(true);
-
-//		CreateHeroGuiView createHeroGuiView = new CreateHeroGuiView(frame);
-//		frame.setContentPane(createHeroGuiView.getTopPanel());
-//		createHeroGuiView.getTopPanel().setVisible(true);
-//		System.out.println("Name = " + createHeroGuiView.getName());
-		MenuGuiView menuGuiView = new MenuGuiView();
-		menuGuiView.menu();
+//		MenuGuiView menuGuiView = new MenuGuiView();
+//		menuGuiView.menu();
 		return;
 	}
 

@@ -1,5 +1,6 @@
 package za.co.swingy.view.gui;
 
+import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.view.MapView;
@@ -8,6 +9,24 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MapGuiView implements MapView {
+	private JPanel mainPanel;
+	private JTextArea nameTextArea;
+	private JTextArea classTextArea;
+	private JTextArea levelTextArea;
+	private JTextArea xpTextArea;
+	private JTextArea hpTextArea;
+	private JTextArea defTextArea;
+	private JPanel mapPane;
+	private JTextArea attTextArea;
+	private JPanel movementPanel;
+	private JTextArea λVTextArea;
+	private JButton northButton;
+	private JButton westButton;
+	private JButton southButton;
+	private JTextArea yourGoalIsToTextArea;
+	private JButton button1;
+	private JButton button2;
+
 	public void displayMap(char[][] map, int mapSize) {
 
 	}
@@ -42,5 +61,8 @@ public class MapGuiView implements MapView {
 	private void $$$setupUI$$$() {
 		final JPanel panel1 = new JPanel();
 		panel1.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+		panel1.add(mainPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 	}
 }
