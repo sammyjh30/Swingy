@@ -3,12 +3,15 @@ package za.co.swingy.view.gui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import za.co.swingy.controller.GameController;
+import za.co.swingy.model.characters.Hero;
 import za.co.swingy.view.MapView;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MapGuiView implements MapView {
+import static java.lang.Math.pow;
+
+public class MapGuiView extends FrameView implements MapView {
 	private JPanel mainPanel;
 	private JTextArea nameTextArea;
 	private JTextArea classTextArea;
@@ -24,14 +27,55 @@ public class MapGuiView implements MapView {
 	private JButton westButton;
 	private JButton southButton;
 	private JTextArea yourGoalIsToTextArea;
+	private JPanel heroPanel;
 	private JButton button1;
 	private JButton button2;
+	private JPanel ouputPanel;
+	private JTextArea outputTextArea;
+
+	public MapGuiView() {
+//		this.initFrame();
+	}
 
 	public void displayMap(char[][] map, int mapSize) {
 
 	}
 
+	private void		setHero(Hero hero) {
+		this.nameTextArea.setText(hero.getName());
+
+		this.levelTextArea.setText("" + hero.getLevel());
+		this.classTextArea.setText(hero.getClassType());
+
+		if (hero.getEquippedHelm() == null) {
+			this.hpTextArea.setText(hero.getHitPoints() + "/" + hero.getMaxHitPoints());
+		} else {
+			this.hpTextArea.setText((hero.getHitPoints() + hero.getEquippedHelm().getHitPointIncrease()) +
+					"/" + (hero.getMaxHitPoints() + hero.getEquippedHelm().getHitPointIncrease()));
+		}
+
+		this.xpTextArea.setText(hero.getExperience() + "/" + (hero.getLevel() * 1000 -  ((int)pow(hero.getLevel() - 1, 2) * 450)));
+
+		if (hero.getEquippedWeapon() == null) {
+			this.attTextArea.setText("" + hero.getAttack());
+		} else {
+			this.attTextArea.setText("" + (hero.getAttack() + hero.getEquippedWeapon().getAttackIncrease()));
+		}
+
+		if (hero.getEquippedArmor() == null) {
+			this.defTextArea.setText("" + hero.getDefence());
+		} else {
+			this.defTextArea.setText("" + (hero.getDefence() + hero.getEquippedArmor().getDefenceIncrease()));
+		}
+	}
+
+	private void		setMap(GameController controller) {
+
+	}
+
 	public int display(GameController controller) {
+		this.setHero(controller.getHero());
+		this.setMap(controller);
 		return 0;
 	}
 
