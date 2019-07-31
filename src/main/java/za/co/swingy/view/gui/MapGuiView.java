@@ -11,7 +11,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
-import java.util.concurrent.TimeUnit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import static java.lang.Math.pow;
 
@@ -37,12 +38,57 @@ public class MapGuiView extends FrameView implements MapView {
 	private JPanel ouputPanel;
 	private JTextArea outputTextArea;
 	private JPanel mapViewPanel;
+	private JButton eastButton;
+
+	private GameController controller;
 
 	public MapGuiView() {
 //		this.initFrame();
+		northButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (controller.checkForCombat(0,-1) < 0) {
+					//Go back to menu
+				} else {
+					updateView();
+				}
+			}
+		});
+		eastButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (controller.checkForCombat(1,0) < 0) {
+					//Go back to menu
+				} else {
+					updateView();
+				}
+			}
+		});
+		southButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (controller.checkForCombat(0,1) < 0) {
+					//Go back to menu
+				} else {
+					updateView();
+				}
+			}
+		});
+		westButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (controller.checkForCombat(-1,0) < 0) {
+					//Go back to menu
+				} else {
+					updateView();
+				}
+			}
+		});
 	}
 
 	public void displayMap(char[][] map, int mapSize) {
+		this.mapPane.removeAll();
+		this.mapPane.updateUI();
 		GridBagConstraints gbc = new GridBagConstraints();
 		int size = 300 / mapSize;
 		for (int row = 0; row < mapSize; row++) {
@@ -79,7 +125,7 @@ public class MapGuiView extends FrameView implements MapView {
 		}
 	}
 
-	private void setHero(Hero hero) {
+	private void setHeroView(Hero hero) {
 		this.nameTextArea.setText(hero.getName());
 
 		this.levelTextArea.setText("" + hero.getLevel());
@@ -107,15 +153,23 @@ public class MapGuiView extends FrameView implements MapView {
 		}
 	}
 
-
-	public int display(GameController controller) {
-		this.setHero(controller.getHero());
-		this.displayMap(controller.getMap(), controller.getMapSize());
-		this.getFrame().setContentPane(this.mainPanel);
+	private void		updateView() {
+		this.setHeroView(this.controller.getHero());
+		this.displayMap(this.controller.getMap(), this.controller.getMapSize());
 		this.mainPanel.setVisible(true);
 		this.heroPanel.setVisible(true);
 		this.mapViewPanel.setVisible(true);
+
+	}
+
+	public int display(GameController controller) {
+		this.controller = controller;
+
+		this.getFrame().setContentPane(this.mainPanel);
+		this.updateView();
 		//Set other viewPanels as false
+
+		//Would return if hero died
 		return 0;
 	}
 

@@ -129,11 +129,11 @@ public class CreateHeroConsoleView implements CreateHeroView {
 			}
 			if (typeInput.equalsIgnoreCase("A")) {
 				typeInput = "Explorer";
-			} else if (type.equalsIgnoreCase("B")) {
+			} else if (typeInput.equalsIgnoreCase("B")) {
 				typeInput = "Warrior";
-			} else if (type.equalsIgnoreCase("C")) {
+			} else if (typeInput.equalsIgnoreCase("C")) {
 				typeInput = "Knight";
-			} else if (type.equalsIgnoreCase("D")) {
+			} else if (typeInput.equalsIgnoreCase("D")) {
 				typeInput = "Barbarian";
 			}
 			this.type = typeInput;

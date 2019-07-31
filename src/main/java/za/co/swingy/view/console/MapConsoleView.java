@@ -1,7 +1,6 @@
 package za.co.swingy.view.console;
 
 import za.co.swingy.controller.GameController;
-import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.view.MapView;
 
@@ -81,7 +80,7 @@ public class MapConsoleView implements MapView {
 		System.out.println();
 	}
 
-	public void					showOptions() {
+	private void					showOptions() {
 		System.out.println("Your goal is to leave all the maps, or level up lo level 6.");
 		System.out.println("You can move: " + (char)27 + "[32mNORTH" +  "\033[0m, " + (char)27 + "[32mSOUTH" + (char)27 + "[37m, "
 				+ (char)27 + "[32mEAST" +  "\033[0m or " + (char)27 + "[32mWEST" +  "\033[0m");

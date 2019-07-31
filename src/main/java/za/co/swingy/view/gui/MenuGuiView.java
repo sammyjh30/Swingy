@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 import za.co.swingy.controller.CharacterController;
 import za.co.swingy.view.MenuView;
-import za.co.swingy.view.console.CreateHeroConsoleView;
-import za.co.swingy.view.console.LoadFileConsoleView;
 
 import javax.swing.*;
 import javax.validation.constraints.NotNull;
@@ -19,7 +17,6 @@ import java.awt.event.ActionListener;
 @Getter
 @Setter
 public class MenuGuiView extends FrameView implements MenuView {
-//	private JFrame frame;
 	private CharacterController characterController;
 	private JTextArea welcomeToSwingyWhatTextArea;
 	private JButton newButton;
@@ -28,21 +25,7 @@ public class MenuGuiView extends FrameView implements MenuView {
 	@NotNull
 	private JPanel mainPanel;
 
-//	private static FrameView frameView;
-
 	public MenuGuiView() {
-//		welcomeToSwingyWhatTextArea = new JTextArea();
-//		newButton = new JButton();
-//		loadButton = new JButton();
-//		exitButton = new JButton();
-//		mainPanel = new JPanel();
-//
-//		mainPanel.add(welcomeToSwingyWhatTextArea);
-//		mainPanel.add(newButton);
-//		mainPanel.add(loadButton);
-//		mainPanel.add(exitButton);
-//		getFrame() = new FrameView();
-
 		this.initFrame();
 		this.getFrame().setContentPane(this.mainPanel);
 		this.getFrame().pack();
@@ -68,10 +51,7 @@ public class MenuGuiView extends FrameView implements MenuView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mainPanel.setVisible(false);
-//				getFrame().remove(mainPanel);
-				System.out.println("Character creation test");
 				characterController.createNewHero();
-
 			}
 		});
 

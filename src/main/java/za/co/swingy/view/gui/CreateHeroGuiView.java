@@ -174,8 +174,6 @@ public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 		this.helmsTextArea.setText(helmString);
 		this.bottomPanel.setVisible(false);
 		this.heroPanel.setVisible(true);
-//		GameController controller = GameController.builder().hero(hero).mapView(new MapGuiView()).build();
-//		return controller.showMapView();
 		return 0;
 	}
 
