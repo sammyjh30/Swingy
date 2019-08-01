@@ -19,7 +19,7 @@ public class CreateHeroConsoleView implements CreateHeroView {
 	private String				name;
 	private String				type;
 
-	public 					CreateHeroConsoleView() {
+	CreateHeroConsoleView() {
 //		controller = new Create
 	}
 

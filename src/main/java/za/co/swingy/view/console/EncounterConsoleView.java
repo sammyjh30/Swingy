@@ -95,6 +95,8 @@ public class EncounterConsoleView implements EncounterView {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
+		this.controller.getGameController().removeEnemy(this.controller.getEnemy());
+		this.controller.victory();
 	}
 
 	public int						itemDrop(String item, int index) {

@@ -47,7 +47,7 @@ public class MapGuiView extends FrameView implements MapView {
 		northButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (controller.checkForCombat(0,-1) < 0) {
+				if (controller.checkForCombat(0, -1) < 0) {
 					//Go back to menu
 				} else {
 					updateView();
@@ -57,7 +57,7 @@ public class MapGuiView extends FrameView implements MapView {
 		eastButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (controller.checkForCombat(1,0) < 0) {
+				if (controller.checkForCombat(1, 0) < 0) {
 					//Go back to menu
 				} else {
 					updateView();
@@ -67,7 +67,7 @@ public class MapGuiView extends FrameView implements MapView {
 		southButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (controller.checkForCombat(0,1) < 0) {
+				if (controller.checkForCombat(0, 1) < 0) {
 					//Go back to menu
 				} else {
 					updateView();
@@ -77,7 +77,7 @@ public class MapGuiView extends FrameView implements MapView {
 		westButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (controller.checkForCombat(-1,0) < 0) {
+				if (controller.checkForCombat(-1, 0) < 0) {
 					//Go back to menu
 				} else {
 					updateView();
@@ -153,7 +153,7 @@ public class MapGuiView extends FrameView implements MapView {
 		}
 	}
 
-	private void		updateView() {
+	private void updateView() {
 		this.setHeroView(this.controller.getHero());
 		this.displayMap(this.controller.getMap(), this.controller.getMapSize());
 		this.mainPanel.setVisible(true);
@@ -265,14 +265,14 @@ public class MapGuiView extends FrameView implements MapView {
 		gbc.weightx = 1.0;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		movementPanel.add(southButton, gbc);
-		final JButton button1 = new JButton();
-		button1.setText("East");
+		eastButton = new JButton();
+		eastButton.setText("East");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 2;
 		gbc.gridy = 1;
 		gbc.weighty = 1.0;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		movementPanel.add(button1, gbc);
+		movementPanel.add(eastButton, gbc);
 		mapPane = new JPanel();
 		mapPane.setLayout(new GridBagLayout());
 		mapPane.setBackground(new Color(-11645362));

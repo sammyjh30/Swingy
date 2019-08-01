@@ -239,6 +239,7 @@ public class GameController {
 			this.map[newY][newX] = 'X';
 			this.hero.setXPos(newX);
 			this.hero.setYPos(newY);
+			this.showMapView();
 		}
 	}
 
@@ -259,9 +260,9 @@ public class GameController {
 			//Create an encounter view
 			Enemy enemy = this.getCombatEnemy(newX,newY);
 			if (enemy == null) {
-				this.mapView.falseAlarm();
-				System.out.println("False alarm! It was just a cardboard cutout!");
-				//movehero then showmap
+				this.mapView.falseAlarm(x,y);
+//				System.out.println("False alarm! It was just a cardboard cutout!");
+				//movehero then showmap DONE
 //				return 1;
 			} else {
 				//Create view and encounter
@@ -274,7 +275,7 @@ public class GameController {
 					//    else show fail view and continue combat
 //				EncounterConsoleView encounterConsoleView = new EncounterConsoleView(this);
 //				int ret = encounterConsoleView.getController().startNewEncounter(enemy);
-				this.mapView.createEncounter(this, enemy);
+				this.mapView.createEncounter(enemy);
 
 
 //				if (ret == -1) {
@@ -299,7 +300,6 @@ public class GameController {
 			//Pass to Encounter mode
 		} else {
 			this.moveHero(x, y);
-			//call showmap
 		}
 	}
 

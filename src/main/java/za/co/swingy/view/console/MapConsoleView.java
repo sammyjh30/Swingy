@@ -112,6 +112,7 @@ public class MapConsoleView implements MapView {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
+		this.controller.returnToMenu();
 	}
 
 	public void					runAway() {
@@ -134,9 +135,10 @@ public class MapConsoleView implements MapView {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
+		this.controller.showMapView();
 	}
 
-	public void					falseAlarm() {
+	public void					falseAlarm(int x, int y) {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
@@ -157,10 +159,10 @@ public class MapConsoleView implements MapView {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
-		this.controller.moveHero();
+		this.controller.moveHero(x,y);
 	}
 
-	public void					success() {
+	public void					success(int x, int y) {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
@@ -180,6 +182,7 @@ public class MapConsoleView implements MapView {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
+		this.controller.moveHero(x,y);
 	}
 
 	public void					createEncounter(Enemy enemy) {

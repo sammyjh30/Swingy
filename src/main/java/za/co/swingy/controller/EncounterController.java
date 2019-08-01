@@ -147,7 +147,81 @@ public class EncounterController {
 		}
 	}
 
+	public void				round() {
+		int heroHitpoints;
+		if (this.hero.getEquippedHelm() != null) {
+			heroHitpoints = this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease();
+		} else {
+			heroHitpoints = this.hero.getHitPoints();
+		}
+
+		if (this.enemy.getHitPoints() > 0 && heroHitpoints > 0) {
+//			continue encounter
+
+
+		} else if (this.enemy.getHitPoints() <= 0) {
+			//Call the item drop!
+			this.randomDrop();
+			int currentLevel = this.hero.getLevel();
+			this.hero.setExperience(this.hero.getExperience() + ((this.enemy.getLevel() + 1) * 10 + 50));
+			this.hero.levelUp();
+			if (this.hero.getLevel() > currentLevel) {
+				//Level up screen
+				this.encounterView.success();
+			} else {
+				this.victory();
+			}
+		} else if (heroHitpoints <= 0)  {
+			this.gameController.getMapView().death();
+		}
+	}
+
+	public  void			victory() {
+		this.gameController.getMapView().success(this.enemy.getXPos(), this.enemy.getYPos());
+
+	}
+
 	public int				startNewEncounter(Enemy enemy) {
+		this.setEnemy(enemy);
+		//Show encounter and get input
+		while (this.enemy.getHitPoints() > 0 && ((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) > 0) ||
+				(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() > 0))) {
+			this.encounterView.title();
+			int ret = this.encounterView.display();
+			if (ret == 0) {
+				if (this.run() == 1) {
+					this.encounterView.run(1);
+					return 0;
+				} else {
+					this.encounterView.run(0);
+				}
+			} else if (ret == 1) {
+				this.fight();
+			} else if (ret == 2) {
+				this.simulate();
+			}
+		}
+		if (this.enemy.getHitPoints() <= 0) {
+			//Call the item drop!
+			this.randomDrop();
+			int currentLevel = this.hero.getLevel();
+			this.hero.setExperience(this.hero.getExperience() + ((this.enemy.getLevel() + 1) * 10 + 50));
+			this.hero.levelUp();
+			if (this.hero.getLevel() > currentLevel) {
+				//Level up screen
+				this.encounterView.success();
+				//Map update
+				this.gameController.updateMap();
+			}
+			return 1;
+		} else if (((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) ||
+				(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() <= 0))) {
+			return -1;
+		}
+		return 1;
+	}
+
+	public int				startNewEncounterLD(Enemy enemy) {
 		this.setEnemy(enemy);
 		//Show encounter and get input
 		while (this.enemy.getHitPoints() > 0 && ((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) > 0) ||

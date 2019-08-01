@@ -92,7 +92,7 @@ public class CharacterController {
 		if (i >= 0) {
 			loadedHero = saves.get(i);
 		}
-		this.loadFileView.printLoadedHero(loadedHero);
+		this.loadFileView.printLoadedHero(loadedHero, this);
 	}
 
 	public static boolean 	isNumeric(String str) {

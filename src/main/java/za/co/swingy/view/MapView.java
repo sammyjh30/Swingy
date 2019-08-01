@@ -12,9 +12,9 @@ public interface MapView {
 
 	void					runAway();
 
-	void					success();
+	void					success(int x, int y);
 
-	void					falseAlarm();
+	void					falseAlarm(int x, int y);
 
 	void					createEncounter(Enemy enemy);
 }

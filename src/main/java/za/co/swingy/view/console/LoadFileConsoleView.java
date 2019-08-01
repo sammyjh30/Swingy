@@ -1,5 +1,6 @@
 package za.co.swingy.view.console;
 
+import za.co.swingy.controller.CharacterController;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.model.items.Armor;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class LoadFileConsoleView implements LoadFileView {
+	private CharacterController			characterController;
+
 	//Need to still save/load character position
 	public static boolean 	isNumeric(String str) {
 		try {
@@ -85,7 +88,9 @@ public class LoadFileConsoleView implements LoadFileView {
 		System.out.println("You don't have any saves yet! Create a new character to start the adventure!");
 	}
 
-	public int 			printLoadedHero(Hero hero) {
+	public void 			printLoadedHero(Hero hero, CharacterController controller) {
+		this.characterController = controller;
+
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
@@ -133,7 +138,7 @@ public class LoadFileConsoleView implements LoadFileView {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 		//Go to GameController
-		GameController controller = GameController.builder().hero(hero).mapView(new MapConsoleView()).build();
-		return controller.showMapView();
+		GameController gameController = GameController.builder().hero(hero).mapView(new MapConsoleView()).characterController(this.characterController).build();
+		gameController.showMapView();
 	}
 }

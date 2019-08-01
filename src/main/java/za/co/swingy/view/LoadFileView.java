@@ -1,5 +1,6 @@
 package za.co.swingy.view;
 
+import za.co.swingy.controller.CharacterController;
 import za.co.swingy.model.characters.Hero;
 import java.util.ArrayList;
 
@@ -8,5 +9,5 @@ public interface LoadFileView {
 
 	void			noSaves();
 
-	int 			printLoadedHero(Hero hero);
+	void 			printLoadedHero(Hero hero, CharacterController controller);
 }
