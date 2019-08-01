@@ -1,6 +1,9 @@
 package za.co.swingy.view.console;
 
+import lombok.Getter;
+import lombok.Setter;
 import za.co.swingy.controller.GameController;
+import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.view.MapView;
 
@@ -11,9 +14,11 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.Math.pow;
 
+@Getter
+@Setter
 public class MapConsoleView implements MapView {
+	private GameController		controller;
 
-	//  RESET
 	public void					displayMap(char[][] map, int mapSize) {
 		System.out.print("\n");
 		for (int l = 0; l < mapSize * 2 + 2; l++) {
@@ -52,7 +57,7 @@ public class MapConsoleView implements MapView {
 		System.out.print("|\n");
 	}
 
-	private void					showHero(Hero hero) {
+	private void				showHero(Hero hero) {
 		if (hero.getName().length() > 10) {
 			System.out.println("| Name:  " + (char)27 + "[32m" + hero.getName().substring(0, 10) + "\033[0m");
 		} else {
@@ -80,7 +85,7 @@ public class MapConsoleView implements MapView {
 		System.out.println();
 	}
 
-	private void					showOptions() {
+	private void				showOptions() {
 		System.out.println("Your goal is to leave all the maps, or level up lo level 6.");
 		System.out.println("You can move: " + (char)27 + "[32mNORTH" +  "\033[0m, " + (char)27 + "[32mSOUTH" + (char)27 + "[37m, "
 				+ (char)27 + "[32mEAST" +  "\033[0m or " + (char)27 + "[32mWEST" +  "\033[0m");
@@ -131,6 +136,30 @@ public class MapConsoleView implements MapView {
 		System.out.flush();
 	}
 
+	public void					falseAlarm() {
+		//Clear screen
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+
+		System.out.println("_________________________________________");
+		System.out.println("|                                       |");
+		System.out.println("|                                       |");
+		System.out.println("|              " + (char)27 + "[34m" + "FALSE ALARM!" + "\033[0m" + "             |");
+		System.out.println("|    " + (char)27 + "[34m" + "IT WAS JUST A CARDBOARD CUTOUT!" + "\033[0m" + "    |");
+		System.out.println("|                                       |");
+		System.out.println("|_______________________________________|");
+
+		try {
+			TimeUnit.SECONDS.sleep(3);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//Clear screen
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+		this.controller.moveHero();
+	}
+
 	public void					success() {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
@@ -153,9 +182,15 @@ public class MapConsoleView implements MapView {
 		System.out.flush();
 	}
 
-	public int					display(GameController controller) {
-		int stage = 0;
-		while  (stage >= 0) {
+	public void					createEncounter(Enemy enemy) {
+		EncounterConsoleView encounterConsoleView = new EncounterConsoleView(this.controller);
+		encounterConsoleView.getController().startNewEncounter(enemy);
+	}
+
+	public void					display(GameController controller) {
+		this.controller = controller;
+//		int stage = 0;
+//		while  (stage >= 0) {
 			//Clear screen
 			System.out.print("\033[H\033[2J");
 			System.out.flush();
@@ -175,31 +210,36 @@ public class MapConsoleView implements MapView {
 					input = bufferedReader.readLine();
 				}
 				if (input.equalsIgnoreCase("NORTH")) {
-					System.out.println("Move the hero north");
-					stage = controller.checkForCombat(0, -1);
+//					System.out.println("Move the hero north");
+//					stage = controller.checkForCombat(0, -1);
+					controller.checkForCombat(0, -1);
 				} else if (input.equalsIgnoreCase("SOUTH")) {
-					System.out.println("Move the hero south");
-					stage = controller.checkForCombat(0, 1);
+//					System.out.println("Move the hero south");
+//					stage = controller.checkForCombat(0, 1);
+					controller.checkForCombat(0, 1);
 				} else if (input.equalsIgnoreCase("EAST")) {
-					System.out.println("Move the hero east");
-					stage = controller.checkForCombat(1, 0);
+//					System.out.println("Move the hero east");
+//					stage = controller.checkForCombat(1, 0);
+					controller.checkForCombat(1, 0);
 				} else if (input.equalsIgnoreCase("WEST")) {
-					System.out.println("Move the hero west");
-					stage = controller.checkForCombat(-1, 0);
+//					System.out.println("Move the hero west");
+//					stage = controller.checkForCombat(-1, 0);
+					controller.checkForCombat(-1, 0);
 				} else if (input.equalsIgnoreCase("INVENTORY")) {
-					System.out.println("Open inventory");
+//					System.out.println("Open inventory");
 					InventoryConsoleView inventoryConsoleView = new InventoryConsoleView(controller.getHero());
 					inventoryConsoleView.display();
+					//then call the mapviewDisplay()
 				} else if (input.equalsIgnoreCase("SAVE")) {
-					System.out.println("Save the game");
+//					System.out.println("Save the game");
 					controller.saveGame();
-					stage = -1;
+//					stage = -1;
 				}
 				//Clean screen
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-		return stage;
+//		}
+//		return stage;
 	}
 }

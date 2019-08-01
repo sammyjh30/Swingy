@@ -50,41 +50,40 @@ public class CharacterController {
 		}
 	}
 
-	public int				generateHero(String name, String type) {
-		this.hero = Hero.builder().classType(type).name(name).inventory().build();
-		this.hero.starterHero();
-		return this.createHeroView.printHeroStatus(this.hero);
+	public void				returnToMenu() {
+		this.menuView.resetMenu();
 	}
 
-	private int			callNamePrompt(){
-		return this.createHeroView.promptName(this);
-//		System.out.println("The name from the view is: " + name);
-//		return name;
+	public void				generateHero(String name, String type) {
+		this.hero = Hero.builder().classType(type).name(name).inventory().build();
+		this.hero.starterHero();
+		this.createHeroView.printHeroStatus(this.hero);
 	}
+
+//	private void			callNamePrompt(){
+//		this.createHeroView.promptName(this);
+//	}
+
 	private void			callTypePrompt(){
 		this.createHeroView.promptType();
 //		return null;
 	}
-	public int				createNewHero() {
-		return this.callNamePrompt();
+	public void				createNewHero() {
+		this.createHeroView.promptName(this);
+//		this.callNamePrompt();
 
-		// Call Name prompt -> name prompt calls type prompt -> type promt calls generate Hero.
+		// Call Name prompt -> name prompt calls type prompt -> type prompt calls generate Hero.
 		//Generate Hero returns a int from print hero status -> carries int back to prompt name which we return in the controller
 
-//		this.callTypePrompt();
-//		this.hero = Hero.builder().classType(type).name(name).inventory().build();
-//		this.hero.starterHero();
-//		return this.createHeroView.printHeroStatus(this.hero);
-//		return 0;
 	}
 
-	public int				loadHero() {
+	public void				loadHero() {
 		Hero loadedHero = null;
 		//Get File
 		ArrayList<Hero> saves = readSaves();
 		if (saves == null || saves.size() == 0) {
 			this.loadFileView.noSaves();
-			this.menuView.menu();
+			this.menuView.resetMenu();
 		}
 		//List available heroes
 		int i = this.loadFileView.saveList(saves);
@@ -93,7 +92,7 @@ public class CharacterController {
 		if (i >= 0) {
 			loadedHero = saves.get(i);
 		}
-		return this.loadFileView.printLoadedHero(loadedHero);
+		this.loadFileView.printLoadedHero(loadedHero);
 	}
 
 	public static boolean 	isNumeric(String str) {

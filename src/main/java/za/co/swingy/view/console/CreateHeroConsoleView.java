@@ -23,7 +23,7 @@ public class CreateHeroConsoleView implements CreateHeroView {
 //		controller = new Create
 	}
 
-	public int 			printHeroStatus(Hero hero) {
+	public void 			printHeroStatus(Hero hero) {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
@@ -83,11 +83,11 @@ public class CreateHeroConsoleView implements CreateHeroView {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
-		GameController controller = GameController.builder().hero(hero).mapView(new MapConsoleView()).build();
-		return controller.showMapView();
+		GameController controller = GameController.builder().hero(hero).mapView(new MapConsoleView()).characterController(this.controller).build();
+		controller.showMapView();
 	}
 
-	public int			 promptName(CharacterController controller) {
+	public void			 promptName(CharacterController controller) {
 		this.controller = controller;
 		try {
 			System.out.println("Greetings hero! Before you begin your journey, let's set up your character!");
@@ -101,14 +101,12 @@ public class CreateHeroConsoleView implements CreateHeroView {
 				nameInput = bufferedReader.readLine();
 			}
 			this.name = nameInput;
-//			return name;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		this.name = "Bob";
 		this.promptType();
-		return this.controller.generateHero(this.name, this.type);
-//		return "Bob";
+		this.controller.generateHero(this.name, this.type);
 	}
 
 	public void		 promptType() {

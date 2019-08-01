@@ -17,57 +17,59 @@ public class MenuConsoleView implements MenuView {
 		this.characterController = CharacterController.builder().menuView(this).createHeroView(new CreateHeroConsoleView()).loadFileView(new LoadFileConsoleView()).build();
 	}
 
+	public void 		resetMenu() {
+		this.menu();
+	}
+
 	public void			menu() {
-		int ret = 0;
-		while (ret <= 0) {
-			try {
-				//Clean screen
+//		int ret = 0;
+//		while (ret <= 0) {
+		try {
+			//Clean screen
+			System.out.print("\033[H\033[2J");
+			System.out.flush();
+			//Print Menu
+			System.out.println("__________________________________________________");
+			System.out.println("|               Welcome to Swingy!               |");
+			System.out.println("|           What would you like to do?           |");
+			System.out.println("|                                                |");
+			System.out.println("|           NEW   -  Create a new hero           |");
+			System.out.println("|           LOAD  -  Load a previous hero        |");
+			System.out.println("|           EXIT  -  Leave the game, duh!        |");
+			System.out.println("|________________________________________________|");
+			System.out.print("  Please enter one of the above commands: ");
+			InputStreamReader streamReader = new InputStreamReader(System.in);
+			BufferedReader bufferedReader = new BufferedReader(streamReader);
+			String input = bufferedReader.readLine();
+			while (!input.equalsIgnoreCase("NEW") && !input.equalsIgnoreCase("LOAD") && !input.equalsIgnoreCase("EXIT")) {
+				System.out.println("Oops, that's not a valid command! Please try again!");
+				System.out.print("  Please enter one of the above commands: ");
+				input = bufferedReader.readLine();
+			}
+			if (input.equalsIgnoreCase("NEW")) {
+				//				return 1;
+				//Create Character view
+				System.out.println("Call character create function.");
+				this.characterController.createNewHero();
+			} else if (input.equalsIgnoreCase("LOAD")) {
+				//				return 2;
+				//Load character view
+				System.out.println("Call character load function.");
+				this.characterController.loadHero();
+			} else if (input.equalsIgnoreCase("EXIT")) {
+				//				return 0;
+				System.out.println("Exiting...");
+				try {
+					TimeUnit.SECONDS.sleep(2);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				//Clear screen
 				System.out.print("\033[H\033[2J");
 				System.out.flush();
-				//Print Menu
-				System.out.println("__________________________________________________");
-				System.out.println("|               Welcome to Swingy!               |");
-				System.out.println("|           What would you like to do?           |");
-				System.out.println("|                                                |");
-				System.out.println("|           NEW   -  Create a new hero           |");
-				System.out.println("|           LOAD  -  Load a previous hero        |");
-				System.out.println("|           EXIT  -  Leave the game, duh!        |");
-				System.out.println("|________________________________________________|");
-				System.out.print("  Please enter one of the above commands: ");
-				InputStreamReader streamReader = new InputStreamReader(System.in);
-				BufferedReader bufferedReader = new BufferedReader(streamReader);
-				String input = bufferedReader.readLine();
-				while (!input.equalsIgnoreCase("NEW") && !input.equalsIgnoreCase("LOAD") && !input.equalsIgnoreCase("EXIT")) {
-					System.out.println("Oops, that's not a valid command! Please try again!");
-					System.out.print("  Please enter one of the above commands: ");
-					input = bufferedReader.readLine();
-				}
-				if (input.equalsIgnoreCase("NEW")) {
-					//				return 1;
-					//Create Character view
-					System.out.println("Call character create function.");
-					ret = this.characterController.createNewHero();
-				} else if (input.equalsIgnoreCase("LOAD")) {
-					//				return 2;
-					//Load character view
-					System.out.println("Call character load function.");
-					ret = this.characterController.loadHero();
-				} else if (input.equalsIgnoreCase("EXIT")) {
-					//				return 0;
-					System.out.println("Exiting...");
-					try {
-						TimeUnit.SECONDS.sleep(2);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					//Clear screen
-					System.out.print("\033[H\033[2J");
-					System.out.flush();
-					ret = 1;
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

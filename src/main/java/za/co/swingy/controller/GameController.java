@@ -36,6 +36,8 @@ public class GameController {
 	private ArrayList<Enemy>	enemies;
 	@NotNull
 	private MapView				mapView;
+	@NotNull(message = "Character controller cannot be null")
+	private CharacterController characterController;
 
 	// Builder
 	public static class 		GameControllerBuilder {
@@ -44,6 +46,7 @@ public class GameController {
 		private int					mapSize;
 		private ArrayList<Enemy>	enemies;
 		private MapView				mapView;
+		private CharacterController characterController;
 
 		public GameControllerBuilder		hero(Hero hero) {
 			System.out.println("GameController HERO!");
@@ -87,7 +90,13 @@ public class GameController {
 			this.mapView = mapView;
 			return this;
 		}
+
+		public GameControllerBuilder		characterController(CharacterController controller) {
+			this.characterController = controller;
+			return this;
+		}
 	}
+
 
 	public void				updateMap() {
 		this.mapSize = (hero.getLevel() - 1) * 5 + 10 - (hero.getLevel() % 2);
@@ -126,8 +135,8 @@ public class GameController {
 		}
 	}
 
-	public int				showMapView() {
-		return this.mapView.display(this);
+	public void				showMapView() {
+		this.mapView.display(this);
 	}
 
 	// Set up victory commands
@@ -233,7 +242,7 @@ public class GameController {
 		}
 	}
 
-	public int					checkForCombat(int x, int y) {
+	public void					checkForCombat(int x, int y) {
 		int newX = this.getHero().getXPos() + x;
 		int newY = this.getHero().getYPos() + y;
 		if (newX < 0 || newY < 0 || newX >= this.getMapSize() || newY >= this.getMapSize()) {
@@ -250,33 +259,52 @@ public class GameController {
 			//Create an encounter view
 			Enemy enemy = this.getCombatEnemy(newX,newY);
 			if (enemy == null) {
+				this.mapView.falseAlarm();
 				System.out.println("False alarm! It was just a cardboard cutout!");
-				return 1;
+				//movehero then showmap
+//				return 1;
 			} else {
-//Create view and encounter
-				EncounterConsoleView encounterConsoleView = new EncounterConsoleView(this);
-				int ret = encounterConsoleView.getController().startNewEncounter(enemy);
-				if (ret == -1) {
-//					System.out.println("THE HERO IS DEAD?!");
-					this.mapView.death();
-					//Go back to the main menu
-					return -2;
-				} else if ( ret == 0) {
-//					System.out.println("THE HERO RAN AWAY!");
-					this.mapView.runAway();
-				} else if (ret == 1) {
-//					System.out.println("THE HERO DEFEATED THEIR OPPONENT!");
-					this.mapView.success();
-					this.removeEnemy(enemy);
-					this.moveHero(x,y);
-				}
+				//Create view and encounter
+				//Call view to create encounter view
+				//DURING ENCOUNTER:
+					//If fight/simulate: add fight thing ->check if hero dead or enemy dead
+											//  -> if hero dead -> call Hero is dead view which calls return to menu
+											//  -> if enemy dead -> call hero defeated enemy view and call showmap
+					//If run away: try run, if succeed show success view and then call show map
+					//    else show fail view and continue combat
+//				EncounterConsoleView encounterConsoleView = new EncounterConsoleView(this);
+//				int ret = encounterConsoleView.getController().startNewEncounter(enemy);
+				this.mapView.createEncounter(this, enemy);
+
+
+//				if (ret == -1) {
+////					System.out.println("THE HERO IS DEAD?!");
+//					this.mapView.death();
+//					//will call game controller return to Meu()
+//					//Go back to the main menu
+////					return -2;
+//				} else if ( ret == 0) {
+////					System.out.println("THE HERO RAN AWAY!");
+//					this.mapView.runAway();
+//					//will call showmap
+//				} else if (ret == 1) {
+////					System.out.println("THE HERO DEFEATED THEIR OPPONENT!");
+//					this.mapView.success();
+//					this.removeEnemy(enemy);
+//					this.moveHero(x,y);
+//					//call showmap
+//				}
 			}
 			//Use controller to get enemy and index
 			//Pass to Encounter mode
 		} else {
 			this.moveHero(x, y);
+			//call showmap
 		}
-		return 1;
+	}
+
+	public void					returnToMenu() {
+		this.characterController.returnToMenu();
 	}
 
 }
