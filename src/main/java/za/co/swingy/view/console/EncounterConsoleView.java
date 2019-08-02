@@ -1,12 +1,14 @@
 package za.co.swingy.view.console;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import za.co.swingy.controller.EncounterController;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
+import za.co.swingy.model.items.Armor;
+import za.co.swingy.model.items.Helm;
+import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.EncounterView;
 
 import javax.validation.constraints.NotNull;
@@ -100,23 +102,17 @@ public class EncounterConsoleView implements EncounterView {
 		this.controller.victory();
 	}
 
-	public int						itemDrop(String item, int index) {
+	public int						itemDrop(String item, int boost) {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 
-		String drops[] = {"Weapon", "Armor", "Helm", "Inventory", "Health"};
+//		String drops[] = {"Weapon", "Armor", "Helm", "Inventory", "Health"};
 		System.out.println("			ITEM DROP!");
-		if (drops[index].equalsIgnoreCase("Weapon")) {
-			System.out.println("	The enemy dropped a Weapon: " + item);
-		} else if (drops[index].equalsIgnoreCase("Armor")) {
-			System.out.println("	The enemy dropped an Armor: " + item);
-		} else if (drops[index].equalsIgnoreCase("Helm")) {
-			System.out.println("	The enemy dropped a Helm: " + item);
-		} else if (drops[index].equalsIgnoreCase("Inventory")) {
-			System.out.println("	The enemy dropped an Inventory attachment with a +" + item + " boost.");
-		} else if (drops[index].equalsIgnoreCase("Health")) {
-			System.out.println("	The enemy dropped a small health remedy of +" + item + "HP.");
+		if (item.equalsIgnoreCase("Inventory")) {
+			System.out.println("	The enemy dropped an Inventory attachment with a +" + boost + " boost.");
+		} else if (item.equalsIgnoreCase("Health")) {
+			System.out.println("	The enemy dropped a small health remedy of +" + boost + "HP.");
 		}
 		System.out.println("	Would you like to take it?");
 		try {
@@ -144,6 +140,96 @@ public class EncounterConsoleView implements EncounterView {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	public void					armorDrop(Armor armor) {
+		System.out.println("			ITEM DROP!");
+		System.out.println("	The enemy dropped an Armor: " + armor.getName());
+		System.out.println("	Would you like to take it?");
+		try {
+			System.out.print("Please enter either YES or NO: ");
+			InputStreamReader streamReader = new InputStreamReader(System.in);
+			BufferedReader bufferedReader = new BufferedReader(streamReader);
+			String input = bufferedReader.readLine();
+			while (!input.equalsIgnoreCase("YES") && !input.equalsIgnoreCase("NO")) {
+				System.out.println("Oops, that's not a valid command! Please try again!");
+				System.out.print("Please enter either YES or NO: ");
+				input = bufferedReader.readLine();
+			}
+			if (input.equalsIgnoreCase("YES")) {
+				//Clear screen
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				this.controller.addArmor(armor);
+			} else if (input.equalsIgnoreCase("NO")) {
+				//Clear screen
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				//Go to success screen
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void					weaponDrop(Weapon weapon) {
+		System.out.println("			ITEM DROP!");
+		System.out.println("	The enemy dropped a Weapon: " + weapon.getName());
+		System.out.println("	Would you like to take it?");
+		try {
+			System.out.print("Please enter either YES or NO: ");
+			InputStreamReader streamReader = new InputStreamReader(System.in);
+			BufferedReader bufferedReader = new BufferedReader(streamReader);
+			String input = bufferedReader.readLine();
+			while (!input.equalsIgnoreCase("YES") && !input.equalsIgnoreCase("NO")) {
+				System.out.println("Oops, that's not a valid command! Please try again!");
+				System.out.print("Please enter either YES or NO: ");
+				input = bufferedReader.readLine();
+			}
+			if (input.equalsIgnoreCase("YES")) {
+				//Clear screen
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				this.controller.addWeapon(weapon);
+			} else if (input.equalsIgnoreCase("NO")) {
+				//Clear screen
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				//Go to success screen
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void					helmDrop(Helm helm){
+		System.out.println("			ITEM DROP!");
+		System.out.println("	The enemy dropped a Helm: " + helm.getName());
+		System.out.println("	Would you like to take it?");
+		try {
+			System.out.print("Please enter either YES or NO: ");
+			InputStreamReader streamReader = new InputStreamReader(System.in);
+			BufferedReader bufferedReader = new BufferedReader(streamReader);
+			String input = bufferedReader.readLine();
+			while (!input.equalsIgnoreCase("YES") && !input.equalsIgnoreCase("NO")) {
+				System.out.println("Oops, that's not a valid command! Please try again!");
+				System.out.print("Please enter either YES or NO: ");
+				input = bufferedReader.readLine();
+			}
+			if (input.equalsIgnoreCase("YES")) {
+				//Clear screen
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				this.controller.addHelm(helm);
+			} else if (input.equalsIgnoreCase("NO")) {
+				//Clear screen
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				//Go to success screen
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void						display() {

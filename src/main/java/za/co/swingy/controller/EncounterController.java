@@ -184,6 +184,21 @@ public class EncounterController {
 		}
 	}
 
+	public void				addArmor(Armor armor) {
+		this.hero.getInventory().addArmor(armor);
+		//Go to the success process
+	}
+
+	public void				addWeapon(Weapon weapon) {
+		this.hero.getInventory().addWeapon(weapon);
+		//Go to the success process
+	}
+
+	public void				addHelm(Helm helm) {
+		this.hero.getInventory().addHelm(helm);
+		//Go to the success process
+	}
+
 	/////////////
 
 	public void				round() {
