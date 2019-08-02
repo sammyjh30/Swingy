@@ -18,13 +18,14 @@ import java.util.Random;
 @Setter
 public class EncounterController {
 	@NotNull
-	private Hero hero;
+	private Hero			hero;
 	@NotNull
-	private Enemy enemy;
+	private Enemy			enemy;
 	@NotNull
-	private EncounterView encounterView;
+	private EncounterView	encounterView;
 	@NotNull
 	private GameController	gameController;
+	private int				turn;
 
 	// Builder
 	public static class 		EncounterControllerBuilder {
@@ -49,64 +50,100 @@ public class EncounterController {
 
 	}
 
-	public void				fight() {
-		//The outputs need to be a view thing. Need to set up the appropriate functions
+	private String			heroAttacks() {
 		int heroAttack;
-		int heroDefence;
 		int damage;
 		String enemyName = this.enemy.getEnemyName() + " the " + this.enemy.getEnemyType();
+		String ret = "";
+
 		Random rand = new Random();
-		int enemyAttack = this.enemy.getAttack() + rand.nextInt(7);
 		if (this.hero.getEquippedWeapon() != null) {
 			heroAttack = this.hero.getAttack() + this.hero.getEquippedWeapon().getAttackIncrease() + rand.nextInt(10);
 		} else {
 			heroAttack = this.hero.getAttack() + rand.nextInt(10);
 		}
+		//Attack
+		if (heroAttack > this.enemy.getDefence()) {
+			damage = heroAttack - this.enemy.getDefence();
+			this.enemy.setHitPoints(this.enemy.getHitPoints() - damage);
+			ret += this.hero.getName() + " attacked " + enemyName + " with " + damage + " points of damage!\n";
+		} else {
+			ret += this.hero.getName() + " tried to attack " + enemyName + " but missed!\n";
+		}
+		return ret;
+	}
+
+	private String			enemyAttacks() {
+		int heroDefence;
+		int damage;
+		String enemyName = this.enemy.getEnemyName() + " the " + this.enemy.getEnemyType();
+		String ret = "";
+
+		Random rand = new Random();
+		int enemyAttack = this.enemy.getAttack() + rand.nextInt(7);
 		if (this.hero.getEquippedArmor() != null) {
 			heroDefence = this.hero.getDefence() + this.hero.getEquippedArmor().getDefenceIncrease();
 		} else {
 			heroDefence = this.hero.getDefence();
 		}
-		//Hero attacks
-		if (heroAttack > this.enemy.getDefence()) {
-			damage = heroAttack - this.enemy.getDefence();
-			this.encounterView.fight(this.hero.getName(), enemyName, 1, damage);
-			this.enemy.setHitPoints(this.enemy.getHitPoints() - damage);
-		} else {
-			this.encounterView.fight(this.hero.getName(), enemyName, 0, 0);
-		}
-		if (this.enemy.getHitPoints() <= 0) {
-			return;
-		}
-		//Enemy attacks
+
+		//Attack
 		if (enemyAttack > heroDefence) {
 			damage = enemyAttack - heroDefence;
-			this.encounterView.fight(enemyName, this.hero.getName(), 1, damage);
 			this.hero.setHitPoints((this.hero.getHitPoints()) - damage);
+			ret += enemyName + " attacked " + this.hero.getName() + " with " + damage + " points of damage!\n";
 		} else {
-			this.encounterView.fight(enemyName, this.hero.getName(), 0, 0);
+			ret += enemyName + " tried to attack " + this.hero.getName() + " but missed!\n";
 		}
-		if ((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) ||
-			(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() <= 0)) {
-			return;
-		}
-		return;
+		return ret;
 	}
 
-	public int				run() {
+	public void				fight() {
+		this.turn++;
+		String roundUpdate = "";
+		roundUpdate += ("Round " + this.turn + ":\\n");
+		roundUpdate += this.heroAttacks();
+		if (this.enemy.getHitPoints() <= 0) {
+			this.encounterView.fight(roundUpdate);
+		}
+		roundUpdate += this.enemyAttacks();
+		if ((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) ||
+			(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() <= 0)) {
+			this.encounterView.fight(roundUpdate);
+		}
+		this.encounterView.fight(roundUpdate);
+	}
+
+	public void				run() {
 		Random rand = new Random();
-		return rand.nextInt(2);
+		int ret =  rand.nextInt(2);
+		if (ret == 1) {
+			this.gameController.getMapView().runAway();
+		} else {
+			this.encounterView.runFailed();
+		}
 	}
 
 	public void				simulate() {
-		int i = 0;
+		String roundUpdate = "";
 		while (this.enemy.getHitPoints() > 0 && ((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) > 0) ||
 		(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() > 0))) {
-			this.encounterView.simulate(i);
-			this.fight();
-			i++;
+			this.turn++;
+			roundUpdate += ("Round " + this.turn + ":\\n");
+			roundUpdate += this.heroAttacks();
+			if (this.enemy.getHitPoints() <= 0) {
+				this.encounterView.simulate(roundUpdate);
+			}
+			roundUpdate += this.enemyAttacks();
+			if ((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) ||
+					(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() <= 0)) {
+				this.encounterView.simulate(roundUpdate);
+			}
 		}
+		this.encounterView.simulate(roundUpdate);
 	}
+
+	//NEEED TO FIX
 
 	private void			randomDrop() {
 		Random rand = new Random();
@@ -147,18 +184,18 @@ public class EncounterController {
 		}
 	}
 
+	/////////////
+
 	public void				round() {
-		int heroHitpoints;
+		int heroHitPoints;
 		if (this.hero.getEquippedHelm() != null) {
-			heroHitpoints = this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease();
+			heroHitPoints = this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease();
 		} else {
-			heroHitpoints = this.hero.getHitPoints();
+			heroHitPoints = this.hero.getHitPoints();
 		}
 
-		if (this.enemy.getHitPoints() > 0 && heroHitpoints > 0) {
-//			continue encounter
-
-
+		if (this.enemy.getHitPoints() > 0 && heroHitPoints > 0) {
+			this.encounterView.display();
 		} else if (this.enemy.getHitPoints() <= 0) {
 			//Call the item drop!
 			this.randomDrop();
@@ -171,7 +208,7 @@ public class EncounterController {
 			} else {
 				this.victory();
 			}
-		} else if (heroHitpoints <= 0)  {
+		} else if (heroHitPoints <= 0)  {
 			this.gameController.getMapView().death();
 		}
 	}
@@ -181,83 +218,10 @@ public class EncounterController {
 
 	}
 
-	public int				startNewEncounter(Enemy enemy) {
+	public void				startNewEncounter(Enemy enemy) {
 		this.setEnemy(enemy);
+		this.turn = 0;
 		//Show encounter and get input
-		while (this.enemy.getHitPoints() > 0 && ((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) > 0) ||
-				(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() > 0))) {
-			this.encounterView.title();
-			int ret = this.encounterView.display();
-			if (ret == 0) {
-				if (this.run() == 1) {
-					this.encounterView.run(1);
-					return 0;
-				} else {
-					this.encounterView.run(0);
-				}
-			} else if (ret == 1) {
-				this.fight();
-			} else if (ret == 2) {
-				this.simulate();
-			}
-		}
-		if (this.enemy.getHitPoints() <= 0) {
-			//Call the item drop!
-			this.randomDrop();
-			int currentLevel = this.hero.getLevel();
-			this.hero.setExperience(this.hero.getExperience() + ((this.enemy.getLevel() + 1) * 10 + 50));
-			this.hero.levelUp();
-			if (this.hero.getLevel() > currentLevel) {
-				//Level up screen
-				this.encounterView.success();
-				//Map update
-				this.gameController.updateMap();
-			}
-			return 1;
-		} else if (((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) ||
-				(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() <= 0))) {
-			return -1;
-		}
-		return 1;
-	}
-
-	public int				startNewEncounterLD(Enemy enemy) {
-		this.setEnemy(enemy);
-		//Show encounter and get input
-		while (this.enemy.getHitPoints() > 0 && ((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) > 0) ||
-		(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() > 0))) {
-			this.encounterView.title();
-			int ret = this.encounterView.display();
-			if (ret == 0) {
-				if (this.run() == 1) {
-					this.encounterView.run(1);
-					return 0;
-				} else {
-					this.encounterView.run(0);
-				}
-			} else if (ret == 1) {
-				this.fight();
-			} else if (ret == 2) {
-				this.simulate();
-			}
-		}
-		if (this.enemy.getHitPoints() <= 0) {
-			//Call the item drop!
-			this.randomDrop();
-			int currentLevel = this.hero.getLevel();
-			this.hero.setExperience(this.hero.getExperience() + ((this.enemy.getLevel() + 1) * 10 + 50));
-			this.hero.levelUp();
-			if (this.hero.getLevel() > currentLevel) {
-				//Level up screen
-				this.encounterView.success();
-				//Map update
-				this.gameController.updateMap();
-			}
-			return 1;
-		} else if (((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) ||
-		(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() <= 0))) {
-			return -1;
-		}
-		return 1;
+		this.round();
 	}
 }

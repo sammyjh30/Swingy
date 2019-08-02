@@ -23,6 +23,7 @@ public class EncounterConsoleView implements EncounterView {
 	@NotNull
 	public GameController			gameController;
 
+
 	public EncounterConsoleView(GameController controller) {
 		this.gameController = controller;
 		this.controller = EncounterController.builder().encounterView(this).hero(controller.getHero()).gameController(controller).build();
@@ -145,7 +146,7 @@ public class EncounterConsoleView implements EncounterView {
 		return 0;
 	}
 
-	public int						display() {
+	public void						display() {
 		//How Helmet and hitpoints will work: hitpoints can go into negative
 		//Check if hitpoint + helmet <= 0 (e.g. if -3 + 5 <= 0 die, else continue
 		System.out.println("Your Hero Stats:");
@@ -164,48 +165,67 @@ public class EncounterConsoleView implements EncounterView {
 				input = bufferedReader.readLine();
 			}
 			if (input.equalsIgnoreCase("RUN")) {
-				return 0;
+				this.controller.run();
 			} else if (input.equalsIgnoreCase("FIGHT")) {
-				return 1;
+				this.controller.fight();
 			} else if (input.equalsIgnoreCase("SIMULATE")) {
-				return 2;
+				this.controller.simulate();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return -1;
 	}
 
-	public void					fight(String attacker, String defender, int success, int damage) {
-		if (success == 1) {
-			System.out.println(attacker + " attacked " + defender + " with " + damage + " points of damage!");
-		} else if (success == 0) {
-			System.out.println(attacker + " tried to attack " + defender + " but missed!");
-		}
+	public void					fight(String round) {
+		this.showHero(this.controller.getHero());
+		this.showEnemy(this.controller.getEnemy());
+		System.out.print(round);
+
+		//Implement "Press ENTER to continue"
 		try {
 			TimeUnit.SECONDS.sleep(1);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		this.controller.round();
 	}
 
-	public void					run(int success) {
-		if (success == 1) {
-			System.out.println(this.controller.getHero().getName() + " managed to run away!");
-		} else {
-			System.out.println(this.controller.getHero().getName() + " tried to run away but failed!");
+	public void					runFailed() {
+		//Clear screen
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+
+		System.out.println("_________________________________________");
+		System.out.println("|                                       |");
+		System.out.println("|                                       |");
+		System.out.println("|       \" + (char)27 + \"[34m\" + \"THE HERO TRIED TO RUN AWAY\" + \"\\033[0m\" + \"      |");
+		System.out.println("|               \" + (char)27 + \"[34m\" + \"BUT FAILED!\" + \"\\033[0m\" + \"             |");
+		System.out.println("|                                       |");
+		System.out.println("|_______________________________________|");
+
+		try {
+			TimeUnit.SECONDS.sleep(3);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		//Clear screen
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+		this.controller.round();
+	}
+
+	public void					simulate(String round) {
+		System.out.println("			SIMULATION START!");
+		this.showHero(this.controller.getHero());
+		this.showEnemy(this.controller.getEnemy());
+		System.out.print(round);
+
+		//Implement "Press ENTER to continue"
 		try {
 			TimeUnit.SECONDS.sleep(1);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void					simulate(int turn) {
-		if (turn == 0) {
-			System.out.println("			SIMULATION START!");
-		}
-		System.out.println("Round " + turn + ":");
+		this.controller.round();
 	}
 }

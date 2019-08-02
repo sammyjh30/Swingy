@@ -192,57 +192,42 @@ public class MapConsoleView implements MapView {
 
 	public void					display(GameController controller) {
 		this.controller = controller;
-//		int stage = 0;
-//		while  (stage >= 0) {
-			//Clear screen
-			System.out.print("\033[H\033[2J");
-			System.out.flush();
-			this.showHero(controller.getHero());
-			this.displayMap(controller.getMap(), controller.getMapSize());
-			try {
-				InputStreamReader streamReader = new InputStreamReader(System.in);
-				BufferedReader bufferedReader = new BufferedReader(streamReader);
-				showOptions();
+		//Clear screen
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+		this.showHero(controller.getHero());
+		this.displayMap(controller.getMap(), controller.getMapSize());
+		try {
+			InputStreamReader streamReader = new InputStreamReader(System.in);
+			BufferedReader bufferedReader = new BufferedReader(streamReader);
+			showOptions();
+			System.out.print("Please enter a command: ");
+			String input = bufferedReader.readLine();
+			while (!input.equalsIgnoreCase("NORTH") && !input.equalsIgnoreCase("SOUTH") &&
+					!input.equalsIgnoreCase("EAST") && !input.equalsIgnoreCase("WEST") &&
+					!input.equalsIgnoreCase("INVENTORY") && !input.equalsIgnoreCase("SAVE")){
+				System.out.println("Oops, that's not a valid command! Please try again!");
 				System.out.print("Please enter a command: ");
-				String input = bufferedReader.readLine();
-				while (!input.equalsIgnoreCase("NORTH") && !input.equalsIgnoreCase("SOUTH") &&
-						!input.equalsIgnoreCase("EAST") && !input.equalsIgnoreCase("WEST") &&
-						!input.equalsIgnoreCase("INVENTORY") && !input.equalsIgnoreCase("SAVE")){
-					System.out.println("Oops, that's not a valid command! Please try again!");
-					System.out.print("Please enter a command: ");
-					input = bufferedReader.readLine();
-				}
-				if (input.equalsIgnoreCase("NORTH")) {
-//					System.out.println("Move the hero north");
-//					stage = controller.checkForCombat(0, -1);
-					controller.checkForCombat(0, -1);
-				} else if (input.equalsIgnoreCase("SOUTH")) {
-//					System.out.println("Move the hero south");
-//					stage = controller.checkForCombat(0, 1);
-					controller.checkForCombat(0, 1);
-				} else if (input.equalsIgnoreCase("EAST")) {
-//					System.out.println("Move the hero east");
-//					stage = controller.checkForCombat(1, 0);
-					controller.checkForCombat(1, 0);
-				} else if (input.equalsIgnoreCase("WEST")) {
-//					System.out.println("Move the hero west");
-//					stage = controller.checkForCombat(-1, 0);
-					controller.checkForCombat(-1, 0);
-				} else if (input.equalsIgnoreCase("INVENTORY")) {
-//					System.out.println("Open inventory");
-					InventoryConsoleView inventoryConsoleView = new InventoryConsoleView(controller.getHero());
-					inventoryConsoleView.display();
-					//then call the mapviewDisplay()
-				} else if (input.equalsIgnoreCase("SAVE")) {
-//					System.out.println("Save the game");
-					controller.saveGame();
-//					stage = -1;
-				}
-				//Clean screen
-			} catch (IOException e) {
-				e.printStackTrace();
+				input = bufferedReader.readLine();
 			}
-//		}
-//		return stage;
+			if (input.equalsIgnoreCase("NORTH")) {
+				controller.checkForCombat(0, -1);
+			} else if (input.equalsIgnoreCase("SOUTH")) {
+				controller.checkForCombat(0, 1);
+			} else if (input.equalsIgnoreCase("EAST")) {
+				controller.checkForCombat(1, 0);
+			} else if (input.equalsIgnoreCase("WEST")) {
+				controller.checkForCombat(-1, 0);
+			} else if (input.equalsIgnoreCase("INVENTORY")) {
+				InventoryConsoleView inventoryConsoleView = new InventoryConsoleView(controller.getHero());
+				inventoryConsoleView.display();
+				//then call the mapviewDisplay()
+			} else if (input.equalsIgnoreCase("SAVE")) {
+				controller.saveGame();
+			}
+			//Clean screen
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

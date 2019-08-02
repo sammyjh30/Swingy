@@ -7,13 +7,13 @@ import javax.validation.constraints.NotNull;
 
 public interface EncounterView {
 
-	int						display();
+	void					display();
 
-	void					fight(String attacker, String defender, int success, int damage);
+	void					fight(String round);
 
-	void					run(int success);
+	void					runFailed();
 
-	void					simulate(int turn);
+	void					simulate(String round);
 
 	void					title();
 

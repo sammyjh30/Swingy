@@ -204,6 +204,7 @@ public class GameController {
 		} catch ( FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		this.returnToMenu();
 	}
 
 	public Enemy			getCombatEnemy(int x, int y) {
@@ -261,9 +262,6 @@ public class GameController {
 			Enemy enemy = this.getCombatEnemy(newX,newY);
 			if (enemy == null) {
 				this.mapView.falseAlarm(x,y);
-//				System.out.println("False alarm! It was just a cardboard cutout!");
-				//movehero then showmap DONE
-//				return 1;
 			} else {
 				//Create view and encounter
 				//Call view to create encounter view
@@ -279,17 +277,17 @@ public class GameController {
 
 
 //				if (ret == -1) {
-////					System.out.println("THE HERO IS DEAD?!");
+////					System.out.println("THE HERO IS DEAD?!");								DONE setup
 //					this.mapView.death();
 //					//will call game controller return to Meu()
 //					//Go back to the main menu
 ////					return -2;
 //				} else if ( ret == 0) {
-////					System.out.println("THE HERO RAN AWAY!");
+////					System.out.println("THE HERO RAN AWAY!");								DONE setup
 //					this.mapView.runAway();
 //					//will call showmap
 //				} else if (ret == 1) {
-////					System.out.println("THE HERO DEFEATED THEIR OPPONENT!");
+////					System.out.println("THE HERO DEFEATED THEIR OPPONENT!");				DONE setup
 //					this.mapView.success();
 //					this.removeEnemy(enemy);
 //					this.moveHero(x,y);
