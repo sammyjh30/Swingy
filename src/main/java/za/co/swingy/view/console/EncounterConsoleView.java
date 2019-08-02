@@ -70,16 +70,16 @@ public class EncounterConsoleView implements EncounterView {
 		System.out.println("| DEF:   " + (char)27 + "[35m" + (enemy.getDefence()) + "\033[0m");
 	}
 
-	public void						title() {
-		//Clear screen
-		System.out.print("\033[H\033[2J");
-		System.out.flush();
+//	public void						title() {
+//		//Clear screen
+//		System.out.print("\033[H\033[2J");
+//		System.out.flush();
+//
+//		System.out.println("                                COMBAT!");
+//		System.out.println("                        An enemy has appeared!");
+//	}
 
-		System.out.println("                                COMBAT!");
-		System.out.println("                        An enemy has appeared!");
-	}
-
-	public void					success() {
+	public void						success() {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
@@ -102,7 +102,7 @@ public class EncounterConsoleView implements EncounterView {
 		this.controller.victory();
 	}
 
-	public int						itemDrop(String item, int boost) {
+	public void						itemDrop(String item, int boost) {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
@@ -129,17 +129,20 @@ public class EncounterConsoleView implements EncounterView {
 				//Clear screen
 				System.out.print("\033[H\033[2J");
 				System.out.flush();
-				return 1;
+				if (item.equalsIgnoreCase("Inventory")) {
+					this.controller.addInventoryBoost(boost);
+				} else if (item.equalsIgnoreCase("Health")) {
+					this.controller.addHealthBoost(boost);
+				}
 			} else if (input.equalsIgnoreCase("NO")) {
 				//Clear screen
 				System.out.print("\033[H\033[2J");
 				System.out.flush();
-				return 0;
+				this.controller.checkLevel();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return 0;
 	}
 
 	public void					armorDrop(Armor armor) {
@@ -165,7 +168,7 @@ public class EncounterConsoleView implements EncounterView {
 				//Clear screen
 				System.out.print("\033[H\033[2J");
 				System.out.flush();
-				//Go to success screen
+				this.controller.checkLevel();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -195,7 +198,7 @@ public class EncounterConsoleView implements EncounterView {
 				//Clear screen
 				System.out.print("\033[H\033[2J");
 				System.out.flush();
-				//Go to success screen
+				this.controller.checkLevel();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -225,7 +228,7 @@ public class EncounterConsoleView implements EncounterView {
 				//Clear screen
 				System.out.print("\033[H\033[2J");
 				System.out.flush();
-				//Go to success screen
+				this.controller.checkLevel();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

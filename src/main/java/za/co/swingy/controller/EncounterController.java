@@ -153,53 +153,67 @@ public class EncounterController {
 			int i = rand.nextInt(5);
 			if (drops[i].equalsIgnoreCase("Weapon")) {
 				Weapon weaponDrop = Weapon.builder().name().level(this.hero.getLevel()).build();
-				if (this.encounterView.itemDrop(weaponDrop.getName(), i) == 1) {
-					this.hero.getInventory().addWeapon(weaponDrop);
-				}
+				this.encounterView.weaponDrop(weaponDrop);
 			} else if (drops[i].equalsIgnoreCase("Armor")) {
 				Armor armorDrop = Armor.builder().name().level(this.hero.getLevel()).build();
-				if (this.encounterView.itemDrop(armorDrop.getName(), i) == 1) {
-					this.hero.getInventory().addArmor(armorDrop);
-				}
+				this.encounterView.armorDrop(armorDrop);
 			} else if (drops[i].equalsIgnoreCase("Helm")) {
 				Helm helmDrop = Helm.builder().name().level(this.hero.getLevel()).build();
-				if (this.encounterView.itemDrop(helmDrop.getName(), i) == 1) {
-					this.hero.getInventory().addHelm(helmDrop);
-				}
+				this.encounterView.helmDrop(helmDrop);
 			} else if (drops[i].equalsIgnoreCase("Inventory")) {
 				int boost = rand.nextInt(5) + 1;
-				if (this.encounterView.itemDrop(Integer.toString(boost), i) == 1) {
-					this.hero.getInventory().setMaxSlots(this.hero.getInventory().getMaxSlots() + boost);
-				}
+				this.encounterView.itemDrop("Inventory", boost);
 			} else if (drops[i].equalsIgnoreCase("Health")) {
 				int boost = rand.nextInt(5) + 1;
-				if (this.encounterView.itemDrop(Integer.toString(boost), i) == 1) {
-					if (this.hero.getHitPoints() + boost >= this.hero.getMaxHitPoints()) {
-						this.hero.setHitPoints(this.hero.getMaxHitPoints());
-					} else {
-						this.hero.setHitPoints(this.hero.getHitPoints() + boost);
-					}
-				}
+				this.encounterView.itemDrop("Health", boost);
 			}
+		} else {
+			this.checkLevel();
 		}
 	}
 
 	public void				addArmor(Armor armor) {
 		this.hero.getInventory().addArmor(armor);
-		//Go to the success process
+		this.checkLevel();
 	}
 
 	public void				addWeapon(Weapon weapon) {
 		this.hero.getInventory().addWeapon(weapon);
-		//Go to the success process
+		this.checkLevel();
 	}
 
 	public void				addHelm(Helm helm) {
 		this.hero.getInventory().addHelm(helm);
-		//Go to the success process
+		this.checkLevel();
+	}
+
+	public void				addInventoryBoost(int boost){
+		this.hero.getInventory().setMaxSlots(this.hero.getInventory().getMaxSlots() + boost);
+		this.checkLevel();
+	}
+
+	public void				addHealthBoost(int boost){
+		if (this.hero.getHitPoints() + boost >= this.hero.getMaxHitPoints()) {
+			this.hero.setHitPoints(this.hero.getMaxHitPoints());
+		} else {
+			this.hero.setHitPoints(this.hero.getHitPoints() + boost);
+		}
+		this.checkLevel();
 	}
 
 	/////////////
+
+	public void				checkLevel() {
+		int currentLevel = this.hero.getLevel();
+		this.hero.setExperience(this.hero.getExperience() + ((this.enemy.getLevel() + 1) * 10 + 50));
+		this.hero.levelUp();
+		if (this.hero.getLevel() > currentLevel) {
+			//Level up screen
+			this.encounterView.success();
+		} else {
+			this.victory();
+		}
+	}
 
 	public void				round() {
 		int heroHitPoints;
@@ -214,15 +228,6 @@ public class EncounterController {
 		} else if (this.enemy.getHitPoints() <= 0) {
 			//Call the item drop!
 			this.randomDrop();
-			int currentLevel = this.hero.getLevel();
-			this.hero.setExperience(this.hero.getExperience() + ((this.enemy.getLevel() + 1) * 10 + 50));
-			this.hero.levelUp();
-			if (this.hero.getLevel() > currentLevel) {
-				//Level up screen
-				this.encounterView.success();
-			} else {
-				this.victory();
-			}
 		} else if (heroHitPoints <= 0)  {
 			this.gameController.getMapView().death();
 		}

@@ -18,9 +18,9 @@ public interface EncounterView {
 
 	void					simulate(String round);
 
-	void					title();
+//	void					title();
 
-	int						itemDrop(String item, int index);
+	void					itemDrop(String item, int index);
 
 	void					armorDrop(Armor armor);
 

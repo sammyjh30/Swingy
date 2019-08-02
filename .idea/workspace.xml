@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ba86a429-a9a6-4607-a511-192b7bebb95c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/EncounterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/EncounterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/EncounterView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/EncounterView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java" afterDir="false" />
     </list>
@@ -21,29 +22,16 @@
     <splitter split-orientation="horizontal" split-proportion="0.48941177">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/GameController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1103">
-                  <caret line="206" column="28" selection-start-line="206" selection-start-column="28" selection-end-line="206" selection-end-column="28" />
+                <state relative-caret-position="129">
+                  <caret line="206" column="43" lean-forward="true" selection-start-line="206" selection-start-column="43" selection-end-line="206" selection-end-column="43" />
                   <folding>
                     <element signature="class#GameControllerBuilder#0;class#GameController#0" />
                     <element signature="method#hero#0;class#GameControllerBuilder#0;class#GameController#0" />
                     <element signature="method#updateMap#0;class#GameController#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/EncounterController.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="525">
-                  <caret line="165" column="78" lean-forward="true" selection-start-line="165" selection-start-column="78" selection-end-line="165" selection-end-column="78" />
-                  <folding>
-                    <element signature="method#fight#0;class#EncounterController#0" />
-                    <element signature="method#run#0;class#EncounterController#0" />
-                    <element signature="method#simulate#0;class#EncounterController#0" />
+                    <element signature="method#saveGame#0;class#GameController#0" />
                   </folding>
                 </state>
               </provider>
@@ -70,8 +58,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/MapConsoleView.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="321">
-                  <caret line="117" column="4" lean-forward="true" selection-start-line="117" selection-start-column="4" selection-end-line="138" selection-end-column="5" />
+                <state relative-caret-position="441">
+                  <caret line="189" column="52" selection-start-line="189" selection-start-column="52" selection-end-line="189" selection-end-column="52" />
                   <folding>
                     <element signature="method#displayMap#0;class#MapConsoleView#0" />
                     <element signature="method#showHero#0;class#MapConsoleView#0" />
@@ -84,30 +72,20 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/InventoryView.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="456">
-                  <caret line="129" column="50" lean-forward="true" selection-start-line="129" selection-start-column="50" selection-end-line="129" selection-end-column="50" />
-                  <folding>
-                    <element signature="method#showHero#0;class#EncounterConsoleView#0" />
-                    <element signature="method#showEnemy#0;class#EncounterConsoleView#0" />
-                    <element signature="method#title#0;class#EncounterConsoleView#0" />
-                    <element signature="method#success#0;class#EncounterConsoleView#0" />
-                    <element signature="method#display#0;class#EncounterConsoleView#0" />
-                    <element signature="method#fight#0;class#EncounterConsoleView#0" />
-                    <element signature="method#runAway#0;class#EncounterConsoleView#0" />
-                    <element signature="method#simulate#0;class#EncounterConsoleView#0" />
-                  </folding>
+                <state relative-caret-position="30">
+                  <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/EncounterView.java">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/InventoryConsoleView.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="390">
-                  <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="28" selection-end-column="48" />
+                <state relative-caret-position="1040">
+                  <caret line="100" column="39" selection-start-line="100" selection-start-column="39" selection-end-line="100" selection-end-column="39" />
                 </state>
               </provider>
             </entry>
@@ -190,11 +168,11 @@
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/LoadFileView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/LoadFileConsoleView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/CharacterController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/GameController.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/MapConsoleView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/EncounterView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/EncounterController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/EncounterView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/controller/GameController.java" />
       </list>
     </option>
   </component>
@@ -280,6 +258,16 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="swingy" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="swingy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="swingy" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="swingy" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="console" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -395,7 +383,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/PlayView.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/model/characters/Enemy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="625">
@@ -421,13 +408,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="37" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/InventoryConsoleView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1107">
-          <caret line="100" column="39" selection-start-line="100" selection-start-column="39" selection-end-line="100" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -630,22 +610,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/GameController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/EncounterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1103">
-          <caret line="206" column="28" selection-start-line="206" selection-start-column="28" selection-end-line="206" selection-end-column="28" />
+        <state relative-caret-position="264">
+          <caret line="147" column="41" selection-start-line="147" selection-start-column="41" selection-end-line="147" selection-end-column="41" />
           <folding>
-            <element signature="class#GameControllerBuilder#0;class#GameController#0" />
-            <element signature="method#hero#0;class#GameControllerBuilder#0;class#GameController#0" />
-            <element signature="method#updateMap#0;class#GameController#0" />
+            <element signature="method#fight#0;class#EncounterController#0" />
+            <element signature="method#run#0;class#EncounterController#0" />
+            <element signature="method#simulate#0;class#EncounterController#0" />
+            <element signature="method#randomDrop#0;class#EncounterController#0" />
+            <element signature="method#addArmor#0;class#EncounterController#0" />
+            <element signature="method#addArmor#1;class#EncounterController#0" />
+            <element signature="method#addArmor#2;class#EncounterController#0" />
+            <element signature="method#addInventoryBoost#0;class#EncounterController#0" />
+            <element signature="method#addInventoryBoost#1;class#EncounterController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/EncounterView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2345">
+          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+          <folding>
+            <element signature="method#display#0;class#EncounterConsoleView#0" />
+            <element signature="method#fight#0;class#EncounterConsoleView#0" />
+            <element signature="method#runAway#0;class#EncounterConsoleView#0" />
+            <element signature="method#simulate#0;class#EncounterConsoleView#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/MapConsoleView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="117" column="4" lean-forward="true" selection-start-line="117" selection-start-column="4" selection-end-line="138" selection-end-column="5" />
+        <state relative-caret-position="441">
+          <caret line="189" column="52" selection-start-line="189" selection-start-column="52" selection-end-line="189" selection-end-column="52" />
           <folding>
             <element signature="method#displayMap#0;class#MapConsoleView#0" />
             <element signature="method#showHero#0;class#MapConsoleView#0" />
@@ -657,38 +663,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/EncounterView.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/InventoryView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="28" selection-end-column="48" />
+        <state relative-caret-position="30">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/InventoryConsoleView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="129" column="50" lean-forward="true" selection-start-line="129" selection-start-column="50" selection-end-line="129" selection-end-column="50" />
-          <folding>
-            <element signature="method#showHero#0;class#EncounterConsoleView#0" />
-            <element signature="method#showEnemy#0;class#EncounterConsoleView#0" />
-            <element signature="method#title#0;class#EncounterConsoleView#0" />
-            <element signature="method#success#0;class#EncounterConsoleView#0" />
-            <element signature="method#display#0;class#EncounterConsoleView#0" />
-            <element signature="method#fight#0;class#EncounterConsoleView#0" />
-            <element signature="method#runAway#0;class#EncounterConsoleView#0" />
-            <element signature="method#simulate#0;class#EncounterConsoleView#0" />
-          </folding>
+        <state relative-caret-position="1040">
+          <caret line="100" column="39" selection-start-line="100" selection-start-column="39" selection-end-line="100" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/EncounterController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/controller/GameController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="165" column="78" lean-forward="true" selection-start-line="165" selection-start-column="78" selection-end-line="165" selection-end-column="78" />
+        <state relative-caret-position="129">
+          <caret line="206" column="43" lean-forward="true" selection-start-line="206" selection-start-column="43" selection-end-line="206" selection-end-column="43" />
           <folding>
-            <element signature="method#fight#0;class#EncounterController#0" />
-            <element signature="method#run#0;class#EncounterController#0" />
-            <element signature="method#simulate#0;class#EncounterController#0" />
+            <element signature="class#GameControllerBuilder#0;class#GameController#0" />
+            <element signature="method#hero#0;class#GameControllerBuilder#0;class#GameController#0" />
+            <element signature="method#updateMap#0;class#GameController#0" />
+            <element signature="method#saveGame#0;class#GameController#0" />
           </folding>
         </state>
       </provider>

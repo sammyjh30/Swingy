@@ -4,18 +4,12 @@ package za.co.swingy.controller;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.model.items.Armor;
 import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.MapView;
-import za.co.swingy.view.MenuView;
-
-
-import za.co.swingy.model.characters.Enemy;
-import za.co.swingy.model.characters.Hero;
-import za.co.swingy.view.MenuView;
-import za.co.swingy.view.console.EncounterConsoleView;
 
 import javax.validation.constraints.NotNull;
 import java.io.*;
@@ -263,36 +257,7 @@ public class GameController {
 			if (enemy == null) {
 				this.mapView.falseAlarm(x,y);
 			} else {
-				//Create view and encounter
-				//Call view to create encounter view
-				//DURING ENCOUNTER:
-					//If fight/simulate: add fight thing ->check if hero dead or enemy dead
-											//  -> if hero dead -> call Hero is dead view which calls return to menu
-											//  -> if enemy dead -> call hero defeated enemy view and call showmap
-					//If run away: try run, if succeed show success view and then call show map
-					//    else show fail view and continue combat
-//				EncounterConsoleView encounterConsoleView = new EncounterConsoleView(this);
-//				int ret = encounterConsoleView.getController().startNewEncounter(enemy);
 				this.mapView.createEncounter(enemy);
-
-
-//				if (ret == -1) {
-////					System.out.println("THE HERO IS DEAD?!");								DONE setup
-//					this.mapView.death();
-//					//will call game controller return to Meu()
-//					//Go back to the main menu
-////					return -2;
-//				} else if ( ret == 0) {
-////					System.out.println("THE HERO RAN AWAY!");								DONE setup
-//					this.mapView.runAway();
-//					//will call showmap
-//				} else if (ret == 1) {
-////					System.out.println("THE HERO DEFEATED THEIR OPPONENT!");				DONE setup
-//					this.mapView.success();
-//					this.removeEnemy(enemy);
-//					this.moveHero(x,y);
-//					//call showmap
-//				}
 			}
 			//Use controller to get enemy and index
 			//Pass to Encounter mode
