@@ -26,6 +26,7 @@ public class CharacterController {
 	private Hero						hero;
 	@NotNull(message = "Menu View cannot be NULL")
 	private MenuView					menuView;
+	private ArrayList<Hero> saves;
 
 	// Builder
 	public static class CharacterControllerBuilder {
@@ -77,22 +78,26 @@ public class CharacterController {
 
 	}
 
+	public void				loadSave(int i) {
+		Hero loadedHero = null;
+		//Assign Hero
+		if (i >= 0) {
+			loadedHero = this.saves.get(i);
+		}
+		this.loadFileView.printLoadedHero(loadedHero, this);
+	}
+
 	public void				loadHero() {
+		this.loadFileView.setCharacterController(this);
 		Hero loadedHero = null;
 		//Get File
-		ArrayList<Hero> saves = readSaves();
+		this.saves = readSaves();
 		if (saves == null || saves.size() == 0) {
 			this.loadFileView.noSaves();
 			this.menuView.resetMenu();
 		}
 		//List available heroes
-		int i = this.loadFileView.saveList(saves);
-		//Take input
-		//Assign Hero
-		if (i >= 0) {
-			loadedHero = saves.get(i);
-		}
-		this.loadFileView.printLoadedHero(loadedHero, this);
+		this.loadFileView.saveList(saves);
 	}
 
 	public static boolean 	isNumeric(String str) {

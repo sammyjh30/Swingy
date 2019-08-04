@@ -40,10 +40,18 @@ public class EncounterConsoleView implements EncounterView {
 		System.out.println("| Class: " + (char)27 + "[32m" + hero.getClassType() + "\033[0m");
 		System.out.println("| Level: " + (char)27 + "[32m" + hero.getLevel() + "\033[0m");
 		if (this.controller.getHero().getEquippedHelm() == null) {
-			System.out.println("| HP:    " + (char)27 + "[32m" + hero.getHitPoints() + "/" + hero.getMaxHitPoints() + "\033[0m");
+			if (hero.getHitPoints() < 0) {
+				System.out.println("| HP:    " + (char) 27 + "[32m0/" + hero.getMaxHitPoints() + "\033[0m");
+			} else {
+				System.out.println("| HP:    " + (char)27 + "[32m" + hero.getHitPoints() + "/" + hero.getMaxHitPoints() + "\033[0m");
+			}
 		} else {
-			System.out.println("| HP:    " + (char)27 + "[32m" + (hero.getHitPoints() + hero.getEquippedHelm().getHitPointIncrease()) +
-					"/" + (hero.getMaxHitPoints() + hero.getEquippedHelm().getHitPointIncrease()) + "\033[0m");
+			if ((hero.getHitPoints() + hero.getEquippedHelm().getHitPointIncrease()) < 0) {
+				System.out.println("| HP:    " + (char)27 + "[32m0/" + (hero.getMaxHitPoints() + hero.getEquippedHelm().getHitPointIncrease()) + "\033[0m");
+			} else {
+				System.out.println("| HP:    " + (char) 27 + "[32m" + (hero.getHitPoints() + hero.getEquippedHelm().getHitPointIncrease()) +
+						"/" + (hero.getMaxHitPoints() + hero.getEquippedHelm().getHitPointIncrease()) + "\033[0m");
+			}
 		}
 		if (this.controller.getHero().getEquippedWeapon() == null) {
 			System.out.println("| ATT:   " + (char)27 + "[32m" + hero.getAttack() + "\033[0m");
@@ -65,7 +73,11 @@ public class EncounterConsoleView implements EncounterView {
 			System.out.println("| Name:  " + (char)27 + "[35m" + enemy.getEnemyName() + " the " + enemy.getEnemyType() + "\033[0m");
 		}
 		System.out.println("| Level: " + (char)27 + "[35m" + enemy.getLevel() + "\033[0m");
-		System.out.println("| HP:    " + (char)27 + "[35m" + enemy.getHitPoints() + "/" + enemy.getMaxHitPoints() + "\033[0m");
+		if ( enemy.getHitPoints() < 0) {
+			System.out.println("| HP:    " + (char)27 + "[35m0/" + enemy.getMaxHitPoints() + "\033[0m");
+		} else {
+			System.out.println("| HP:    " + (char)27 + "[35m" + enemy.getHitPoints() + "/" + enemy.getMaxHitPoints() + "\033[0m");
+		}
 		System.out.println("| ATT:   " + (char)27 + "[35m" + enemy.getAttack() + "\033[0m");
 		System.out.println("| DEF:   " + (char)27 + "[35m" + (enemy.getDefence()) + "\033[0m");
 	}
@@ -242,6 +254,9 @@ public class EncounterConsoleView implements EncounterView {
 		this.showHero(this.controller.getHero());
 		System.out.println("Your Opponent's Stats:");
 		this.showEnemy(this.controller.getEnemy());
+		System.out.println("\n____BATTLE HISTORY____");
+		System.out.println(this.controller.getRoundUpdate());
+		System.out.println("______________________");
 		try {
 			System.out.println("You have 3 choices! You can try to RUN, or you can FIGHT...\nor you can SIMULATE so the game will fight for you (lazy much?)");
 			System.out.print("Please enter in a command: ");
@@ -266,8 +281,8 @@ public class EncounterConsoleView implements EncounterView {
 	}
 
 	public void					fight(String round) {
-		this.showHero(this.controller.getHero());
-		this.showEnemy(this.controller.getEnemy());
+//		this.showHero(this.controller.getHero());
+//		this.showEnemy(this.controller.getEnemy());
 		System.out.print(round);
 
 		//Implement "Press ENTER to continue"
@@ -301,6 +316,21 @@ public class EncounterConsoleView implements EncounterView {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 		this.controller.round();
+	}
+
+	public void					battleHistory() {
+		System.out.println("			THE BATTLE IS OVER!");
+		this.showHero(this.controller.getHero());
+		this.showEnemy(this.controller.getEnemy());
+		System.out.print(this.controller.getRoundUpdate());
+
+		//Implement "Press ENTER to continue"
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		this.controller.randomDrop();
 	}
 
 	public void					simulate(String round) {

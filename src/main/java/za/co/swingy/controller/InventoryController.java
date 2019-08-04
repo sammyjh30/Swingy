@@ -19,11 +19,14 @@ public class InventoryController {
 	private Hero hero;
 	@NotNull
 	private InventoryView inventoryView;
+	@NotNull
+	private GameController gameController;
 
 	// Builder
 	public static class 		InventoryControllerBuilder {
 		private Hero hero;
 		private InventoryView inventoryView;
+		private GameController gameController;
 
 		public InventoryControllerBuilder		hero(Hero hero) {
 			this.hero = hero;
@@ -32,6 +35,11 @@ public class InventoryController {
 
 		public InventoryControllerBuilder			inventoryView(InventoryView view) {
 			this.inventoryView = view;
+			return this;
+		}
+
+		public InventoryControllerBuilder			gameController(GameController gameController) {
+			this.gameController = gameController;
 			return this;
 		}
 	}
@@ -71,6 +79,7 @@ public class InventoryController {
 				e.printStackTrace();
 			}
 		}
+		this.inventoryView.display();
 	}
 
 	public void					delete(String input) {
@@ -126,5 +135,6 @@ public class InventoryController {
 				e.printStackTrace();
 			}
 		}
+		this.inventoryView.display();
 	}
 }

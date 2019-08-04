@@ -1,5 +1,7 @@
 package za.co.swingy.view.console;
 
+import lombok.Getter;
+import lombok.Setter;
 import za.co.swingy.controller.CharacterController;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Hero;
@@ -8,6 +10,7 @@ import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Inventory;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.LoadFileView;
+import za.co.swingy.view.MenuView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +31,7 @@ public class LoadFileConsoleView implements LoadFileView {
 		return true;
 	}
 
-	public int			saveList(ArrayList<Hero> saves) {
+	public void			saveList(ArrayList<Hero> saves) {
 		try {
 			int	lineCount = 0;
 			System.out.println("LOAD SAVE:");
@@ -74,18 +77,32 @@ public class LoadFileConsoleView implements LoadFileView {
 				input = bufferedReader.readLine();
 			}
 			if (input.equalsIgnoreCase("BACK"))  {
-				return (-1);
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				this.characterController.returnToMenu();
 			} else {
-				return Integer.parseInt(input);
+				this.characterController.loadSave(Integer.parseInt(input));
+//				return Integer.parseInt(input);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return -1;
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+		this.characterController.returnToMenu();
 	}
 
 	public void			noSaves() {
 		System.out.println("You don't have any saves yet! Create a new character to start the adventure!");
+		try {
+			TimeUnit.SECONDS.sleep(3);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//Clear screen
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+		this.characterController.returnToMenu();
 	}
 
 	public void 			printLoadedHero(Hero hero, CharacterController controller) {
@@ -140,5 +157,9 @@ public class LoadFileConsoleView implements LoadFileView {
 		//Go to GameController
 		GameController gameController = GameController.builder().hero(hero).mapView(new MapConsoleView()).characterController(this.characterController).build();
 		gameController.showMapView();
+	}
+
+	public void 			setCharacterController(CharacterController characterController) {
+		this.characterController = characterController;
 	}
 }

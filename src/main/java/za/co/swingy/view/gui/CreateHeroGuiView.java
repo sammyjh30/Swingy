@@ -122,7 +122,7 @@ public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 		});
 	}
 
-	public int printHeroStatus(Hero hero) {
+	public void								 printHeroStatus(Hero hero) {
 		this.hero = hero;
 		this.nameTextArea.setText(hero.getName());
 		this.levelTextArea.setText("" + hero.getLevel());
@@ -174,17 +174,16 @@ public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 		this.helmsTextArea.setText(helmString);
 		this.bottomPanel.setVisible(false);
 		this.heroPanel.setVisible(true);
-		return 0;
 	}
 
-	public int promptName(CharacterController controller) {
+	public void				promptName(CharacterController controller) {
 		this.controller = controller;
 		this.getFrame().setContentPane(this.mainPanel);
 		this.getFrame().pack();
 		this.topPanel.setVisible(true);
 		this.heroPanel.setVisible(false);
 		this.bottomPanel.setVisible(false);
-		return 0;
+//		return 0;
 	}
 
 	public void promptType() {

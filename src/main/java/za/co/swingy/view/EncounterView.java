@@ -19,7 +19,7 @@ public interface EncounterView {
 	void					simulate(String round);
 
 //	void					title();
-
+	void					battleHistory();
 	void					itemDrop(String item, int index);
 
 	void					armorDrop(Armor armor);

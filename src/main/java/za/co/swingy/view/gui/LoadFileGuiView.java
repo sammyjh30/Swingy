@@ -3,6 +3,7 @@ package za.co.swingy.view.gui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import za.co.swingy.controller.CharacterController;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.view.LoadFileView;
 
@@ -12,6 +13,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class LoadFileGuiView implements LoadFileView {
+	private CharacterController			characterController;
 	private JTable table1;
 	private JPanel panel1;
 	private JTextPane LOADSAVETextPane;
@@ -72,16 +74,18 @@ public class LoadFileGuiView implements LoadFileView {
 //		panelTable = tableToolbarDecorator.createPanel();
 	}
 
-	public int saveList(ArrayList<Hero> saves) {
-		return 0;
+	public void		 saveList(ArrayList<Hero> saves) {
 	}
 
 	public void noSaves() {
 
 	}
 
-	public int printLoadedHero(Hero hero) {
-		return 0;
+	public void printLoadedHero(Hero hero, CharacterController controller) {
+	}
+
+	public void 			setCharacterController(CharacterController characterController) {
+		this.characterController = characterController;
 	}
 
 	{

@@ -219,7 +219,7 @@ public class MapConsoleView implements MapView {
 			} else if (input.equalsIgnoreCase("WEST")) {
 				controller.checkForCombat(-1, 0);
 			} else if (input.equalsIgnoreCase("INVENTORY")) {
-				InventoryConsoleView inventoryConsoleView = new InventoryConsoleView(controller.getHero());
+				InventoryConsoleView inventoryConsoleView = new InventoryConsoleView(controller);
 				inventoryConsoleView.display();
 				//then call the mapviewDisplay()
 			} else if (input.equalsIgnoreCase("SAVE")) {

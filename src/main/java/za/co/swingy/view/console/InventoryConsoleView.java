@@ -1,5 +1,6 @@
 package za.co.swingy.view.console;
 
+import za.co.swingy.controller.GameController;
 import za.co.swingy.controller.InventoryController;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.model.items.Armor;
@@ -16,13 +17,13 @@ public class InventoryConsoleView implements InventoryView {
 	@NotNull
 	private InventoryController controller;
 
-	public InventoryConsoleView(Hero hero) {
-		this.controller = InventoryController.builder().inventoryView(this).hero(hero).build();
+	public InventoryConsoleView(GameController gameController) {
+		this.controller = InventoryController.builder().inventoryView(this).hero(gameController.getHero()).gameController(gameController).build();
 	}
 
 	public void				display() {
 		int list;
-		while (true) {
+//		while (true) {
 			//Clear screen
 			System.out.print("\033[H\033[2J");
 			System.out.flush();
@@ -99,13 +100,14 @@ public class InventoryConsoleView implements InventoryView {
 					//Clear screen
 					System.out.print("\033[H\033[2J");
 					System.out.flush();
-					return;
+					this.controller.getGameController().getMapView().display(this.controller.getGameController());
+//					return;
 				}
 
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
+//		}
 	}
 
 	public static boolean 	isNumeric(String str) {
