@@ -21,6 +21,36 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 	private EncounterController controller;
 	@NotNull
 	public GameController			gameController;
+	private JPanel panel1;
+	private JPanel mainPanel;
+	private JPanel encounterPanel;
+	private JPanel heroPanel;
+	private JTextArea nameTextArea;
+	private JTextArea classTextArea;
+	private JTextArea levelTextArea;
+	private JTextArea hpTextArea;
+	private JTextArea attTextArea;
+	private JTextArea defTextArea;
+	private JPanel enemyPanel;
+	private JLabel enemyNameLabel;
+	private JTextArea enemyNameTextArea;
+	private JLabel enemyClassLabel;
+	private JTextArea enemyClassTextArea;
+	private JLabel enemyLevelLabel;
+	private JTextArea enemyLavalTextArea;
+	private JLabel enemyHPLabel;
+	private JLabel enemyAttLabel;
+	private JLabel enemyDefLabel;
+	private JTextArea enemyHPTextArea;
+	private JTextArea enemyAttTextArea;
+	private JTextArea enemyDefTextArea;
+	private JTextPane enemyStatsTextPane;
+	private JTextPane heroStatsTestPane;
+	private JTextArea youHave3ChoicesTextArea;
+	private JButton fightButton;
+	private JButton simulateButton;
+	private JButton runButton;
+	private JButton switchButton;
 
 	public EncounterGuiView(GameController controller) {
 		this.gameController = controller;
