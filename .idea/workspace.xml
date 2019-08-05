@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba86a429-a9a6-4607-a511-192b7bebb95c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/EncounterGuiView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/EncounterGuiView.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/EncounterGuiView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/EncounterGuiView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -20,81 +18,7 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.7321077">
-      <split-first>
-        <leaf>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="170">
-                  <caret line="10" column="33" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="566">
-                  <caret line="230" selection-start-line="230" selection-end-line="230" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/EncounterGuiView.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="256">
-                  <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/EncounterGuiView.form">
-              <provider selected="true" editor-type-id="ui-designer" />
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.form">
-              <provider selected="true" editor-type-id="ui-designer" />
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="330">
-                  <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="25" selection-end-column="51" />
-                  <folding>
-                    <element signature="method#itemDrop#0;class#EncounterConsoleView#0" />
-                    <element signature="method#armorDrop#0;class#EncounterConsoleView#0" />
-                    <element signature="method#helmDrop#0;class#EncounterConsoleView#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="357">
-                  <caret line="263" column="156" lean-forward="true" selection-start-line="263" selection-start-column="32" selection-end-line="263" selection-end-column="156" />
-                  <folding>
-                    <element signature="method#itemDrop#0;class#EncounterConsoleView#0" />
-                    <element signature="method#armorDrop#0;class#EncounterConsoleView#0" />
-                    <element signature="method#helmDrop#0;class#EncounterConsoleView#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -169,8 +93,8 @@
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.form" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/EncounterGuiView.java" />
         <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/EncounterGuiView.form" />
+        <option value="$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/EncounterGuiView.java" />
       </list>
     </option>
   </component>
@@ -198,8 +122,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="555" />
-    <option name="width" value="1368" />
+    <option name="x" value="682" />
+    <option name="width" value="1245" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
@@ -283,28 +207,6 @@
               <item name="swingy" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="gui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="swingy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swingy" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="swingy" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="gui" type="462c0819:PsiDirectoryNode" />
-              <item name="EncounterGuiView" type="e9f4de52:FormNode" />
-            </path>
-            <path>
-              <item name="swingy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swingy" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="swingy" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="gui" type="462c0819:PsiDirectoryNode" />
-              <item name="MapGuiView" type="e9f4de52:FormNode" />
             </path>
           </expand>
           <select />
@@ -392,7 +294,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989059" visible="true" weight="0.1076759" />
       <window_info id="Structure" order="1" sideWeight="0.5010941" side_tool="true" weight="0.21824382" />
@@ -403,7 +304,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4991708" visible="true" weight="0.13867822" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4991708" weight="0.13867822" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -411,7 +312,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32983872" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50082916" side_tool="true" weight="0.34274194" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32983872" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.31744313" />
+      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.31744313" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -637,44 +538,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/EncounterGuiView.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/EncounterGuiView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="33" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+        <state relative-caret-position="323">
+          <caret line="19" column="34" lean-forward="true" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+          <folding>
+            <element signature="initializer##0;class#EncounterGuiView#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
+        <state relative-caret-position="1651">
           <caret line="230" selection-start-line="230" selection-end-line="230" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/EncounterGuiView.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        <state relative-caret-position="136">
+          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/MapGuiView.form">
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/console/EncounterConsoleView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="25" selection-end-column="51" />
+        <state relative-caret-position="290">
+          <caret line="261" column="53" selection-start-line="261" selection-start-column="27" selection-end-line="261" selection-end-column="53" />
           <folding>
+            <element signature="method#showHero#0;class#EncounterConsoleView#0" />
+            <element signature="method#showEnemy#0;class#EncounterConsoleView#0" />
             <element signature="method#itemDrop#0;class#EncounterConsoleView#0" />
             <element signature="method#armorDrop#0;class#EncounterConsoleView#0" />
             <element signature="method#helmDrop#0;class#EncounterConsoleView#0" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/za/co/swingy/view/gui/EncounterGuiView.form">
-      <provider selected="true" editor-type-id="ui-designer" />
     </entry>
   </component>
   <component name="masterDetails">
