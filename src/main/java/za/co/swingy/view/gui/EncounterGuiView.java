@@ -23,7 +23,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 	public GameController			gameController;
 
 	public EncounterGuiView(GameController controller) {
-
+		this.gameController = controller;
 	}
 
 	public void					display() {
