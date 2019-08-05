@@ -57,6 +57,12 @@ public class MenuGuiView extends FrameView implements MenuView {
 
 	}
 
+	public void 		resetMenu() {
+		this.getFrame().setContentPane(this.mainPanel);
+		this.getFrame().pack();
+		this.menu();
+	}
+
 	public void menu() {
 		this.getFrame().setVisible(true);
 		this.mainPanel.setVisible(true);

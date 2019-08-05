@@ -4,6 +4,7 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import za.co.swingy.controller.GameController;
+import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.view.MapView;
 
@@ -27,61 +28,75 @@ public class MapGuiView extends FrameView implements MapView {
 	private JPanel mapPane;
 	private JTextArea attTextArea;
 	private JPanel heroPanel;
-	private JPanel movementPanel;
-	private JTextArea λVTextArea;
 	private JButton northButton;
 	private JButton westButton;
 	private JButton southButton;
-	private JButton inventoryButton;
-	private JButton button2;
-	private JTextArea yourGoalIsToTextArea;
-	private JPanel ouputPanel;
-	private JTextArea outputTextArea;
 	private JPanel mapViewPanel;
 	private JButton eastButton;
+	private JPanel falseAlarmPanel;
+	private JTextPane FALSEALARMITWASTextPane;
+	private JButton falseAlarmButton;
+	private JButton inventoryButton;
+	private JPanel directionsPanel;
+	private JPanel successPanel;
+	private JButton successButton;
+	private JPanel runAwayPanel;
+	private JButton ranAwayButton;
+	private JPanel deathPanel;
+	private JButton deathButton;
 
 	private GameController controller;
+	private int xPosition;
+	private int yPosition;
 
 	public MapGuiView() {
-//		this.initFrame();
 		northButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (controller.checkForCombat(0, -1) < 0) {
-					//Go back to menu
-				} else {
-					updateView();
-				}
+				controller.checkForCombat(0, -1);
+//					updateView();
 			}
 		});
 		eastButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (controller.checkForCombat(1, 0) < 0) {
-					//Go back to menu
-				} else {
-					updateView();
-				}
+				controller.checkForCombat(1, 0);
 			}
 		});
 		southButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (controller.checkForCombat(0, 1) < 0) {
-					//Go back to menu
-				} else {
-					updateView();
-				}
+				controller.checkForCombat(0, 1);
 			}
 		});
 		westButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (controller.checkForCombat(-1, 0) < 0) {
-					//Go back to menu
-				} else {
-					updateView();
-				}
+				controller.checkForCombat(-1, 0);
+			}
+		});
+		falseAlarmButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.moveHero(xPosition, yPosition);
+			}
+		});
+		successButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.moveHero(xPosition, yPosition);
+			}
+		});
+		ranAwayButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.showMapView();
+			}
+		});
+		deathButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.returnToMenu();
 			}
 		});
 	}
@@ -162,24 +177,52 @@ public class MapGuiView extends FrameView implements MapView {
 
 	}
 
-	public int display(GameController controller) {
+	public void display(GameController controller) {
 		this.controller = controller;
 
 		this.getFrame().setContentPane(this.mainPanel);
+		this.mainPanel.setVisible(true);
+		this.mapViewPanel.setVisible(true);
+		this.heroPanel.setVisible(true);
+		this.mapPane.setVisible(true);
 		this.updateView();
 		//Set other viewPanels as false
-
-		//Would return if hero died
-		return 0;
 	}
 
 	public void death() {
+		this.falseAlarmPanel.setVisible(false);
+		this.mapViewPanel.setVisible(false);
+		this.successPanel.setVisible(false);
+		this.runAwayPanel.setVisible(false);
+		this.deathPanel.setVisible(true);
 	}
 
 	public void runAway() {
+		this.falseAlarmPanel.setVisible(false);
+		this.mapViewPanel.setVisible(false);
+		this.successPanel.setVisible(false);
+		this.runAwayPanel.setVisible(true);
+		this.deathPanel.setVisible(false);
 	}
 
-	public void success() {
+	public void success(int x, int y) {
+		this.xPosition = x;
+		this.yPosition = y;
+	}
+
+	public void falseAlarm(int x, int y) {
+//		this.getFrame()
+		this.xPosition = x;
+		this.yPosition = y;
+		this.falseAlarmPanel.setVisible(true);
+		this.mapViewPanel.setVisible(false);
+		this.successPanel.setVisible(false);
+		this.runAwayPanel.setVisible(false);
+		this.deathPanel.setVisible(false);
+	}
+
+	public void createEncounter(Enemy enemy) {
+
 	}
 
 	{
@@ -199,120 +242,50 @@ public class MapGuiView extends FrameView implements MapView {
 	private void $$$setupUI$$$() {
 		final JPanel panel1 = new JPanel();
 		panel1.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+		panel1.setMaximumSize(new Dimension(560, 560));
+		panel1.setMinimumSize(new Dimension(560, 560));
+		panel1.setPreferredSize(new Dimension(560, 560));
 		mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayoutManager(5, 4, new Insets(0, 0, 0, 0), -1, -1));
+		mainPanel.setLayout(new GridLayoutManager(5, 1, new Insets(0, 0, 0, 0), -1, -1));
 		mainPanel.setBackground(new Color(-12566464));
 		mainPanel.setForeground(new Color(-4342339));
 		panel1.add(mainPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		falseAlarmPanel = new JPanel();
+		falseAlarmPanel.setLayout(new GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), -1, -1));
+		falseAlarmPanel.setBackground(new Color(-12566464));
+		mainPanel.add(falseAlarmPanel, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		FALSEALARMITWASTextPane = new JTextPane();
+		FALSEALARMITWASTextPane.setBackground(new Color(-12566464));
+		FALSEALARMITWASTextPane.setCaretColor(new Color(-4342339));
+		FALSEALARMITWASTextPane.setDisabledTextColor(new Color(-4342339));
+		FALSEALARMITWASTextPane.setEditable(false);
+		FALSEALARMITWASTextPane.setForeground(new Color(-4342339));
+		FALSEALARMITWASTextPane.setText("                  FALSE ALARM!\n     IT WAS JUST A CARDBOARD CUTOUT!");
+		falseAlarmPanel.add(FALSEALARMITWASTextPane, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
 		final Spacer spacer1 = new Spacer();
-		mainPanel.add(spacer1, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 15), new Dimension(-1, 15), new Dimension(-1, 15), 0, false));
+		falseAlarmPanel.add(spacer1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
 		final Spacer spacer2 = new Spacer();
-		mainPanel.add(spacer2, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		falseAlarmPanel.add(spacer2, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
 		final Spacer spacer3 = new Spacer();
-		mainPanel.add(spacer3, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), null, null, 0, false));
-		mapViewPanel = new JPanel();
-		mapViewPanel.setLayout(new GridLayoutManager(6, 2, new Insets(0, 0, 0, 0), -1, -1));
-		mapViewPanel.setBackground(new Color(-12566464));
-		mainPanel.add(mapViewPanel, new GridConstraints(2, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-		movementPanel = new JPanel();
-		movementPanel.setLayout(new GridBagLayout());
-		movementPanel.setBackground(new Color(-12566464));
-		movementPanel.setForeground(new Color(-4342339));
-		mapViewPanel.add(movementPanel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(220, 110), new Dimension(220, 110), new Dimension(220, 110), 0, false));
-		λVTextArea = new JTextArea();
-		λVTextArea.setAlignmentX(0.0f);
-		λVTextArea.setAlignmentY(0.5f);
-		λVTextArea.setBackground(new Color(-12566464));
-		λVTextArea.setCaretColor(new Color(-4342339));
-		λVTextArea.setDisabledTextColor(new Color(-4342339));
-		λVTextArea.setEditable(false);
-		λVTextArea.setForeground(new Color(-4342339));
-		λVTextArea.setMaximumSize(new Dimension(80, 50));
-		λVTextArea.setMinimumSize(new Dimension(80, 50));
-		λVTextArea.setPreferredSize(new Dimension(80, 50));
-		λVTextArea.setText("       Λ  \n   <-|->\n       V");
-		GridBagConstraints gbc;
-		gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		gbc.weightx = 1.0;
-		gbc.weighty = 1.0;
-		gbc.fill = GridBagConstraints.BOTH;
-		movementPanel.add(λVTextArea, gbc);
-		northButton = new JButton();
-		northButton.setText("North");
-		gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.weightx = 1.0;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		movementPanel.add(northButton, gbc);
-		westButton = new JButton();
-		westButton.setMaximumSize(new Dimension(80, 30));
-		westButton.setMinimumSize(new Dimension(80, 30));
-		westButton.setText("West");
-		gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.weighty = 1.0;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		movementPanel.add(westButton, gbc);
-		southButton = new JButton();
-		southButton.setText("South");
-		gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		gbc.weightx = 1.0;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		movementPanel.add(southButton, gbc);
-		eastButton = new JButton();
-		eastButton.setText("East");
-		gbc = new GridBagConstraints();
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		gbc.weighty = 1.0;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		movementPanel.add(eastButton, gbc);
-		mapPane = new JPanel();
-		mapPane.setLayout(new GridBagLayout());
-		mapPane.setBackground(new Color(-11645362));
-		mapViewPanel.add(mapPane, new GridConstraints(1, 0, 4, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(300, 300), new Dimension(300, 300), new Dimension(300, 300), 0, false));
-		inventoryButton = new JButton();
-		inventoryButton.setLabel("Inventory");
-		inventoryButton.setText("Inventory");
-		mapViewPanel.add(inventoryButton, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		button2 = new JButton();
-		button2.setLabel("Save  Exit");
-		button2.setText("Save  Exit");
-		button2.setMnemonic(' ');
-		button2.setDisplayedMnemonicIndex(5);
-		mapViewPanel.add(button2, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		falseAlarmPanel.add(spacer3, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
 		final Spacer spacer4 = new Spacer();
-		mapViewPanel.add(spacer4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 10), new Dimension(-1, 10), new Dimension(-1, 10), 0, false));
-		yourGoalIsToTextArea = new JTextArea();
-		yourGoalIsToTextArea.setBackground(new Color(-12566464));
-		yourGoalIsToTextArea.setCaretColor(new Color(-4342339));
-		yourGoalIsToTextArea.setEditable(false);
-		yourGoalIsToTextArea.setForeground(new Color(-4342339));
-		yourGoalIsToTextArea.setText("Your goal is to leave all the maps, or level up lo level 6.\nYou can move: NORTH, SOUTH, EAST or WEST\nOr you can go to your INVENTORY or SAVE to save and exit this game.");
-		mapViewPanel.add(yourGoalIsToTextArea, new GridConstraints(5, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(60, 50), null, 0, false));
-		ouputPanel = new JPanel();
-		ouputPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-		ouputPanel.setBackground(new Color(-6381922));
-		ouputPanel.setForeground(new Color(-12566464));
-		mapViewPanel.add(ouputPanel, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(-1, 180), new Dimension(-1, 180), new Dimension(-1, 180), 0, false));
-		outputTextArea = new JTextArea();
-		outputTextArea.setBackground(new Color(-6381922));
-		outputTextArea.setCaretColor(new Color(-12566464));
-		outputTextArea.setEditable(false);
-		outputTextArea.setForeground(new Color(-12566464));
-		ouputPanel.add(outputTextArea, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+		falseAlarmPanel.add(spacer4, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+		falseAlarmButton = new JButton();
+		falseAlarmButton.setLabel("OK");
+		falseAlarmButton.setText("OK");
+		falseAlarmPanel.add(falseAlarmButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final Spacer spacer5 = new Spacer();
-		mainPanel.add(spacer5, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), null, null, 0, false));
+		falseAlarmPanel.add(spacer5, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
+		mapViewPanel = new JPanel();
+		mapViewPanel.setLayout(new GridLayoutManager(11, 5, new Insets(0, 0, 0, 0), -1, -1));
+		mapViewPanel.setBackground(new Color(-12566464));
+		mainPanel.add(mapViewPanel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		final Spacer spacer6 = new Spacer();
+		mapViewPanel.add(spacer6, new GridConstraints(0, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
 		heroPanel = new JPanel();
 		heroPanel.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
 		heroPanel.setBackground(new Color(-12566464));
-		mainPanel.add(heroPanel, new GridConstraints(1, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		mapViewPanel.add(heroPanel, new GridConstraints(1, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 		final JLabel label1 = new JLabel();
 		Font label1Font = this.$$$getFont$$$(null, Font.BOLD, -1, label1.getFont());
 		if (label1Font != null) label1.setFont(label1Font);
@@ -390,6 +363,178 @@ public class MapGuiView extends FrameView implements MapView {
 		defTextArea.setEditable(false);
 		defTextArea.setForeground(new Color(-4342339));
 		heroPanel.add(defTextArea, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(80, 20), new Dimension(80, 20), new Dimension(80, 20), 0, false));
+		final Spacer spacer7 = new Spacer();
+		mapViewPanel.add(spacer7, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), null, null, 0, false));
+		final Spacer spacer8 = new Spacer();
+		mapViewPanel.add(spacer8, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 10), new Dimension(-1, 10), new Dimension(-1, 10), 0, false));
+		mapPane = new JPanel();
+		mapPane.setLayout(new GridBagLayout());
+		mapPane.setBackground(new Color(-11645362));
+		mapViewPanel.add(mapPane, new GridConstraints(3, 1, 6, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(300, 300), new Dimension(300, 300), new Dimension(300, 300), 0, false));
+		final Spacer spacer9 = new Spacer();
+		mapViewPanel.add(spacer9, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		inventoryButton = new JButton();
+		inventoryButton.setLabel("Inventory");
+		inventoryButton.setText("Inventory");
+		mapViewPanel.add(inventoryButton, new GridConstraints(5, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JButton button1 = new JButton();
+		button1.setLabel("Save  Exit");
+		button1.setText("Save  Exit");
+		button1.setMnemonic(' ');
+		button1.setDisplayedMnemonicIndex(5);
+		mapViewPanel.add(button1, new GridConstraints(6, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final Spacer spacer10 = new Spacer();
+		mapViewPanel.add(spacer10, new GridConstraints(7, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		directionsPanel = new JPanel();
+		directionsPanel.setLayout(new GridBagLayout());
+		directionsPanel.setBackground(new Color(-12566464));
+		directionsPanel.setForeground(new Color(-4342339));
+		mapViewPanel.add(directionsPanel, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(220, 110), new Dimension(220, 110), new Dimension(220, 110), 0, false));
+		final JTextArea textArea1 = new JTextArea();
+		textArea1.setAlignmentX(0.0f);
+		textArea1.setAlignmentY(0.5f);
+		textArea1.setBackground(new Color(-12566464));
+		textArea1.setCaretColor(new Color(-4342339));
+		textArea1.setDisabledTextColor(new Color(-4342339));
+		textArea1.setEditable(false);
+		textArea1.setForeground(new Color(-4342339));
+		textArea1.setMaximumSize(new Dimension(80, 50));
+		textArea1.setMinimumSize(new Dimension(80, 50));
+		textArea1.setPreferredSize(new Dimension(80, 50));
+		textArea1.setText("       Λ  \n   <-|->\n       V");
+		GridBagConstraints gbc;
+		gbc = new GridBagConstraints();
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		gbc.weightx = 1.0;
+		gbc.weighty = 1.0;
+		gbc.fill = GridBagConstraints.BOTH;
+		directionsPanel.add(textArea1, gbc);
+		final JButton button2 = new JButton();
+		button2.setText("North");
+		gbc = new GridBagConstraints();
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		gbc.weightx = 1.0;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		directionsPanel.add(button2, gbc);
+		final JButton button3 = new JButton();
+		button3.setMaximumSize(new Dimension(80, 30));
+		button3.setMinimumSize(new Dimension(80, 30));
+		button3.setText("West");
+		gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		gbc.weighty = 1.0;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		directionsPanel.add(button3, gbc);
+		final JButton button4 = new JButton();
+		button4.setText("South");
+		gbc = new GridBagConstraints();
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		gbc.weightx = 1.0;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		directionsPanel.add(button4, gbc);
+		final JButton button5 = new JButton();
+		button5.setText("East");
+		gbc = new GridBagConstraints();
+		gbc.gridx = 2;
+		gbc.gridy = 1;
+		gbc.weighty = 1.0;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		directionsPanel.add(button5, gbc);
+		final JTextArea textArea2 = new JTextArea();
+		textArea2.setBackground(new Color(-12566464));
+		textArea2.setCaretColor(new Color(-4342339));
+		textArea2.setEditable(false);
+		textArea2.setForeground(new Color(-4342339));
+		textArea2.setText("Your goal is to leave all the maps, or level up lo level 6.\nYou can move: NORTH, SOUTH, EAST or WEST\nOr you can go to your INVENTORY or SAVE to save and exit this game.");
+		mapViewPanel.add(textArea2, new GridConstraints(9, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(60, 50), null, 0, false));
+		final Spacer spacer11 = new Spacer();
+		mapViewPanel.add(spacer11, new GridConstraints(10, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 15), new Dimension(-1, 15), new Dimension(-1, 15), 0, false));
+		final Spacer spacer12 = new Spacer();
+		mapViewPanel.add(spacer12, new GridConstraints(8, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 10), new Dimension(-1, 10), new Dimension(-1, 10), 0, false));
+		final Spacer spacer13 = new Spacer();
+		mapViewPanel.add(spacer13, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), null, null, 0, false));
+		successPanel = new JPanel();
+		successPanel.setLayout(new GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), -1, -1));
+		successPanel.setBackground(new Color(-12566464));
+		mainPanel.add(successPanel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		final JTextPane textPane1 = new JTextPane();
+		textPane1.setBackground(new Color(-12566464));
+		textPane1.setCaretColor(new Color(-10109628));
+		textPane1.setDisabledTextColor(new Color(-10109628));
+		textPane1.setEditable(false);
+		textPane1.setForeground(new Color(-10109628));
+		textPane1.setText("THE HERO DEFEATED THEIR OPPONENT!");
+		successPanel.add(textPane1, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+		final Spacer spacer14 = new Spacer();
+		successPanel.add(spacer14, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer15 = new Spacer();
+		successPanel.add(spacer15, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer16 = new Spacer();
+		successPanel.add(spacer16, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+		final Spacer spacer17 = new Spacer();
+		successPanel.add(spacer17, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+		successButton = new JButton();
+		successButton.setLabel("OK");
+		successButton.setText("OK");
+		successPanel.add(successButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final Spacer spacer18 = new Spacer();
+		successPanel.add(spacer18, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
+		runAwayPanel = new JPanel();
+		runAwayPanel.setLayout(new GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), -1, -1));
+		runAwayPanel.setBackground(new Color(-12566464));
+		mainPanel.add(runAwayPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		final JTextPane textPane2 = new JTextPane();
+		textPane2.setBackground(new Color(-12566464));
+		textPane2.setCaretColor(new Color(-12948803));
+		textPane2.setDisabledTextColor(new Color(-12948803));
+		textPane2.setEditable(false);
+		textPane2.setForeground(new Color(-12948803));
+		textPane2.setText("THE HERO RAN AWAY!");
+		runAwayPanel.add(textPane2, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+		final Spacer spacer19 = new Spacer();
+		runAwayPanel.add(spacer19, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer20 = new Spacer();
+		runAwayPanel.add(spacer20, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer21 = new Spacer();
+		runAwayPanel.add(spacer21, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+		final Spacer spacer22 = new Spacer();
+		runAwayPanel.add(spacer22, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+		ranAwayButton = new JButton();
+		ranAwayButton.setLabel("OK");
+		ranAwayButton.setText("OK");
+		runAwayPanel.add(ranAwayButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final Spacer spacer23 = new Spacer();
+		runAwayPanel.add(spacer23, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
+		deathPanel = new JPanel();
+		deathPanel.setLayout(new GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), -1, -1));
+		deathPanel.setBackground(new Color(-12566464));
+		mainPanel.add(deathPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		final JTextPane textPane3 = new JTextPane();
+		textPane3.setBackground(new Color(-12566464));
+		textPane3.setCaretColor(new Color(-4380623));
+		textPane3.setDisabledTextColor(new Color(-4380623));
+		textPane3.setEditable(false);
+		textPane3.setForeground(new Color(-4380623));
+		textPane3.setText("THE HERO HAS DIED?!");
+		deathPanel.add(textPane3, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+		final Spacer spacer24 = new Spacer();
+		deathPanel.add(spacer24, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer25 = new Spacer();
+		deathPanel.add(spacer25, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer26 = new Spacer();
+		deathPanel.add(spacer26, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+		final Spacer spacer27 = new Spacer();
+		deathPanel.add(spacer27, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+		deathButton = new JButton();
+		deathButton.setLabel("OK");
+		deathButton.setText("OK");
+		deathPanel.add(deathButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final Spacer spacer28 = new Spacer();
+		deathPanel.add(spacer28, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
 	}
 
 	/**
