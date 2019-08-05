@@ -1,7 +1,5 @@
 package za.co.swingy.view.console;
 
-import lombok.Getter;
-import lombok.Setter;
 import za.co.swingy.controller.CharacterController;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Hero;
@@ -10,13 +8,11 @@ import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Inventory;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.LoadFileView;
-import za.co.swingy.view.MenuView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class LoadFileConsoleView implements LoadFileView {
 	private CharacterController			characterController;
@@ -94,9 +90,10 @@ public class LoadFileConsoleView implements LoadFileView {
 
 	public void			noSaves() {
 		System.out.println("You don't have any saves yet! Create a new character to start the adventure!");
+		System.out.println("Press \"ENTER\" to continue...");
 		try {
-			TimeUnit.SECONDS.sleep(3);
-		} catch (InterruptedException e) {
+			int read = System.in.read(new byte[2]);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		//Clear screen
@@ -139,16 +136,11 @@ public class LoadFileConsoleView implements LoadFileView {
 			System.out.println("| 	" + h.getName() + " level: " + h.getLevel() + " hitPoint increase: " + h.getHitPointIncrease());
 		}
 		System.out.println("|______________________");
+		System.out.print("Alright, hero! We're ready to go! Let your adventure begin...");
+		System.out.println("Press \"ENTER\" to continue...");
 		try {
-			System.out.print("Alright, hero! We're ready to go! Let your adventure begin");
-			TimeUnit.SECONDS.sleep(1);
-			System.out.print(".");
-			TimeUnit.SECONDS.sleep(1);
-			System.out.print(".");
-			TimeUnit.SECONDS.sleep(1);
-			System.out.print(".");
-			TimeUnit.SECONDS.sleep(2);
-		} catch (InterruptedException e) {
+			int read = System.in.read(new byte[2]);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		//Try clear screen

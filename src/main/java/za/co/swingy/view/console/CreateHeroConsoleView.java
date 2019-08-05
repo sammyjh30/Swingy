@@ -12,7 +12,6 @@ import za.co.swingy.view.CreateHeroView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.concurrent.TimeUnit;
 
 public class CreateHeroConsoleView implements CreateHeroView {
 	private CharacterController controller;
@@ -68,16 +67,11 @@ public class CreateHeroConsoleView implements CreateHeroView {
 			System.out.println("| 	" + h.getName() + " level: " + h.getLevel() + " hitPoint increase: " + h.getHitPointIncrease());
 		}
 		System.out.println("|______________________");
+		System.out.print("Alright, hero! We're ready to go! Let your adventure begin...");
+		System.out.println("Press \"ENTER\" to continue...");
 		try {
-			System.out.print("Alright, hero! We're ready to go! Let your adventure begin");
-			TimeUnit.SECONDS.sleep(1);
-			System.out.print(".");
-			TimeUnit.SECONDS.sleep(1);
-			System.out.print(".");
-			TimeUnit.SECONDS.sleep(1);
-			System.out.print(".");
-			TimeUnit.SECONDS.sleep(2);
-		} catch (InterruptedException e) {
+			int read = System.in.read(new byte[2]);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		//Clear screen

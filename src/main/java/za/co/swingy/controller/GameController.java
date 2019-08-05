@@ -249,6 +249,7 @@ public class GameController {
 				//Congrats you levelled up
 			}
 			this.updateMap();
+			this.mapView.display(this);
 //			return;
 		} else if (this.getMap()[newY][newX] == 'O') {
 			System.out.println("COMBAT!");

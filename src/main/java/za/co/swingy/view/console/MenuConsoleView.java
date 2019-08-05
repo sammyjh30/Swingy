@@ -58,15 +58,10 @@ public class MenuConsoleView implements MenuView {
 				this.characterController.loadHero();
 			} else if (input.equalsIgnoreCase("EXIT")) {
 				//				return 0;
-				System.out.println("Exiting...");
-				try {
-					TimeUnit.SECONDS.sleep(2);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 				//Clear screen
 				System.out.print("\033[H\033[2J");
 				System.out.flush();
+				System.exit(1);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

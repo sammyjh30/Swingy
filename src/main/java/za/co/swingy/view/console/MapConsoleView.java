@@ -10,7 +10,6 @@ import za.co.swingy.view.MapView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.concurrent.TimeUnit;
 
 import static java.lang.Math.pow;
 
@@ -104,9 +103,10 @@ public class MapConsoleView implements MapView {
 		System.out.println("|                                       |");
 		System.out.println("|_______________________________________|");
 
+		System.out.println("Press \"ENTER\" to continue...");
 		try {
-			TimeUnit.SECONDS.sleep(3);
-		} catch (InterruptedException e) {
+			int read = System.in.read(new byte[2]);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		//Clear screen
@@ -127,9 +127,10 @@ public class MapConsoleView implements MapView {
 		System.out.println("|                                       |");
 		System.out.println("|_______________________________________|");
 
+		System.out.println("Press \"ENTER\" to continue...");
 		try {
-			TimeUnit.SECONDS.sleep(3);
-		} catch (InterruptedException e) {
+			int read = System.in.read(new byte[2]);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		//Clear screen
@@ -151,9 +152,10 @@ public class MapConsoleView implements MapView {
 		System.out.println("|                                       |");
 		System.out.println("|_______________________________________|");
 
+		System.out.println("Press \"ENTER\" to continue...");
 		try {
-			TimeUnit.SECONDS.sleep(3);
-		} catch (InterruptedException e) {
+			int read = System.in.read(new byte[2]);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		//Clear screen
@@ -174,9 +176,10 @@ public class MapConsoleView implements MapView {
 		System.out.println("|                                       |");
 		System.out.println("|_______________________________________|");
 
+		System.out.println("Press \"ENTER\" to continue...");
 		try {
-			TimeUnit.SECONDS.sleep(3);
-		} catch (InterruptedException e) {
+			int read = System.in.read(new byte[2]);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		//Clear screen

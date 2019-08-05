@@ -128,19 +128,21 @@ public class EncounterController {
 	}
 
 	public void				simulate() {
-		String roundUpdate = "";
+		this.roundUpdate += "Simulation started!\n";
 		while (this.enemy.getHitPoints() > 0 && ((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) > 0) ||
 		(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() > 0))) {
 			this.turn++;
-			roundUpdate += ("Round " + this.turn + ":\\n");
-			roundUpdate += this.heroAttacks();
+			this.roundUpdate += ("Round " + this.turn + ":\n");
+			this.roundUpdate += this.heroAttacks();
 			if (this.enemy.getHitPoints() <= 0) {
-				this.encounterView.simulate(roundUpdate);
+//				this.encounterView.simulate(this.roundUpdate);
+				this.round();
 			}
-			roundUpdate += this.enemyAttacks();
+			this.roundUpdate += this.enemyAttacks();
 			if ((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) ||
 					(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() <= 0)) {
-				this.encounterView.simulate(roundUpdate);
+//				this.encounterView.simulate(this.roundUpdate);
+				this.round();
 			}
 		}
 		this.round();
@@ -149,7 +151,7 @@ public class EncounterController {
 
 	//NEEED TO FIX
 
-	public void			randomDrop() {
+	public void				randomDrop() {
 		int heroHitPoints;
 		if (this.hero.getEquippedHelm() != null) {
 			heroHitPoints = this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease();
@@ -224,8 +226,10 @@ public class EncounterController {
 		this.hero.levelUp();
 		if (this.hero.getLevel() > currentLevel) {
 			//Level up screen
+			this.gameController.updateMap();
 			this.encounterView.success();
 		} else {
+			this.gameController.removeEnemy(this.enemy);
 			this.victory();
 		}
 	}
@@ -246,7 +250,7 @@ public class EncounterController {
 	}
 
 	public  void			victory() {
-		this.gameController.getMapView().success(this.enemy.getXPos(), this.enemy.getYPos());
+		this.gameController.getMapView().success(this.enemy.getXPos() - this.hero.getXPos(), this.enemy.getYPos() - this.hero.getYPos());
 
 	}
 
