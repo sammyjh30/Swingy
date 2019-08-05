@@ -179,12 +179,17 @@ public class MapGuiView extends FrameView implements MapView {
 
 	public void display(GameController controller) {
 		this.controller = controller;
-
+		this.falseAlarmPanel.setVisible(false);
+		this.mapViewPanel.setVisible(false);
+		this.successPanel.setVisible(false);
+		this.runAwayPanel.setVisible(false);
+		this.deathPanel.setVisible(false);
 		this.getFrame().setContentPane(this.mainPanel);
 		this.mainPanel.setVisible(true);
 		this.mapViewPanel.setVisible(true);
 		this.heroPanel.setVisible(true);
 		this.mapPane.setVisible(true);
+
 		this.updateView();
 		//Set other viewPanels as false
 	}
@@ -222,7 +227,8 @@ public class MapGuiView extends FrameView implements MapView {
 	}
 
 	public void createEncounter(Enemy enemy) {
-
+		EncounterGuiView encounterGuiView = new EncounterGuiView(this.controller);
+		encounterGuiView.getController().startNewEncounter(enemy);
 	}
 
 	{
