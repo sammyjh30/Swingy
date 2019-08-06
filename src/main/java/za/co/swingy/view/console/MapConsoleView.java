@@ -11,8 +11,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static java.lang.Math.pow;
-
 @Getter
 @Setter
 public class MapConsoleView implements MapView {
@@ -64,7 +62,7 @@ public class MapConsoleView implements MapView {
 		}
 		System.out.println("| Class: " + (char)27 + "[32m" + hero.getClassType() + "\033[0m");
 		System.out.println("| Level: " + (char)27 + "[32m" + hero.getLevel() + "\033[0m");
-		System.out.println("| XP:    " + (char)27 + "[32m" + hero.getExperience() + "/" + (hero.getLevel() * 1000 -  ((int)pow(hero.getLevel() - 1, 2) * 450)) +  "\033[0m");
+		System.out.println("| XP:    " + (char)27 + "[32m" + hero.getExperience() + "/" + hero.getXpRequired() +  "\033[0m");
 		if (hero.getEquippedHelm() == null) {
 			System.out.println("| HP:    " + (char)27 + "[32m" + hero.getHitPoints() + "/" + hero.getMaxHitPoints() + "\033[0m");
 		} else {

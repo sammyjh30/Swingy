@@ -15,8 +15,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static java.lang.Math.pow;
-
 public class MapGuiView extends FrameView implements MapView {
 	private JPanel mainPanel;
 	private JTextArea nameTextArea;
@@ -153,7 +151,7 @@ public class MapGuiView extends FrameView implements MapView {
 					"/" + (hero.getMaxHitPoints() + hero.getEquippedHelm().getHitPointIncrease()));
 		}
 
-		this.xpTextArea.setText(hero.getExperience() + "/" + (hero.getLevel() * 1000 - ((int) pow(hero.getLevel() - 1, 2) * 450)));
+		this.xpTextArea.setText(hero.getExperience() + "/" + hero.getXpRequired());
 
 		if (hero.getEquippedWeapon() == null) {
 			this.attTextArea.setText("" + hero.getAttack());

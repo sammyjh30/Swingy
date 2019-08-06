@@ -25,6 +25,8 @@ public class Hero extends Character {
 	@NotNull
 	private  int		experience;
 	@NotNull
+	private int			xpRequired;
+	@NotNull
 	private Inventory	inventory;
 
 
@@ -82,6 +84,7 @@ public class Hero extends Character {
 	public void 			starterHero(){
 		this.setLevel(1);
 		this.experience = 0;
+		this.xpRequired =  this.getLevel() * 1000 + ((int)pow((this.getLevel() - 1), 2) * 450);
 		this.inventory.starter();
 		//Set Starter Weapon as equipped
 		if (this.inventory.getWeapons().size() > 0) {
@@ -156,10 +159,11 @@ public class Hero extends Character {
 
 	//Level Up
 	public void			levelUp() {
-		int xpRequired = this.getLevel() * 1000 -  ((int)pow((this.getLevel() - 1), 2) * 450);
-		if (this.experience >= xpRequired) {
+//		int xpRequired = this.getLevel() * 1000 + ((int)pow((this.getLevel() - 1), 2) * 450);
+		if (this.experience >= this.xpRequired) {
 			this.setLevel(this.getLevel() + 1);
-			this.experience -= xpRequired;
+			this.experience -= this.xpRequired;
+			this.xpRequired = this.getLevel() * 1000 + ((int)pow((this.getLevel() - 1), 2) * 450);
 			if (this.classType.equals("Explorer")) {
 				this.setAttack(this.getAttack() + 4);
 				this.setDefence(this.getDefence() + 4);

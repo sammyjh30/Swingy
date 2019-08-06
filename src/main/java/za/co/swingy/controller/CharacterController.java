@@ -16,6 +16,8 @@ import javax.validation.constraints.NotNull;
 import java.io.*;
 import java.util.ArrayList;
 
+import static java.lang.Math.pow;
+
 @Getter
 @Setter
 @Builder
@@ -60,10 +62,6 @@ public class CharacterController {
 		this.hero.starterHero();
 		this.createHeroView.printHeroStatus(this.hero);
 	}
-
-//	private void			callNamePrompt(){
-//		this.createHeroView.promptName(this);
-//	}
 
 	private void			callTypePrompt(){
 		this.createHeroView.promptType();
@@ -141,6 +139,7 @@ public class CharacterController {
 								} else {
 									heroToAdd.setLevel(1);
 								}
+								heroToAdd.setXpRequired( heroToAdd.getLevel() * 1000 + ((int)pow((heroToAdd.getLevel() - 1), 2) * 450));
 								heroToAdd.setAttack(Integer.parseInt(line[4]));
 								heroToAdd.setDefence(Integer.parseInt(line[5]));
 								heroToAdd.setHitPoints(Integer.parseInt(line[6]));
