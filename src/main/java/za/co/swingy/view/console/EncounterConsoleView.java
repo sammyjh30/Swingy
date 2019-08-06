@@ -82,15 +82,6 @@ public class EncounterConsoleView implements EncounterView {
 		System.out.println("| DEF:   " + (char)27 + "[35m" + (enemy.getDefence()) + "\033[0m");
 	}
 
-//	public void						title() {
-//		//Clear screen
-//		System.out.print("\033[H\033[2J");
-//		System.out.flush();
-//
-//		System.out.println("                                COMBAT!");
-//		System.out.println("                        An enemy has appeared!");
-//	}
-
 	public void						success() {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
@@ -282,21 +273,6 @@ public class EncounterConsoleView implements EncounterView {
 			e.printStackTrace();
 		}
 	}
-
-//	public void					fight(String round) {
-////		this.showHero(this.controller.getHero());
-////		this.showEnemy(this.controller.getEnemy());
-//		System.out.print(round);
-//
-//		//Implement "Press ENTER to continue"
-//		System.out.println("Press \"ENTER\" to continue...");
-//		try {
-//			int read = System.in.read(new byte[2]);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		this.controller.round();
-//	}
 
 	public void					runFailed() {
 		//Clear screen

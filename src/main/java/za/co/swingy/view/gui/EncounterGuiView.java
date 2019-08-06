@@ -27,6 +27,13 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 	private EncounterController controller;
 	@NotNull
 	public GameController gameController;
+
+	private String				item = null;
+	private int					boost = 0;
+	private Armor				armor = null;
+	private Weapon				weapon = null;
+	private Helm				helm = null;
+
 	private JPanel mainPanel;
 	private JPanel encounterPanel;
 	private JPanel heroPanel;
@@ -56,8 +63,60 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 	private JLabel enemyDefLabel;
 	private JTextPane enemyStatsTextPane;
 	private JTextPane heroStatsTestPane;
-	private JTextArea youHave3ChoicesTextArea;
 	private JScrollPane battleHistoryScrollPanel;
+	private JTextArea youHave3ChoicesTextArea;
+	private JPanel runFailedPanel;
+	private JButton runFailedButton;
+	private JPanel battleHistoryPanel;
+	private JPanel battleHistoryHeroPanel;
+	private JPanel battleHistoryEnemyPanel;
+	private JScrollPane battleHistoryFinalScrollPane;
+	private JTextPane battleHistoryFinalTextPane;
+	private JButton battleHistoryButton;
+	private JLabel battleHistoryEnemyNameLabel;
+	private JTextArea battleHistoryEnemyNameTextArea;
+	private JLabel battleHistoryEnemyClassLabel;
+	private JTextArea battleHistoryEnemyClassTextArea;
+	private JLabel battleHistoryEnemyLevelLabel;
+	private JTextArea battleHistoryEnemyLevelTextArea;
+	private JLabel battleHistoryEnemyHpLabel;
+	private JLabel battleHistoryEnemyAttLabel;
+	private JLabel battleHistoryEnemyDefLabel;
+	private JTextArea battleHistoryEnemyHpTextArea;
+	private JTextArea battleHistoryEnemyAttTextArea;
+	private JTextArea battleHistoryEnemyDefTextArea;
+	private JLabel battleHistoryHeroNameLabel;
+	private JTextArea battleHistoryHeroNameTextArea;
+	private JLabel battleHistoryHeroClassLabel;
+	private JTextArea battleHistoryHeroClassTextArea;
+	private JLabel battleHistoryHeroLevelLabel;
+	private JTextArea battleHistoryHeroLevelTextArea;
+	private JLabel battleHistoryHeroHpLabel;
+	private JLabel battleHistoryHeroAttLabel;
+	private JLabel battleHistoryHeroDefLabel;
+	private JTextArea battleHistoryHeroHpTextArea;
+	private JTextArea battleHistoryHeroAttTextArea;
+	private JTextArea battleHistoryHeroDefTextArea;
+	private JTextPane THEBATTLEISOVERTextPane;
+	private JPanel successPanel;
+	private JButton levelUpButton;
+	private JPanel itemDropPanel;
+	private JTextArea itemDropTextArea;
+	private JTextPane wouldYouLikeToTextPane;
+	private JButton itemNoButton;
+	private JButton itemYesButton;
+	private JPanel armorDropPanel;
+	private JButton armorYesButton;
+	private JButton armorNoButton;
+	private JTextArea armorDropTextArea;
+	private JPanel weaponDropPanel;
+	private JTextArea weaponDropTextArea;
+	private JButton weaponDropYesButton;
+	private JButton weaponDropNoButton;
+	private JPanel helmDropPanel;
+	private JTextArea helmDropTextArea;
+	private JButton helmDropYesButton;
+	private JButton helmDropNoButton;
 
 	public EncounterGuiView(GameController gameController) {
 		this.gameController = gameController;
@@ -86,6 +145,79 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+			}
+		});
+		runFailedButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				display();
+			}
+		});
+		battleHistoryButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.randomDrop();
+			}
+		});
+		levelUpButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.getGameController().removeEnemy(controller.getEnemy());
+				controller.victory();
+			}
+		});
+		itemYesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//If inventory
+				int boostAmount = boost;
+				if (item.equalsIgnoreCase("Inventory")) {
+					controller.addInventoryBoost(boost);
+				} else if (item.equalsIgnoreCase("Health")) {
+					controller.addHealthBoost(boost);
+				}
+			}
+		});
+		itemNoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkLevel();
+			}
+		});
+		armorYesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.addArmor(armor);
+			}
+		});
+		armorNoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkLevel();
+			}
+		});
+		weaponDropYesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.addWeapon(weapon);
+			}
+		});
+		weaponDropNoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkLevel();
+			}
+		});
+		helmDropYesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.addHelm(helm);
+			}
+		});
+		helmDropNoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkLevel();
 			}
 		});
 	}
@@ -138,7 +270,6 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		}
 		this.enemyAttTextArea.setText("" + enemy.getAttack());
 		this.enemyDefTextArea.setText("" + enemy.getDefence());
-
 	}
 
 	public void display() {
@@ -148,39 +279,148 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.heroPanel.setVisible(true);
 		this.enemyPanel.setVisible(true);
 		this.battleHistoryScrollPanel.setVisible(true);
+		this.runFailedPanel.setVisible(false);
+		this.battleHistoryPanel.setVisible(false);
+		this.battleHistoryHeroPanel.setVisible(false);
+		this.battleHistoryHeroPanel.setVisible(false);
+		this.successPanel.setVisible(false);
+		this.itemDropPanel.setVisible(false);
+		this.armorDropPanel.setVisible(false);
+		this.weaponDropPanel.setVisible(true);
 
 		this.setHero(this.controller.getHero());
 		this.setEnemy(this.controller.getEnemy());
-		this.battleHistoryTextPane.setText("\n____BATTLE HISTORY____" + this.controller.getRoundUpdate() + "______________________\n");
+		this.battleHistoryTextPane.setText("\n____BATTLE HISTORY____\n" + this.controller.getRoundUpdate() + "______________________\n");
 
 	}
 
 	public void runFailed() {
+		this.encounterPanel.setVisible(false);
+		this.heroPanel.setVisible(false);
+		this.enemyPanel.setVisible(false);
+		this.battleHistoryScrollPanel.setVisible(false);
+		this.runFailedPanel.setVisible(true);
+		this.battleHistoryPanel.setVisible(false);
+		this.battleHistoryHeroPanel.setVisible(false);
+		this.battleHistoryHeroPanel.setVisible(false);
+		this.battleHistoryFinalScrollPane.setVisible(false);
+	}
 
+	private void setBattleHistoryHero(Hero hero) {
+		if (hero.getName().length() > 10) {
+			this.battleHistoryHeroNameTextArea.setText(hero.getName().substring(0, 10));
+		} else {
+			this.battleHistoryHeroNameTextArea.setText(hero.getName());
+		}
+		this.battleHistoryHeroClassTextArea.setText(hero.getClassType());
+		this.battleHistoryHeroLevelTextArea.setText("" + hero.getLevel());
+		if (this.controller.getHero().getEquippedHelm() == null) {
+			if (hero.getHitPoints() < 0) {
+				this.battleHistoryHeroHpTextArea.setText("0/" + hero.getMaxHitPoints());
+			} else {
+				this.battleHistoryHeroHpTextArea.setText(hero.getHitPoints() + "/" + hero.getMaxHitPoints());
+			}
+		} else {
+			if ((hero.getHitPoints() + hero.getEquippedHelm().getHitPointIncrease()) < 0) {
+				this.battleHistoryHeroHpTextArea.setText("0/" + (hero.getMaxHitPoints() + hero.getEquippedHelm().getHitPointIncrease()));
+			} else {
+				this.battleHistoryHeroHpTextArea.setText((hero.getHitPoints() + hero.getEquippedHelm().getHitPointIncrease()) + "/" +
+						(hero.getMaxHitPoints() + hero.getEquippedHelm().getHitPointIncrease()));
+			}
+		}
+		if (this.controller.getHero().getEquippedWeapon() == null) {
+			this.battleHistoryHeroAttTextArea.setText("" + hero.getAttack());
+		} else {
+			this.battleHistoryHeroAttTextArea.setText("" + (hero.getAttack() + hero.getEquippedWeapon().getAttackIncrease()));
+		}
+		if (this.controller.getHero().getEquippedArmor() == null) {
+			this.battleHistoryHeroDefTextArea.setText("" + hero.getDefence());
+		} else {
+			this.battleHistoryHeroDefTextArea.setText("" + (hero.getDefence() + hero.getEquippedArmor().getDefenceIncrease()));
+		}
+	}
+
+	private void setBattleHistoryEnemy(Enemy enemy) {
+		if (enemy.getEnemyName().length() > 10) {
+			this.battleHistoryEnemyNameTextArea.setText(enemy.getEnemyName().substring(0, 10) + "the" + enemy.getEnemyType());
+		} else {
+			this.battleHistoryEnemyNameTextArea.setText(enemy.getEnemyName() + " the " + enemy.getEnemyType());
+		}
+		this.battleHistoryEnemyLevelTextArea.setText("" + enemy.getLevel());
+		if (enemy.getHitPoints() < 0) {
+			this.battleHistoryEnemyHpTextArea.setText("0/" + enemy.getMaxHitPoints());
+		} else {
+			this.battleHistoryEnemyHpTextArea.setText(enemy.getHitPoints() + "/" + enemy.getMaxHitPoints());
+		}
+		this.battleHistoryEnemyAttTextArea.setText("" + enemy.getAttack());
+		this.battleHistoryEnemyDefTextArea.setText("" + enemy.getDefence());
 	}
 
 	public void battleHistory() {
-
+		this.setBattleHistoryHero(this.controller.getHero());
+		this.setBattleHistoryEnemy(this.controller.getEnemy());
+		this.battleHistoryFinalTextPane.setText(this.controller.getRoundUpdate());
+		this.encounterPanel.setVisible(false);
+		this.heroPanel.setVisible(false);
+		this.enemyPanel.setVisible(false);
+		this.battleHistoryScrollPanel.setVisible(false);
+		this.runFailedPanel.setVisible(false);
+		this.battleHistoryPanel.setVisible(true);
+		this.battleHistoryHeroPanel.setVisible(true);
+		this.battleHistoryHeroPanel.setVisible(true);
+		this.battleHistoryFinalScrollPane.setVisible(true);
 	}
 
-	public void itemDrop(String item, int index) {
-
+	public void itemDrop(String item, int boost) {
+		this.item = item;
+		this.boost = boost;
+		if (item.equalsIgnoreCase("Inventory")) {
+			this.itemDropTextArea.setText("	The enemy dropped an Inventory attachment with a +" + boost + " boost.");
+		} else if (item.equalsIgnoreCase("Health")) {
+			this.itemDropTextArea.setText("	The enemy dropped a small health remedy of +" + boost + "HP.");
+		}
+		this.encounterPanel.setVisible(false);
+		this.heroPanel.setVisible(false);
+		this.enemyPanel.setVisible(false);
+		this.battleHistoryScrollPanel.setVisible(false);
+		this.runFailedPanel.setVisible(false);
+		this.battleHistoryPanel.setVisible(false);
+		this.battleHistoryHeroPanel.setVisible(false);
+		this.battleHistoryHeroPanel.setVisible(false);
+		this.successPanel.setVisible(false);
+		this.itemDropPanel.setVisible(true);
 	}
 
 	public void armorDrop(Armor armor) {
+		this.armor = armor;
+		this.armorDropTextArea.setText("	The enemy dropped an Armor: " + armor.getName());
+		this.encounterPanel.setVisible(false);
+		this.armorDropPanel.setVisible(true);
 
 	}
 
 	public void weaponDrop(Weapon weapon) {
-
+		this.weapon = weapon;
+		this.weaponDropTextArea.setText("	The enemy dropped a Weapon: " + weapon.getName());
+		this.encounterPanel.setVisible(false);
+		this.weaponDropPanel.setVisible(true);
 	}
 
 	public void helmDrop(Helm helm) {
-
+		this.helm = helm;
+		this.helmDropTextArea.setText("	The enemy dropped a Helm: " + helm.getName());
 	}
 
 	public void success() {
-
+		this.encounterPanel.setVisible(false);
+		this.heroPanel.setVisible(false);
+		this.enemyPanel.setVisible(false);
+		this.battleHistoryScrollPanel.setVisible(false);
+		this.runFailedPanel.setVisible(false);
+		this.battleHistoryPanel.setVisible(false);
+		this.battleHistoryHeroPanel.setVisible(false);
+		this.battleHistoryHeroPanel.setVisible(false);
+		this.successPanel.setVisible(true);
 	}
 
 	{
