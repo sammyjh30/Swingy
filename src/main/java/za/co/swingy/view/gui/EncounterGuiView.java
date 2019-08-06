@@ -286,7 +286,8 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.successPanel.setVisible(false);
 		this.itemDropPanel.setVisible(false);
 		this.armorDropPanel.setVisible(false);
-		this.weaponDropPanel.setVisible(true);
+		this.weaponDropPanel.setVisible(false);
+		this.helmDropPanel.setVisible(false);
 
 		this.setHero(this.controller.getHero());
 		this.setEnemy(this.controller.getEnemy());
@@ -395,6 +396,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.armor = armor;
 		this.armorDropTextArea.setText("	The enemy dropped an Armor: " + armor.getName());
 		this.encounterPanel.setVisible(false);
+		this.battleHistoryPanel.setVisible(false);
 		this.armorDropPanel.setVisible(true);
 
 	}
@@ -403,23 +405,31 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.weapon = weapon;
 		this.weaponDropTextArea.setText("	The enemy dropped a Weapon: " + weapon.getName());
 		this.encounterPanel.setVisible(false);
+		this.battleHistoryPanel.setVisible(false);
 		this.weaponDropPanel.setVisible(true);
 	}
 
 	public void helmDrop(Helm helm) {
 		this.helm = helm;
 		this.helmDropTextArea.setText("	The enemy dropped a Helm: " + helm.getName());
+		this.encounterPanel.setVisible(false);
+		this.battleHistoryPanel.setVisible(false);
+		this.helmDropPanel.setVisible(true);
 	}
 
 	public void success() {
-		this.encounterPanel.setVisible(false);
-		this.heroPanel.setVisible(false);
-		this.enemyPanel.setVisible(false);
-		this.battleHistoryScrollPanel.setVisible(false);
+		this.encounterPanel.setVisible(true);
+		this.heroPanel.setVisible(true);
+		this.enemyPanel.setVisible(true);
+		this.battleHistoryScrollPanel.setVisible(true);
 		this.runFailedPanel.setVisible(false);
 		this.battleHistoryPanel.setVisible(false);
 		this.battleHistoryHeroPanel.setVisible(false);
 		this.battleHistoryHeroPanel.setVisible(false);
+		this.itemDropPanel.setVisible(false);
+		this.armorDropPanel.setVisible(false);
+		this.weaponDropPanel.setVisible(false);
+		this.helmDropPanel.setVisible(false);
 		this.successPanel.setVisible(true);
 	}
 

@@ -195,6 +195,8 @@ public class MapGuiView extends FrameView implements MapView {
 	}
 
 	public void death() {
+		this.getFrame().setContentPane(this.mainPanel);
+		this.mainPanel.setVisible(true);
 		this.falseAlarmPanel.setVisible(false);
 		this.mapViewPanel.setVisible(false);
 		this.successPanel.setVisible(false);
@@ -203,6 +205,8 @@ public class MapGuiView extends FrameView implements MapView {
 	}
 
 	public void runAway() {
+		this.getFrame().setContentPane(this.mainPanel);
+		this.mainPanel.setVisible(true);
 		this.falseAlarmPanel.setVisible(false);
 		this.mapViewPanel.setVisible(false);
 		this.successPanel.setVisible(false);
@@ -211,8 +215,15 @@ public class MapGuiView extends FrameView implements MapView {
 	}
 
 	public void success(int x, int y) {
+		this.getFrame().setContentPane(this.mainPanel);
+		this.mainPanel.setVisible(true);
 		this.xPosition = x;
 		this.yPosition = y;
+		this.falseAlarmPanel.setVisible(false);
+		this.mapViewPanel.setVisible(false);
+		this.successPanel.setVisible(true);
+		this.runAwayPanel.setVisible(false);
+		this.deathPanel.setVisible(false);
 	}
 
 	public void falseAlarm(int x, int y) {

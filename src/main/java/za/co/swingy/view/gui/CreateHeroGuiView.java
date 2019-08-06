@@ -116,8 +116,8 @@ public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				heroPanel.setVisible(false);
-				GameController controller = GameController.builder().hero(hero).mapView(new MapGuiView()).build();
-				controller.showMapView();
+				GameController gameController = GameController.builder().hero(hero).mapView(new MapGuiView()).characterController(controller).build();
+				gameController.showMapView();
 			}
 		});
 	}
