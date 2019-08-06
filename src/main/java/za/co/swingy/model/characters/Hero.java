@@ -156,7 +156,7 @@ public class Hero extends Character {
 
 	//Level Up
 	public void			levelUp() {
-		int xpRequired = this.getLevel() * 1000 -  ((int)pow(this.getLevel() - 1, 2) * 450);
+		int xpRequired = this.getLevel() * 1000 -  ((int)pow((this.getLevel() - 1), 2) * 450);
 		if (this.experience >= xpRequired) {
 			this.setLevel(this.getLevel() + 1);
 			this.experience -= xpRequired;
