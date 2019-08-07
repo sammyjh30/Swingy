@@ -63,7 +63,7 @@
           </grid>
         </constraints>
       </vspacer>
-      <scrollpane id="3a42b">
+      <scrollpane id="3a42b" binding="armorScrollPane">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <minimum-size width="480" height="100"/>
@@ -77,14 +77,15 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="7a6f4" class="javax.swing.JTextArea" binding="textArea2" default-binding="true">
+          <grid id="421f7" binding="armorPanel" layout-manager="GridBagLayout">
             <constraints/>
             <properties>
               <background color="-11645362"/>
-              <caretColor color="-4342339"/>
               <foreground color="-4342339"/>
             </properties>
-          </component>
+            <border type="none"/>
+            <children/>
+          </grid>
         </children>
       </scrollpane>
       <component id="8dd4d" class="javax.swing.JTextArea" default-binding="true">
@@ -121,21 +122,7 @@
           <text value="Capacity"/>
         </properties>
       </component>
-      <component id="ab9e0" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
-        <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <minimum-size width="-1" height="25"/>
-            <preferred-size width="150" height="25"/>
-            <maximum-size width="-1" height="25"/>
-          </grid>
-        </constraints>
-        <properties>
-          <background color="-12566464"/>
-          <caretColor color="-4342339"/>
-          <foreground color="-4342339"/>
-        </properties>
-      </component>
-      <scrollpane id="b454d">
+      <scrollpane id="b454d" binding="weaponScrollPanel">
         <constraints>
           <grid row="6" column="1" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <minimum-size width="480" height="100"/>
@@ -149,15 +136,15 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="5a297" class="javax.swing.JTextArea" binding="weaponTextArea">
+          <grid id="b7008" binding="weaponPanel" layout-manager="GridBagLayout">
             <constraints/>
             <properties>
               <background color="-11645362"/>
-              <caretColor color="-4342339"/>
               <foreground color="-4342339"/>
-              <text value="Testytesty"/>
             </properties>
-          </component>
+            <border type="none"/>
+            <children/>
+          </grid>
         </children>
       </scrollpane>
       <scrollpane id="4aa8c" binding="helmsScrollPanel">
@@ -174,8 +161,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <grid id="bd367" binding="helmsPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
+          <grid id="bd367" binding="helmsPanel" layout-manager="GridBagLayout">
             <constraints/>
             <properties>
               <background color="-11645362"/>
@@ -226,16 +212,30 @@
         </constraints>
         <properties>
           <enabled value="true"/>
-          <label value="RETURN"/>
-          <text value="RETURN"/>
+          <text value="Return"/>
         </properties>
       </component>
-      <component id="a7070" class="javax.swing.JButton" binding="button2" default-binding="true">
+      <component id="a7070" class="javax.swing.JButton" binding="switchButton" default-binding="true">
         <constraints>
           <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="Switch"/>
+        </properties>
+      </component>
+      <component id="ab9e0" class="javax.swing.JTextArea" binding="capacityTextArea">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="25"/>
+            <preferred-size width="150" height="25"/>
+            <maximum-size width="-1" height="25"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12566464"/>
+          <caretColor color="-4342339"/>
+          <editable value="false"/>
+          <foreground color="-4342339"/>
         </properties>
       </component>
     </children>

@@ -5,7 +5,9 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.controller.InventoryController;
+import za.co.swingy.model.items.Armor;
 import za.co.swingy.model.items.Helm;
+import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.InventoryView;
 
 import javax.swing.*;
@@ -14,34 +16,153 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addActionListener;
-
 public class InventoryGuiView extends FrameView implements InventoryView {
 	private JPanel mainPanel;
 	private JTextArea inventoryTextArea;
-	private JTextArea textArea1;
-	private JTextArea textArea2;
+	private JTextArea capacityTextArea;
 	private JButton returnButton;
-	private JButton button2;
+	private JButton switchButton;
 	private JPanel helmsPanel;
 	private JScrollPane helmsScrollPanel;
-	private JTextArea weaponTextArea;
+	private JScrollPane armorScrollPane;
+	private JPanel armorPanel;
+	private JScrollPane weaponScrollPanel;
+	private JPanel weaponPanel;
 
 	@NotNull
 	private InventoryController controller;
 
 	public InventoryGuiView(GameController gameController) {
 		this.controller = InventoryController.builder().inventoryView(this).hero(gameController.getHero()).gameController(gameController).build();
+		returnButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.getGameController().getMapView().display(controller.getGameController());
+			}
+		});
 	}
 
-	public void display() {
+	private void setInventoryValues() {
 		int list = 0;
+
+		this.capacityTextArea.setText(this.controller.getHero().getInventory().getUsedSlots() + "/" + this.controller.getHero().getInventory().getMaxSlots());
+
+		//Armor
+		this.armorPanel.removeAll();
+		this.armorPanel.updateUI();
+		GridBagConstraints gbcArmor = new GridBagConstraints();
+		for (int i = 0; i < this.controller.getHero().getInventory().getArmors().size(); i++) {
+			Armor a = this.controller.getHero().getInventory().getArmors().get(i);
+
+			//Display information
+			gbcArmor.gridx = 0;
+			gbcArmor.gridy = i;
+			JTextArea armorTextArea = new JTextArea();
+			armorTextArea.setBackground(new Color(-11645362));
+			armorTextArea.setCaretColor(new Color(-4342339));
+			armorTextArea.setForeground(new Color(-4342339));
+			armorTextArea.setText("	" + a.getName() + " level: " + a.getLevel() + " defence increase: " + a.getDefenceIncrease());
+			System.out.println("Armor text area = " + armorTextArea.getText());
+			armorPanel.add(armorTextArea, gbcArmor);
+
+			//Show equip button
+			gbcArmor.gridx = 1;
+			gbcArmor.gridy = i;
+			JButton equipButton = new JButton();
+			equipButton.putClientProperty("id", i + 1 + list);
+			equipButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int index = (int) ((JButton) e.getSource()).getClientProperty("id");
+					controller.equip("" + (index));
+				}
+			});
+			if (i == this.controller.getHero().getInventory().getEquippedArmorIndex()) {
+				equipButton.setText("EQUIP");
+			} else {
+				equipButton.setText("EQUIPPED");
+				equipButton.setEnabled(false);
+			}
+			armorPanel.add(equipButton, gbcArmor);
+
+			//DeleteButton
+			gbcArmor.gridx = 2;
+			gbcArmor.gridy = i;
+			JButton deleteButton = new JButton();
+			deleteButton.setText("DELETE");
+			deleteButton.putClientProperty("id", i + 1 + list);
+			deleteButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int index = (int) ((JButton) e.getSource()).getClientProperty("id");
+					controller.delete("" + (index));
+				}
+			});
+			armorPanel.add(deleteButton, gbcArmor);
+		}
+		list = this.controller.getHero().getInventory().getArmors().size();
+
+		//Weapon
+		this.armorPanel.removeAll();
+		this.armorPanel.updateUI();
+		GridBagConstraints gbcWeapon = new GridBagConstraints();
+		for (int i = 0; i < this.controller.getHero().getInventory().getWeapons().size(); i++) {
+			Weapon w = this.controller.getHero().getInventory().getWeapons().get(i);
+
+			//Display information
+			gbcWeapon.gridx = 0;
+			gbcWeapon.gridy = i;
+			JTextArea weaponTextArea = new JTextArea();
+			weaponTextArea.setBackground(new Color(-11645362));
+			weaponTextArea.setCaretColor(new Color(-4342339));
+			weaponTextArea.setForeground(new Color(-4342339));
+			weaponTextArea.setText("	" + w.getName() + " level: " + w.getLevel() + " Attack increase: " + w.getAttackIncrease());
+			System.out.println("Weapon text area = " + weaponTextArea.getText());
+			weaponPanel.add(weaponTextArea, gbcWeapon);
+
+			//Show equip button
+			gbcWeapon.gridx = 1;
+			gbcWeapon.gridy = i;
+			JButton equipButton = new JButton();
+			equipButton.putClientProperty("id", i + 1 + list);
+			equipButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int index = (int) ((JButton) e.getSource()).getClientProperty("id");
+					controller.equip("" + (index));
+				}
+			});
+			if (i == this.controller.getHero().getInventory().getEquippedArmorIndex()) {
+				equipButton.setText("EQUIP");
+			} else {
+				equipButton.setText("EQUIPPED");
+				equipButton.setEnabled(false);
+			}
+			weaponPanel.add(equipButton, gbcWeapon);
+
+			//DeleteButton
+			gbcWeapon.gridx = 2;
+			gbcWeapon.gridy = i;
+			JButton deleteButton = new JButton();
+			deleteButton.setText("DELETE");
+			deleteButton.putClientProperty("id", i + 1 + list);
+			deleteButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int index = (int) ((JButton) e.getSource()).getClientProperty("id");
+					controller.delete("" + (index));
+				}
+			});
+			weaponPanel.add(deleteButton, gbcWeapon);
+		}
+		list += this.controller.getHero().getInventory().getWeapons().size();
+
+		//Helmets
 		this.helmsPanel.removeAll();
 		this.helmsPanel.updateUI();
 		GridBagConstraints gbc = new GridBagConstraints();
 		for (int i = 0; i < this.controller.getHero().getInventory().getHelms().size(); i++) {
 			Helm h = this.controller.getHero().getInventory().getHelms().get(i);
-//			for (int col = 0; col < 3; col++) {
 
 			//Display information
 			gbc.gridx = 0;
@@ -51,19 +172,24 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 			helmTextArea.setCaretColor(new Color(-4342339));
 			helmTextArea.setForeground(new Color(-4342339));
 			helmTextArea.setText("	" + h.getName() + " level: " + h.getLevel() + " hitPoint increase: " + h.getHitPointIncrease());
+			System.out.println("Helm text area = " + helmTextArea.getText());
 			helmsPanel.add(helmTextArea, gbc);
 
 			//Show equip button
 			gbc.gridx = 1;
 			gbc.gridy = i;
 			JButton equipButton = new JButton();
+			equipButton.putClientProperty("id", i + 1 + list);
+			equipButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int index = (int) ((JButton) e.getSource()).getClientProperty("id");
+					controller.equip("" + (index));
+				}
+			});
 			if (i == this.controller.getHero().getInventory().getEquippedHelmIndex()) {
-//				System.out.println("|	[" + (i + 1 + list) + "] " + h.getName() + " level: " + h.getLevel() + " hitPoint increase: " + h.getHitPointIncrease() + "     [EQUIPPED]");
-				equipButton.setLabel("EQUIP");
 				equipButton.setText("EQUIP");
 			} else {
-//				System.out.println("|	[" + (i + 1 + list) + "] " + h.getName() + " level: " + h.getLevel() + " hitPoint increase: " + h.getHitPointIncrease());
-				equipButton.setLabel("EQUIPPED");
 				equipButton.setText("EQUIPPED");
 				equipButton.setEnabled(false);
 			}
@@ -73,18 +199,30 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 			gbc.gridx = 2;
 			gbc.gridy = i;
 			JButton deleteButton = new JButton();
-			deleteButton.setLabel("DELETE");
 			deleteButton.setText("DELETE");
+			deleteButton.putClientProperty("id", i + 1 + list);
 			deleteButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					controller.delete((i + 1 + list));
+					int index = (int) ((JButton) e.getSource()).getClientProperty("id");
+					controller.delete("" + (index));
 				}
 			});
-
-//			}
+			helmsPanel.add(deleteButton, gbc);
 		}
 
+	}
+
+	public void display() {
+		this.setInventoryValues();
+		this.getFrame().setContentPane(this.mainPanel);
+		this.mainPanel.setVisible(true);
+		this.armorScrollPane.setVisible(true);
+		this.armorPanel.setVisible(true);
+		this.weaponScrollPanel.setVisible(true);
+		this.weaponPanel.setVisible(true);
+		this.helmsScrollPanel.setVisible(true);
+		this.helmsPanel.setVisible(true);
 	}
 
 	{
@@ -126,15 +264,51 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		mainPanel.add(spacer3, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
 		final Spacer spacer4 = new Spacer();
 		mainPanel.add(spacer4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), new Dimension(-1, 20), new Dimension(-1, 20), 0, false));
-		final JScrollPane scrollPane1 = new JScrollPane();
-		scrollPane1.setBackground(new Color(-11645362));
-		scrollPane1.setForeground(new Color(-11645362));
-		mainPanel.add(scrollPane1, new GridConstraints(4, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, 100), 0, false));
-		textArea2 = new JTextArea();
-		textArea2.setBackground(new Color(-11645362));
+		armorScrollPane = new JScrollPane();
+		armorScrollPane.setBackground(new Color(-11645362));
+		armorScrollPane.setForeground(new Color(-11645362));
+		mainPanel.add(armorScrollPane, new GridConstraints(4, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, 100), 0, false));
+		armorPanel = new JPanel();
+		armorPanel.setLayout(new GridBagLayout());
+		armorPanel.setBackground(new Color(-11645362));
+		armorPanel.setForeground(new Color(-4342339));
+		armorScrollPane.setViewportView(armorPanel);
+		final JTextArea textArea1 = new JTextArea();
+		textArea1.setBackground(new Color(-12566464));
+		textArea1.setCaretColor(new Color(-4342339));
+		textArea1.setEditable(false);
+		Font textArea1Font = this.$$$getFont$$$(null, Font.BOLD, -1, textArea1.getFont());
+		if (textArea1Font != null) textArea1.setFont(textArea1Font);
+		textArea1.setForeground(new Color(-4342339));
+		textArea1.setText("Armor:");
+		mainPanel.add(textArea1, new GridConstraints(3, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), new Dimension(150, 20), new Dimension(-1, 20), 0, false));
+		final JTextArea textArea2 = new JTextArea();
+		textArea2.setBackground(new Color(-12566464));
 		textArea2.setCaretColor(new Color(-4342339));
+		textArea2.setEditable(false);
+		Font textArea2Font = this.$$$getFont$$$(null, Font.BOLD, -1, textArea2.getFont());
+		if (textArea2Font != null) textArea2.setFont(textArea2Font);
 		textArea2.setForeground(new Color(-4342339));
-		scrollPane1.setViewportView(textArea2);
+		textArea2.setText("Capacity");
+		mainPanel.add(textArea2, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 25), new Dimension(150, 25), new Dimension(-1, 25), 0, false));
+		weaponScrollPanel = new JScrollPane();
+		weaponScrollPanel.setBackground(new Color(-11645362));
+		weaponScrollPanel.setForeground(new Color(-11645362));
+		mainPanel.add(weaponScrollPanel, new GridConstraints(6, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, 100), 0, false));
+		weaponPanel = new JPanel();
+		weaponPanel.setLayout(new GridBagLayout());
+		weaponPanel.setBackground(new Color(-11645362));
+		weaponPanel.setForeground(new Color(-4342339));
+		weaponScrollPanel.setViewportView(weaponPanel);
+		helmsScrollPanel = new JScrollPane();
+		helmsScrollPanel.setBackground(new Color(-11645362));
+		helmsScrollPanel.setForeground(new Color(-11645362));
+		mainPanel.add(helmsScrollPanel, new GridConstraints(8, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, 100), 0, false));
+		helmsPanel = new JPanel();
+		helmsPanel.setLayout(new GridBagLayout());
+		helmsPanel.setBackground(new Color(-11645362));
+		helmsPanel.setForeground(new Color(-4342339));
+		helmsScrollPanel.setViewportView(helmsPanel);
 		final JTextArea textArea3 = new JTextArea();
 		textArea3.setBackground(new Color(-12566464));
 		textArea3.setCaretColor(new Color(-4342339));
@@ -142,8 +316,8 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		Font textArea3Font = this.$$$getFont$$$(null, Font.BOLD, -1, textArea3.getFont());
 		if (textArea3Font != null) textArea3.setFont(textArea3Font);
 		textArea3.setForeground(new Color(-4342339));
-		textArea3.setText("Armor:");
-		mainPanel.add(textArea3, new GridConstraints(3, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), new Dimension(150, 20), new Dimension(-1, 20), 0, false));
+		textArea3.setText("Weapon:");
+		mainPanel.add(textArea3, new GridConstraints(5, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), new Dimension(150, 20), new Dimension(-1, 20), 0, false));
 		final JTextArea textArea4 = new JTextArea();
 		textArea4.setBackground(new Color(-12566464));
 		textArea4.setCaretColor(new Color(-4342339));
@@ -151,58 +325,21 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		Font textArea4Font = this.$$$getFont$$$(null, Font.BOLD, -1, textArea4.getFont());
 		if (textArea4Font != null) textArea4.setFont(textArea4Font);
 		textArea4.setForeground(new Color(-4342339));
-		textArea4.setText("Capacity");
-		mainPanel.add(textArea4, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 25), new Dimension(150, 25), new Dimension(-1, 25), 0, false));
-		textArea1 = new JTextArea();
-		textArea1.setBackground(new Color(-12566464));
-		textArea1.setCaretColor(new Color(-4342339));
-		textArea1.setForeground(new Color(-4342339));
-		mainPanel.add(textArea1, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 25), new Dimension(150, 25), new Dimension(-1, 25), 0, false));
-		final JScrollPane scrollPane2 = new JScrollPane();
-		scrollPane2.setBackground(new Color(-11645362));
-		scrollPane2.setForeground(new Color(-11645362));
-		mainPanel.add(scrollPane2, new GridConstraints(6, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, 100), 0, false));
-		weaponTextArea = new JTextArea();
-		weaponTextArea.setBackground(new Color(-11645362));
-		weaponTextArea.setCaretColor(new Color(-4342339));
-		weaponTextArea.setForeground(new Color(-4342339));
-		weaponTextArea.setText("Testytesty");
-		scrollPane2.setViewportView(weaponTextArea);
-		helmsScrollPanel = new JScrollPane();
-		helmsScrollPanel.setBackground(new Color(-11645362));
-		helmsScrollPanel.setForeground(new Color(-11645362));
-		mainPanel.add(helmsScrollPanel, new GridConstraints(8, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, 100), 0, false));
-		helmsPanel = new JPanel();
-		helmsPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-		helmsPanel.setBackground(new Color(-11645362));
-		helmsPanel.setForeground(new Color(-4342339));
-		helmsScrollPanel.setViewportView(helmsPanel);
-		final JTextArea textArea5 = new JTextArea();
-		textArea5.setBackground(new Color(-12566464));
-		textArea5.setCaretColor(new Color(-4342339));
-		textArea5.setEditable(false);
-		Font textArea5Font = this.$$$getFont$$$(null, Font.BOLD, -1, textArea5.getFont());
-		if (textArea5Font != null) textArea5.setFont(textArea5Font);
-		textArea5.setForeground(new Color(-4342339));
-		textArea5.setText("Weapon:");
-		mainPanel.add(textArea5, new GridConstraints(5, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), new Dimension(150, 20), new Dimension(-1, 20), 0, false));
-		final JTextArea textArea6 = new JTextArea();
-		textArea6.setBackground(new Color(-12566464));
-		textArea6.setCaretColor(new Color(-4342339));
-		textArea6.setEditable(false);
-		Font textArea6Font = this.$$$getFont$$$(null, Font.BOLD, -1, textArea6.getFont());
-		if (textArea6Font != null) textArea6.setFont(textArea6Font);
-		textArea6.setForeground(new Color(-4342339));
-		textArea6.setText("Helm:");
-		mainPanel.add(textArea6, new GridConstraints(7, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), new Dimension(150, 20), new Dimension(-1, 20), 0, false));
+		textArea4.setText("Helm:");
+		mainPanel.add(textArea4, new GridConstraints(7, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), new Dimension(150, 20), new Dimension(-1, 20), 0, false));
 		returnButton = new JButton();
-		returnButton.setEnabled(false);
-		returnButton.setLabel("RETURN");
-		returnButton.setText("RETURN");
+		returnButton.setEnabled(true);
+		returnButton.setText("Return");
 		mainPanel.add(returnButton, new GridConstraints(9, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		button2 = new JButton();
-		button2.setText("Button");
-		mainPanel.add(button2, new GridConstraints(9, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		switchButton = new JButton();
+		switchButton.setText("Switch");
+		mainPanel.add(switchButton, new GridConstraints(9, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		capacityTextArea = new JTextArea();
+		capacityTextArea.setBackground(new Color(-12566464));
+		capacityTextArea.setCaretColor(new Color(-4342339));
+		capacityTextArea.setEditable(false);
+		capacityTextArea.setForeground(new Color(-4342339));
+		mainPanel.add(capacityTextArea, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 25), new Dimension(150, 25), new Dimension(-1, 25), 0, false));
 	}
 
 	/**

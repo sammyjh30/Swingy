@@ -6,6 +6,7 @@ import com.intellij.uiDesigner.core.Spacer;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
+import za.co.swingy.model.items.Inventory;
 import za.co.swingy.view.MapView;
 
 import javax.swing.*;
@@ -95,6 +96,13 @@ public class MapGuiView extends FrameView implements MapView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.returnToMenu();
+			}
+		});
+		inventoryButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				InventoryGuiView inventoryGuiView = new InventoryGuiView(controller);
+				inventoryGuiView.display();
 			}
 		});
 	}
