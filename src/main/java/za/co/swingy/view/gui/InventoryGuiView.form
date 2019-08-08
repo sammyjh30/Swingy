@@ -76,17 +76,7 @@
           <foreground color="-11645362"/>
         </properties>
         <border type="none"/>
-        <children>
-          <grid id="421f7" binding="armorPanel" layout-manager="GridBagLayout">
-            <constraints/>
-            <properties>
-              <background color="-11645362"/>
-              <foreground color="-4342339"/>
-            </properties>
-            <border type="none"/>
-            <children/>
-          </grid>
-        </children>
+        <children/>
       </scrollpane>
       <component id="8dd4d" class="javax.swing.JTextArea" default-binding="true">
         <constraints>

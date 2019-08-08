@@ -25,9 +25,9 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 	private JPanel helmsPanel;
 	private JScrollPane helmsScrollPanel;
 	private JScrollPane armorScrollPane;
-	private JPanel armorPanel;
 	private JScrollPane weaponScrollPanel;
 	private JPanel weaponPanel;
+	private JList armorList;
 
 	@NotNull
 	private InventoryController controller;
@@ -48,12 +48,19 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		this.capacityTextArea.setText(this.controller.getHero().getInventory().getUsedSlots() + "/" + this.controller.getHero().getInventory().getMaxSlots());
 
 		//Armor
-		this.armorPanel.removeAll();
-		this.armorPanel.updateUI();
+		this.armorList.removeAll();
+		this.armorList.updateUI();
+//		this.armorPanel.removeAll();
+//		this.armorPanel.updateUI();
 		GridBagConstraints gbcArmor = new GridBagConstraints();
 		for (int i = 0; i < this.controller.getHero().getInventory().getArmors().size(); i++) {
 			Armor a = this.controller.getHero().getInventory().getArmors().get(i);
+			JPanel armorPanel = new JPanel();
 
+			armorPanel.setLayout(new GridBagLayout());
+			armorPanel.setBackground(new Color(-11645362));
+			armorPanel.setForeground(new Color(-4342339));
+			armorPanel.setSize(new Dimension(480, 30));
 			//Display information
 			gbcArmor.gridx = 0;
 			gbcArmor.gridy = i;
@@ -61,8 +68,8 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 			armorTextArea.setBackground(new Color(-11645362));
 			armorTextArea.setCaretColor(new Color(-4342339));
 			armorTextArea.setForeground(new Color(-4342339));
-			armorTextArea.setText("	" + a.getName() + " level: " + a.getLevel() + " defence increase: " + a.getDefenceIncrease());
-			System.out.println("Armor text area = " + armorTextArea.getText());
+			armorTextArea.setText(a.getName() + "\nlevel: " + a.getLevel() + " defence increase: " + a.getDefenceIncrease());
+			System.out.println("Adding armour: " + a.getName());
 			armorPanel.add(armorTextArea, gbcArmor);
 
 			//Show equip button
@@ -78,10 +85,11 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 				}
 			});
 			if (i == this.controller.getHero().getInventory().getEquippedArmorIndex()) {
-				equipButton.setText("EQUIP");
-			} else {
 				equipButton.setText("EQUIPPED");
 				equipButton.setEnabled(false);
+			} else {
+				equipButton.setText("EQUIP");
+
 			}
 			armorPanel.add(equipButton, gbcArmor);
 
@@ -99,12 +107,53 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 				}
 			});
 			armorPanel.add(deleteButton, gbcArmor);
+
+			this.armorList.add(armorPanel);
 		}
+
+		this.armorScrollPane.removeAll();
+		this.armorScrollPane.updateUI();
+		String[] columnNames = {"Item", "", ""};
+		Object[][] data = {};
+
+		for (int i = 0; i < this.controller.getHero().getInventory().getArmors().size(); i++) {
+			Armor a = this.controller.getHero().getInventory().getArmors().get(i);
+			String name = a.getName() + "\nlevel: " + a.getLevel() + " defence increase: " + a.getDefenceIncrease();
+
+			JButton equipButton = new JButton();
+			equipButton.putClientProperty("id", i + 1 + list);
+			equipButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int index = (int) ((JButton) e.getSource()).getClientProperty("id");
+					controller.equip("" + (index));
+				}
+			});
+			if (i == this.controller.getHero().getInventory().getEquippedArmorIndex()) {
+				equipButton.setText("EQUIPPED");
+				equipButton.setEnabled(false);
+			} else {
+				equipButton.setText("EQUIP");
+			}
+
+			JButton deleteButton = new JButton();
+			deleteButton.setText("DELETE");
+			deleteButton.putClientProperty("id", i + 1 + list);
+			deleteButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int index = (int) ((JButton) e.getSource()).getClientProperty("id");
+					controller.delete("" + (index));
+				}
+			});
+
+		}
+		JTable armorTable = new JTable(,columnNames);
 		list = this.controller.getHero().getInventory().getArmors().size();
 
 		//Weapon
-		this.armorPanel.removeAll();
-		this.armorPanel.updateUI();
+		this.weaponPanel.removeAll();
+		this.weaponPanel.updateUI();
 		GridBagConstraints gbcWeapon = new GridBagConstraints();
 		for (int i = 0; i < this.controller.getHero().getInventory().getWeapons().size(); i++) {
 			Weapon w = this.controller.getHero().getInventory().getWeapons().get(i);
@@ -116,8 +165,7 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 			weaponTextArea.setBackground(new Color(-11645362));
 			weaponTextArea.setCaretColor(new Color(-4342339));
 			weaponTextArea.setForeground(new Color(-4342339));
-			weaponTextArea.setText("	" + w.getName() + " level: " + w.getLevel() + " Attack increase: " + w.getAttackIncrease());
-			System.out.println("Weapon text area = " + weaponTextArea.getText());
+			weaponTextArea.setText(w.getName() + "\nlevel: " + w.getLevel() + " Attack increase: " + w.getAttackIncrease());
 			weaponPanel.add(weaponTextArea, gbcWeapon);
 
 			//Show equip button
@@ -132,11 +180,11 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 					controller.equip("" + (index));
 				}
 			});
-			if (i == this.controller.getHero().getInventory().getEquippedArmorIndex()) {
-				equipButton.setText("EQUIP");
-			} else {
+			if (i == this.controller.getHero().getInventory().getEquippedWeaponIndex()) {
 				equipButton.setText("EQUIPPED");
 				equipButton.setEnabled(false);
+			} else {
+				equipButton.setText("EQUIP");
 			}
 			weaponPanel.add(equipButton, gbcWeapon);
 
@@ -171,8 +219,7 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 			helmTextArea.setBackground(new Color(-11645362));
 			helmTextArea.setCaretColor(new Color(-4342339));
 			helmTextArea.setForeground(new Color(-4342339));
-			helmTextArea.setText("	" + h.getName() + " level: " + h.getLevel() + " hitPoint increase: " + h.getHitPointIncrease());
-			System.out.println("Helm text area = " + helmTextArea.getText());
+			helmTextArea.setText(h.getName() + "\nlevel: " + h.getLevel() + " hitPoint increase: " + h.getHitPointIncrease());
 			helmsPanel.add(helmTextArea, gbc);
 
 			//Show equip button
@@ -188,10 +235,10 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 				}
 			});
 			if (i == this.controller.getHero().getInventory().getEquippedHelmIndex()) {
-				equipButton.setText("EQUIP");
-			} else {
 				equipButton.setText("EQUIPPED");
 				equipButton.setEnabled(false);
+			} else {
+				equipButton.setText("EQUIP");
 			}
 			helmsPanel.add(equipButton, gbc);
 
@@ -218,11 +265,12 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		this.getFrame().setContentPane(this.mainPanel);
 		this.mainPanel.setVisible(true);
 		this.armorScrollPane.setVisible(true);
-		this.armorPanel.setVisible(true);
+//		this.armorPanel.setVisible(true);
 		this.weaponScrollPanel.setVisible(true);
 		this.weaponPanel.setVisible(true);
 		this.helmsScrollPanel.setVisible(true);
 		this.helmsPanel.setVisible(true);
+		this.getFrame().pack();
 	}
 
 	{
@@ -268,11 +316,10 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		armorScrollPane.setBackground(new Color(-11645362));
 		armorScrollPane.setForeground(new Color(-11645362));
 		mainPanel.add(armorScrollPane, new GridConstraints(4, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, 100), 0, false));
-		armorPanel = new JPanel();
-		armorPanel.setLayout(new GridBagLayout());
-		armorPanel.setBackground(new Color(-11645362));
-		armorPanel.setForeground(new Color(-4342339));
-		armorScrollPane.setViewportView(armorPanel);
+		armorList = new JList();
+		armorList.setBackground(new Color(-11645362));
+		armorList.setForeground(new Color(-4342339));
+		armorScrollPane.setViewportView(armorList);
 		final JTextArea textArea1 = new JTextArea();
 		textArea1.setBackground(new Color(-12566464));
 		textArea1.setCaretColor(new Color(-4342339));
