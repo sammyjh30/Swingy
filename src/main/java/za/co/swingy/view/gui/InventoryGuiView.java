@@ -29,6 +29,7 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 	private JScrollPane weaponScrollPanel;
 	private JPanel weaponPanel;
 	private JPanel testPanel;
+	private JScrollPane armorScrollPanel;
 	private JList armorList;
 
 	@NotNull
@@ -50,81 +51,8 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		this.capacityTextArea.setText(this.controller.getHero().getInventory().getUsedSlots() + "/" + this.controller.getHero().getInventory().getMaxSlots());
 
 		//Armor
-//		this.armorList.removeAll();
-//		this.armorList.updateUI();
-////		this.armorPanel.removeAll();
-////		this.armorPanel.updateUI();
-//		GridBagConstraints gbcArmor = new GridBagConstraints();
-//		for (int i = 0; i < this.controller.getHero().getInventory().getArmors().size(); i++) {
-//			Armor a = this.controller.getHero().getInventory().getArmors().get(i);
-//			JPanel armorPanel = new JPanel();
-//
-//			armorPanel.setLayout(new GridBagLayout());
-//			armorPanel.setBackground(new Color(-11645362));
-//			armorPanel.setForeground(new Color(-4342339));
-//			armorPanel.setSize(new Dimension(480, 30));
-//			//Display information
-//			gbcArmor.gridx = 0;
-//			gbcArmor.gridy = i;
-//			JTextArea armorTextArea = new JTextArea();
-//			armorTextArea.setBackground(new Color(-11645362));
-//			armorTextArea.setCaretColor(new Color(-4342339));
-//			armorTextArea.setForeground(new Color(-4342339));
-//			armorTextArea.setText(a.getName() + "\nlevel: " + a.getLevel() + " defence increase: " + a.getDefenceIncrease());
-//			System.out.println("Adding armour: " + a.getName());
-//			armorPanel.add(armorTextArea, gbcArmor);
-//
-//			//Show equip button
-//			gbcArmor.gridx = 1;
-//			gbcArmor.gridy = i;
-//			JButton equipButton = new JButton();
-//			equipButton.putClientProperty("id", i + 1 + list);
-//			equipButton.addActionListener(new ActionListener() {
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					int index = (int) ((JButton) e.getSource()).getClientProperty("id");
-//					controller.equip("" + (index));
-//				}
-//			});
-//			if (i == this.controller.getHero().getInventory().getEquippedArmorIndex()) {
-//				equipButton.setText("EQUIPPED");
-//				equipButton.setEnabled(false);
-//			} else {
-//				equipButton.setText("EQUIP");
-//
-//			}
-//			armorPanel.add(equipButton, gbcArmor);
-//
-//			//DeleteButton
-//			gbcArmor.gridx = 2;
-//			gbcArmor.gridy = i;
-//			JButton deleteButton = new JButton();
-//			deleteButton.setText("DELETE");
-//			deleteButton.putClientProperty("id", i + 1 + list);
-//			deleteButton.addActionListener(new ActionListener() {
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					int index = (int) ((JButton) e.getSource()).getClientProperty("id");
-//					controller.delete("" + (index));
-//				}
-//			});
-//			armorPanel.add(deleteButton, gbcArmor);
-//
-//			this.armorList.add(armorPanel);
-//		}
-
-		this.armorScrollPane.removeAll();
-		this.armorScrollPane.updateUI();
-
 		this.testPanel.removeAll();
 		this.testPanel.updateUI();
-//		JTable armorTable = new JTable(new DefaultTableModel(new Object[]{"Item", "", ""}, 0));
-//		DefaultTableModel armorModel = (DefaultTableModel) armorTable.getModel();
-
-//		DefaultTableModel armorModel = new DefaultTableModel();
-//		armorModel.addColumn("Armor");
-//		armorModel.addColumn("");
-//		armorModel.addColumn("");
 		for (int i = 0; i < this.controller.getHero().getInventory().getArmors().size(); i++) {
 			JPanel armorIterPanel = new JPanel();
 			armorIterPanel.setLayout(new GridBagLayout());
@@ -141,9 +69,9 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 			nameTextArea.setPreferredSize(new Dimension(300, 30));
 			nameTextArea.setEditable(false);
 
-			armorIterPanel.setMinimumSize(new Dimension(480, 30));
-			armorIterPanel.setMaximumSize(new Dimension(480, 30));
-			armorIterPanel.setPreferredSize(new Dimension(480, 30));
+			armorIterPanel.setMinimumSize(new Dimension(460, 30));
+			armorIterPanel.setMaximumSize(new Dimension(460, 30));
+			armorIterPanel.setPreferredSize(new Dimension(460, 30));
 			GridBagConstraints armorIterGbd = new GridBagConstraints();
 			armorIterGbd.gridx = 0;
 			armorIterGbd.gridy = i;
@@ -183,6 +111,9 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 			armorIterGbd.gridy = i;
 			armorIterPanel.add(deleteButton, armorIterGbd);
 
+			armorIterPanel.setBackground(new Color(-11645362));
+			armorIterPanel.setForeground(new Color(-4342339));
+
 			armorIterGbd.gridx = 0;
 			armorIterGbd.gridy = i;
 			this.testPanel.setVisible(true);
@@ -190,16 +121,6 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 
 //			armorModel.addRow(new Object[]{name, equipButton, deleteButton});
 		}
-//		JTable armorTable = new JTable(armorModel);
-//		armorTable.setBackground(new Color(0x00BD03));
-//		this.armorScrollPane.setViewportView(armorTable);
-//		this.armorScrollPane.setVisible(true);
-//		this.testPanel.setVisible(true);
-//		System.out.println("Table = " + armorTable);
-//		GridBagConstraints testPanelCons = new GridBagConstraints();
-//		testPanelCons.gridx = 0;
-//		testPanelCons.gridy = 0;
-//		this.testPanel.add(armorTable, testPanelCons);
 		list = this.controller.getHero().getInventory().getArmors().size();
 
 		//Weapon
@@ -315,7 +236,7 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		this.setInventoryValues();
 		this.getFrame().setContentPane(this.mainPanel);
 		this.mainPanel.setVisible(true);
-		this.armorScrollPane.setVisible(true);
+//		this.armorScrollPane.setVisible(true);
 //		this.armorPanel.setVisible(true);
 		this.weaponScrollPanel.setVisible(true);
 		this.weaponPanel.setVisible(true);
@@ -340,7 +261,7 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 	 */
 	private void $$$setupUI$$$() {
 		mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayoutManager(12, 4, new Insets(0, 0, 0, 0), -1, -1));
+		mainPanel.setLayout(new GridLayoutManager(11, 4, new Insets(0, 0, 0, 0), -1, -1));
 		mainPanel.setBackground(new Color(-12566464));
 		mainPanel.setForeground(new Color(-4342339));
 		mainPanel.setMaximumSize(new Dimension(560, 560));
@@ -356,17 +277,13 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		inventoryTextArea.setText("Inventory");
 		mainPanel.add(inventoryTextArea, new GridConstraints(1, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, 25), new Dimension(100, 25), new Dimension(100, 25), 0, false));
 		final Spacer spacer1 = new Spacer();
-		mainPanel.add(spacer1, new GridConstraints(11, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 10), new Dimension(-1, 10), new Dimension(-1, 10), 0, false));
+		mainPanel.add(spacer1, new GridConstraints(10, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 10), new Dimension(-1, 10), new Dimension(-1, 10), 0, false));
 		final Spacer spacer2 = new Spacer();
 		mainPanel.add(spacer2, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(20, -1), new Dimension(20, -1), new Dimension(20, -1), 0, false));
 		final Spacer spacer3 = new Spacer();
 		mainPanel.add(spacer3, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
 		final Spacer spacer4 = new Spacer();
 		mainPanel.add(spacer4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), new Dimension(-1, 20), new Dimension(-1, 20), 0, false));
-		armorScrollPane = new JScrollPane();
-		armorScrollPane.setBackground(new Color(-11645362));
-		armorScrollPane.setForeground(new Color(-11645362));
-		mainPanel.add(armorScrollPane, new GridConstraints(5, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, 100), 0, false));
 		final JTextArea textArea1 = new JTextArea();
 		textArea1.setBackground(new Color(-12566464));
 		textArea1.setCaretColor(new Color(-4342339));
@@ -379,7 +296,7 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		weaponScrollPanel = new JScrollPane();
 		weaponScrollPanel.setBackground(new Color(-11645362));
 		weaponScrollPanel.setForeground(new Color(-11645362));
-		mainPanel.add(weaponScrollPanel, new GridConstraints(7, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, 100), 0, false));
+		mainPanel.add(weaponScrollPanel, new GridConstraints(6, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, -1), 0, false));
 		weaponPanel = new JPanel();
 		weaponPanel.setLayout(new GridBagLayout());
 		weaponPanel.setBackground(new Color(-11645362));
@@ -388,7 +305,7 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		helmsScrollPanel = new JScrollPane();
 		helmsScrollPanel.setBackground(new Color(-11645362));
 		helmsScrollPanel.setForeground(new Color(-11645362));
-		mainPanel.add(helmsScrollPanel, new GridConstraints(9, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, 100), 0, false));
+		mainPanel.add(helmsScrollPanel, new GridConstraints(8, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, -1), 0, false));
 		helmsPanel = new JPanel();
 		helmsPanel.setLayout(new GridBagLayout());
 		helmsPanel.setBackground(new Color(-11645362));
@@ -402,7 +319,7 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		if (textArea2Font != null) textArea2.setFont(textArea2Font);
 		textArea2.setForeground(new Color(-4342339));
 		textArea2.setText("Weapon:");
-		mainPanel.add(textArea2, new GridConstraints(6, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), new Dimension(150, 20), new Dimension(-1, 20), 0, false));
+		mainPanel.add(textArea2, new GridConstraints(5, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), new Dimension(150, 20), new Dimension(-1, 20), 0, false));
 		final JTextArea textArea3 = new JTextArea();
 		textArea3.setBackground(new Color(-12566464));
 		textArea3.setCaretColor(new Color(-4342339));
@@ -411,14 +328,14 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		if (textArea3Font != null) textArea3.setFont(textArea3Font);
 		textArea3.setForeground(new Color(-4342339));
 		textArea3.setText("Helm:");
-		mainPanel.add(textArea3, new GridConstraints(8, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), new Dimension(150, 20), new Dimension(-1, 20), 0, false));
+		mainPanel.add(textArea3, new GridConstraints(7, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), new Dimension(150, 20), new Dimension(-1, 20), 0, false));
 		returnButton = new JButton();
 		returnButton.setEnabled(true);
 		returnButton.setText("Return");
-		mainPanel.add(returnButton, new GridConstraints(10, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		mainPanel.add(returnButton, new GridConstraints(9, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		switchButton = new JButton();
 		switchButton.setText("Switch");
-		mainPanel.add(switchButton, new GridConstraints(10, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		mainPanel.add(switchButton, new GridConstraints(9, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		capacityTextArea = new JTextArea();
 		capacityTextArea.setBackground(new Color(-12566464));
 		capacityTextArea.setCaretColor(new Color(-4342339));
@@ -434,11 +351,12 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 		textArea4.setForeground(new Color(-4342339));
 		textArea4.setText("Capacity");
 		mainPanel.add(textArea4, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 25), new Dimension(150, 25), new Dimension(-1, 25), 0, false));
-		final JScrollPane scrollPane1 = new JScrollPane();
-		mainPanel.add(scrollPane1, new GridConstraints(4, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, -1), 0, false));
+		armorScrollPanel = new JScrollPane();
+		mainPanel.add(armorScrollPanel, new GridConstraints(4, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(480, 100), new Dimension(480, 100), new Dimension(480, -1), 0, false));
 		testPanel = new JPanel();
 		testPanel.setLayout(new GridBagLayout());
-		scrollPane1.setViewportView(testPanel);
+		testPanel.setBackground(new Color(-11645362));
+		armorScrollPanel.setViewportView(testPanel);
 	}
 
 	/**

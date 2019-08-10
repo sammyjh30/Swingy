@@ -43,6 +43,7 @@ public class MapGuiView extends FrameView implements MapView {
 	private JButton ranAwayButton;
 	private JPanel deathPanel;
 	private JButton deathButton;
+	private JButton saveButton;
 
 	private GameController controller;
 	private int xPosition;
@@ -103,6 +104,12 @@ public class MapGuiView extends FrameView implements MapView {
 			public void actionPerformed(ActionEvent e) {
 				InventoryGuiView inventoryGuiView = new InventoryGuiView(controller);
 				inventoryGuiView.display();
+			}
+		});
+		saveButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.saveGame();
 			}
 		});
 	}
@@ -400,12 +407,12 @@ public class MapGuiView extends FrameView implements MapView {
 		inventoryButton.setLabel("Inventory");
 		inventoryButton.setText("Inventory");
 		mapViewPanel.add(inventoryButton, new GridConstraints(5, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final JButton button1 = new JButton();
-		button1.setLabel("Save  Exit");
-		button1.setText("Save  Exit");
-		button1.setMnemonic(' ');
-		button1.setDisplayedMnemonicIndex(5);
-		mapViewPanel.add(button1, new GridConstraints(6, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		saveButton = new JButton();
+		saveButton.setLabel("Save  Exit");
+		saveButton.setText("Save  Exit");
+		saveButton.setMnemonic(' ');
+		saveButton.setDisplayedMnemonicIndex(5);
+		mapViewPanel.add(saveButton, new GridConstraints(6, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final Spacer spacer10 = new Spacer();
 		mapViewPanel.add(spacer10, new GridConstraints(7, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
 		directionsPanel = new JPanel();

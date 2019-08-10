@@ -38,3 +38,8 @@
 8|Weapons|0|Wooden Sword of Noobs|1|1|1|Silver Sword of Skull Crushing|1|2|2|Silver Crossbow of Bone Shattering|1|2|3|Wooden Lance of Darkness|2|3
 8|Armors|0|Wooden Chest Plate|1|2|1|Wooden Mail|1|2
 8|Helms|0|Straw Helmet|1|1|1|Wooden Helmet|1|2|2|Shadow Helmet|1|2
+9|GUI test guy 01|Barbarian|1|4|4|45|50|70|6|3
+9|Inventory|3|9|0|0|0
+9|Weapons|0|Wooden Sword of Noobs|1|1
+9|Armors|0|Casual Clothes|1|1
+9|Helms|0|Straw Helmet|1|1

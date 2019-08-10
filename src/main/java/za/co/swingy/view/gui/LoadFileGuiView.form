@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="za.co.swingy.view.gui.LoadFileGuiView">
-  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="560" height="560"/>
@@ -13,63 +13,549 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="5021b" class="javax.swing.JTable" binding="table1" custom-create="true" default-binding="true">
+      <grid id="e0024" binding="loadMainPanel" layout-manager="GridLayoutManager" row-count="5" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <minimum-size width="500" height="-1"/>
-            <preferred-size width="500" height="50"/>
-            <maximum-size width="500" height="-1"/>
+          <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="560" height="560"/>
+            <preferred-size width="560" height="560"/>
+            <maximum-size width="560" height="560"/>
           </grid>
         </constraints>
         <properties>
           <background color="-12566464"/>
-          <cellSelectionEnabled value="false"/>
-          <columnSelectionAllowed value="true"/>
+          <foreground color="-4342339"/>
         </properties>
-      </component>
-      <component id="6b619" class="javax.swing.JTextPane" binding="LOADSAVETextPane" default-binding="true">
+        <border type="none"/>
+        <children>
+          <vspacer id="a6928">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                <minimum-size width="-1" height="20"/>
+                <preferred-size width="-1" height="20"/>
+                <maximum-size width="-1" height="20"/>
+              </grid>
+            </constraints>
+          </vspacer>
+          <component id="b6130" class="javax.swing.JTextPane" binding="LOADSAVETextPane" default-binding="true">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <caretColor color="-4342339"/>
+              <disabledTextColor color="-4342339"/>
+              <enabled value="false"/>
+              <font size="16" style="1"/>
+              <text value="&#9;&#9;&#9;LOAD SAVE:"/>
+            </properties>
+          </component>
+          <hspacer id="3846b">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="20" height="-1"/>
+                <preferred-size width="20" height="-1"/>
+                <maximum-size width="20" height="-1"/>
+              </grid>
+            </constraints>
+          </hspacer>
+          <hspacer id="d20f7">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="20" height="-1"/>
+                <preferred-size width="20" height="-1"/>
+                <maximum-size width="20" height="-1"/>
+              </grid>
+            </constraints>
+          </hspacer>
+          <scrollpane id="30944" binding="loadScrollPanel">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="500" height="360"/>
+                <preferred-size width="500" height="360"/>
+                <maximum-size width="500" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-11645362"/>
+              <foreground color="-4342339"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <grid id="9db95" binding="loadsPanel" layout-manager="GridBagLayout">
+                <constraints/>
+                <properties>
+                  <background color="-11645362"/>
+                  <foreground color="-4342339"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </scrollpane>
+          <vspacer id="9a6f3">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                <minimum-size width="-1" height="10"/>
+                <preferred-size width="-1" height="10"/>
+                <maximum-size width="-1" height="10"/>
+              </grid>
+            </constraints>
+          </vspacer>
+          <component id="afc46" class="javax.swing.JButton" binding="returnButton">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Button"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="d760" binding="noSavesPanel" layout-manager="GridLayoutManager" row-count="5" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="560" height="560"/>
+            <preferred-size width="560" height="560"/>
+            <maximum-size width="560" height="560"/>
           </grid>
         </constraints>
         <properties>
           <background color="-12566464"/>
-          <caretColor color="-4342339"/>
-          <disabledTextColor color="-4342339"/>
-          <enabled value="false"/>
-          <font size="16" style="1"/>
-          <text value="&#9;&#9;&#9;LOAD SAVE:"/>
         </properties>
-      </component>
-      <hspacer id="547f3">
+        <border type="none"/>
+        <children>
+          <component id="50be6" class="javax.swing.JTextPane" default-binding="true">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <caretColor color="-4380623"/>
+              <disabledTextColor color="-4380623"/>
+              <editable value="false"/>
+              <foreground color="-4380623"/>
+              <text value="You don't have any saves yet! Create a new character to start the adventure!&quot;"/>
+            </properties>
+          </component>
+          <vspacer id="f561c">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
+          <vspacer id="61ac9">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
+          <hspacer id="df868">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="f022f">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <component id="d0ede" class="javax.swing.JButton" binding="deathButton">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <label value="OK"/>
+              <text value="OK"/>
+            </properties>
+          </component>
+          <vspacer id="6aa7f">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                <minimum-size width="-1" height="30"/>
+                <preferred-size width="-1" height="30"/>
+                <maximum-size width="-1" height="30"/>
+              </grid>
+            </constraints>
+          </vspacer>
+        </children>
+      </grid>
+      <grid id="e20a3" binding="heroPanel" layout-manager="GridLayoutManager" row-count="20" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-      </hspacer>
-      <hspacer id="e48ca">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </hspacer>
-      <vspacer id="81c43">
-        <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
-            <minimum-size width="-1" height="50"/>
-            <preferred-size width="-1" height="100"/>
-            <maximum-size width="-1" height="100"/>
-          </grid>
-        </constraints>
-      </vspacer>
-      <vspacer id="9e09d">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
-            <minimum-size width="-1" height="50"/>
-            <preferred-size width="-1" height="100"/>
-            <maximum-size width="-1" height="100"/>
-          </grid>
-        </constraints>
-      </vspacer>
+        <properties>
+          <background color="-12566464"/>
+          <foreground color="-4342339"/>
+          <opaque value="true"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <vspacer id="87d24">
+            <constraints>
+              <grid row="19" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
+          <hspacer id="238ef">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="10" height="-1"/>
+                <preferred-size width="10" height="-1"/>
+                <maximum-size width="10" height="-1"/>
+              </grid>
+            </constraints>
+          </hspacer>
+          <hspacer id="20947">
+            <constraints>
+              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="10" height="-1"/>
+                <preferred-size width="10" height="-1"/>
+                <maximum-size width="10" height="-1"/>
+              </grid>
+            </constraints>
+          </hspacer>
+          <component id="7ad1f" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <font style="1"/>
+              <foreground color="-4342339"/>
+              <text value="Name:"/>
+            </properties>
+          </component>
+          <component id="7a3" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <font style="1"/>
+              <foreground color="-4342339"/>
+              <text value="Level:"/>
+            </properties>
+          </component>
+          <component id="b2a80" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <font style="1"/>
+              <foreground color="-4342339"/>
+              <text value="Type:"/>
+            </properties>
+          </component>
+          <component id="a713a" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <font style="1"/>
+              <foreground color="-4342339"/>
+              <text value="HP:"/>
+            </properties>
+          </component>
+          <component id="93978" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <font style="1"/>
+              <foreground color="-4342339"/>
+              <text value="Attack:"/>
+            </properties>
+          </component>
+          <component id="848a3" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <font style="1"/>
+              <foreground color="-4342339"/>
+              <text value="Defence:"/>
+            </properties>
+          </component>
+          <component id="fa69b" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <font style="1"/>
+              <foreground color="-4342339"/>
+              <text value="Position:"/>
+            </properties>
+          </component>
+          <component id="cc01c" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="8" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <font style="1"/>
+              <foreground color="-4342339"/>
+              <text value="______________Inventory______________"/>
+            </properties>
+          </component>
+          <component id="b6d03" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <font style="1"/>
+              <foreground color="-4342339"/>
+              <text value="Slots: "/>
+            </properties>
+          </component>
+          <component id="43345" class="javax.swing.JTextArea" binding="nameTextArea">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="5"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <caretColor color="-4342339"/>
+              <editable value="false"/>
+              <foreground color="-4342339"/>
+              <lineWrap value="false"/>
+            </properties>
+          </component>
+          <component id="614c8" class="javax.swing.JTextArea" binding="levelTextArea">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="5"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <disabledTextColor color="-4342339"/>
+              <editable value="false"/>
+              <foreground color="-4342339"/>
+              <lineWrap value="false"/>
+              <selectedTextColor color="-4342339"/>
+            </properties>
+          </component>
+          <component id="9de2a" class="javax.swing.JTextArea" binding="typeTextArea">
+            <constraints>
+              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="5"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <caretColor color="-4342339"/>
+              <disabledTextColor color="-4342339"/>
+              <editable value="false"/>
+              <foreground color="-4342339"/>
+              <lineWrap value="false"/>
+            </properties>
+          </component>
+          <component id="37fb9" class="javax.swing.JTextArea" binding="hpTextArea">
+            <constraints>
+              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="5"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <caretColor color="-4342339"/>
+              <disabledTextColor color="-4342339"/>
+              <editable value="false"/>
+              <foreground color="-4342339"/>
+              <lineWrap value="false"/>
+            </properties>
+          </component>
+          <component id="b7877" class="javax.swing.JTextArea" binding="attackTextArea">
+            <constraints>
+              <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="5"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <caretColor color="-4342339"/>
+              <disabledTextColor color="-4342339"/>
+              <editable value="false"/>
+              <foreground color="-4342339"/>
+              <lineWrap value="false"/>
+              <selectedTextColor color="-4342339"/>
+            </properties>
+          </component>
+          <component id="99a79" class="javax.swing.JTextArea" binding="positionTextArea">
+            <constraints>
+              <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="5"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <caretColor color="-4342339"/>
+              <editable value="false"/>
+              <foreground color="-4342339"/>
+              <lineWrap value="false"/>
+              <selectedTextColor color="-4342339"/>
+            </properties>
+          </component>
+          <component id="4721" class="javax.swing.JTextArea" binding="slotsTextArea">
+            <constraints>
+              <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="5"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <caretColor color="-4342339"/>
+              <disabledTextColor color="-4342339"/>
+              <editable value="false"/>
+              <foreground color="-4342339"/>
+              <lineWrap value="false"/>
+            </properties>
+          </component>
+          <component id="95beb" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <font style="1"/>
+              <foreground color="-4342339"/>
+              <text value="Armor:"/>
+            </properties>
+          </component>
+          <component id="a7455" class="javax.swing.JTextArea" binding="armorTextArea">
+            <constraints>
+              <grid row="11" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="5"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <caretColor color="-4342339"/>
+              <disabledTextColor color="-4342339"/>
+              <editable value="false"/>
+              <foreground color="-4342339"/>
+              <lineWrap value="false"/>
+              <selectedTextColor color="-4342339"/>
+            </properties>
+          </component>
+          <component id="b2d52" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <font style="1"/>
+              <foreground color="-4342339"/>
+              <text value="Weapons:"/>
+            </properties>
+          </component>
+          <component id="e7182" class="javax.swing.JTextArea" binding="weaponsTextArea">
+            <constraints>
+              <grid row="13" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="5"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <caretColor color="-4342339"/>
+              <disabledTextColor color="-4342339"/>
+              <editable value="false"/>
+              <foreground color="-4342339"/>
+              <lineWrap value="false"/>
+            </properties>
+          </component>
+          <component id="fc5e6" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="14" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <font style="1"/>
+              <foreground color="-4342339"/>
+              <text value="Helms:"/>
+            </properties>
+          </component>
+          <component id="1f560" class="javax.swing.JTextArea" binding="helmsTextArea">
+            <constraints>
+              <grid row="15" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="5"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <caretColor color="-4342339"/>
+              <disabledTextColor color="-4342339"/>
+              <editable value="false"/>
+              <foreground color="-4342339"/>
+              <lineWrap value="false"/>
+            </properties>
+          </component>
+          <vspacer id="57976">
+            <constraints>
+              <grid row="16" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
+          <component id="63441" class="javax.swing.JTextPane" binding="alrightHeroWeReTextPane" default-binding="true">
+            <constraints>
+              <grid row="17" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <caretColor color="-4342339"/>
+              <disabledTextColor color="-4342339"/>
+              <editable value="false"/>
+              <foreground color="-4342339"/>
+              <text value="Alright, hero! We're ready to go! Let your adventure begin..."/>
+            </properties>
+          </component>
+          <component id="4f6b0" class="javax.swing.JTextArea" binding="defenceTextArea">
+            <constraints>
+              <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="5"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12566464"/>
+              <caretColor color="-4342339"/>
+              <disabledTextColor color="-4342339"/>
+              <editable value="false"/>
+              <foreground color="-4342339"/>
+              <lineWrap value="false"/>
+              <selectedTextColor color="-4342339"/>
+            </properties>
+          </component>
+          <vspacer id="cdfad">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                <minimum-size width="-1" height="30"/>
+                <preferred-size width="-1" height="30"/>
+                <maximum-size width="-1" height="30"/>
+              </grid>
+            </constraints>
+          </vspacer>
+          <component id="fbaf1" class="javax.swing.JButton" binding="letSGOButton" default-binding="true">
+            <constraints>
+              <grid row="18" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Let's GO!"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>
