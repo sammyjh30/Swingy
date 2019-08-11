@@ -17,4 +17,8 @@ public interface MapView {
 	void					falseAlarm(int x, int y);
 
 	void					createEncounter(Enemy enemy);
+
+	void					levelUp();
+
+	void					youWin();
 }

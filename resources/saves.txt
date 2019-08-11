@@ -43,3 +43,43 @@
 9|Weapons|0|Wooden Sword of Noobs|1|1
 9|Armors|0|Casual Clothes|1|1
 9|Helms|0|Straw Helmet|1|1
+10|sdf|Barbarian|1|4|4|31|50|150|1|2
+10|Inventory|3|9|0|0|0
+10|Weapons|0|Wooden Sword of Noobs|1|1
+10|Armors|0|Casual Clothes|1|1
+10|Helms|0|Straw Helmet|1|1
+11|dfgdr|Warrior|1|2|2|18|50|148|4|8
+11|Inventory|3|9|0|0|0
+11|Weapons|0|Wooden Sword of Noobs|1|1
+11|Armors|0|Casual Clothes|1|1
+11|Helms|0|Straw Helmet|1|1
+12|Hello Scroll test|Knight|1|3|3|0|50|178|4|3
+12|Inventory|3|9|0|0|0
+12|Weapons|0|Wooden Sword of Noobs|1|1
+12|Armors|0|Casual Clothes|1|1
+12|Helms|0|Straw Helmet|1|1
+13|Bob|Barbarian|2|5|5|126|150|260|6|10
+13|Inventory|9|9|1|1|1
+13|Weapons|0|Wooden Sword of Noobs|1|1|1|Platinum Lance of Bone Shattering|1|2|2|Silver Lance of Bone Shattering|1|2|3|Platinum Crossbow of Skull Crushing|2|3
+13|Armors|0|Casual Clothes|1|1|1|Shadow Chest Plate|1|2|2|Wooden Shield|2|2
+13|Helms|0|Straw Helmet|1|1|1|Shadow Helmet|1|2
+14|Bob|Barbarian|2|5|5|88|150|760|7|11
+14|Inventory|9|9|1|1|1
+14|Weapons|0|Wooden Sword of Noobs|1|1|1|Platinum Lance of Bone Shattering|1|2|2|Silver Lance of Bone Shattering|1|2|3|Platinum Crossbow of Skull Crushing|2|3
+14|Armors|0|Casual Clothes|1|1|1|Shadow Chest Plate|1|2|2|Wooden Shield|2|2
+14|Helms|0|Straw Helmet|1|1|1|Shadow Helmet|1|2
+15|Bob|Barbarian|4|7|7|487|500|610|4|22
+15|Inventory|3|30|0|0|0
+15|Weapons|0|Shadow Sword of Tree Cutting|3|4
+15|Armors|0|Wooden Gauntlet|4|4
+15|Helms|0|Bone Helmet|3|4
+16|Bob|Barbarian|5|8|8|750|750|60|7|0
+16|Inventory|7|65|0|0|0
+16|Weapons|0|Shadow Sword of Bone Shattering|4|5|1|Shadow Sword of Darkness|4|2|2|Blood Sword of Skull Crushing|4|3
+16|Armors|0|Wooden Mail|4|3
+16|Helms|0|Wooden Helmet|4|5|1|Bone Helmet|4|2|2|Leather Helmet|4|4
+17|Bob|Barbarian|5|8|8|736|750|12054|10|17
+17|Inventory|9|103|0|0|0
+17|Weapons|0|Wooden Sword of Bone Shattering|5|6|1|Blood Lance of Skull Crushing|5|2|2|Wooden Sword of Darkness|5|4
+17|Armors|0|Shadow Shield|5|6|1|Chain Mail|5|6
+17|Helms|0|Leather Helmet|5|6|1|Chain Helmet|5|2|2|Shadow Helmet|5|5|3|Leather Helmet|5|5

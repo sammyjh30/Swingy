@@ -21,4 +21,6 @@ public interface EncounterView {
 	void					helmDrop(Helm helm);
 
 	void					success();
+
+	void 					itemDropFailed();
 }

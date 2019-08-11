@@ -105,7 +105,20 @@ public class EncounterConsoleView implements EncounterView {
 		this.controller.getGameController().removeEnemy(this.controller.getEnemy());
 		this.controller.victory();
 	}
-
+	public void 			itemDropFailed() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+		System.out.println("				ITEM DROP FAILED!");
+		System.out.println("		It seems your inventory is full!");
+		System.out.println("	You will need to clear out some of your inventory.");
+		System.out.println("Press \"ENTER\" to continue...");
+		try {
+			int read = System.in.read(new byte[2]);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		this.controller.checkLevel();
+	}
 	public void						itemDrop(String item, int boost) {
 		//Clear screen
 		System.out.print("\033[H\033[2J");

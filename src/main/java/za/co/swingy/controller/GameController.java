@@ -227,6 +227,11 @@ public class GameController {
 			this.hero.levelUp();
 			if (this.hero.getLevel() > currentLevel) {
 				//Congrats you levelled up
+				if (this.hero.getLevel() == 6) {
+					this.mapView.youWin();
+				} else {
+					this.getMapView().levelUp();
+				}
 			}
 			this.updateMap();
 		} else {
@@ -247,9 +252,15 @@ public class GameController {
 			this.hero.levelUp();
 			if (this.hero.getLevel() > currentLevel) {
 				//Congrats you levelled up
+				if (this.hero.getLevel() == 6) {
+					this.mapView.youWin();
+				} else {
+					this.getMapView().levelUp();
+				}
+			} else {
+				this.updateMap();
+				this.mapView.display(this);
 			}
-			this.updateMap();
-			this.mapView.display(this);
 //			return;
 		} else if (this.getMap()[newY][newX] == 'O') {
 			System.out.println("COMBAT!");

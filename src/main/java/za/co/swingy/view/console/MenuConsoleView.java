@@ -2,6 +2,7 @@ package za.co.swingy.view.console;
 
 import za.co.swingy.controller.CharacterController;
 import za.co.swingy.view.MenuView;
+import za.co.swingy.view.gui.MenuGuiView;
 
 import javax.validation.constraints.NotNull;
 import java.io.BufferedReader;
@@ -41,23 +42,23 @@ public class MenuConsoleView implements MenuView {
 			InputStreamReader streamReader = new InputStreamReader(System.in);
 			BufferedReader bufferedReader = new BufferedReader(streamReader);
 			String input = bufferedReader.readLine();
-			while (!input.equalsIgnoreCase("NEW") && !input.equalsIgnoreCase("LOAD") && !input.equalsIgnoreCase("EXIT")) {
+			while (!input.equalsIgnoreCase("SWITCH") && !input.equalsIgnoreCase("NEW") && !input.equalsIgnoreCase("LOAD") && !input.equalsIgnoreCase("EXIT")) {
 				System.out.println("Oops, that's not a valid command! Please try again!");
 				System.out.print("  Please enter one of the above commands: ");
 				input = bufferedReader.readLine();
 			}
-			if (input.equalsIgnoreCase("NEW")) {
-				//				return 1;
+			if (input.equalsIgnoreCase("SWITCH")) {
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				MenuGuiView menuGuiView = new MenuGuiView();
+				menuGuiView.menu();
+			} else if (input.equalsIgnoreCase("NEW")) {
 				//Create Character view
-				System.out.println("Call character create function.");
 				this.characterController.createNewHero();
 			} else if (input.equalsIgnoreCase("LOAD")) {
-				//				return 2;
 				//Load character view
-				System.out.println("Call character load function.");
 				this.characterController.loadHero();
 			} else if (input.equalsIgnoreCase("EXIT")) {
-				//				return 0;
 				//Clear screen
 				System.out.print("\033[H\033[2J");
 				System.out.flush();

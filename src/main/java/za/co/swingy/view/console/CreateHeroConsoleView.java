@@ -8,6 +8,7 @@ import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Inventory;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.CreateHeroView;
+import za.co.swingy.view.gui.MenuGuiView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -114,6 +115,14 @@ public class CreateHeroConsoleView implements CreateHeroView {
 			InputStreamReader streamReader = new InputStreamReader(System.in);
 			BufferedReader bufferedReader = new BufferedReader(streamReader);
 			String typeInput = bufferedReader.readLine();
+			if (typeInput.equalsIgnoreCase("SWITCH")) {
+				MenuGuiView menuGuiView = new MenuGuiView();
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				menuGuiView.getCharacterController().getCreateHeroView().
+				menuGuiView.getCharacterController().createNewHero();
+//				menuGuiView.setCharacterController(this.controller);
+			}
 			while (typeInput.isEmpty() || !typeInput.equalsIgnoreCase("A") && !typeInput.equalsIgnoreCase("B") && !typeInput.equalsIgnoreCase("C") && !typeInput.equalsIgnoreCase("D")) {
 				System.out.println("Oops, that's not a valid class! Please try again!");
 				System.out.print("Please enter either A, B, C, or D for your class: ");

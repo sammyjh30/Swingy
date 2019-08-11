@@ -16,6 +16,56 @@ import java.io.InputStreamReader;
 public class MapConsoleView implements MapView {
 	private GameController		controller;
 
+	public void	youWin() {
+		//Clear screen
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+
+		System.out.println("_________________________________________");
+		System.out.println("|                                       |");
+		System.out.println("|                                       |");
+		System.out.println("|      " + (char)27 + "[32m" + "Congratulations! You win!" + "\033[0m" + "        |");
+		System.out.println("|                                       |");
+		System.out.println("|_______________________________________|");
+		System.out.println("Press \"ENTER\" to continue...");
+		try {
+			int read = System.in.read(new byte[2]);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//Clear screen
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+		this.controller.returnToMenu();
+	}
+
+	public void	levelUp() {
+		//Clear screen
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+
+		System.out.println("_________________________________________");
+		System.out.println("|                                       |");
+		System.out.println("|                                       |");
+		System.out.println("|   " + (char)27 + "[32m" + "Congratulations! You leveled up!" + "\033[0m" + "    |");
+		System.out.println("|                                       |");
+		System.out.println("|_______________________________________|");
+		System.out.println("Press \"ENTER\" to continue...");
+		try {
+			int read = System.in.read(new byte[2]);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//Clear screen
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+		this.controller.updateMap();
+		this.controller.getMapView().display(this.controller);
+
+//		this.controller.getGameController().removeEnemy(this.controller.getEnemy());
+//		this.controller.victory();
+	}
+
 	public void					displayMap(char[][] map, int mapSize) {
 		System.out.print("\n");
 		for (int l = 0; l < mapSize * 2 + 2; l++) {
@@ -83,7 +133,7 @@ public class MapConsoleView implements MapView {
 	}
 
 	private void				showOptions() {
-		System.out.println("Your goal is to leave all the maps, or level up lo level 6.");
+		System.out.println("Your goal is to level up lo level 6.");
 		System.out.println("You can move: " + (char)27 + "[32mNORTH" +  "\033[0m, " + (char)27 + "[32mSOUTH" + (char)27 + "[37m, "
 				+ (char)27 + "[32mEAST" +  "\033[0m or " + (char)27 + "[32mWEST" +  "\033[0m");
 		System.out.println("Or you can go to your " + (char)27 + "[32mINVENTORY" +  "\033[0m or " + (char)27 + "[32mSAVE" +  "\033[0m to save and exit this game.");

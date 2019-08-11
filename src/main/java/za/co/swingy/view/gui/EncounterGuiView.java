@@ -117,6 +117,8 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 	private JTextArea helmDropTextArea;
 	private JButton helmDropYesButton;
 	private JButton helmDropNoButton;
+	private JPanel inventoryFullPanel;
+	private JButton deathButton;
 
 	public EncounterGuiView(GameController gameController) {
 		this.gameController = gameController;
@@ -220,9 +222,15 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 				controller.checkLevel();
 			}
 		});
+		deathButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkLevel();
+			}
+		});
 	}
 
-	private void setHero(Hero hero) {
+	private void			setHero(Hero hero) {
 		if (hero.getName().length() > 10) {
 			this.nameTextArea.setText(hero.getName().substring(0, 10));
 		} else {
@@ -256,7 +264,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		}
 	}
 
-	private void setEnemy(Enemy enemy) {
+	private void			setEnemy(Enemy enemy) {
 		if (enemy.getEnemyName().length() > 10) {
 			this.enemyNameTextArea.setText(enemy.getEnemyName().substring(0, 10) + "the" + enemy.getEnemyType());
 		} else {
@@ -272,7 +280,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.enemyDefTextArea.setText("" + enemy.getDefence());
 	}
 
-	public void display() {
+	public void				display() {
 		this.getFrame().setContentPane(this.mainPanel);
 		this.mainPanel.setVisible(true);
 		this.encounterPanel.setVisible(true);
@@ -288,6 +296,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.armorDropPanel.setVisible(false);
 		this.weaponDropPanel.setVisible(false);
 		this.helmDropPanel.setVisible(false);
+		this.inventoryFullPanel.setVisible(false);
 
 		this.setHero(this.controller.getHero());
 		this.setEnemy(this.controller.getEnemy());
@@ -295,7 +304,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 
 	}
 
-	public void runFailed() {
+	public void				runFailed() {
 		this.encounterPanel.setVisible(false);
 		this.heroPanel.setVisible(false);
 		this.enemyPanel.setVisible(false);
@@ -307,7 +316,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.battleHistoryFinalScrollPane.setVisible(false);
 	}
 
-	private void setBattleHistoryHero(Hero hero) {
+	private void			setBattleHistoryHero(Hero hero) {
 		if (hero.getName().length() > 10) {
 			this.battleHistoryHeroNameTextArea.setText(hero.getName().substring(0, 10));
 		} else {
@@ -341,7 +350,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		}
 	}
 
-	private void setBattleHistoryEnemy(Enemy enemy) {
+	private void			setBattleHistoryEnemy(Enemy enemy) {
 		if (enemy.getEnemyName().length() > 10) {
 			this.battleHistoryEnemyNameTextArea.setText(enemy.getEnemyName().substring(0, 10) + "the" + enemy.getEnemyType());
 		} else {
@@ -357,7 +366,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.battleHistoryEnemyDefTextArea.setText("" + enemy.getDefence());
 	}
 
-	public void battleHistory() {
+	public void				battleHistory() {
 		this.setBattleHistoryHero(this.controller.getHero());
 		this.setBattleHistoryEnemy(this.controller.getEnemy());
 		this.battleHistoryFinalTextPane.setText(this.controller.getRoundUpdate());
@@ -370,6 +379,20 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.battleHistoryHeroPanel.setVisible(true);
 		this.battleHistoryHeroPanel.setVisible(true);
 		this.battleHistoryFinalScrollPane.setVisible(true);
+	}
+
+	public void 			itemDropFailed() {
+		this.mainPanel.setVisible(true);
+		this.encounterPanel.setVisible(false);
+		this.runFailedButton.setVisible(false);
+		this.battleHistoryPanel.setVisible(false);
+		this.successPanel.setVisible(false);
+		this.itemDropPanel.setVisible(false);
+		this.armorDropPanel.setVisible(false);
+		this.itemDropPanel.setVisible(false);
+		this.weaponDropPanel.setVisible(false);
+		this.helmDropPanel.setVisible(false);
+		this.inventoryFullPanel.setVisible(true);
 	}
 
 	public void itemDrop(String item, int boost) {
@@ -390,6 +413,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.battleHistoryHeroPanel.setVisible(false);
 		this.successPanel.setVisible(false);
 		this.itemDropPanel.setVisible(true);
+		this.inventoryFullPanel.setVisible(false);
 	}
 
 	public void armorDrop(Armor armor) {
@@ -398,6 +422,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.encounterPanel.setVisible(false);
 		this.battleHistoryPanel.setVisible(false);
 		this.armorDropPanel.setVisible(true);
+		this.inventoryFullPanel.setVisible(false);
 
 	}
 
@@ -407,6 +432,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.encounterPanel.setVisible(false);
 		this.battleHistoryPanel.setVisible(false);
 		this.weaponDropPanel.setVisible(true);
+		this.inventoryFullPanel.setVisible(false);
 	}
 
 	public void helmDrop(Helm helm) {
@@ -415,6 +441,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.encounterPanel.setVisible(false);
 		this.battleHistoryPanel.setVisible(false);
 		this.helmDropPanel.setVisible(true);
+		this.inventoryFullPanel.setVisible(false);
 	}
 
 	public void success() {
@@ -431,6 +458,8 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		this.weaponDropPanel.setVisible(false);
 		this.helmDropPanel.setVisible(false);
 		this.successPanel.setVisible(true);
+		this.inventoryFullPanel.setVisible(false);
+
 	}
 
 	{
@@ -449,7 +478,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 	 */
 	private void $$$setupUI$$$() {
 		mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayoutManager(8, 1, new Insets(0, 0, 0, 0), -1, -1));
+		mainPanel.setLayout(new GridLayoutManager(9, 1, new Insets(0, 0, 0, 0), -1, -1));
 		mainPanel.setBackground(new Color(-12566464));
 		mainPanel.setMaximumSize(new Dimension(560, 560));
 		mainPanel.setMinimumSize(new Dimension(560, 560));
@@ -458,7 +487,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		encounterPanel.setLayout(new GridLayoutManager(11, 4, new Insets(0, 0, 0, 0), -1, -1));
 		encounterPanel.setBackground(new Color(-12566464));
 		encounterPanel.setForeground(new Color(-4342339));
-		mainPanel.add(encounterPanel, new GridConstraints(7, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		mainPanel.add(encounterPanel, new GridConstraints(8, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
 		encounterPanel.setBorder(BorderFactory.createTitledBorder("0"));
 		heroPanel = new JPanel();
 		heroPanel.setLayout(new GridLayoutManager(3, 4, new Insets(0, 0, 0, 0), -1, -1));
@@ -656,7 +685,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		runFailedPanel = new JPanel();
 		runFailedPanel.setLayout(new GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), -1, -1));
 		runFailedPanel.setBackground(new Color(-12566464));
-		mainPanel.add(runFailedPanel, new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		mainPanel.add(runFailedPanel, new GridConstraints(7, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
 		final JTextPane textPane1 = new JTextPane();
 		textPane1.setBackground(new Color(-12566464));
 		textPane1.setCaretColor(new Color(-12948803));
@@ -683,7 +712,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		battleHistoryPanel.setLayout(new GridLayoutManager(9, 3, new Insets(0, 0, 0, 0), -1, -1));
 		battleHistoryPanel.setBackground(new Color(-12566464));
 		battleHistoryPanel.setForeground(new Color(-4342339));
-		mainPanel.add(battleHistoryPanel, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		mainPanel.add(battleHistoryPanel, new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
 		battleHistoryPanel.setBorder(BorderFactory.createTitledBorder("0"));
 		battleHistoryHeroPanel = new JPanel();
 		battleHistoryHeroPanel.setLayout(new GridLayoutManager(3, 4, new Insets(0, 0, 0, 0), -1, -1));
@@ -877,7 +906,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		successPanel = new JPanel();
 		successPanel.setLayout(new GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), -1, -1));
 		successPanel.setBackground(new Color(-12566464));
-		mainPanel.add(successPanel, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		mainPanel.add(successPanel, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
 		final JTextPane textPane4 = new JTextPane();
 		textPane4.setBackground(new Color(-12566464));
 		textPane4.setCaretColor(new Color(-10109628));
@@ -903,7 +932,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		itemDropPanel = new JPanel();
 		itemDropPanel.setLayout(new GridLayoutManager(7, 4, new Insets(0, 0, 0, 0), -1, -1));
 		itemDropPanel.setBackground(new Color(-12566464));
-		mainPanel.add(itemDropPanel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		mainPanel.add(itemDropPanel, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
 		final Spacer spacer20 = new Spacer();
 		itemDropPanel.add(spacer20, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
 		final Spacer spacer21 = new Spacer();
@@ -949,7 +978,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		armorDropPanel = new JPanel();
 		armorDropPanel.setLayout(new GridLayoutManager(7, 4, new Insets(0, 0, 0, 0), -1, -1));
 		armorDropPanel.setBackground(new Color(-12566464));
-		mainPanel.add(armorDropPanel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		mainPanel.add(armorDropPanel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
 		final Spacer spacer25 = new Spacer();
 		armorDropPanel.add(spacer25, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
 		final Spacer spacer26 = new Spacer();
@@ -995,7 +1024,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		weaponDropPanel = new JPanel();
 		weaponDropPanel.setLayout(new GridLayoutManager(7, 4, new Insets(0, 0, 0, 0), -1, -1));
 		weaponDropPanel.setBackground(new Color(-12566464));
-		mainPanel.add(weaponDropPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		mainPanel.add(weaponDropPanel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
 		final Spacer spacer30 = new Spacer();
 		weaponDropPanel.add(spacer30, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
 		final Spacer spacer31 = new Spacer();
@@ -1041,7 +1070,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		helmDropPanel = new JPanel();
 		helmDropPanel.setLayout(new GridLayoutManager(7, 4, new Insets(0, 0, 0, 0), -1, -1));
 		helmDropPanel.setBackground(new Color(-12566464));
-		mainPanel.add(helmDropPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		mainPanel.add(helmDropPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
 		final Spacer spacer35 = new Spacer();
 		helmDropPanel.add(spacer35, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
 		final Spacer spacer36 = new Spacer();
@@ -1084,6 +1113,32 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 		helmDropPanel.add(spacer38, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
 		final Spacer spacer39 = new Spacer();
 		helmDropPanel.add(spacer39, new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		inventoryFullPanel = new JPanel();
+		inventoryFullPanel.setLayout(new GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), -1, -1));
+		inventoryFullPanel.setBackground(new Color(-12566464));
+		mainPanel.add(inventoryFullPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		final JTextPane textPane12 = new JTextPane();
+		textPane12.setBackground(new Color(-12566464));
+		textPane12.setCaretColor(new Color(-4380623));
+		textPane12.setDisabledTextColor(new Color(-4380623));
+		textPane12.setEditable(false);
+		textPane12.setForeground(new Color(-4380623));
+		textPane12.setText("\t\t\t\tITEM DROP FAILED!\n              It seems your inventory is full!\nYou will need to clear out some of your inventory.");
+		inventoryFullPanel.add(textPane12, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+		final Spacer spacer40 = new Spacer();
+		inventoryFullPanel.add(spacer40, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer41 = new Spacer();
+		inventoryFullPanel.add(spacer41, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer42 = new Spacer();
+		inventoryFullPanel.add(spacer42, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+		final Spacer spacer43 = new Spacer();
+		inventoryFullPanel.add(spacer43, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+		deathButton = new JButton();
+		deathButton.setLabel("OK");
+		deathButton.setText("OK");
+		inventoryFullPanel.add(deathButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final Spacer spacer44 = new Spacer();
+		inventoryFullPanel.add(spacer44, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
 	}
 
 	/**

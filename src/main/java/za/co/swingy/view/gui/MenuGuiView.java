@@ -7,12 +7,14 @@ import lombok.Getter;
 import lombok.Setter;
 import za.co.swingy.controller.CharacterController;
 import za.co.swingy.view.MenuView;
+import za.co.swingy.view.console.MenuConsoleView;
 
 import javax.swing.*;
 import javax.validation.constraints.NotNull;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 @Getter
 @Setter
@@ -24,6 +26,7 @@ public class MenuGuiView extends FrameView implements MenuView {
 	private JButton exitButton;
 	@NotNull
 	private JPanel mainPanel;
+	private JButton switchButton;
 
 	public MenuGuiView() {
 		this.initFrame();
@@ -55,9 +58,19 @@ public class MenuGuiView extends FrameView implements MenuView {
 			}
 		});
 
+		switchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+//				getFrame().dispatchEvent(new WindowEvent(getFrame(), WindowEvent.WINDOW_CLOSING));
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+				MenuConsoleView menuConsoleView = new MenuConsoleView();
+				menuConsoleView.menu();
+			}
+		});
 	}
 
-	public void 		resetMenu() {
+	public void resetMenu() {
 		this.getFrame().setContentPane(this.mainPanel);
 		this.getFrame().pack();
 		this.menu();
@@ -90,7 +103,7 @@ public class MenuGuiView extends FrameView implements MenuView {
 		panel1.setMinimumSize(new Dimension(560, 560));
 		panel1.setPreferredSize(new Dimension(560, 560));
 		mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayoutManager(7, 4, new Insets(0, 0, 0, 0), -1, -1));
+		mainPanel.setLayout(new GridLayoutManager(8, 4, new Insets(0, 0, 0, 0), -1, -1));
 		mainPanel.setBackground(new Color(-12566464));
 		panel1.add(mainPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
 		welcomeToSwingyWhatTextArea = new JTextArea();
@@ -137,7 +150,10 @@ public class MenuGuiView extends FrameView implements MenuView {
 		label3.setText("Leave the game, duh!");
 		mainPanel.add(label3, new GridConstraints(5, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final Spacer spacer4 = new Spacer();
-		mainPanel.add(spacer4, new GridConstraints(6, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 150), new Dimension(-1, 150), new Dimension(-1, 150), 0, false));
+		mainPanel.add(spacer4, new GridConstraints(7, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 150), new Dimension(-1, 150), new Dimension(-1, 150), 0, false));
+		switchButton = new JButton();
+		switchButton.setText("Switch");
+		mainPanel.add(switchButton, new GridConstraints(6, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 	}
 
 	/**
@@ -158,4 +174,5 @@ public class MenuGuiView extends FrameView implements MenuView {
 		}
 		return new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
 	}
+
 }

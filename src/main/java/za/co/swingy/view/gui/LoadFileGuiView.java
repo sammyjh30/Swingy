@@ -21,8 +21,6 @@ import java.util.ArrayList;
 public class LoadFileGuiView extends FrameView implements LoadFileView {
 	private CharacterController characterController;
 	private JPanel mainPanel;
-	private JTextPane LOADSAVETextPane;
-	private JScrollPane loadScrollPanel;
 	private JPanel loadsPanel;
 	private JPanel loadMainPanel;
 	private JButton returnButton;
@@ -42,6 +40,9 @@ public class LoadFileGuiView extends FrameView implements LoadFileView {
 	private JTextPane alrightHeroWeReTextPane;
 	private JTextArea defenceTextArea;
 	private JButton letSGOButton;
+	private JTextPane LOADSAVETextPane;
+	private JScrollPane loadScrollPanel;
+	private JButton switchButton;
 
 	private Hero hero;
 
@@ -66,41 +67,17 @@ public class LoadFileGuiView extends FrameView implements LoadFileView {
 				gameController.showMapView();
 			}
 		});
+		switchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//For switch functionality
+			}
+		});
 	}
 
 	private void setLoadGUI(ArrayList<Hero> saves) {
 		int lineCount = 0;
 
-//		JTextArea headerTextArea = new JTextArea();
-//		headerTextArea.setText("_______________________________________\n" +
-//				"| No. |     Name            |  Level  |\n" +
-//				"|_____|_____________________|_________|");
-//		headerTextArea.setBackground(new Color(-11645362));
-//		headerTextArea.setForeground(new Color(-4342339));
-//		headerTextArea.setMinimumSize(new Dimension(400, 90));
-//		headerTextArea.setMaximumSize(new Dimension(400, 90));
-//		headerTextArea.setPreferredSize(new Dimension(400, 90));
-//		headerTextArea.setEditable(false);
-//
-//		JPanel loadHeaderPanel = new JPanel();
-//		loadHeaderPanel.setMinimumSize(new Dimension(460, 30));
-//		loadHeaderPanel.setMaximumSize(new Dimension(460, 30));
-//		loadHeaderPanel.setPreferredSize(new Dimension(460, 30));
-//
-//		GridBagConstraints loadHeaderGbd = new GridBagConstraints();
-//		loadHeaderGbd.gridx = 0;
-//		loadHeaderGbd.gridy = 0;
-//
-//		loadHeaderPanel.add(headerTextArea, loadHeaderGbd);
-//
-//		loadHeaderGbd.gridx = 0;
-//		loadHeaderGbd.gridy = lineCount;
-//
-//		this.loadsPanel.add(loadHeaderPanel, loadHeaderGbd);
-
-
-//		lineCount++;
-//
 		for (int i = 0; i < saves.size() && i <= 100; i++) {
 			//Print index
 			String index = null;
@@ -145,6 +122,8 @@ public class LoadFileGuiView extends FrameView implements LoadFileView {
 			loadIterPanel.setMinimumSize(new Dimension(460, 30));
 			loadIterPanel.setMaximumSize(new Dimension(460, 30));
 			loadIterPanel.setPreferredSize(new Dimension(460, 30));
+			loadIterPanel.setBackground(new Color(-11645362));
+			loadIterPanel.setForeground(new Color(-4342339));
 
 			GridBagConstraints loadIterGbd = new GridBagConstraints();
 			loadIterGbd.gridx = 0;
@@ -172,31 +151,6 @@ public class LoadFileGuiView extends FrameView implements LoadFileView {
 
 			lineCount++;
 		}
-//		JTextArea loadIterTextArea = new JTextArea();
-//		loadIterTextArea.setText("|_____|_____________________|_________|");
-//		loadIterTextArea.setBackground(new Color(-11645362));
-//		loadIterTextArea.setForeground(new Color(-4342339));
-//		loadIterTextArea.setMinimumSize(new Dimension(300, 30));
-//		loadIterTextArea.setMaximumSize(new Dimension(300, 30));
-//		loadIterTextArea.setPreferredSize(new Dimension(300, 30));
-//		loadIterTextArea.setEditable(false);
-//
-//		JPanel loadFooterPanel = new JPanel();
-//		loadFooterPanel.setMinimumSize(new Dimension(460, 30));
-//		loadFooterPanel.setMaximumSize(new Dimension(460, 30));
-//		loadFooterPanel.setPreferredSize(new Dimension(460, 30));
-//
-//		GridBagConstraints loadFooterGbd = new GridBagConstraints();
-//		loadFooterGbd.gridx = 0;
-//		loadFooterGbd.gridy = 0;
-//
-//		loadFooterPanel.add(loadIterTextArea, loadFooterGbd);
-//
-//		GridBagConstraints loadIterGbd = new GridBagConstraints();
-//		loadIterGbd.gridx = 0;
-//		loadIterGbd.gridy = lineCount;
-//
-//		this.loadsPanel.add(loadFooterPanel, loadIterGbd);
 	}
 
 	public void saveList(ArrayList<Hero> saves) {
@@ -290,49 +244,15 @@ public class LoadFileGuiView extends FrameView implements LoadFileView {
 	 */
 	private void $$$setupUI$$$() {
 		mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayoutManager(3, 3, new Insets(0, 0, 0, 0), -1, -1));
+		mainPanel.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
 		mainPanel.setBackground(new Color(-12566464));
 		mainPanel.setMaximumSize(new Dimension(560, 560));
 		mainPanel.setMinimumSize(new Dimension(560, 560));
 		mainPanel.setPreferredSize(new Dimension(560, 560));
-		loadMainPanel = new JPanel();
-		loadMainPanel.setLayout(new GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), -1, -1));
-		loadMainPanel.setBackground(new Color(-12566464));
-		loadMainPanel.setForeground(new Color(-4342339));
-		mainPanel.add(loadMainPanel, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
-		final Spacer spacer1 = new Spacer();
-		loadMainPanel.add(spacer1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), new Dimension(-1, 20), new Dimension(-1, 20), 0, false));
-		LOADSAVETextPane = new JTextPane();
-		LOADSAVETextPane.setBackground(new Color(-12566464));
-		LOADSAVETextPane.setCaretColor(new Color(-4342339));
-		LOADSAVETextPane.setDisabledTextColor(new Color(-4342339));
-		LOADSAVETextPane.setEnabled(false);
-		Font LOADSAVETextPaneFont = this.$$$getFont$$$(null, Font.BOLD, 16, LOADSAVETextPane.getFont());
-		if (LOADSAVETextPaneFont != null) LOADSAVETextPane.setFont(LOADSAVETextPaneFont);
-		LOADSAVETextPane.setText("\t\t\tLOAD SAVE:");
-		loadMainPanel.add(LOADSAVETextPane, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-		final Spacer spacer2 = new Spacer();
-		loadMainPanel.add(spacer2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(20, -1), new Dimension(20, -1), new Dimension(20, -1), 0, false));
-		final Spacer spacer3 = new Spacer();
-		loadMainPanel.add(spacer3, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(20, -1), new Dimension(20, -1), new Dimension(20, -1), 0, false));
-		loadScrollPanel = new JScrollPane();
-		loadScrollPanel.setBackground(new Color(-11645362));
-		loadScrollPanel.setForeground(new Color(-4342339));
-		loadMainPanel.add(loadScrollPanel, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(500, 360), new Dimension(500, 360), new Dimension(500, -1), 0, false));
-		loadsPanel = new JPanel();
-		loadsPanel.setLayout(new GridBagLayout());
-		loadsPanel.setBackground(new Color(-11645362));
-		loadsPanel.setForeground(new Color(-4342339));
-		loadScrollPanel.setViewportView(loadsPanel);
-		final Spacer spacer4 = new Spacer();
-		loadMainPanel.add(spacer4, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 10), new Dimension(-1, 10), new Dimension(-1, 10), 0, false));
-		returnButton = new JButton();
-		returnButton.setText("Button");
-		loadMainPanel.add(returnButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		noSavesPanel = new JPanel();
 		noSavesPanel.setLayout(new GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), -1, -1));
 		noSavesPanel.setBackground(new Color(-12566464));
-		mainPanel.add(noSavesPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		mainPanel.add(noSavesPanel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
 		final JTextPane textPane1 = new JTextPane();
 		textPane1.setBackground(new Color(-12566464));
 		textPane1.setCaretColor(new Color(-4380623));
@@ -341,32 +261,32 @@ public class LoadFileGuiView extends FrameView implements LoadFileView {
 		textPane1.setForeground(new Color(-4380623));
 		textPane1.setText("You don't have any saves yet! Create a new character to start the adventure!\"");
 		noSavesPanel.add(textPane1, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-		final Spacer spacer5 = new Spacer();
-		noSavesPanel.add(spacer5, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-		final Spacer spacer6 = new Spacer();
-		noSavesPanel.add(spacer6, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-		final Spacer spacer7 = new Spacer();
-		noSavesPanel.add(spacer7, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-		final Spacer spacer8 = new Spacer();
-		noSavesPanel.add(spacer8, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+		final Spacer spacer1 = new Spacer();
+		noSavesPanel.add(spacer1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer2 = new Spacer();
+		noSavesPanel.add(spacer2, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer3 = new Spacer();
+		noSavesPanel.add(spacer3, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+		final Spacer spacer4 = new Spacer();
+		noSavesPanel.add(spacer4, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
 		deathButton = new JButton();
 		deathButton.setLabel("OK");
 		deathButton.setText("OK");
 		noSavesPanel.add(deathButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final Spacer spacer9 = new Spacer();
-		noSavesPanel.add(spacer9, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
+		final Spacer spacer5 = new Spacer();
+		noSavesPanel.add(spacer5, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
 		heroPanel = new JPanel();
 		heroPanel.setLayout(new GridLayoutManager(20, 4, new Insets(0, 0, 0, 0), -1, -1));
 		heroPanel.setBackground(new Color(-12566464));
 		heroPanel.setForeground(new Color(-4342339));
 		heroPanel.setOpaque(true);
-		mainPanel.add(heroPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-		final Spacer spacer10 = new Spacer();
-		heroPanel.add(spacer10, new GridConstraints(19, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-		final Spacer spacer11 = new Spacer();
-		heroPanel.add(spacer11, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
-		final Spacer spacer12 = new Spacer();
-		heroPanel.add(spacer12, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
+		mainPanel.add(heroPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		final Spacer spacer6 = new Spacer();
+		heroPanel.add(spacer6, new GridConstraints(19, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer7 = new Spacer();
+		heroPanel.add(spacer7, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
+		final Spacer spacer8 = new Spacer();
+		heroPanel.add(spacer8, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
 		final JLabel label1 = new JLabel();
 		label1.setBackground(new Color(-12566464));
 		Font label1Font = this.$$$getFont$$$(null, Font.BOLD, -1, label1.getFont());
@@ -532,8 +452,8 @@ public class LoadFileGuiView extends FrameView implements LoadFileView {
 		helmsTextArea.setForeground(new Color(-4342339));
 		helmsTextArea.setLineWrap(false);
 		heroPanel.add(helmsTextArea, new GridConstraints(15, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 5), null, 0, false));
-		final Spacer spacer13 = new Spacer();
-		heroPanel.add(spacer13, new GridConstraints(16, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer9 = new Spacer();
+		heroPanel.add(spacer9, new GridConstraints(16, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
 		alrightHeroWeReTextPane = new JTextPane();
 		alrightHeroWeReTextPane.setBackground(new Color(-12566464));
 		alrightHeroWeReTextPane.setCaretColor(new Color(-4342339));
@@ -551,11 +471,49 @@ public class LoadFileGuiView extends FrameView implements LoadFileView {
 		defenceTextArea.setLineWrap(false);
 		defenceTextArea.setSelectedTextColor(new Color(-4342339));
 		heroPanel.add(defenceTextArea, new GridConstraints(6, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 5), null, 0, false));
-		final Spacer spacer14 = new Spacer();
-		heroPanel.add(spacer14, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
+		final Spacer spacer10 = new Spacer();
+		heroPanel.add(spacer10, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
 		letSGOButton = new JButton();
 		letSGOButton.setText("Let's GO!");
 		heroPanel.add(letSGOButton, new GridConstraints(18, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		loadMainPanel = new JPanel();
+		loadMainPanel.setLayout(new GridLayoutManager(5, 4, new Insets(0, 0, 0, 0), -1, -1));
+		loadMainPanel.setBackground(new Color(-12566464));
+		loadMainPanel.setForeground(new Color(-4342339));
+		mainPanel.add(loadMainPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
+		final Spacer spacer11 = new Spacer();
+		loadMainPanel.add(spacer11, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 10), new Dimension(-1, 10), new Dimension(-1, 10), 0, false));
+		LOADSAVETextPane = new JTextPane();
+		LOADSAVETextPane.setBackground(new Color(-12566464));
+		LOADSAVETextPane.setCaretColor(new Color(-4342339));
+		LOADSAVETextPane.setDisabledTextColor(new Color(-4342339));
+		LOADSAVETextPane.setEnabled(false);
+		Font LOADSAVETextPaneFont = this.$$$getFont$$$(null, Font.BOLD, 16, LOADSAVETextPane.getFont());
+		if (LOADSAVETextPaneFont != null) LOADSAVETextPane.setFont(LOADSAVETextPaneFont);
+		LOADSAVETextPane.setText("\t\t\tLOAD SAVE:");
+		loadMainPanel.add(LOADSAVETextPane, new GridConstraints(1, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 25), new Dimension(150, 25), new Dimension(-1, 25), 0, false));
+		final Spacer spacer12 = new Spacer();
+		loadMainPanel.add(spacer12, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(20, -1), new Dimension(20, -1), new Dimension(20, -1), 0, false));
+		final Spacer spacer13 = new Spacer();
+		loadMainPanel.add(spacer13, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(20, -1), new Dimension(20, -1), new Dimension(20, -1), 0, false));
+		loadScrollPanel = new JScrollPane();
+		loadScrollPanel.setBackground(new Color(-11645362));
+		loadScrollPanel.setForeground(new Color(-4342339));
+		loadMainPanel.add(loadScrollPanel, new GridConstraints(2, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(500, 300), new Dimension(500, 300), new Dimension(500, -1), 0, false));
+		loadsPanel = new JPanel();
+		loadsPanel.setLayout(new GridBagLayout());
+		loadsPanel.setBackground(new Color(-11645362));
+		loadsPanel.setForeground(new Color(-4342339));
+		loadScrollPanel.setViewportView(loadsPanel);
+		final Spacer spacer14 = new Spacer();
+		loadMainPanel.add(spacer14, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 10), new Dimension(-1, 10), new Dimension(-1, 10), 0, false));
+		returnButton = new JButton();
+		returnButton.setText("Return");
+		loadMainPanel.add(returnButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		switchButton = new JButton();
+		switchButton.setLabel("Switch");
+		switchButton.setText("Switch");
+		loadMainPanel.add(switchButton, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 	}
 
 	/**
