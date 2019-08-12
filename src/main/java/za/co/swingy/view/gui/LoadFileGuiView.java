@@ -3,6 +3,8 @@ package za.co.swingy.view.gui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import lombok.Getter;
+import lombok.Setter;
 import za.co.swingy.controller.CharacterController;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Hero;
@@ -11,6 +13,9 @@ import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Inventory;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.LoadFileView;
+import za.co.swingy.view.console.CreateHeroConsoleView;
+import za.co.swingy.view.console.LoadFileConsoleView;
+import za.co.swingy.view.console.MenuConsoleView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +23,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+@Setter
+@Getter
 public class LoadFileGuiView extends FrameView implements LoadFileView {
 	private CharacterController characterController;
 	private JPanel mainPanel;
@@ -71,6 +78,76 @@ public class LoadFileGuiView extends FrameView implements LoadFileView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//For switch functionality
+			}
+		});
+		switchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//CreateHero
+				CreateHeroConsoleView createHeroConsoleView = new CreateHeroConsoleView(characterController);
+				characterController.setCreateHeroView(createHeroConsoleView);
+
+				//LoadHero
+				LoadFileConsoleView loadFileConsoleView = new LoadFileConsoleView(characterController);
+				characterController.setLoadFileView(loadFileConsoleView);
+
+				MenuConsoleView menuConsoleView = new MenuConsoleView(characterController);
+				characterController.setMenuView(menuConsoleView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+
+				characterController.loadHero();
+			}
+		});
+	}
+
+	public LoadFileGuiView(CharacterController characterController) {
+		this.characterController = characterController;
+
+		returnButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				characterController.returnToMenu();
+			}
+		});
+		deathButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				characterController.returnToMenu();
+			}
+		});
+		letSGOButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				heroPanel.setVisible(false);
+				GameController gameController = GameController.builder().hero(hero).mapView(new MapGuiView()).characterController(characterController).build();
+				gameController.showMapView();
+			}
+		});
+		switchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Switch button pressed");
+				//CreateHero
+				CreateHeroConsoleView createHeroConsoleView = new CreateHeroConsoleView(characterController);
+				characterController.setCreateHeroView(createHeroConsoleView);
+
+				//LoadHero
+				LoadFileConsoleView loadFileConsoleView = new LoadFileConsoleView(characterController);
+				characterController.setLoadFileView(loadFileConsoleView);
+
+				MenuConsoleView menuConsoleView = new MenuConsoleView(characterController);
+				characterController.setMenuView(menuConsoleView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+
+				characterController.loadHero();
 			}
 		});
 	}

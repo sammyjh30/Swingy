@@ -13,6 +13,9 @@ import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Inventory;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.CreateHeroView;
+import za.co.swingy.view.console.CreateHeroConsoleView;
+import za.co.swingy.view.console.LoadFileConsoleView;
+import za.co.swingy.view.console.MenuConsoleView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,6 +49,8 @@ public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 	private JButton barbarianButton;
 	private JButton letSGOButton;
 	private JTextPane alrightHeroWeReTextPane;
+	private JButton switchTypeButton;
+	private JButton switchNameButton;
 
 	private String name = null;
 	private String type = null;
@@ -120,9 +125,169 @@ public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 				gameController.showMapView();
 			}
 		});
+		switchTypeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//CreateHero
+				CreateHeroConsoleView createHeroConsoleView = new CreateHeroConsoleView(controller);
+				createHeroConsoleView.setName(getName());
+				controller.setCreateHeroView(createHeroConsoleView);
+
+				//LoadHero
+				LoadFileConsoleView loadFileConsoleView = new LoadFileConsoleView(controller);
+				controller.setLoadFileView(loadFileConsoleView);
+
+				MenuConsoleView menuConsoleView = new MenuConsoleView(controller);
+				controller.setMenuView(menuConsoleView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+
+				controller.callTypePrompt();
+			}
+		});
+		switchNameButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//CreateHero
+				CreateHeroConsoleView createHeroConsoleView = new CreateHeroConsoleView(controller);
+				controller.setCreateHeroView(createHeroConsoleView);
+
+				//LoadHero
+				LoadFileConsoleView loadFileConsoleView = new LoadFileConsoleView(controller);
+				controller.setLoadFileView(loadFileConsoleView);
+
+				MenuConsoleView menuConsoleView = new MenuConsoleView(controller);
+				controller.setMenuView(menuConsoleView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+
+				controller.createNewHero();
+			}
+		});
 	}
 
-	public void								 printHeroStatus(Hero hero) {
+	public CreateHeroGuiView(CharacterController characterController) {
+//		this.initFrame();
+		controller = characterController;
+		OKButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getActionCommand().equals("OK")) {
+					if (nameTextField.getText() != null && !nameTextField.getText().isEmpty()) {
+						name = nameTextField.getText();
+						topPanel.setVisible(false);
+						promptType();
+						System.out.println("Name = " + name);
+
+					}
+				}
+			}
+		});
+
+		nameTextField.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (nameTextField.getText() == null && nameTextField.getText().isEmpty()) {
+					OKButton.setEnabled(false);
+				} else {
+					OKButton.setEnabled(true);
+				}
+			}
+		});
+		explorerButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				type = "Explorer";
+				bottomPanel.setVisible(false);
+				controller.generateHero(name, type);
+			}
+		});
+		warriorButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				type = "Warrior";
+				bottomPanel.setVisible(false);
+				controller.generateHero(name, type);
+			}
+		});
+		knightButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				type = "Knight";
+				bottomPanel.setVisible(false);
+				controller.generateHero(name, type);
+			}
+		});
+		barbarianButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				type = "Barbarian";
+				bottomPanel.setVisible(false);
+				controller.generateHero(name, type);
+			}
+		});
+		letSGOButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				heroPanel.setVisible(false);
+				GameController gameController = GameController.builder().hero(hero).mapView(new MapGuiView()).characterController(controller).build();
+				gameController.showMapView();
+			}
+		});
+		switchTypeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//CreateHero
+				CreateHeroConsoleView createHeroConsoleView = new CreateHeroConsoleView(controller);
+				createHeroConsoleView.setName(getName());
+				controller.setCreateHeroView(createHeroConsoleView);
+
+				//LoadHero
+				LoadFileConsoleView loadFileConsoleView = new LoadFileConsoleView(controller);
+				controller.setLoadFileView(loadFileConsoleView);
+
+				MenuConsoleView menuConsoleView = new MenuConsoleView(controller);
+				controller.setMenuView(menuConsoleView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+
+				controller.callTypePrompt();
+			}
+		});
+		switchNameButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//CreateHero
+				CreateHeroConsoleView createHeroConsoleView = new CreateHeroConsoleView(controller);
+				controller.setCreateHeroView(createHeroConsoleView);
+
+				//LoadHero
+				LoadFileConsoleView loadFileConsoleView = new LoadFileConsoleView(controller);
+				controller.setLoadFileView(loadFileConsoleView);
+
+				MenuConsoleView menuConsoleView = new MenuConsoleView(controller);
+				controller.setMenuView(menuConsoleView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+
+				controller.createNewHero();
+			}
+		});
+	}
+
+	public void printHeroStatus(Hero hero) {
 		this.hero = hero;
 		this.nameTextArea.setText(hero.getName());
 		this.levelTextArea.setText("" + hero.getLevel());
@@ -176,7 +341,7 @@ public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 		this.heroPanel.setVisible(true);
 	}
 
-	public void				promptName(CharacterController controller) {
+	public void promptName(CharacterController controller) {
 		this.controller = controller;
 		this.getFrame().setContentPane(this.mainPanel);
 		this.getFrame().pack();
@@ -217,165 +382,81 @@ public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 		mainPanel.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
 		mainPanel.setBackground(new Color(-12566464));
 		panel1.add(mainPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(560, 560), new Dimension(560, 560), new Dimension(560, 560), 0, false));
-		topPanel = new JPanel();
-		topPanel.setLayout(new GridLayoutManager(6, 5, new Insets(0, 0, 0, 0), -1, -1));
-		topPanel.setBackground(new Color(-12566464));
-		mainPanel.add(topPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-		final Spacer spacer1 = new Spacer();
-		topPanel.add(spacer1, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
-		final Spacer spacer2 = new Spacer();
-		topPanel.add(spacer2, new GridConstraints(5, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-		final JTextPane textPane1 = new JTextPane();
-		textPane1.setBackground(new Color(-12566464));
-		textPane1.setEditable(false);
-		Font textPane1Font = this.$$$getFont$$$(null, Font.BOLD, 16, textPane1.getFont());
-		if (textPane1Font != null) textPane1.setFont(textPane1Font);
-		textPane1.setForeground(new Color(-4342339));
-		textPane1.setText("Greetings hero! Before you begin your journey, \n            let's set up your character!");
-		topPanel.add(textPane1, new GridConstraints(1, 1, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 5, false));
-		final Spacer spacer3 = new Spacer();
-		topPanel.add(spacer3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
-		final Spacer spacer4 = new Spacer();
-		topPanel.add(spacer4, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
-		final JLabel label1 = new JLabel();
-		label1.setForeground(new Color(-4342339));
-		label1.setText("Please enter in your name:");
-		topPanel.add(label1, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final Spacer spacer5 = new Spacer();
-		topPanel.add(spacer5, new GridConstraints(2, 1, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-		OKButton = new JButton();
-		OKButton.setText("OK");
-		topPanel.add(OKButton, new GridConstraints(4, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final Spacer spacer6 = new Spacer();
-		topPanel.add(spacer6, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-		nameTextField = new JTextField();
-		nameTextField.setBackground(new Color(-7237231));
-		nameTextField.setForeground(new Color(-13355980));
-		nameTextField.setText("");
-		topPanel.add(nameTextField, new GridConstraints(3, 2, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-		bottomPanel = new JPanel();
-		bottomPanel.setLayout(new GridLayoutManager(6, 4, new Insets(0, 0, 0, 0), -1, -1));
-		bottomPanel.setBackground(new Color(-12566464));
-		mainPanel.add(bottomPanel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-		final JTextArea textArea1 = new JTextArea();
-		textArea1.setBackground(new Color(-12566464));
-		textArea1.setEditable(false);
-		textArea1.setForeground(new Color(-4342339));
-		textArea1.setText("Alright, now it's time to choose a class! What would you like to be?");
-		bottomPanel.add(textArea1, new GridConstraints(0, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(150, 30), new Dimension(-1, 30), 0, false));
-		explorerButton = new JButton();
-		explorerButton.setBackground(new Color(-7237231));
-		explorerButton.setText("Explorer");
-		bottomPanel.add(explorerButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(227, 30), new Dimension(120, -1), 0, false));
-		final JLabel label2 = new JLabel();
-		label2.setForeground(new Color(-4342339));
-		label2.setText("(Attack: 1, Defence: 1, MaxHitPoints: 50)");
-		bottomPanel.add(label2, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		warriorButton = new JButton();
-		warriorButton.setBackground(new Color(-7237231));
-		warriorButton.setText("Warrior");
-		bottomPanel.add(warriorButton, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(227, 30), new Dimension(120, -1), 0, false));
-		knightButton = new JButton();
-		knightButton.setBackground(new Color(-7237231));
-		knightButton.setText("Knight");
-		bottomPanel.add(knightButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(227, 30), new Dimension(120, -1), 0, false));
-		barbarianButton = new JButton();
-		barbarianButton.setBackground(new Color(-7237231));
-		barbarianButton.setText("Barbarian");
-		bottomPanel.add(barbarianButton, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(227, 30), new Dimension(120, -1), 0, false));
-		final JLabel label3 = new JLabel();
-		label3.setForeground(new Color(-4342339));
-		label3.setText("(Attack: 2, Defence: 2, MaxHitPoints: 50)");
-		bottomPanel.add(label3, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final JLabel label4 = new JLabel();
-		label4.setForeground(new Color(-4342339));
-		label4.setText("(Attack: 3, Defence: 3, MaxHitPoints: 50)");
-		bottomPanel.add(label4, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final JLabel label5 = new JLabel();
-		label5.setForeground(new Color(-4342339));
-		label5.setText("(Attack: 4, Defence: 4, MaxHitPoints: 50)");
-		bottomPanel.add(label5, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final Spacer spacer7 = new Spacer();
-		bottomPanel.add(spacer7, new GridConstraints(5, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-		final Spacer spacer8 = new Spacer();
-		bottomPanel.add(spacer8, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
-		final Spacer spacer9 = new Spacer();
-		bottomPanel.add(spacer9, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
 		heroPanel = new JPanel();
 		heroPanel.setLayout(new GridLayoutManager(20, 4, new Insets(0, 0, 0, 0), -1, -1));
 		heroPanel.setBackground(new Color(-12566464));
 		heroPanel.setForeground(new Color(-4342339));
 		heroPanel.setOpaque(true);
-		mainPanel.add(heroPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-		final Spacer spacer10 = new Spacer();
-		heroPanel.add(spacer10, new GridConstraints(19, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-		final Spacer spacer11 = new Spacer();
-		heroPanel.add(spacer11, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
-		final Spacer spacer12 = new Spacer();
-		heroPanel.add(spacer12, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
+		mainPanel.add(heroPanel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		final Spacer spacer1 = new Spacer();
+		heroPanel.add(spacer1, new GridConstraints(19, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer2 = new Spacer();
+		heroPanel.add(spacer2, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
+		final Spacer spacer3 = new Spacer();
+		heroPanel.add(spacer3, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
+		final JLabel label1 = new JLabel();
+		label1.setBackground(new Color(-12566464));
+		Font label1Font = this.$$$getFont$$$(null, Font.BOLD, -1, label1.getFont());
+		if (label1Font != null) label1.setFont(label1Font);
+		label1.setForeground(new Color(-4342339));
+		label1.setText("Name:");
+		heroPanel.add(label1, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label2 = new JLabel();
+		label2.setBackground(new Color(-12566464));
+		Font label2Font = this.$$$getFont$$$(null, Font.BOLD, -1, label2.getFont());
+		if (label2Font != null) label2.setFont(label2Font);
+		label2.setForeground(new Color(-4342339));
+		label2.setText("Level:");
+		heroPanel.add(label2, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label3 = new JLabel();
+		label3.setBackground(new Color(-12566464));
+		Font label3Font = this.$$$getFont$$$(null, Font.BOLD, -1, label3.getFont());
+		if (label3Font != null) label3.setFont(label3Font);
+		label3.setForeground(new Color(-4342339));
+		label3.setText("Type:");
+		heroPanel.add(label3, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label4 = new JLabel();
+		label4.setBackground(new Color(-12566464));
+		Font label4Font = this.$$$getFont$$$(null, Font.BOLD, -1, label4.getFont());
+		if (label4Font != null) label4.setFont(label4Font);
+		label4.setForeground(new Color(-4342339));
+		label4.setText("HP:");
+		heroPanel.add(label4, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label5 = new JLabel();
+		label5.setBackground(new Color(-12566464));
+		Font label5Font = this.$$$getFont$$$(null, Font.BOLD, -1, label5.getFont());
+		if (label5Font != null) label5.setFont(label5Font);
+		label5.setForeground(new Color(-4342339));
+		label5.setText("Attack:");
+		heroPanel.add(label5, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final JLabel label6 = new JLabel();
 		label6.setBackground(new Color(-12566464));
 		Font label6Font = this.$$$getFont$$$(null, Font.BOLD, -1, label6.getFont());
 		if (label6Font != null) label6.setFont(label6Font);
 		label6.setForeground(new Color(-4342339));
-		label6.setText("Name:");
-		heroPanel.add(label6, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		label6.setText("Defence:");
+		heroPanel.add(label6, new GridConstraints(6, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final JLabel label7 = new JLabel();
 		label7.setBackground(new Color(-12566464));
 		Font label7Font = this.$$$getFont$$$(null, Font.BOLD, -1, label7.getFont());
 		if (label7Font != null) label7.setFont(label7Font);
 		label7.setForeground(new Color(-4342339));
-		label7.setText("Level:");
-		heroPanel.add(label7, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		label7.setText("Position:");
+		heroPanel.add(label7, new GridConstraints(7, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final JLabel label8 = new JLabel();
 		label8.setBackground(new Color(-12566464));
 		Font label8Font = this.$$$getFont$$$(null, Font.BOLD, -1, label8.getFont());
 		if (label8Font != null) label8.setFont(label8Font);
 		label8.setForeground(new Color(-4342339));
-		label8.setText("Type:");
-		heroPanel.add(label8, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		label8.setText("______________Inventory______________");
+		heroPanel.add(label8, new GridConstraints(8, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final JLabel label9 = new JLabel();
 		label9.setBackground(new Color(-12566464));
 		Font label9Font = this.$$$getFont$$$(null, Font.BOLD, -1, label9.getFont());
 		if (label9Font != null) label9.setFont(label9Font);
 		label9.setForeground(new Color(-4342339));
-		label9.setText("HP:");
-		heroPanel.add(label9, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final JLabel label10 = new JLabel();
-		label10.setBackground(new Color(-12566464));
-		Font label10Font = this.$$$getFont$$$(null, Font.BOLD, -1, label10.getFont());
-		if (label10Font != null) label10.setFont(label10Font);
-		label10.setForeground(new Color(-4342339));
-		label10.setText("Attack:");
-		heroPanel.add(label10, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final JLabel label11 = new JLabel();
-		label11.setBackground(new Color(-12566464));
-		Font label11Font = this.$$$getFont$$$(null, Font.BOLD, -1, label11.getFont());
-		if (label11Font != null) label11.setFont(label11Font);
-		label11.setForeground(new Color(-4342339));
-		label11.setText("Defence:");
-		heroPanel.add(label11, new GridConstraints(6, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final JLabel label12 = new JLabel();
-		label12.setBackground(new Color(-12566464));
-		Font label12Font = this.$$$getFont$$$(null, Font.BOLD, -1, label12.getFont());
-		if (label12Font != null) label12.setFont(label12Font);
-		label12.setForeground(new Color(-4342339));
-		label12.setText("Position:");
-		heroPanel.add(label12, new GridConstraints(7, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final JLabel label13 = new JLabel();
-		label13.setBackground(new Color(-12566464));
-		Font label13Font = this.$$$getFont$$$(null, Font.BOLD, -1, label13.getFont());
-		if (label13Font != null) label13.setFont(label13Font);
-		label13.setForeground(new Color(-4342339));
-		label13.setText("______________Inventory______________");
-		heroPanel.add(label13, new GridConstraints(8, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final JLabel label14 = new JLabel();
-		label14.setBackground(new Color(-12566464));
-		Font label14Font = this.$$$getFont$$$(null, Font.BOLD, -1, label14.getFont());
-		if (label14Font != null) label14.setFont(label14Font);
-		label14.setForeground(new Color(-4342339));
-		label14.setText("Slots: ");
-		heroPanel.add(label14, new GridConstraints(9, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		label9.setText("Slots: ");
+		heroPanel.add(label9, new GridConstraints(9, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		nameTextArea = new JTextArea();
 		nameTextArea.setBackground(new Color(-12566464));
 		nameTextArea.setCaretColor(new Color(-4342339));
@@ -432,13 +513,13 @@ public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 		slotsTextArea.setForeground(new Color(-4342339));
 		slotsTextArea.setLineWrap(false);
 		heroPanel.add(slotsTextArea, new GridConstraints(9, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 5), null, 0, false));
-		final JLabel label15 = new JLabel();
-		label15.setBackground(new Color(-12566464));
-		Font label15Font = this.$$$getFont$$$(null, Font.BOLD, -1, label15.getFont());
-		if (label15Font != null) label15.setFont(label15Font);
-		label15.setForeground(new Color(-4342339));
-		label15.setText("Armor:");
-		heroPanel.add(label15, new GridConstraints(10, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label10 = new JLabel();
+		label10.setBackground(new Color(-12566464));
+		Font label10Font = this.$$$getFont$$$(null, Font.BOLD, -1, label10.getFont());
+		if (label10Font != null) label10.setFont(label10Font);
+		label10.setForeground(new Color(-4342339));
+		label10.setText("Armor:");
+		heroPanel.add(label10, new GridConstraints(10, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		armorTextArea = new JTextArea();
 		armorTextArea.setBackground(new Color(-12566464));
 		armorTextArea.setCaretColor(new Color(-4342339));
@@ -448,13 +529,13 @@ public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 		armorTextArea.setLineWrap(false);
 		armorTextArea.setSelectedTextColor(new Color(-4342339));
 		heroPanel.add(armorTextArea, new GridConstraints(11, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 5), null, 0, false));
-		final JLabel label16 = new JLabel();
-		label16.setBackground(new Color(-12566464));
-		Font label16Font = this.$$$getFont$$$(null, Font.BOLD, -1, label16.getFont());
-		if (label16Font != null) label16.setFont(label16Font);
-		label16.setForeground(new Color(-4342339));
-		label16.setText("Weapons:");
-		heroPanel.add(label16, new GridConstraints(12, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label11 = new JLabel();
+		label11.setBackground(new Color(-12566464));
+		Font label11Font = this.$$$getFont$$$(null, Font.BOLD, -1, label11.getFont());
+		if (label11Font != null) label11.setFont(label11Font);
+		label11.setForeground(new Color(-4342339));
+		label11.setText("Weapons:");
+		heroPanel.add(label11, new GridConstraints(12, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		weaponsTextArea = new JTextArea();
 		weaponsTextArea.setBackground(new Color(-12566464));
 		weaponsTextArea.setCaretColor(new Color(-4342339));
@@ -463,13 +544,13 @@ public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 		weaponsTextArea.setForeground(new Color(-4342339));
 		weaponsTextArea.setLineWrap(false);
 		heroPanel.add(weaponsTextArea, new GridConstraints(13, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 5), null, 0, false));
-		final JLabel label17 = new JLabel();
-		label17.setBackground(new Color(-12566464));
-		Font label17Font = this.$$$getFont$$$(null, Font.BOLD, -1, label17.getFont());
-		if (label17Font != null) label17.setFont(label17Font);
-		label17.setForeground(new Color(-4342339));
-		label17.setText("Helms:");
-		heroPanel.add(label17, new GridConstraints(14, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label12 = new JLabel();
+		label12.setBackground(new Color(-12566464));
+		Font label12Font = this.$$$getFont$$$(null, Font.BOLD, -1, label12.getFont());
+		if (label12Font != null) label12.setFont(label12Font);
+		label12.setForeground(new Color(-4342339));
+		label12.setText("Helms:");
+		heroPanel.add(label12, new GridConstraints(14, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		helmsTextArea = new JTextArea();
 		helmsTextArea.setBackground(new Color(-12566464));
 		helmsTextArea.setCaretColor(new Color(-4342339));
@@ -478,8 +559,8 @@ public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 		helmsTextArea.setForeground(new Color(-4342339));
 		helmsTextArea.setLineWrap(false);
 		heroPanel.add(helmsTextArea, new GridConstraints(15, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 5), null, 0, false));
-		final Spacer spacer13 = new Spacer();
-		heroPanel.add(spacer13, new GridConstraints(16, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer4 = new Spacer();
+		heroPanel.add(spacer4, new GridConstraints(16, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
 		alrightHeroWeReTextPane = new JTextPane();
 		alrightHeroWeReTextPane.setBackground(new Color(-12566464));
 		alrightHeroWeReTextPane.setCaretColor(new Color(-4342339));
@@ -497,11 +578,100 @@ public class CreateHeroGuiView extends FrameView implements CreateHeroView {
 		defenceTextArea.setLineWrap(false);
 		defenceTextArea.setSelectedTextColor(new Color(-4342339));
 		heroPanel.add(defenceTextArea, new GridConstraints(6, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 5), null, 0, false));
-		final Spacer spacer14 = new Spacer();
-		heroPanel.add(spacer14, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
+		final Spacer spacer5 = new Spacer();
+		heroPanel.add(spacer5, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
 		letSGOButton = new JButton();
 		letSGOButton.setText("Let's GO!");
 		heroPanel.add(letSGOButton, new GridConstraints(18, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		bottomPanel = new JPanel();
+		bottomPanel.setLayout(new GridLayoutManager(7, 4, new Insets(0, 0, 0, 0), -1, -1));
+		bottomPanel.setBackground(new Color(-12566464));
+		mainPanel.add(bottomPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		final JTextArea textArea1 = new JTextArea();
+		textArea1.setBackground(new Color(-12566464));
+		textArea1.setEditable(false);
+		textArea1.setForeground(new Color(-4342339));
+		textArea1.setText("Alright, now it's time to choose a class! What would you like to be?");
+		bottomPanel.add(textArea1, new GridConstraints(0, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(150, 30), new Dimension(-1, 30), 0, false));
+		explorerButton = new JButton();
+		explorerButton.setBackground(new Color(-7237231));
+		explorerButton.setText("Explorer");
+		bottomPanel.add(explorerButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(227, 30), new Dimension(120, -1), 0, false));
+		final JLabel label13 = new JLabel();
+		label13.setForeground(new Color(-4342339));
+		label13.setText("(Attack: 1, Defence: 1, MaxHitPoints: 50)");
+		bottomPanel.add(label13, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		warriorButton = new JButton();
+		warriorButton.setBackground(new Color(-7237231));
+		warriorButton.setText("Warrior");
+		bottomPanel.add(warriorButton, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(227, 30), new Dimension(120, -1), 0, false));
+		knightButton = new JButton();
+		knightButton.setBackground(new Color(-7237231));
+		knightButton.setText("Knight");
+		bottomPanel.add(knightButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(227, 30), new Dimension(120, -1), 0, false));
+		barbarianButton = new JButton();
+		barbarianButton.setBackground(new Color(-7237231));
+		barbarianButton.setText("Barbarian");
+		bottomPanel.add(barbarianButton, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(227, 30), new Dimension(120, -1), 0, false));
+		final JLabel label14 = new JLabel();
+		label14.setForeground(new Color(-4342339));
+		label14.setText("(Attack: 2, Defence: 2, MaxHitPoints: 50)");
+		bottomPanel.add(label14, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label15 = new JLabel();
+		label15.setForeground(new Color(-4342339));
+		label15.setText("(Attack: 3, Defence: 3, MaxHitPoints: 50)");
+		bottomPanel.add(label15, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label16 = new JLabel();
+		label16.setForeground(new Color(-4342339));
+		label16.setText("(Attack: 4, Defence: 4, MaxHitPoints: 50)");
+		bottomPanel.add(label16, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final Spacer spacer6 = new Spacer();
+		bottomPanel.add(spacer6, new GridConstraints(6, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final Spacer spacer7 = new Spacer();
+		bottomPanel.add(spacer7, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
+		final Spacer spacer8 = new Spacer();
+		bottomPanel.add(spacer8, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
+		switchTypeButton = new JButton();
+		switchTypeButton.setBackground(new Color(-7237231));
+		switchTypeButton.setText("Switch");
+		bottomPanel.add(switchTypeButton, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(227, 30), new Dimension(120, -1), 0, false));
+		topPanel = new JPanel();
+		topPanel.setLayout(new GridLayoutManager(6, 5, new Insets(0, 0, 0, 0), -1, -1));
+		topPanel.setBackground(new Color(-12566464));
+		mainPanel.add(topPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+		final Spacer spacer9 = new Spacer();
+		topPanel.add(spacer9, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 30), new Dimension(-1, 30), new Dimension(-1, 30), 0, false));
+		final Spacer spacer10 = new Spacer();
+		topPanel.add(spacer10, new GridConstraints(5, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		final JTextPane textPane1 = new JTextPane();
+		textPane1.setBackground(new Color(-12566464));
+		textPane1.setEditable(false);
+		Font textPane1Font = this.$$$getFont$$$(null, Font.BOLD, 16, textPane1.getFont());
+		if (textPane1Font != null) textPane1.setFont(textPane1Font);
+		textPane1.setForeground(new Color(-4342339));
+		textPane1.setText("Greetings hero! Before you begin your journey, \n            let's set up your character!");
+		topPanel.add(textPane1, new GridConstraints(1, 1, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 5, false));
+		final Spacer spacer11 = new Spacer();
+		topPanel.add(spacer11, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
+		final Spacer spacer12 = new Spacer();
+		topPanel.add(spacer12, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), new Dimension(10, -1), new Dimension(10, -1), 0, false));
+		final JLabel label17 = new JLabel();
+		label17.setForeground(new Color(-4342339));
+		label17.setText("Please enter in your name:");
+		topPanel.add(label17, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final Spacer spacer13 = new Spacer();
+		topPanel.add(spacer13, new GridConstraints(2, 1, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		OKButton = new JButton();
+		OKButton.setText("OK");
+		topPanel.add(OKButton, new GridConstraints(4, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		nameTextField = new JTextField();
+		nameTextField.setBackground(new Color(-7237231));
+		nameTextField.setForeground(new Color(-13355980));
+		nameTextField.setText("");
+		topPanel.add(nameTextField, new GridConstraints(3, 2, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+		switchNameButton = new JButton();
+		switchNameButton.setText("Switch");
+		topPanel.add(switchNameButton, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 	}
 
 	/**

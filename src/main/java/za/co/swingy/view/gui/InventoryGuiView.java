@@ -3,20 +3,24 @@ package za.co.swingy.view.gui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import lombok.Getter;
+import lombok.Setter;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.controller.InventoryController;
 import za.co.swingy.model.items.Armor;
 import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.InventoryView;
+import za.co.swingy.view.console.*;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import javax.validation.constraints.NotNull;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@Getter
+@Setter
 public class InventoryGuiView extends FrameView implements InventoryView {
 	private JPanel mainPanel;
 	private JTextArea inventoryTextArea;
@@ -41,6 +45,78 @@ public class InventoryGuiView extends FrameView implements InventoryView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.getGameController().getMapView().display(controller.getGameController());
+			}
+		});
+		switchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//CreateHero
+				CreateHeroConsoleView createHeroConsoleView = new CreateHeroConsoleView(controller.getGameController().getCharacterController());
+				controller.getGameController().getCharacterController().setCreateHeroView(createHeroConsoleView);
+
+				//LoadHero
+				LoadFileConsoleView loadFileConsoleView = new LoadFileConsoleView(controller.getGameController().getCharacterController());
+				controller.getGameController().getCharacterController().setLoadFileView(loadFileConsoleView);
+
+				//MenuView
+				MenuConsoleView menuConsoleView = new MenuConsoleView(controller.getGameController().getCharacterController());
+				controller.getGameController().getCharacterController().setMenuView(menuConsoleView);
+
+				//MapView
+				MapConsoleView mapConsoleView = new MapConsoleView(controller.getGameController());
+				controller.getGameController().setMapView(mapConsoleView);
+
+				//InventoryView
+				InventoryConsoleView inventoryConsoleView = new InventoryConsoleView(controller);
+				controller.setInventoryView(inventoryConsoleView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+
+				controller.getInventoryView().display();
+			}
+		});
+	}
+
+	public InventoryGuiView(InventoryController inventoryController) {
+		this.controller = inventoryController;
+		returnButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.getGameController().getMapView().display(controller.getGameController());
+			}
+		});
+		switchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//CreateHero
+				CreateHeroConsoleView createHeroConsoleView = new CreateHeroConsoleView(controller.getGameController().getCharacterController());
+				controller.getGameController().getCharacterController().setCreateHeroView(createHeroConsoleView);
+
+				//LoadHero
+				LoadFileConsoleView loadFileConsoleView = new LoadFileConsoleView(controller.getGameController().getCharacterController());
+				controller.getGameController().getCharacterController().setLoadFileView(loadFileConsoleView);
+
+				//MenuView
+				MenuConsoleView menuConsoleView = new MenuConsoleView(controller.getGameController().getCharacterController());
+				controller.getGameController().getCharacterController().setMenuView(menuConsoleView);
+
+				//MapView
+				MapConsoleView mapConsoleView = new MapConsoleView(controller.getGameController());
+				controller.getGameController().setMapView(mapConsoleView);
+
+				//InventoryView
+				InventoryConsoleView inventoryConsoleView = new InventoryConsoleView(controller);
+				controller.setInventoryView(inventoryConsoleView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+
+				controller.getInventoryView().display();
 			}
 		});
 	}

@@ -63,7 +63,7 @@ public class CharacterController {
 		this.createHeroView.printHeroStatus(this.hero);
 	}
 
-	private void			callTypePrompt(){
+	public void			callTypePrompt(){
 		this.createHeroView.promptType();
 //		return null;
 	}

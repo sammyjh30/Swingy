@@ -70,6 +70,50 @@ public class MenuGuiView extends FrameView implements MenuView {
 		});
 	}
 
+	public MenuGuiView(CharacterController controller) {
+//		this.characterController = CharacterController.builder().menuView(this).createHeroView(new CreateHeroConsoleView()).loadFileView(new LoadFileConsoleView()).build();
+		this.characterController = controller;
+//		this.initFrame();
+//		this.getFrame().setContentPane(this.mainPanel);
+//		this.getFrame().pack();
+
+//		CreateHeroGuiView createHeroGuiView = new CreateHeroGuiView();
+//		LoadFileGuiView loadFileGuiView = new LoadFileGuiView();
+//		this.characterController = CharacterController.builder().menuView(this).createHeroView(createHeroGuiView).loadFileView(loadFileGuiView).build();
+
+		loadButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				characterController.loadHero();
+			}
+		});
+
+		exitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(1);
+			}
+		});
+		newButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainPanel.setVisible(false);
+				characterController.createNewHero();
+			}
+		});
+
+		switchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+//				getFrame().dispatchEvent(new WindowEvent(getFrame(), WindowEvent.WINDOW_CLOSING));
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+				MenuConsoleView menuConsoleView = new MenuConsoleView();
+				menuConsoleView.menu();
+			}
+		});
+	}
+
 	public void resetMenu() {
 		this.getFrame().setContentPane(this.mainPanel);
 		this.getFrame().pack();

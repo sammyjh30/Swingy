@@ -43,7 +43,6 @@ public class GameController {
 		private CharacterController characterController;
 
 		public GameControllerBuilder		hero(Hero hero) {
-			System.out.println("GameController HERO!");
 			this.hero = hero;
 			this.mapSize = (hero.getLevel() - 1) * 5 + 10 - (hero.getLevel() % 2);
 			this.map = new char[this.mapSize][this.mapSize];
@@ -137,7 +136,7 @@ public class GameController {
 	// Set up failure command
 	// Set up level up (Map increase, enemy increase)
 
-	public void			saveGame() {
+	public void				saveGame() {
 		String st;
 		try {
 			File file = new File("resources/saves.txt");
@@ -217,7 +216,7 @@ public class GameController {
 		}
 	}
 
-	public void			moveHero(int x, int y) {
+	public void				moveHero(int x, int y) {
 		int newX = this.hero.getXPos() + x;
 		int newY = this.hero.getYPos() + y;
 		if (newX < 0 || newY < 0 || newX >= this.mapSize || newY >= this.mapSize) {
@@ -243,7 +242,7 @@ public class GameController {
 		}
 	}
 
-	public void					checkForCombat(int x, int y) {
+	public void				checkForCombat(int x, int y) {
 		int newX = this.getHero().getXPos() + x;
 		int newY = this.getHero().getYPos() + y;
 		if (newX < 0 || newY < 0 || newX >= this.getMapSize() || newY >= this.getMapSize()) {
@@ -278,7 +277,7 @@ public class GameController {
 		}
 	}
 
-	public void					returnToMenu() {
+	public void				returnToMenu() {
 		this.characterController.returnToMenu();
 	}
 

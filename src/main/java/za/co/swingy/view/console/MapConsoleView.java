@@ -6,6 +6,10 @@ import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.view.MapView;
+import za.co.swingy.view.gui.CreateHeroGuiView;
+import za.co.swingy.view.gui.LoadFileGuiView;
+import za.co.swingy.view.gui.MapGuiView;
+import za.co.swingy.view.gui.MenuGuiView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +20,11 @@ import java.io.InputStreamReader;
 public class MapConsoleView implements MapView {
 	private GameController		controller;
 
+	public MapConsoleView() {}
+
+	public MapConsoleView(GameController gameController) {
+		this.controller = gameController;
+	}
 	public void	youWin() {
 		//Clear screen
 		System.out.print("\033[H\033[2J");
@@ -254,27 +263,57 @@ public class MapConsoleView implements MapView {
 			showOptions();
 			System.out.print("Please enter a command: ");
 			String input = bufferedReader.readLine();
-			while (!input.equalsIgnoreCase("NORTH") && !input.equalsIgnoreCase("SOUTH") &&
+			while (!input.equalsIgnoreCase("SWITCH") && !input.equalsIgnoreCase("NORTH") && !input.equalsIgnoreCase("SOUTH") &&
 					!input.equalsIgnoreCase("EAST") && !input.equalsIgnoreCase("WEST") &&
 					!input.equalsIgnoreCase("INVENTORY") && !input.equalsIgnoreCase("SAVE")){
 				System.out.println("Oops, that's not a valid command! Please try again!");
 				System.out.print("Please enter a command: ");
 				input = bufferedReader.readLine();
 			}
-			if (input.equalsIgnoreCase("NORTH")) {
-				controller.checkForCombat(0, -1);
-			} else if (input.equalsIgnoreCase("SOUTH")) {
-				controller.checkForCombat(0, 1);
-			} else if (input.equalsIgnoreCase("EAST")) {
-				controller.checkForCombat(1, 0);
-			} else if (input.equalsIgnoreCase("WEST")) {
-				controller.checkForCombat(-1, 0);
-			} else if (input.equalsIgnoreCase("INVENTORY")) {
-				InventoryConsoleView inventoryConsoleView = new InventoryConsoleView(controller);
-				inventoryConsoleView.display();
-				//then call the mapviewDisplay()
-			} else if (input.equalsIgnoreCase("SAVE")) {
-				controller.saveGame();
+			if (input.equalsIgnoreCase("SWITCH")) {
+				//CreateHero
+				CreateHeroGuiView createHeroGuiView = new CreateHeroGuiView(this.controller.getCharacterController());
+				this.controller.getCharacterController().setCreateHeroView(createHeroGuiView);
+
+				//LoadHero
+				LoadFileGuiView loadFileGuiView = new LoadFileGuiView(this.controller.getCharacterController());
+				this.controller.getCharacterController().setLoadFileView(loadFileGuiView);
+
+				//MenuView
+				MenuGuiView menuGuiView = new MenuGuiView(this.controller.getCharacterController());
+				this.controller.getCharacterController().setMenuView(menuGuiView);
+
+				//MapView
+				MapGuiView mapGuiView = new MapGuiView(this.controller);
+				mapGuiView.initFrame();
+				mapGuiView.getFrame().setContentPane(mapGuiView.getMainPanel());
+				mapGuiView.getFrame().pack();
+				mapGuiView.getMainPanel().setVisible(true);
+				this.controller.setMapView(mapGuiView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+
+//				System.out.println(controller.getMap());
+
+				this.controller.updateMap();
+				this.controller.showMapView();
+			} else {
+				if (input.equalsIgnoreCase("NORTH")) {
+					controller.checkForCombat(0, -1);
+				} else if (input.equalsIgnoreCase("SOUTH")) {
+					controller.checkForCombat(0, 1);
+				} else if (input.equalsIgnoreCase("EAST")) {
+					controller.checkForCombat(1, 0);
+				} else if (input.equalsIgnoreCase("WEST")) {
+					controller.checkForCombat(-1, 0);
+				} else if (input.equalsIgnoreCase("INVENTORY")) {
+					InventoryConsoleView inventoryConsoleView = new InventoryConsoleView(controller);
+					inventoryConsoleView.display();
+					//then call the mapviewDisplay()
+				} else if (input.equalsIgnoreCase("SAVE")) {
+					controller.saveGame();
+				}
 			}
 			//Clean screen
 		} catch (IOException e) {

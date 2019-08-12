@@ -7,6 +7,7 @@ import za.co.swingy.model.items.Armor;
 import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.InventoryView;
+import za.co.swingy.view.gui.*;
 
 import javax.validation.constraints.NotNull;
 import java.io.BufferedReader;
@@ -20,6 +21,11 @@ public class InventoryConsoleView implements InventoryView {
 	public InventoryConsoleView(GameController gameController) {
 		this.controller = InventoryController.builder().inventoryView(this).hero(gameController.getHero()).gameController(gameController).build();
 	}
+
+	public InventoryConsoleView(InventoryController inventoryController) {
+		this.controller = inventoryController;
+	}
+
 
 	public void				display() {
 		int list;
@@ -72,42 +78,70 @@ public class InventoryConsoleView implements InventoryView {
 				InputStreamReader streamReader = new InputStreamReader(System.in);
 				BufferedReader bufferedReader = new BufferedReader(streamReader);
 				String input = bufferedReader.readLine();
-				while (!input.equalsIgnoreCase("EQUIP") && !input.equalsIgnoreCase("DELETE") && !input.equalsIgnoreCase("RETURN")) {
+				while (!input.equalsIgnoreCase("SWITCH") && !input.equalsIgnoreCase("EQUIP") && !input.equalsIgnoreCase("DELETE") && !input.equalsIgnoreCase("RETURN")) {
 					System.out.println("Oops, that's not a valid command! Please try again!");
 					System.out.print("Please enter a command: ");
 					input = bufferedReader.readLine();
 				}
-				if (input.equalsIgnoreCase("EQUIP")) {
-					System.out.print("Please select the number of the item you would like to equip: ");
-					input = bufferedReader.readLine();
-					while (!this.isNumeric(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
-						System.out.println("Oops, that's not a valid input! Please try again!");
-						System.out.print("Please select the number of the item you would like to equip: ");
-						input = bufferedReader.readLine();
-					}
-					//				int section;
-					this.controller.equip(input);
-				} else if (input.equalsIgnoreCase("DELETE")) {
-					System.out.print("Please select the number of the item you would like to delete: ");
-					input = bufferedReader.readLine();
-					while (!this.isNumeric(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
-						System.out.println("Oops, that's not a valid input! Please try again!");
-						System.out.print("Please select the number of the item you would like to delete: ");
-						input = bufferedReader.readLine();
-					}
-					this.controller.delete(input);
-				} else if (input.equalsIgnoreCase("RETURN")) {
-					//Clear screen
+				if (input.equalsIgnoreCase("SWITCH")) {
+					//CreateHero
+					CreateHeroGuiView createHeroGuiView = new CreateHeroGuiView(this.controller.getGameController().getCharacterController());
+					this.controller.getGameController().getCharacterController().setCreateHeroView(createHeroGuiView);
+
+					//LoadHero
+					LoadFileGuiView loadFileGuiView = new LoadFileGuiView(this.controller.getGameController().getCharacterController());
+					this.controller.getGameController().getCharacterController().setLoadFileView(loadFileGuiView);
+
+					//MenuView
+					MenuGuiView menuGuiView = new MenuGuiView(this.controller.getGameController().getCharacterController());
+					this.controller.getGameController().getCharacterController().setMenuView(menuGuiView);
+
+					//MapView
+					MapGuiView mapGuiView = new MapGuiView(this.controller.getGameController());
+					this.controller.getGameController().setMapView(mapGuiView);
+
+					//InventoryView
+					InventoryGuiView inventoryGuiView = new InventoryGuiView(controller);
+					inventoryGuiView.initFrame();
+					inventoryGuiView.getFrame().setContentPane(inventoryGuiView.getMainPanel());
+					inventoryGuiView.getFrame().pack();
+					inventoryGuiView.getMainPanel().setVisible(true);
+					controller.setInventoryView(inventoryGuiView);
+
 					System.out.print("\033[H\033[2J");
 					System.out.flush();
-					this.controller.getGameController().getMapView().display(this.controller.getGameController());
-//					return;
-				}
 
+					this.controller.getInventoryView().display();
+				} else {
+					if (input.equalsIgnoreCase("EQUIP")) {
+						System.out.print("Please select the number of the item you would like to equip: ");
+						input = bufferedReader.readLine();
+						while (!this.isNumeric(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
+							System.out.println("Oops, that's not a valid input! Please try again!");
+							System.out.print("Please select the number of the item you would like to equip: ");
+							input = bufferedReader.readLine();
+						}
+						//				int section;
+						this.controller.equip(input);
+					} else if (input.equalsIgnoreCase("DELETE")) {
+						System.out.print("Please select the number of the item you would like to delete: ");
+						input = bufferedReader.readLine();
+						while (!this.isNumeric(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
+							System.out.println("Oops, that's not a valid input! Please try again!");
+							System.out.print("Please select the number of the item you would like to delete: ");
+							input = bufferedReader.readLine();
+						}
+						this.controller.delete(input);
+					} else if (input.equalsIgnoreCase("RETURN")) {
+						//Clear screen
+						System.out.print("\033[H\033[2J");
+						System.out.flush();
+						this.controller.getGameController().getMapView().display(this.controller.getGameController());
+					}
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-//		}
 	}
 
 	public static boolean 	isNumeric(String str) {

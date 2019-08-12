@@ -3,11 +3,17 @@ package za.co.swingy.view.gui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import lombok.Getter;
+import lombok.Setter;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Enemy;
 import za.co.swingy.model.characters.Hero;
 import za.co.swingy.model.items.Inventory;
 import za.co.swingy.view.MapView;
+import za.co.swingy.view.console.CreateHeroConsoleView;
+import za.co.swingy.view.console.LoadFileConsoleView;
+import za.co.swingy.view.console.MapConsoleView;
+import za.co.swingy.view.console.MenuConsoleView;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -16,6 +22,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@Getter
+@Setter
 public class MapGuiView extends FrameView implements MapView {
 	private JPanel mainPanel;
 	private JTextArea nameTextArea;
@@ -36,7 +44,6 @@ public class MapGuiView extends FrameView implements MapView {
 	private JTextPane FALSEALARMITWASTextPane;
 	private JButton falseAlarmButton;
 	private JButton inventoryButton;
-	private JPanel directionsPanel;
 	private JPanel successPanel;
 	private JButton successButton;
 	private JPanel runAwayPanel;
@@ -48,6 +55,8 @@ public class MapGuiView extends FrameView implements MapView {
 	private JPanel levelUpPanel;
 	private JPanel youWinPanel;
 	private JButton youWinButton;
+	private JPanel directionsPanel;
+	private JButton switchButton;
 
 	private GameController controller;
 	private int xPosition;
@@ -121,13 +130,147 @@ public class MapGuiView extends FrameView implements MapView {
 			public void actionPerformed(ActionEvent e) {
 				controller.updateMap();
 				controller.getMapView().display(controller);
-
 			}
 		});
 		youWinButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.returnToMenu();
+			}
+		});
+		switchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//CreateHero
+				CreateHeroConsoleView createHeroConsoleView = new CreateHeroConsoleView(controller.getCharacterController());
+				controller.getCharacterController().setCreateHeroView(createHeroConsoleView);
+
+				//LoadHero
+				LoadFileConsoleView loadFileConsoleView = new LoadFileConsoleView(controller.getCharacterController());
+				controller.getCharacterController().setLoadFileView(loadFileConsoleView);
+
+				//MenuView
+				MenuConsoleView menuConsoleView = new MenuConsoleView(controller.getCharacterController());
+				controller.getCharacterController().setMenuView(menuConsoleView);
+
+				//MapView
+				MapConsoleView mapConsoleView = new MapConsoleView(controller);
+				controller.setMapView(mapConsoleView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+
+				controller.showMapView();
+
+			}
+		});
+	}
+
+	public MapGuiView(GameController gameController) {
+		this.controller = gameController;
+
+		northButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkForCombat(0, -1);
+			}
+		});
+		eastButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkForCombat(1, 0);
+			}
+		});
+		southButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkForCombat(0, 1);
+			}
+		});
+		westButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkForCombat(-1, 0);
+			}
+		});
+		falseAlarmButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.moveHero(xPosition, yPosition);
+			}
+		});
+		successButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.moveHero(xPosition, yPosition);
+			}
+		});
+		ranAwayButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.showMapView();
+			}
+		});
+		deathButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.returnToMenu();
+			}
+		});
+		inventoryButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				InventoryGuiView inventoryGuiView = new InventoryGuiView(controller);
+				inventoryGuiView.display();
+			}
+		});
+		saveButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.saveGame();
+			}
+		});
+		levelUpButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.updateMap();
+				controller.getMapView().display(controller);
+			}
+		});
+		youWinButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.returnToMenu();
+			}
+		});
+		switchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//CreateHero
+				CreateHeroConsoleView createHeroConsoleView = new CreateHeroConsoleView(controller.getCharacterController());
+				controller.getCharacterController().setCreateHeroView(createHeroConsoleView);
+
+				//LoadHero
+				LoadFileConsoleView loadFileConsoleView = new LoadFileConsoleView(controller.getCharacterController());
+				controller.getCharacterController().setLoadFileView(loadFileConsoleView);
+
+				//MenuView
+				MenuConsoleView menuConsoleView = new MenuConsoleView(controller.getCharacterController());
+				controller.getCharacterController().setMenuView(menuConsoleView);
+
+				//MapView
+				MapConsoleView mapConsoleView = new MapConsoleView(controller);
+				controller.setMapView(mapConsoleView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+
+				controller.showMapView();
+
 			}
 		});
 	}
@@ -187,8 +330,11 @@ public class MapGuiView extends FrameView implements MapView {
 				}
 				cellPane.setBorder(border);
 				mapPane.add(cellPane, gbc);
+				System.out.print("");
 			}
 		}
+		this.mapPane.repaint();
+		this.mapPane.updateUI();
 	}
 
 	private void setHeroView(Hero hero) {
@@ -243,7 +389,6 @@ public class MapGuiView extends FrameView implements MapView {
 		this.mapPane.setVisible(true);
 		this.levelUpPanel.setVisible(false);
 		this.youWinPanel.setVisible(false);
-
 		this.updateView();
 		//Set other viewPanels as false
 	}

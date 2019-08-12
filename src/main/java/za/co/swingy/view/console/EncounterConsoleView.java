@@ -10,6 +10,7 @@ import za.co.swingy.model.items.Armor;
 import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.EncounterView;
+import za.co.swingy.view.gui.*;
 
 import javax.validation.constraints.NotNull;
 import java.io.BufferedReader;
@@ -29,6 +30,11 @@ public class EncounterConsoleView implements EncounterView {
 	public EncounterConsoleView(GameController controller) {
 		this.gameController = controller;
 		this.controller = EncounterController.builder().encounterView(this).hero(controller.getHero()).gameController(controller).build();
+	}
+
+	public EncounterConsoleView(EncounterController controller) {
+		this.gameController = controller.getGameController();
+		this.controller = controller;
 	}
 
 	private void					showHero(Hero hero) {
@@ -105,7 +111,7 @@ public class EncounterConsoleView implements EncounterView {
 		this.controller.getGameController().removeEnemy(this.controller.getEnemy());
 		this.controller.victory();
 	}
-	public void 			itemDropFailed() {
+	public void 					itemDropFailed() {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 		System.out.println("				ITEM DROP FAILED!");
@@ -270,17 +276,48 @@ public class EncounterConsoleView implements EncounterView {
 			InputStreamReader streamReader = new InputStreamReader(System.in);
 			BufferedReader bufferedReader = new BufferedReader(streamReader);
 			String input = bufferedReader.readLine();
-			while (!input.equalsIgnoreCase("RUN") && !input.equalsIgnoreCase("FIGHT") && !input.equalsIgnoreCase("SIMULATE")) {
+			while (!input.equalsIgnoreCase("SWITCH") && !input.equalsIgnoreCase("RUN") && !input.equalsIgnoreCase("FIGHT") && !input.equalsIgnoreCase("SIMULATE")) {
 				System.out.println("Oops, that's not a valid command! Please try again!");
 				System.out.print("Please enter in a command: ");
 				input = bufferedReader.readLine();
 			}
-			if (input.equalsIgnoreCase("RUN")) {
-				this.controller.run();
-			} else if (input.equalsIgnoreCase("FIGHT")) {
-				this.controller.fight();
-			} else if (input.equalsIgnoreCase("SIMULATE")) {
-				this.controller.simulate();
+			if (input.equalsIgnoreCase("SWITCH")) {
+				//CreateHero
+				CreateHeroGuiView createHeroGuiView = new CreateHeroGuiView(this.controller.getGameController().getCharacterController());
+				this.controller.getGameController().getCharacterController().setCreateHeroView(createHeroGuiView);
+
+				//LoadHero
+				LoadFileGuiView loadFileGuiView = new LoadFileGuiView(this.controller.getGameController().getCharacterController());
+				this.controller.getGameController().getCharacterController().setLoadFileView(loadFileGuiView);
+
+				//MenuView
+				MenuGuiView menuGuiView = new MenuGuiView(this.controller.getGameController().getCharacterController());
+				this.controller.getGameController().getCharacterController().setMenuView(menuGuiView);
+
+				//MapView
+				MapGuiView mapGuiView = new MapGuiView(this.controller.getGameController());
+				this.controller.getGameController().setMapView(mapGuiView);
+
+				//EncounterView
+				EncounterGuiView encounterGuiView = new EncounterGuiView(controller);
+				encounterGuiView.initFrame();
+				encounterGuiView.getFrame().setContentPane(encounterGuiView.getMainPanel());
+				encounterGuiView.getFrame().pack();
+				encounterGuiView.getMainPanel().setVisible(true);
+				controller.setEncounterView(encounterGuiView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+
+				this.controller.round();
+			} else {
+				if (input.equalsIgnoreCase("RUN")) {
+					this.controller.run();
+				} else if (input.equalsIgnoreCase("FIGHT")) {
+					this.controller.fight();
+				} else if (input.equalsIgnoreCase("SIMULATE")) {
+					this.controller.simulate();
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

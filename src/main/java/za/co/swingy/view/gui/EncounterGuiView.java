@@ -13,6 +13,7 @@ import za.co.swingy.model.items.Armor;
 import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.EncounterView;
+import za.co.swingy.view.console.*;
 
 import javax.swing.*;
 import javax.validation.constraints.NotNull;
@@ -54,17 +55,7 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 	private JButton runButton;
 	private JButton switchButton;
 	private JTextPane battleHistoryTextPane;
-	private JLabel enemyNameLabel;
-	private JLabel enemyClassLabel;
-	private JTextArea enemyClassTextArea;
-	private JLabel enemyLevelLabel;
-	private JLabel enemyHPLabel;
-	private JLabel enemyAttLabel;
-	private JLabel enemyDefLabel;
-	private JTextPane enemyStatsTextPane;
-	private JTextPane heroStatsTestPane;
 	private JScrollPane battleHistoryScrollPanel;
-	private JTextArea youHave3ChoicesTextArea;
 	private JPanel runFailedPanel;
 	private JButton runFailedButton;
 	private JPanel battleHistoryPanel;
@@ -119,6 +110,16 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 	private JButton helmDropNoButton;
 	private JPanel inventoryFullPanel;
 	private JButton deathButton;
+	private JLabel enemyNameLabel;
+	private JLabel enemyClassLabel;
+	private JTextArea enemyClassTextArea;
+	private JLabel enemyLevelLabel;
+	private JLabel enemyHPLabel;
+	private JLabel enemyAttLabel;
+	private JLabel enemyDefLabel;
+	private JTextPane enemyStatsTextPane;
+	private JTextPane heroStatsTestPane;
+	private JTextArea youHave3ChoicesTextArea;
 
 	public EncounterGuiView(GameController gameController) {
 		this.gameController = gameController;
@@ -226,6 +227,171 @@ public class EncounterGuiView extends FrameView implements EncounterView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.checkLevel();
+			}
+		});
+		switchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//CreateHero
+				CreateHeroConsoleView createHeroConsoleView = new CreateHeroConsoleView(controller.getGameController().getCharacterController());
+				controller.getGameController().getCharacterController().setCreateHeroView(createHeroConsoleView);
+
+				//LoadHero
+				LoadFileConsoleView loadFileConsoleView = new LoadFileConsoleView(controller.getGameController().getCharacterController());
+				controller.getGameController().getCharacterController().setLoadFileView(loadFileConsoleView);
+
+				//MenuView
+				MenuConsoleView menuConsoleView = new MenuConsoleView(controller.getGameController().getCharacterController());
+				controller.getGameController().getCharacterController().setMenuView(menuConsoleView);
+
+				//MapView
+				MapConsoleView mapConsoleView = new MapConsoleView(controller.getGameController());
+				controller.getGameController().setMapView(mapConsoleView);
+
+				//EncounterView
+				EncounterConsoleView encounterConsoleView = new EncounterConsoleView(controller);
+				controller.setEncounterView(encounterConsoleView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+
+				controller.round();
+			}
+		});
+	}
+
+	public EncounterGuiView(EncounterController encounterController) {
+		this.gameController = encounterController.getGameController();
+		this.controller = encounterController;
+
+		fightButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.fight();
+			}
+		});
+		simulateButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.simulate();
+			}
+		});
+		runButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.run();
+			}
+		});
+		runFailedButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				display();
+			}
+		});
+		battleHistoryButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.randomDrop();
+			}
+		});
+		levelUpButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.getGameController().removeEnemy(controller.getEnemy());
+				controller.victory();
+			}
+		});
+		itemYesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//If inventory
+				int boostAmount = boost;
+				if (item.equalsIgnoreCase("Inventory")) {
+					controller.addInventoryBoost(boost);
+				} else if (item.equalsIgnoreCase("Health")) {
+					controller.addHealthBoost(boost);
+				}
+			}
+		});
+		itemNoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkLevel();
+			}
+		});
+		armorYesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.addArmor(armor);
+			}
+		});
+		armorNoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkLevel();
+			}
+		});
+		weaponDropYesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.addWeapon(weapon);
+			}
+		});
+		weaponDropNoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkLevel();
+			}
+		});
+		helmDropYesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.addHelm(helm);
+			}
+		});
+		helmDropNoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkLevel();
+			}
+		});
+		deathButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.checkLevel();
+			}
+		});
+		switchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//CreateHero
+				CreateHeroConsoleView createHeroConsoleView = new CreateHeroConsoleView(controller.getGameController().getCharacterController());
+				controller.getGameController().getCharacterController().setCreateHeroView(createHeroConsoleView);
+
+				//LoadHero
+				LoadFileConsoleView loadFileConsoleView = new LoadFileConsoleView(controller.getGameController().getCharacterController());
+				controller.getGameController().getCharacterController().setLoadFileView(loadFileConsoleView);
+
+				//MenuView
+				MenuConsoleView menuConsoleView = new MenuConsoleView(controller.getGameController().getCharacterController());
+				controller.getGameController().getCharacterController().setMenuView(menuConsoleView);
+
+				//MapView
+				MapConsoleView mapConsoleView = new MapConsoleView(controller.getGameController());
+				controller.getGameController().setMapView(mapConsoleView);
+
+				//EncounterView
+				EncounterConsoleView encounterConsoleView = new EncounterConsoleView(controller);
+				controller.setEncounterView(encounterConsoleView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				mainPanel.setVisible(false); //you can't see me!
+				getFrame().dispose();
+
+				controller.round();
 			}
 		});
 	}

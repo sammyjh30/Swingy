@@ -112,8 +112,9 @@ public class EncounterController {
 			(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() <= 0)) {
 //			this.encounterView.fight(this.roundUpdate);
 			this.round();
+		} else {
+			this.round();
 		}
-		this.round();
 //		this.encounterView.fight(this.roundUpdate);
 	}
 
@@ -135,14 +136,12 @@ public class EncounterController {
 			this.roundUpdate += ("Round " + this.turn + ":\n");
 			this.roundUpdate += this.heroAttacks();
 			if (this.enemy.getHitPoints() <= 0) {
-//				this.encounterView.simulate(this.roundUpdate);
-				this.round();
+				break;
 			}
 			this.roundUpdate += this.enemyAttacks();
 			if ((this.hero.getEquippedHelm() != null && (this.hero.getHitPoints() + this.hero.getEquippedHelm().getHitPointIncrease()) <= 0) ||
 					(this.hero.getEquippedHelm() == null && this.hero.getHitPoints() <= 0)) {
-//				this.encounterView.simulate(this.roundUpdate);
-				this.round();
+				break;
 			}
 		}
 		this.round();
@@ -238,8 +237,14 @@ public class EncounterController {
 		this.hero.levelUp();
 		if (this.hero.getLevel() > currentLevel) {
 			//Level up screen
-			this.gameController.updateMap();
-			this.encounterView.success();
+			if (this.hero.getLevel() == 6) {
+				System.out.println("Encounter controller level 6!");
+				this.getGameController().getMapView().youWin();
+			} else {
+				this.getGameController().getMapView().levelUp();
+			}
+//			this.gameController.updateMap();
+//			this.encounterView.success();
 		} else {
 			this.gameController.removeEnemy(this.enemy);
 			this.victory();
@@ -254,6 +259,9 @@ public class EncounterController {
 			heroHitPoints = this.hero.getHitPoints();
 		}
 
+		if (this.enemy == null) {
+			System.out.println("Enemy is null");
+		}
 		if (this.enemy.getHitPoints() > 0 && heroHitPoints > 0) {
 			this.encounterView.display();
 		} else if (this.enemy.getHitPoints() <= 0 || heroHitPoints <= 0) {

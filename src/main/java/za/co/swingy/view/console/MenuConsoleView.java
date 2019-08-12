@@ -18,6 +18,11 @@ public class MenuConsoleView implements MenuView {
 		this.characterController = CharacterController.builder().menuView(this).createHeroView(new CreateHeroConsoleView()).loadFileView(new LoadFileConsoleView()).build();
 	}
 
+	public MenuConsoleView(CharacterController controller) {
+//		this.characterController = CharacterController.builder().menuView(this).createHeroView(new CreateHeroConsoleView()).loadFileView(new LoadFileConsoleView()).build();
+		this.characterController = controller;
+	}
+
 	public void 		resetMenu() {
 		this.menu();
 	}

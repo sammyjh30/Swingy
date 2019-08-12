@@ -1,5 +1,7 @@
 package za.co.swingy.view.console;
 
+import lombok.Getter;
+import lombok.Setter;
 import za.co.swingy.controller.CharacterController;
 import za.co.swingy.controller.GameController;
 import za.co.swingy.model.characters.Hero;
@@ -8,19 +10,24 @@ import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Inventory;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.CreateHeroView;
+import za.co.swingy.view.gui.CreateHeroGuiView;
+import za.co.swingy.view.gui.LoadFileGuiView;
 import za.co.swingy.view.gui.MenuGuiView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+@Getter
+@Setter
 public class CreateHeroConsoleView implements CreateHeroView {
 	private CharacterController controller;
 	private String				name;
 	private String				type;
 
-	CreateHeroConsoleView() {
-//		controller = new Create
+	public CreateHeroConsoleView() {}
+	public CreateHeroConsoleView(CharacterController characterController) {
+		this.controller = characterController;
 	}
 
 	public void 			printHeroStatus(Hero hero) {
@@ -95,13 +102,36 @@ public class CreateHeroConsoleView implements CreateHeroView {
 				System.out.print("Please enter in your name: ");
 				nameInput = bufferedReader.readLine();
 			}
-			this.name = nameInput;
+			if (nameInput.equalsIgnoreCase("SWITCH")) {
+				//CreateHero
+				CreateHeroGuiView createHeroGuiView = new CreateHeroGuiView(this.controller);
+				createHeroGuiView.initFrame();
+				createHeroGuiView.getFrame().setContentPane(createHeroGuiView.getMainPanel());
+				createHeroGuiView.getFrame().pack();
+				createHeroGuiView.getMainPanel().setVisible(true);
+				this.controller.setCreateHeroView(createHeroGuiView);
+
+				//LoadHero
+				LoadFileGuiView loadFileGuiView = new LoadFileGuiView(this.controller);
+				this.controller.setLoadFileView(loadFileGuiView);
+
+				MenuGuiView menuGuiView = new MenuGuiView(this.controller);
+				this.controller.setMenuView(menuGuiView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+
+				this.controller.createNewHero();
+			} else {
+				this.name = nameInput;
+				if (this.name == null) {
+					this.name = "Bob";
+				}
+				this.promptType();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.name = "Bob";
-		this.promptType();
-		this.controller.generateHero(this.name, this.type);
 	}
 
 	public void		 promptType() {
@@ -115,34 +145,54 @@ public class CreateHeroConsoleView implements CreateHeroView {
 			InputStreamReader streamReader = new InputStreamReader(System.in);
 			BufferedReader bufferedReader = new BufferedReader(streamReader);
 			String typeInput = bufferedReader.readLine();
-			if (typeInput.equalsIgnoreCase("SWITCH")) {
-				MenuGuiView menuGuiView = new MenuGuiView();
-				System.out.print("\033[H\033[2J");
-				System.out.flush();
-				menuGuiView.getCharacterController().getCreateHeroView().
-				menuGuiView.getCharacterController().createNewHero();
-//				menuGuiView.setCharacterController(this.controller);
-			}
-			while (typeInput.isEmpty() || !typeInput.equalsIgnoreCase("A") && !typeInput.equalsIgnoreCase("B") && !typeInput.equalsIgnoreCase("C") && !typeInput.equalsIgnoreCase("D")) {
+
+			while (!typeInput.equalsIgnoreCase("SWITCH") && !typeInput.equalsIgnoreCase("A") && !typeInput.equalsIgnoreCase("B") && !typeInput.equalsIgnoreCase("C") && !typeInput.equalsIgnoreCase("D")) {
 				System.out.println("Oops, that's not a valid class! Please try again!");
 				System.out.print("Please enter either A, B, C, or D for your class: ");
 				typeInput = bufferedReader.readLine();
 			}
-			if (typeInput.equalsIgnoreCase("A")) {
-				typeInput = "Explorer";
-			} else if (typeInput.equalsIgnoreCase("B")) {
-				typeInput = "Warrior";
-			} else if (typeInput.equalsIgnoreCase("C")) {
-				typeInput = "Knight";
-			} else if (typeInput.equalsIgnoreCase("D")) {
-				typeInput = "Barbarian";
+			if (typeInput.equalsIgnoreCase("SWITCH")) {
+				//CreateHero
+				CreateHeroGuiView createHeroGuiView = new CreateHeroGuiView(this.controller);
+				createHeroGuiView.setName(this.getName());
+				createHeroGuiView.initFrame();
+				createHeroGuiView.getFrame().setContentPane(createHeroGuiView.getMainPanel());
+				createHeroGuiView.getFrame().pack();
+				createHeroGuiView.getMainPanel().setVisible(true);
+				this.controller.setCreateHeroView(createHeroGuiView);
+
+				//LoadHero
+				LoadFileGuiView loadFileGuiView = new LoadFileGuiView(this.controller);
+				this.controller.setLoadFileView(loadFileGuiView);
+
+				MenuGuiView menuGuiView = new MenuGuiView(this.controller);
+				this.controller.setMenuView(menuGuiView);
+
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+
+				this.controller.callTypePrompt();
+//				menuGuiView.getCharacterController().getCreateHeroView().
+//				menuGuiView.getCharacterController().createNewHero();
+//				menuGuiView.setCharacterController(this.controller);
+			} else {
+				if (typeInput.equalsIgnoreCase("A")) {
+					typeInput = "Explorer";
+				} else if (typeInput.equalsIgnoreCase("B")) {
+					typeInput = "Warrior";
+				} else if (typeInput.equalsIgnoreCase("C")) {
+					typeInput = "Knight";
+				} else if (typeInput.equalsIgnoreCase("D")) {
+					typeInput = "Barbarian";
+				}
+				this.type = typeInput;
+				this.controller.generateHero(this.name, this.type);
 			}
-			this.type = typeInput;
 //			return type;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.type = "Explorer";
+//		this.type = "Explorer";
 //		return "Explorer";
 	}
 }

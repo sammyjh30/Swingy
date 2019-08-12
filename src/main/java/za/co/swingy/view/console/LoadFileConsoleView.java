@@ -8,6 +8,9 @@ import za.co.swingy.model.items.Helm;
 import za.co.swingy.model.items.Inventory;
 import za.co.swingy.model.items.Weapon;
 import za.co.swingy.view.LoadFileView;
+import za.co.swingy.view.gui.CreateHeroGuiView;
+import za.co.swingy.view.gui.LoadFileGuiView;
+import za.co.swingy.view.gui.MenuGuiView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +19,12 @@ import java.util.ArrayList;
 
 public class LoadFileConsoleView implements LoadFileView {
 	private CharacterController			characterController;
+
+	public LoadFileConsoleView() {}
+
+	public LoadFileConsoleView(CharacterController controller) {
+		this.characterController = controller;
+	}
 
 	//Need to still save/load character position
 	public static boolean 	isNumeric(String str) {
@@ -67,25 +76,43 @@ public class LoadFileConsoleView implements LoadFileView {
 			InputStreamReader streamReader = new InputStreamReader(System.in);
 			BufferedReader bufferedReader = new BufferedReader(streamReader);
 			String input = bufferedReader.readLine();
-			while (!input.equalsIgnoreCase("BACK") && !(isNumeric(input) && Integer.parseInt(input) <= lineCount && Integer.parseInt(input) >= 0)) {
+			while (!input.equalsIgnoreCase("SWITCH") && !input.equalsIgnoreCase("BACK") && !(isNumeric(input) && Integer.parseInt(input) <= lineCount && Integer.parseInt(input) >= 0)) {
 				System.out.println("Oops, that's not a valid command! Please try again!");
 				System.out.print(": ");
 				input = bufferedReader.readLine();
 			}
-			if (input.equalsIgnoreCase("BACK"))  {
+			if (input.equalsIgnoreCase("SWITCH")) {
+				CreateHeroGuiView createHeroGuiView = new CreateHeroGuiView(this.characterController);
+				this.characterController.setCreateHeroView(createHeroGuiView);
+
+				//LoadHero
+				LoadFileGuiView loadFileGuiView = new LoadFileGuiView(this.characterController);
+				loadFileGuiView.initFrame();
+				loadFileGuiView.getFrame().setContentPane(loadFileGuiView.getMainPanel());
+				loadFileGuiView.getFrame().pack();
+				loadFileGuiView.getMainPanel().setVisible(true);
+				this.characterController.setLoadFileView(loadFileGuiView);
+
+				MenuGuiView menuGuiView = new MenuGuiView(this.characterController);
+				this.characterController.setMenuView(menuGuiView);
+
 				System.out.print("\033[H\033[2J");
 				System.out.flush();
-				this.characterController.returnToMenu();
+
+				this.characterController.loadHero();
 			} else {
-				this.characterController.loadSave(Integer.parseInt(input));
-//				return Integer.parseInt(input);
+				if (input.equalsIgnoreCase("BACK")) {
+					System.out.print("\033[H\033[2J");
+					System.out.flush();
+					this.characterController.returnToMenu();
+				} else {
+					this.characterController.loadSave(Integer.parseInt(input));
+					//				return Integer.parseInt(input);
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.print("\033[H\033[2J");
-		System.out.flush();
-		this.characterController.returnToMenu();
 	}
 
 	public void			noSaves() {
