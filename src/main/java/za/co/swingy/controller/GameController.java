@@ -262,7 +262,7 @@ public class GameController {
 			}
 //			return;
 		} else if (this.getMap()[newY][newX] == 'O') {
-			System.out.println("COMBAT!");
+			// System.out.println("COMBAT!");
 			//Create an encounter view
 			Enemy enemy = this.getCombatEnemy(newX,newY);
 			if (enemy == null) {

@@ -364,6 +364,8 @@ public class EncounterConsoleView implements EncounterView {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		// System.out.println("Random drop 1");
+		// try{Thread.sleep(1000);}catch (InterruptedException e){e.printStackTrace();}
 		this.controller.randomDrop();
 	}
 }

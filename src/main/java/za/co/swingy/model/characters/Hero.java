@@ -179,7 +179,7 @@ public class Hero extends Character {
 			}
 			this.setMaxHitPoints(this.getMaxHitPoints() + this.getLevel() * 50);
 			this.setHitPoints(this.getMaxHitPoints());
-			System.out.println("CONGRATULATIONS! You are now level " + this.getLevel() + "!");
+			// System.out.println("CONGRATULATIONS! You are now level " + this.getLevel() + "!");
 		}
 	}
 
