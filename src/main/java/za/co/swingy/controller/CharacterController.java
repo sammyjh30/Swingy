@@ -107,6 +107,18 @@ public class CharacterController {
 		return true;
 	}
 
+	public static boolean isInteger(String s) {
+		try {
+			Integer.parseInt(s);
+		} catch(NumberFormatException e) {
+			return false;
+		} catch(NullPointerException e) {
+			return false;
+		}
+		// only got here if we didn't return false
+		return true;
+	}
+
 	public ArrayList<Hero>	readSaves() {
 		String st;
 		try {
@@ -129,12 +141,12 @@ public class CharacterController {
 						//1|Armors|Index|Name|Level|DefenceIncrease
 						//1|Helms|Index|Name|Level|hitpointIncrease
 						line = st.split("\\|");
-						if (isNumeric(line[0])){
+						if (isNumeric(line[0]) && isInteger(line[0])){
 							if (Integer.parseInt(line[0]) > save) {
 								save = Integer.parseInt(line[0]);
 								//Create new character
 								heroToAdd = Hero.builder().name(line[1]).classType(line[2]).inventory().build();
-								if (Integer.parseInt(line[3]) > 0) {
+								if (isInteger(line[3]) && Integer.parseInt(line[3]) > 0) {
 									heroToAdd.setLevel(Integer.parseInt(line[3]));
 								} else {
 									heroToAdd.setLevel(1);

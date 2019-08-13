@@ -281,7 +281,7 @@ public class MapGuiView extends FrameView implements MapView {
 		this.successPanel.setVisible(false);
 		this.runAwayPanel.setVisible(false);
 		this.deathPanel.setVisible(false);
-		this.levelUpPanel.setVisible(true);
+		this.levelUpPanel.setVisible(false);
 		this.youWinPanel.setVisible(true);
 	}
 

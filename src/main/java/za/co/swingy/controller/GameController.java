@@ -135,7 +135,18 @@ public class GameController {
 	// Set up victory commands
 	// Set up failure command
 	// Set up level up (Map increase, enemy increase)
-
+	public static boolean isInteger(String s) {
+		try {
+			Integer.parseInt(s);
+		} catch(NumberFormatException e) {
+			return false;
+		} catch(NullPointerException e) {
+			return false;
+		}
+		// only got here if we didn't return false
+		return true;
+	}
+	
 	public void				saveGame() {
 		String st;
 		try {
@@ -150,7 +161,7 @@ public class GameController {
 					while ((st = br.readLine()) != null) {
 						line = st.split("\\|");
 						if (isNumeric(line[0])){
-							if (Integer.parseInt(line[0]) > save) {
+							if (isInteger(line[0]) && Integer.parseInt(line[0]) > save) {
 								save = Integer.parseInt(line[0]);
 							}
 						}

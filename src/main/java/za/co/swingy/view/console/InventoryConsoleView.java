@@ -116,7 +116,7 @@ public class InventoryConsoleView implements InventoryView {
 					if (input.equalsIgnoreCase("EQUIP")) {
 						System.out.print("Please select the number of the item you would like to equip: ");
 						input = bufferedReader.readLine();
-						while (!this.isNumeric(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
+						while (!this.isNumeric(input) && !isInteger(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
 							System.out.println("Oops, that's not a valid input! Please try again!");
 							System.out.print("Please select the number of the item you would like to equip: ");
 							input = bufferedReader.readLine();
@@ -126,7 +126,7 @@ public class InventoryConsoleView implements InventoryView {
 					} else if (input.equalsIgnoreCase("DELETE")) {
 						System.out.print("Please select the number of the item you would like to delete: ");
 						input = bufferedReader.readLine();
-						while (!this.isNumeric(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
+						while (!this.isNumeric(input) && !isInteger(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
 							System.out.println("Oops, that's not a valid input! Please try again!");
 							System.out.print("Please select the number of the item you would like to delete: ");
 							input = bufferedReader.readLine();
@@ -150,6 +150,18 @@ public class InventoryConsoleView implements InventoryView {
 		} catch(NumberFormatException nfe) {
 			return false;
 		}
+		return true;
+	}
+
+	public static boolean isInteger(String s) {
+		try {
+			Integer.parseInt(s);
+		} catch(NumberFormatException e) {
+			return false;
+		} catch(NullPointerException e) {
+			return false;
+		}
+		// only got here if we didn't return false
 		return true;
 	}
 }

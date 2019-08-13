@@ -83,3 +83,13 @@
 17|Weapons|0|Wooden Sword of Bone Shattering|5|6|1|Blood Lance of Skull Crushing|5|2|2|Wooden Sword of Darkness|5|4
 17|Armors|0|Shadow Shield|5|6|1|Chain Mail|5|6
 17|Helms|0|Leather Helmet|5|6|1|Chain Helmet|5|2|2|Shadow Helmet|5|5|3|Leather Helmet|5|5
+18|Xeno|Explorer|1|1|1|50|50|0|4|3
+18|Inventory|3|9|0|0|0
+18|Weapons|0|Wooden Sword of Noobs|1|1
+18|Armors|0|Casual Clothes|1|1
+18|Helms|0|Straw Helmet|1|1
+19|Xeno|Explorer|1|1|1|50|50|0|4|4
+19|Inventory|3|9|0|0|0
+19|Weapons|0|Wooden Sword of Noobs|1|1
+19|Armors|0|Casual Clothes|1|1
+19|Helms|0|Straw Helmet|1|1

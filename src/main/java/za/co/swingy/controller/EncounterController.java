@@ -195,12 +195,6 @@ public class EncounterController {
 						this.encounterView.itemDrop("Health", boost);
 					}
 				} else {
-					System.out.println("Check level 1");
-					try {
-						Thread.sleep(5000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 					this.checkLevel();
 				}
 			}
@@ -212,29 +206,21 @@ public class EncounterController {
 
 	public void					addArmor(Armor armor) {
 		this.hero.getInventory().addArmor(armor);
-		// System.out.println("Check level 2");
-		// try{Thread.sleep(1000);}catch (InterruptedException e){e.printStackTrace();}
 		this.checkLevel();
 	}
 
 	public void					addWeapon(Weapon weapon) {
 		this.hero.getInventory().addWeapon(weapon);
-		// System.out.println("Check level 3");
-		// try{Thread.sleep(1000);}catch (InterruptedException e){e.printStackTrace();}
 		this.checkLevel();
 	}
 
 	public void					addHelm(Helm helm) {
 		this.hero.getInventory().addHelm(helm);
-		// System.out.println("Check level 4");
-		// try{Thread.sleep(1000);}catch (InterruptedException e){e.printStackTrace();}
 		this.checkLevel();
 	}
 
 	public void					addInventoryBoost(int boost){
 		this.hero.getInventory().setMaxSlots(this.hero.getInventory().getMaxSlots() + boost);
-		// System.out.println("Check level 5");
-		// try{Thread.sleep(1000);}catch (InterruptedException e){e.printStackTrace();}
 		this.checkLevel();
 	}
 
@@ -244,8 +230,6 @@ public class EncounterController {
 		} else {
 			this.hero.setHitPoints(this.hero.getHitPoints() + boost);
 		}
-		// System.out.println("Check level 6");
-		// try{Thread.sleep(1000);}catch (InterruptedException e){e.printStackTrace();}
 		this.checkLevel();
 	}
 
@@ -285,8 +269,6 @@ public class EncounterController {
 		if (this.enemy.getHitPoints() > 0 && heroHitPoints > 0) {
 			this.encounterView.display();
 		} else if (this.enemy.getHitPoints() <= 0 || heroHitPoints <= 0) {
-			// System.out.println("Battle History 1");
-			// try{Thread.sleep(1000);}catch (InterruptedException e){e.printStackTrace();}
 			this.encounterView.battleHistory();
 		}
 	}

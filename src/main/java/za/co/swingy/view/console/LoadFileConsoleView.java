@@ -36,6 +36,18 @@ public class LoadFileConsoleView implements LoadFileView {
 		return true;
 	}
 
+	public static boolean isInteger(String s) {
+		try {
+			Integer.parseInt(s);
+		} catch(NumberFormatException e) {
+			return false;
+		} catch(NullPointerException e) {
+			return false;
+		}
+		// only got here if we didn't return false
+		return true;
+	}
+
 	public void			saveList(ArrayList<Hero> saves) {
 		try {
 			int	lineCount = 0;
@@ -76,7 +88,7 @@ public class LoadFileConsoleView implements LoadFileView {
 			InputStreamReader streamReader = new InputStreamReader(System.in);
 			BufferedReader bufferedReader = new BufferedReader(streamReader);
 			String input = bufferedReader.readLine();
-			while (!input.equalsIgnoreCase("SWITCH") && !input.equalsIgnoreCase("BACK") && !(isNumeric(input) && Integer.parseInt(input) <= lineCount && Integer.parseInt(input) >= 0)) {
+			while (!input.equalsIgnoreCase("SWITCH") && !input.equalsIgnoreCase("BACK") && !(isNumeric(input) && isInteger(input) && Integer.parseInt(input) <= lineCount && Integer.parseInt(input) >= 0)) {
 				System.out.println("Oops, that's not a valid command! Please try again!");
 				System.out.print(": ");
 				input = bufferedReader.readLine();

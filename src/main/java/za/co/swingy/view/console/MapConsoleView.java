@@ -296,7 +296,6 @@ public class MapConsoleView implements MapView {
 
 //				System.out.println(controller.getMap());
 
-				this.controller.updateMap();
 				this.controller.showMapView();
 			} else {
 				if (input.equalsIgnoreCase("NORTH")) {

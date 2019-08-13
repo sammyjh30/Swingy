@@ -46,7 +46,7 @@ public class InventoryController {
 
 	public void					equip(String input) {
 		int index;
-		if (Integer.parseInt(input) <= this.getHero().getInventory().getArmors().size()) {
+		if (isInteger(input) && Integer.parseInt(input) <= this.getHero().getInventory().getArmors().size()) {
 			//					Armors
 			index = Integer.parseInt(input) - 1;
 			try {
@@ -56,7 +56,7 @@ public class InventoryController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (Integer.parseInt(input) > this.getHero().getInventory().getArmors().size() &&
+		} else if (isInteger(input) && Integer.parseInt(input) > this.getHero().getInventory().getArmors().size() &&
 				Integer.parseInt(input) <= (this.getHero().getInventory().getArmors().size() + this.getHero().getInventory().getWeapons().size())) {
 			//Weapons
 			index = Integer.parseInt(input) - this.getHero().getInventory().getArmors().size() - 1;
@@ -67,7 +67,7 @@ public class InventoryController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (Integer.parseInt(input) > (this.getHero().getInventory().getArmors().size() + +this.getHero().getInventory().getWeapons().size()) &&
+		} else if (isInteger(input) && Integer.parseInt(input) > (this.getHero().getInventory().getArmors().size() + +this.getHero().getInventory().getWeapons().size()) &&
 				Integer.parseInt(input) <= (this.getHero().getInventory().getArmors().size() + this.getHero().getInventory().getWeapons().size() + this.getHero().getInventory().getHelms().size())) {
 			//Helms
 			index = Integer.parseInt(input) - (this.getHero().getInventory().getArmors().size() + +this.getHero().getInventory().getWeapons().size()) - 1;
@@ -84,7 +84,7 @@ public class InventoryController {
 
 	public void					delete(String input) {
 		int index;
-		if (Integer.parseInt(input) <= this.getHero().getInventory().getArmors().size()) {
+		if (isInteger(input) && Integer.parseInt(input) <= this.getHero().getInventory().getArmors().size()) {
 			//Armors
 			index = Integer.parseInt(input) - 1;
 			try {
@@ -100,7 +100,7 @@ public class InventoryController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (Integer.parseInt(input) > this.getHero().getInventory().getArmors().size() &&
+		} else if (isInteger(input) && Integer.parseInt(input) > this.getHero().getInventory().getArmors().size() &&
 				Integer.parseInt(input) <= (this.getHero().getInventory().getArmors().size() + this.getHero().getInventory().getWeapons().size())) {
 			//Weapons
 			index = Integer.parseInt(input) - this.getHero().getInventory().getArmors().size() - 1;
@@ -117,7 +117,7 @@ public class InventoryController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (Integer.parseInt(input) > (this.getHero().getInventory().getArmors().size() + +this.getHero().getInventory().getWeapons().size()) &&
+		} else if (isInteger(input) && Integer.parseInt(input) > (this.getHero().getInventory().getArmors().size() + +this.getHero().getInventory().getWeapons().size()) &&
 				Integer.parseInt(input) <= (this.getHero().getInventory().getArmors().size() + this.getHero().getInventory().getWeapons().size() + this.getHero().getInventory().getHelms().size())) {
 			//Helms
 			index = Integer.parseInt(input) - (this.getHero().getInventory().getArmors().size() + this.getHero().getInventory().getWeapons().size()) - 1;
@@ -136,5 +136,17 @@ public class InventoryController {
 			}
 		}
 		this.inventoryView.display();
+	}
+
+	public static boolean isInteger(String s) {
+		try {
+			Integer.parseInt(s);
+		} catch(NumberFormatException e) {
+			return false;
+		} catch(NullPointerException e) {
+			return false;
+		}
+		// only got here if we didn't return false
+		return true;
 	}
 }
