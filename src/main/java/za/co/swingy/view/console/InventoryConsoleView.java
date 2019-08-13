@@ -116,7 +116,7 @@ public class InventoryConsoleView implements InventoryView {
 					if (input.equalsIgnoreCase("EQUIP")) {
 						System.out.print("Please select the number of the item you would like to equip: ");
 						input = bufferedReader.readLine();
-						while (!this.isNumeric(input) && !isInteger(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
+						while (!this.isNumeric(input) && !isInteger(input) && ((isInteger(input) && Integer.parseInt(input) > list) || (isInteger(input) && Integer.parseInt(input) <= 0))) {
 							System.out.println("Oops, that's not a valid input! Please try again!");
 							System.out.print("Please select the number of the item you would like to equip: ");
 							input = bufferedReader.readLine();
@@ -126,7 +126,7 @@ public class InventoryConsoleView implements InventoryView {
 					} else if (input.equalsIgnoreCase("DELETE")) {
 						System.out.print("Please select the number of the item you would like to delete: ");
 						input = bufferedReader.readLine();
-						while (!this.isNumeric(input) && !isInteger(input) && (Integer.parseInt(input) > list || Integer.parseInt(input) <= 0)) {
+						while (!this.isNumeric(input) && !isInteger(input) && ((isInteger(input) && Integer.parseInt(input) > list) || (isInteger(input) && Integer.parseInt(input) <= 0))) {
 							System.out.println("Oops, that's not a valid input! Please try again!");
 							System.out.print("Please select the number of the item you would like to delete: ");
 							input = bufferedReader.readLine();

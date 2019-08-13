@@ -84,7 +84,6 @@ public class Inventory {
 	public void 		removeWeapon(Weapon weapon) {
 		if (weapons.contains(weapon)) {
 			weapons.remove(weapon);
-			System.out.println("Successfully removed the " + weapon.getName());
 		}
 	}
 
@@ -108,7 +107,6 @@ public class Inventory {
 	public void 		removeArmor(Armor armor) {
 		if (armors.contains(armor)) {
 			armors.remove(armor);
-			System.out.println("Successfully removed the " + armor.getName());
 		}
 	}
 
@@ -132,7 +130,6 @@ public class Inventory {
 	public void 		removeHelm(Helm helm) {
 		if (helms.contains(helm)) {
 			helms.remove(helm);
-			System.out.println("Successfully removed the " + helm.getName());
 		}
 	}
 

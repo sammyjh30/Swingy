@@ -93,3 +93,23 @@
 19|Weapons|0|Wooden Sword of Noobs|1|1
 19|Armors|0|Casual Clothes|1|1
 19|Helms|0|Straw Helmet|1|1
+20|Arthats the Despicable|Barbarian|1|4|4|26|50|686|3|4
+20|Inventory|0|9|0|-1|-1
+20|Weapons
+20|Armors
+20|Helms
+21|asdawdsad as dasdawxawda dwda 23asd a23ea sd a2ds a2eas dawsda |Knight|1|3|3|29|50|322|4|6
+21|Inventory|0|9|-1|-1|-1
+21|Weapons
+21|Armors
+21|Helms
+22|Bob Dingleeton|Warrior|2|5|5|104|150|1170|8|1
+22|Inventory|0|20|-1|-1|-1
+22|Weapons
+22|Armors
+22|Helms
+23|Arthats the Despicable|Barbarian|1|4|4|1|50|766|4|1
+23|Inventory|0|9|-1|-1|-1
+23|Weapons
+23|Armors
+23|Helms

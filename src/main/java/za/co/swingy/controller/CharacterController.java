@@ -177,7 +177,12 @@ public class CharacterController {
 									heroSaves.get(save - 1).getInventory().getWeapons().add(weapon);
 								}
 								if (heroToAdd.getInventory().getEquippedWeaponIndex() >= 0) {
-									heroSaves.get(save - 1).setEquippedWeapon(heroToAdd.getInventory().getWeapons().get(heroToAdd.getInventory().getEquippedWeaponIndex()));
+									if (heroSaves.get(save - 1).getInventory().getWeapons().size() > heroToAdd.getInventory().getEquippedWeaponIndex()) {
+										heroSaves.get(save - 1).setEquippedWeapon(heroToAdd.getInventory().getWeapons().get(heroToAdd.getInventory().getEquippedWeaponIndex()));
+									} else {
+										heroSaves.get(save - 1).getInventory().setEquippedWeaponIndex(-1);
+										heroSaves.get(save - 1).setEquippedWeapon(null);
+									}
 								} else {
 									heroSaves.get(save - 1).setEquippedWeapon(null);
 								}
@@ -191,7 +196,12 @@ public class CharacterController {
 									heroSaves.get(save - 1).getInventory().getArmors().add(armor);
 								}
 								if (heroToAdd.getInventory().getEquippedArmorIndex() >= 0) {
-									heroSaves.get(save - 1).setEquippedArmor(heroToAdd.getInventory().getArmors().get(heroToAdd.getInventory().getEquippedArmorIndex()));
+									if (heroSaves.get(save - 1).getInventory().getArmors().size() > heroToAdd.getInventory().getEquippedArmorIndex()) {
+										heroSaves.get(save - 1).setEquippedArmor(heroToAdd.getInventory().getArmors().get(heroToAdd.getInventory().getEquippedArmorIndex()));
+									} else {
+										heroSaves.get(save - 1).getInventory().setEquippedArmorIndex(-1);
+										heroSaves.get(save - 1).setEquippedArmor(null);
+									}
 								} else {
 									heroSaves.get(save - 1).setEquippedArmor(null);
 								}
@@ -205,7 +215,12 @@ public class CharacterController {
 									heroSaves.get(save - 1).getInventory().getHelms().add(helm);
 								}
 								if (heroToAdd.getInventory().getEquippedHelmIndex() >= 0) {
-									heroSaves.get(save - 1).setEquippedHelm(heroToAdd.getInventory().getHelms().get(heroToAdd.getInventory().getEquippedHelmIndex()));
+									if (heroSaves.get(save - 1).getInventory().getHelms().size() > heroToAdd.getInventory().getEquippedHelmIndex()) {
+										heroSaves.get(save - 1).setEquippedHelm(heroToAdd.getInventory().getHelms().get(heroToAdd.getInventory().getEquippedHelmIndex()));
+									} else {
+										heroSaves.get(save - 1).getInventory().setEquippedHelmIndex(-1);
+										heroSaves.get(save - 1).setEquippedHelm(null);
+									}
 								} else {
 									heroSaves.get(save - 1).setEquippedHelm(null);
 								}

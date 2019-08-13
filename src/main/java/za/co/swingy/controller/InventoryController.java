@@ -108,7 +108,7 @@ public class InventoryController {
 				Weapon weapon = this.getHero().getInventory().getWeapons().get(index);
 				if (this.getHero().getInventory().getEquippedWeaponIndex() == index) {
 					this.getHero().setEquippedWeapon(null);
-					this.getHero().getInventory().setEquippedArmorIndex(-1);
+					this.getHero().getInventory().setEquippedWeaponIndex(-1);
 				} else if (index < this.getHero().getInventory().getEquippedWeaponIndex()) {
 					this.getHero().getInventory().setEquippedWeaponIndex(this.getHero().getInventory().getEquippedWeaponIndex() - 1);
 				}
